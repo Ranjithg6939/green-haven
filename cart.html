@@ -1,0 +1,545 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <title>My Dining Cart | Green Haven Plant-Based Restaurant</title>
+  <meta name="description" content="Review your organic plant-based dishes, update quantities, and proceed to checkout with Green Haven online ordering.">
+  <meta name="keywords" content="green haven cart, vegan food cart, plant based online ordering">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Custom Master Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+
+
+  <!-- Main Navigation Bar -->
+  <header class="gh-navbar">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between">
+        
+        <!-- Brand Logo with Continuous Animated Outline -->
+        <a class="gh-brand gh-brand-auto" href="index.html" aria-label="Green Haven Restaurant">
+          <span class="gh-logo-wrapper">
+            <svg class="gh-logo-outline-svg" viewBox="0 0 100 100">
+              <circle class="gh-logo-outline-base" cx="50" cy="50" r="48" pathLength="100" />
+              <circle class="gh-logo-outline-stroke" cx="50" cy="50" r="48" pathLength="100" />
+            </svg>
+            <img src="assets/images/logo-g.png" alt="Green Haven Logo G" class="gh-logo-icon gh-logo-g">
+            <img src="assets/images/logo-h.png" alt="Green Haven Logo H" class="gh-logo-icon gh-logo-h">
+          </span>
+          <img src="assets/images/title.png" alt="Green Haven" class="gh-brand-title-img gh-title-light">
+          <img src="assets/images/title-dark.png" alt="Green Haven" class="gh-brand-title-img gh-title-dark">
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="d-none d-lg-flex align-items-center gap-1">
+          <div class="dropdown">
+            <a class="gh-nav-link  dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Home
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item " href="index.html"><i class="bi bi-house me-2"></i> Home 1 (Gourmet Landing)</a></li>
+              <li><a class="gh-dropdown-item " href="home-2.html"><i class="bi bi-flower1 me-2"></i> Home 2 (Farm to Plate)</a></li>
+            </ul>
+          </div>
+          <a class="gh-nav-link " href="about.html">About</a>
+          <a class="gh-nav-link " href="menu.html">Menu</a>
+          <div class="dropdown">
+            <a class="gh-nav-link  dropdown-toggle" href="services.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Services
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item " href="services.html"><i class="bi bi-grid-fill me-2"></i> Our Services</a></li>
+              <li><a class="gh-dropdown-item " href="service-details.html"><i class="bi bi-file-earmark-text me-2"></i> Service Details</a></li>
+            </ul>
+          </div>
+          <a class="gh-nav-link " href="catering.html">Catering</a>
+          <a class="gh-nav-link " href="pricing.html">Packages</a>
+          <div class="dropdown">
+            <a class="gh-nav-link  dropdown-toggle" href="blog.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Blog
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item " href="blog.html"><i class="bi bi-card-text me-2"></i> Food &amp; Wellness Blog</a></li>
+              <li><a class="gh-dropdown-item " href="blog-details.html"><i class="bi bi-layout-text-window me-2"></i> Article Details</a></li>
+            </ul>
+          </div>
+          <div class="dropdown">
+            <a class="gh-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Pages
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
+              <li><a class="gh-dropdown-item" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
+              <li><a class="gh-dropdown-item" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
+            </ul>
+          </div>
+          <a class="gh-nav-link " href="contact.html">Contact</a>
+        </nav>
+
+        <!-- Navbar Controls & Dynamic Auth -->
+        <div class="d-flex align-items-center gap-2">
+          <!-- Theme Toggle (Dark Mode) -->
+          <button class="theme-toggle-btn" aria-label="Toggle Light/Dark Theme">
+            <i class="bi bi-moon-stars-fill"></i>
+          </button>
+
+          <!-- RTL / LTR Toggle -->
+          <button class="rtl-toggle-btn" aria-label="Toggle text direction" title="Switch text direction (RTL / LTR)">
+            <i class="bi bi-arrow-left-right"></i>
+          </button>
+
+          <!-- Cart Icon -->
+          <a href="cart.html" class="cart-nav-btn" title="View Cart">
+            <i class="bi bi-bag"></i>
+            <span id="navCartCount" class="cart-badge-count" style="display: none;">0</span>
+          </a>
+
+          <!-- Reserve Table -->
+          <a href="reservation.html" class="btn btn-primary d-none d-lg-inline-flex btn-sm">
+            <i class="bi bi-calendar2-check"></i> Reserve Table
+          </a>
+
+          <!-- Standard Desktop Auth (Sign In) -->
+          <div id="navAuthContainer" class="d-none d-md-block">
+            <div class="d-inline-flex align-items-center gap-2 flex-nowrap">
+              <a href="login.html" class="btn btn-outline-primary btn-sm">
+                <i class="bi bi-box-arrow-in-right me-1"></i> Sign In
+              </a>
+            </div>
+          </div>
+
+          <button class="btn btn-icon btn-outline-primary d-lg-none gh-mobile-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenuOffcanvas" aria-controls="mobileMenuOffcanvas" aria-label="Open mobile navigation">
+            <i class="bi bi-list fs-4"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Offcanvas Menu -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenuOffcanvas" aria-labelledby="mobileMenuOffcanvasLabel">
+    <div class="offcanvas-header border-bottom">
+      <a class="gh-brand gh-brand-auto" href="index.html" aria-label="Green Haven Restaurant">
+        <span class="gh-logo-wrapper">
+          <svg class="gh-logo-outline-svg" viewBox="0 0 100 100">
+            <circle class="gh-logo-outline-base" cx="50" cy="50" r="48" pathLength="100" />
+            <circle class="gh-logo-outline-stroke" cx="50" cy="50" r="48" pathLength="100" />
+          </svg>
+          <img src="assets/images/logo-g.png" alt="Green Haven Logo G" class="gh-logo-icon gh-logo-g">
+          <img src="assets/images/logo-h.png" alt="Green Haven Logo H" class="gh-logo-icon gh-logo-h">
+        </span>
+        <img src="assets/images/title.png" alt="Green Haven" class="gh-brand-title-img gh-title-light">
+        <img src="assets/images/title-dark.png" alt="Green Haven" class="gh-brand-title-img gh-title-dark">
+      </a>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-4 d-flex flex-column justify-content-between">
+      <div>
+        <div id="mobileNavAuthContainer" class="mb-3">
+          <div class="d-flex gap-2">
+            <a href="login.html" class="btn btn-outline-primary btn-sm flex-fill"><i class="bi bi-box-arrow-in-right me-1"></i> Sign In</a>
+          </div>
+        </div>
+        <nav class="d-flex flex-column gap-2">
+          <a class="gh-nav-link " href="index.html">Home (Gourmet)</a>
+          <a class="gh-nav-link " href="home-2.html">Home (Farm to Plate)</a>
+          <a class="gh-nav-link " href="about.html">About Us</a>
+          <a class="gh-nav-link " href="menu.html">Full Restaurant Menu</a>
+          <a class="gh-nav-link" href="cart.html"><i class="bi bi-bag me-1"></i> My Dining Cart</a>
+          <a class="gh-nav-link " href="services.html">Our Services</a>
+          <a class="gh-nav-link " href="catering.html">Plant-Based Catering</a>
+          <a class="gh-nav-link " href="pricing.html">Dining Packages</a>
+          <a class="gh-nav-link " href="blog.html">Culinary Journal</a>
+          <div class="dropdown">
+            <a class="gh-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Pages
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
+              <li><a class="gh-dropdown-item" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
+              <li><a class="gh-dropdown-item" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
+            </ul>
+          </div>
+          <a class="gh-nav-link " href="contact.html">Contact Us</a>
+        </nav>
+      </div>
+      <div class="border-top pt-3">
+        <a href="reservation.html" class="btn btn-primary w-100 mb-2"><i class="bi bi-calendar2-check me-1"></i> Book Table</a>
+        <a href="menu.html" class="btn btn-outline-primary w-100"><i class="bi bi-bag-plus me-1"></i> Order Online</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="flex-grow-1">
+    <!-- Page Header & Breadcrumbs -->
+    <section class="page-header py-4">
+      <div class="container">
+        <span class="section-sub"><i class="bi bi-bag-check"></i> Online Ordering</span>
+        <h1 class="display-4 fw-bold">My Dining Basket</h1>
+        <div class="breadcrumb-nav">
+          <a href="index.html">Home</a>
+          <span>/</span>
+          <a href="menu.html">Menu</a>
+          <span>/</span>
+          <span class="text-success fw-semibold">Cart</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cart Container -->
+    <section class="section-padding">
+      <div class="container">
+        
+        <!-- Empty Cart State -->
+        <div id="emptyCartView" class="text-center py-5" style="display: none;">
+          <div class="order-success-icon bg-light text-muted mx-auto mb-4" style="width: 100px; height: 100px; font-size: 3.2rem;">
+            <i class="bi bi-cart-x"></i>
+          </div>
+          <h2 class="fw-bold mb-2">Your Dining Cart is Empty</h2>
+          <p class="text-muted max-w-600 mx-auto mb-4" style="max-width: 500px; margin: 0 auto;">
+            Explore our handcrafted plant-based creations and fill your basket with nourishing organic dishes.
+          </p>
+          <a href="menu.html" class="btn btn-primary btn-lg px-4">
+            <i class="bi bi-grid-fill me-1"></i> Browse Full Menu
+          </a>
+        </div>
+
+        <!-- Active Cart Content -->
+        <div id="activeCartView" class="row g-5">
+          <!-- Cart Items Table -->
+          <div class="col-lg-8">
+            <div class="p-4 rounded-4 bg-card border shadow-sm mb-4">
+              <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+                <h4 class="fw-bold mb-0">Ordered Items (<span id="cartTotalItemsCount">0</span>)</h4>
+                <button type="button" class="btn btn-sm btn-outline-danger" id="btnClearCart">
+                  <i class="bi bi-trash3 me-1"></i> Clear Cart
+                </button>
+              </div>
+
+              <div class="table-responsive">
+                <table class="cart-table">
+                  <thead>
+                    <tr>
+                      <th>Dish</th>
+                      <th>Price</th>
+                      <th class="text-center">Quantity</th>
+                      <th class="text-end">Subtotal</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="cartTableBody">
+                    <!-- Dynamic Cart Rows Injected Here -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Return to Shopping Link -->
+            <div class="d-flex justify-content-between align-items-center">
+              <a href="menu.html" class="btn btn-outline-primary">
+                <i class="bi bi-arrow-left me-1"></i> Add More Dishes
+              </a>
+              <span class="small text-muted"><i class="bi bi-shield-check text-success me-1"></i> Organic certified ingredients</span>
+            </div>
+          </div>
+
+          <!-- Summary & Checkout Sidebar -->
+          <div class="col-lg-4">
+            <div class="cart-summary-card">
+              <h4 class="fw-bold mb-3 pb-2 border-bottom">Order Summary</h4>
+
+              <div class="summary-row">
+                <span class="text-muted">Dishes Subtotal</span>
+                <span class="fw-bold" id="cartSubtotalText">$0.00</span>
+              </div>
+
+              <div class="summary-row">
+                <span class="text-muted">Estimated Tax (8%)</span>
+                <span class="fw-semibold" id="cartTaxText">$0.00</span>
+              </div>
+
+              <div class="summary-row">
+                <div class="d-flex align-items-center gap-1">
+                  <span class="text-muted">Delivery Fee</span>
+                  <i class="bi bi-info-circle text-muted" title="Free delivery on orders over $50" style="font-size: 0.8rem; cursor: pointer;"></i>
+                </div>
+                <span class="fw-semibold" id="cartDeliveryText">$5.00</span>
+              </div>
+
+              <div id="freeDeliveryNotice" class="p-2 rounded-3 bg-success-subtle text-success small mb-3 text-center" style="display: none;">
+                <i class="bi bi-gift-fill me-1"></i> You unlocked <strong>FREE Delivery</strong>!
+              </div>
+
+              <div class="summary-row total">
+                <span>Grand Total</span>
+                <span class="text-success" id="cartGrandTotalText">$0.00</span>
+              </div>
+
+              <!-- Promo Code Demo Box -->
+              <div class="my-3 pt-2">
+                <div class="input-group">
+                  <input type="text" class="form-control" id="couponCode" placeholder="Promo code (e.g. VEGAN10)">
+                  <button class="btn btn-outline-secondary" type="button" id="btnApplyCoupon">Apply</button>
+                </div>
+                <div id="couponFeedback" class="small mt-1"></div>
+              </div>
+
+              <!-- Proceed to Checkout Button -->
+              <button type="button" class="btn btn-primary w-100 py-3 fs-6 mt-3 shadow-md" id="btnProceedCheckout">
+                <span>Proceed to Checkout</span>
+                <i class="bi bi-arrow-right ms-2"></i>
+              </button>
+
+              <div class="text-center mt-3">
+                <small class="text-muted extra-small">
+                  <i class="bi bi-lock-fill text-muted me-1"></i> Sign-in required to complete checkout
+                </small>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+      <!-- Universal 4-Column Luxury Footer -->
+  <footer class="gh-footer">
+    <div class="container">
+      <div class="row g-4 g-lg-5 mb-5">
+        
+        <!-- Column 1: Brand & Tagline -->
+        <div class="col-lg-4 col-md-6">
+          <a class="gh-brand text-white mb-3 d-inline-flex align-items-center" href="index.html" aria-label="Green Haven Restaurant">
+            <img src="assets/images/logo-g.png" alt="Green Haven Logo" class="gh-brand-logo-img me-2">
+            <span class="gh-brand-text text-white">Green Haven</span>
+          </a>
+          <p class="footer-bio mb-4">
+            An organic plant-based restaurant sanctuary celebrating vibrant seasonal gastronomy, regenerative agriculture, and holistic well-being.
+          </p>
+          <div class="d-flex gap-2 flex-wrap">
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+            <a href="https://pinterest.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Pinterest"><i class="bi bi-pinterest"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+          </div>
+        </div>
+
+        <!-- Column 2: Navigation -->
+        <div class="col-6 col-md-4 col-lg-2">
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
+            <li><a href="index.html" class="footer-link"><i class="bi bi-chevron-right"></i> Home</a></li>
+            <li><a href="about.html" class="footer-link"><i class="bi bi-chevron-right"></i> About Us</a></li>
+            <li><a href="menu.html" class="footer-link"><i class="bi bi-chevron-right"></i> Our Menu</a></li>
+            <li><a href="cart.html" class="footer-link"><i class="bi bi-chevron-right"></i> Food Cart</a></li>
+            <li><a href="catering.html" class="footer-link"><i class="bi bi-chevron-right"></i> Catering</a></li>
+            <li><a href="contact.html" class="footer-link"><i class="bi bi-chevron-right"></i> Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Hours & Location -->
+        <div class="col-6 col-md-4 col-lg-3">
+          <h4 class="footer-col-title">Hours & Location</h4>
+          <p class="text-white-50 small mb-2"><i class="bi bi-geo-alt text-warning me-2"></i> 742 Evergreen Botanical Way, Portland</p>
+          <p class="text-white-50 small mb-2"><i class="bi bi-clock text-warning me-2"></i> Mon - Sun: 8:00 AM - 10:00 PM</p>
+          <p class="text-white-50 small mb-0"><i class="bi bi-telephone text-warning me-2"></i> <a href="tel:+15035550192" class="text-white text-decoration-none" style="color: #FFFFFF !important;">+1 (503) 555-0192</a></p>
+        </div>
+
+        <!-- Column 4: Botanical Digest -->
+        <div class="col-lg-3 col-md-6">
+          <h4 class="footer-col-title">Botanical Digest</h4>
+          <p class="text-white-50 small mb-3">Join our newsletter for seasonal menu previews and chef recipes.</p>
+          <form class="newsletter-form d-flex gap-2">
+            <input type="email" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Your email" required>
+            <button type="submit" class="btn btn-accent btn-sm px-3">Join</button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Bottom Line -->
+      <div class="footer-bottom border-top border-secondary border-opacity-25 pt-4 mt-4 text-white-50 small">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+          <div>&copy; 2026 Green Haven Restaurant. All Rights Reserved.</div>
+          <div class="d-flex gap-3">
+            <a href="#" class="text-white-50 text-decoration-none hover-white">Privacy Policy</a>
+            <span>&bull;</span>
+            <a href="#" class="text-white-50 text-decoration-none hover-white">Terms &amp; Conditions</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/shop.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const emptyCartView = document.getElementById('emptyCartView');
+      const activeCartView = document.getElementById('activeCartView');
+      const cartTableBody = document.getElementById('cartTableBody');
+      const cartTotalItemsCount = document.getElementById('cartTotalItemsCount');
+      const cartSubtotalText = document.getElementById('cartSubtotalText');
+      const cartTaxText = document.getElementById('cartTaxText');
+      const cartDeliveryText = document.getElementById('cartDeliveryText');
+      const cartGrandTotalText = document.getElementById('cartGrandTotalText');
+      const freeDeliveryNotice = document.getElementById('freeDeliveryNotice');
+      const btnClearCart = document.getElementById('btnClearCart');
+      const btnProceedCheckout = document.getElementById('btnProceedCheckout');
+
+      let discountAmount = 0;
+
+      function renderCartPage() {
+        const items = GH_Cart.getCart();
+        const itemCount = GH_Cart.getItemCount();
+
+        if (items.length === 0) {
+          if (emptyCartView) emptyCartView.style.display = 'block';
+          if (activeCartView) activeCartView.style.display = 'none';
+          return;
+        }
+
+        if (emptyCartView) emptyCartView.style.display = 'none';
+        if (activeCartView) activeCartView.style.display = 'flex';
+
+        if (cartTotalItemsCount) cartTotalItemsCount.textContent = itemCount;
+
+        if (cartTableBody) {
+          cartTableBody.innerHTML = items.map(item => `
+            <tr>
+              <td>
+                <div class="d-flex align-items-center gap-3">
+                  <img src="${item.image}" alt="${item.name}" class="cart-item-img shadow-sm">
+                  <div>
+                    <h6 class="fw-bold mb-0">${item.name}</h6>
+                    <span class="badge bg-secondary-subtle text-secondary small">${item.category || 'Mains'}</span>
+                  </div>
+                </div>
+              </td>
+              <td class="fw-semibold">$${item.price.toFixed(2)}</td>
+              <td class="text-center">
+                <div class="qty-stepper mx-auto">
+                  <button type="button" class="qty-btn" onclick="handleQtyChange('${item.id}', -1)">-</button>
+                  <input type="text" class="qty-input" value="${item.qty}" readonly>
+                  <button type="button" class="qty-btn" onclick="handleQtyChange('${item.id}', 1)">+</button>
+                </div>
+              </td>
+              <td class="text-end fw-bold text-success">$${(item.price * item.qty).toFixed(2)}</td>
+              <td class="text-end">
+                <button type="button" class="btn-remove-item" onclick="handleRemoveItem('${item.id}')" title="Remove item">
+                  <i class="bi bi-trash3"></i>
+                </button>
+              </td>
+            </tr>
+          `).join('');
+        }
+
+        const subtotal = GH_Cart.getSubtotal();
+        const tax = GH_Cart.getTax();
+        const deliveryFee = GH_Cart.getDeliveryFee();
+        let total = (subtotal + tax + deliveryFee) - discountAmount;
+        if (total < 0) total = 0;
+
+        if (cartSubtotalText) cartSubtotalText.textContent = `$${subtotal.toFixed(2)}`;
+        if (cartTaxText) cartTaxText.textContent = `$${tax.toFixed(2)}`;
+        if (cartDeliveryText) {
+          cartDeliveryText.textContent = deliveryFee === 0 ? 'FREE' : `$${deliveryFee.toFixed(2)}`;
+          if (deliveryFee === 0) {
+            cartDeliveryText.classList.add('text-success', 'fw-bold');
+          } else {
+            cartDeliveryText.classList.remove('text-success', 'fw-bold');
+          }
+        }
+        if (freeDeliveryNotice) {
+          freeDeliveryNotice.style.display = (subtotal >= GH_Cart.FREE_DELIVERY_THRESHOLD) ? 'block' : 'none';
+        }
+        if (cartGrandTotalText) cartGrandTotalText.textContent = `$${total.toFixed(2)}`;
+      }
+
+      window.renderCartPage = renderCartPage;
+      window.addEventListener('cart:updated', renderCartPage);
+
+      window.handleQtyChange = function(id, change) {
+        GH_Cart.updateQuantity(id, change);
+        renderCartPage();
+      };
+
+      window.handleRemoveItem = function(id) {
+        GH_Cart.removeFromCart(id);
+        renderCartPage();
+      };
+
+      if (btnClearCart) {
+        btnClearCart.addEventListener('click', () => {
+          if (confirm('Are you sure you want to clear your cart?')) {
+            GH_Cart.clearCart();
+            renderCartPage();
+          }
+        });
+      }
+
+      // Coupon handler demo
+      const btnApplyCoupon = document.getElementById('btnApplyCoupon');
+      const couponCode = document.getElementById('couponCode');
+      const couponFeedback = document.getElementById('couponFeedback');
+
+      if (btnApplyCoupon && couponCode && couponFeedback) {
+        btnApplyCoupon.addEventListener('click', () => {
+          const code = couponCode.value.trim().toUpperCase();
+          if (code === 'VEGAN10' || code === 'GREENHAVEN') {
+            discountAmount = 5.00;
+            couponFeedback.innerHTML = '<span class="text-success"><i class="bi bi-check-circle"></i> $5.00 discount applied!</span>';
+            renderCartPage();
+          } else if (code) {
+            couponFeedback.innerHTML = '<span class="text-danger"><i class="bi bi-x-circle"></i> Invalid promo code. Try <strong>VEGAN10</strong></span>';
+          }
+        });
+      }
+
+      // Proceed to Checkout with Auth Check
+      if (btnProceedCheckout) {
+        btnProceedCheckout.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (GH_Cart.getCart().length === 0) {
+            alert('Your cart is empty! Please add items before checking out.');
+            return;
+          }
+
+          if (GH_Auth.isLoggedIn()) {
+            window.location.href = 'checkout.html';
+          } else {
+            // Guard: Guest cannot checkout directly
+            window.location.href = 'login.html?redirect=checkout.html';
+          }
+        });
+      }
+
+      renderCartPage();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,737 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <title>Green Haven - Organic Vegan & Plant-Based Restaurant</title>
+  <meta name="description" content="Welcome to Green Haven, Portland's premier 100% organic, vegan & plant-based dining sanctuary. Order online, reserve tables, and enjoy farm-to-table culinary artistry.">
+  <meta name="keywords" content="vegan restaurant, plant based dining, organic restaurant portland, vegan online food ordering, farm to table">
+  <meta property="og:title" content="Green Haven - Vegan & Plant-Based Restaurant">
+  <meta property="og:description" content="Artisanal 100% plant-based gastronomy crafted from locally foraged, biodynamic ingredients.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600;1,700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Italiana&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Custom Master Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Main Navigation Bar -->
+  <header class="gh-navbar">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between">
+        
+        <!-- Brand Logo with Continuous Animated Outline -->
+        <a class="gh-brand gh-brand-auto" href="index.html" aria-label="Green Haven Restaurant">
+          <span class="gh-logo-wrapper">
+            <svg class="gh-logo-outline-svg" viewBox="0 0 100 100">
+              <circle class="gh-logo-outline-base" cx="50" cy="50" r="48" pathLength="100" />
+              <circle class="gh-logo-outline-stroke" cx="50" cy="50" r="48" pathLength="100" />
+            </svg>
+            <img src="assets/images/logo-g.png" alt="Green Haven Logo G" class="gh-logo-icon gh-logo-g">
+            <img src="assets/images/logo-h.png" alt="Green Haven Logo H" class="gh-logo-icon gh-logo-h">
+          </span>
+          <img src="assets/images/title.png" alt="Green Haven" class="gh-brand-title-img gh-title-light">
+          <img src="assets/images/title-dark.png" alt="Green Haven" class="gh-brand-title-img gh-title-dark">
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="d-none d-lg-flex align-items-center gap-1">
+          <div class="dropdown">
+            <a class="gh-nav-link active dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Home
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item active" href="index.html"><i class="bi bi-house me-2"></i> Home 1 (Gourmet Landing)</a></li>
+              <li><a class="gh-dropdown-item " href="home-2.html"><i class="bi bi-flower1 me-2"></i> Home 2 (Farm to Plate)</a></li>
+            </ul>
+          </div>
+          <a class="gh-nav-link " href="about.html">About</a>
+          <a class="gh-nav-link " href="menu.html">Menu</a>
+          <div class="dropdown">
+            <a class="gh-nav-link  dropdown-toggle" href="services.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Services
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item " href="services.html"><i class="bi bi-grid-fill me-2"></i> Our Services</a></li>
+              <li><a class="gh-dropdown-item " href="service-details.html"><i class="bi bi-file-earmark-text me-2"></i> Service Details</a></li>
+            </ul>
+          </div>
+          <a class="gh-nav-link " href="catering.html">Catering</a>
+          <a class="gh-nav-link " href="pricing.html">Packages</a>
+          <div class="dropdown">
+            <a class="gh-nav-link  dropdown-toggle" href="blog.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Blog
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item " href="blog.html"><i class="bi bi-card-text me-2"></i> Food &amp; Wellness Blog</a></li>
+              <li><a class="gh-dropdown-item " href="blog-details.html"><i class="bi bi-layout-text-window me-2"></i> Article Details</a></li>
+            </ul>
+          </div>
+          <div class="dropdown">
+            <a class="gh-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Pages
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
+              <li><a class="gh-dropdown-item" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
+              <li><a class="gh-dropdown-item" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
+            </ul>
+          </div>
+          <a class="gh-nav-link " href="contact.html">Contact</a>
+        </nav>
+
+        <!-- Navbar Controls & Dynamic Auth -->
+        <div class="d-flex align-items-center gap-2">
+          <!-- Theme Toggle (Dark Mode) -->
+          <button class="theme-toggle-btn" aria-label="Toggle Light/Dark Theme">
+            <i class="bi bi-moon-stars-fill"></i>
+          </button>
+
+          <!-- RTL / LTR Toggle -->
+          <button class="rtl-toggle-btn" aria-label="Toggle text direction" title="Switch text direction (RTL / LTR)">
+            <i class="bi bi-arrow-left-right"></i>
+          </button>
+
+          <!-- Cart Icon -->
+          <a href="cart.html" class="cart-nav-btn" title="View Cart">
+            <i class="bi bi-bag"></i>
+            <span id="navCartCount" class="cart-badge-count" style="display: none;">0</span>
+          </a>
+
+          <!-- Reserve Table -->
+          <a href="reservation.html" class="btn btn-primary d-none d-lg-inline-flex btn-sm">
+            <i class="bi bi-calendar2-check"></i> Reserve Table
+          </a>
+
+          <!-- Standard Desktop Auth (Sign In) -->
+          <div id="navAuthContainer" class="d-none d-md-block">
+            <div class="d-inline-flex align-items-center gap-2 flex-nowrap">
+              <a href="login.html" class="btn btn-outline-primary btn-sm">
+                <i class="bi bi-box-arrow-in-right me-1"></i> Sign In
+              </a>
+            </div>
+          </div>
+
+          <button class="btn btn-icon btn-outline-primary d-lg-none gh-mobile-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenuOffcanvas" aria-controls="mobileMenuOffcanvas" aria-label="Open mobile navigation">
+            <i class="bi bi-list fs-4"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Offcanvas Menu -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenuOffcanvas" aria-labelledby="mobileMenuOffcanvasLabel">
+    <div class="offcanvas-header border-bottom">
+      <a class="gh-brand gh-brand-auto" href="index.html" aria-label="Green Haven Restaurant">
+        <span class="gh-logo-wrapper">
+          <svg class="gh-logo-outline-svg" viewBox="0 0 100 100">
+            <circle class="gh-logo-outline-base" cx="50" cy="50" r="48" pathLength="100" />
+            <circle class="gh-logo-outline-stroke" cx="50" cy="50" r="48" pathLength="100" />
+          </svg>
+          <img src="assets/images/logo-g.png" alt="Green Haven Logo G" class="gh-logo-icon gh-logo-g">
+          <img src="assets/images/logo-h.png" alt="Green Haven Logo H" class="gh-logo-icon gh-logo-h">
+        </span>
+        <img src="assets/images/title.png" alt="Green Haven" class="gh-brand-title-img gh-title-light">
+        <img src="assets/images/title-dark.png" alt="Green Haven" class="gh-brand-title-img gh-title-dark">
+      </a>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-4 d-flex flex-column justify-content-between">
+      <div>
+        <div id="mobileNavAuthContainer" class="mb-3">
+          <div class="d-flex gap-2">
+            <a href="login.html" class="btn btn-outline-primary btn-sm flex-fill"><i class="bi bi-box-arrow-in-right me-1"></i> Sign In</a>
+          </div>
+        </div>
+        <nav class="d-flex flex-column gap-2">
+          <a class="gh-nav-link active" href="index.html">Home (Gourmet)</a>
+          <a class="gh-nav-link " href="home-2.html">Home (Farm to Plate)</a>
+          <a class="gh-nav-link " href="about.html">About Us</a>
+          <a class="gh-nav-link " href="menu.html">Full Restaurant Menu</a>
+          <a class="gh-nav-link" href="cart.html"><i class="bi bi-bag me-1"></i> My Dining Cart</a>
+          <a class="gh-nav-link " href="services.html">Our Services</a>
+          <a class="gh-nav-link " href="catering.html">Plant-Based Catering</a>
+          <a class="gh-nav-link " href="pricing.html">Dining Packages</a>
+          <a class="gh-nav-link " href="blog.html">Culinary Journal</a>
+          <div class="dropdown">
+            <a class="gh-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Pages
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
+              <li><a class="gh-dropdown-item" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
+              <li><a class="gh-dropdown-item" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
+            </ul>
+          </div>
+          <a class="gh-nav-link " href="contact.html">Contact Us</a>
+        </nav>
+      </div>
+      <div class="border-top pt-3">
+        <a href="reservation.html" class="btn btn-primary w-100 mb-2"><i class="bi bi-calendar2-check me-1"></i> Book Table</a>
+        <a href="menu.html" class="btn btn-outline-primary w-100"><i class="bi bi-bag-plus me-1"></i> Order Online</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="gh-hero-nature position-relative">
+      <div class="gh-nature-container">
+        <div class="row align-items-center g-4 g-xl-5">
+          
+          <div class="col-lg-6 col-xl-6">
+            <span class="gh-hero-badge hero-animated-pill mb-3">
+              <i class="bi bi-shield-fill-check text-success"></i> 100% ORGANIC &bull; 100% VEGAN &bull; GF FRIENDLY
+            </span>
+            <h1 class="hero-title display-3 fw-bold mb-3">
+              Where Nature<br>Becomes Art
+            </h1>
+            <p class="hero-lead mb-4">
+              Savor fresh, seasonal, and creative plant-based dishes crafted to delight your senses and nourish your body.
+            </p>
+
+            <div class="d-flex flex-wrap align-items-center gap-2 mb-3 hero-btns-row">
+              <a href="menu.html" class="btn btn-hero-primary">
+                <i class="bi bi-bag-check me-2"></i> Order Food Online
+              </a>
+              <a href="reservation.html" class="btn btn-hero-outline">
+                <i class="bi bi-calendar2-check me-2"></i> Reserve a Table
+              </a>
+              <a href="#signatureDishes" class="btn btn-hero-outline-muted">
+                <i class="bi bi-journal-text me-2"></i> Explore Menu
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-xl-6 ps-lg-3">
+            <div class="hero-img-card">
+              <!-- Main Salad Dish Image with Glitter Effects -->
+              <div class="hero-dish-img-wrap">
+                <img src="assets/images/hero-dish.jpg" alt="Where Nature Becomes Art - Organic Plant-Based Cuisine" class="hero-main-img">
+                
+                <!-- Glitter & Sparkle Effects Overlay -->
+                <div class="hero-glitter-overlay" aria-hidden="true">
+                  <!-- Shimmer Light Sweep Beam -->
+                  <div class="glitter-shine-beam"></div>
+
+                  <!-- Twinkling Diamond Glitter Stars -->
+                  <span class="glitter-star glitter-s1" style="top: 24%; left: 17%;" title="Glitter Sparkle">
+                    <svg viewBox="0 0 24 24"><path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z"/></svg>
+                  </span>
+                  <span class="glitter-star glitter-s2" style="top: 36%; left: 45%;">
+                    <svg viewBox="0 0 24 24"><path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z"/></svg>
+                  </span>
+                  <span class="glitter-star glitter-s3" style="top: 56%; left: 58%;">
+                    <svg viewBox="0 0 24 24"><path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z"/></svg>
+                  </span>
+                  <span class="glitter-star glitter-s4" style="top: 48%; right: 14%;">
+                    <svg viewBox="0 0 24 24"><path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z"/></svg>
+                  </span>
+                  <span class="glitter-star glitter-s5" style="bottom: 34%; left: 33%;">
+                    <svg viewBox="0 0 24 24"><path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z"/></svg>
+                  </span>
+                  <span class="glitter-star glitter-s6" style="top: 18%; right: 38%;">
+                    <svg viewBox="0 0 24 24"><path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z"/></svg>
+                  </span>
+                  <span class="glitter-star glitter-s7" style="bottom: 24%; right: 22%;">
+                    <svg viewBox="0 0 24 24"><path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z"/></svg>
+                  </span>
+                  <span class="glitter-star glitter-s8" style="top: 48%; left: 24%;">
+                    <svg viewBox="0 0 24 24"><path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z"/></svg>
+                  </span>
+                  <span class="glitter-star glitter-s9" style="bottom: 42%; right: 44%;">
+                    <svg viewBox="0 0 24 24"><path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z"/></svg>
+                  </span>
+
+                  <!-- Floating Shimmer Bokeh Dust Particles -->
+                  <span class="glitter-dot gd-1" style="top: 28%; left: 22%;"></span>
+                  <span class="glitter-dot gd-2" style="top: 42%; left: 38%;"></span>
+                  <span class="glitter-dot gd-3" style="top: 62%; left: 62%;"></span>
+                  <span class="glitter-dot gd-4" style="top: 32%; right: 26%;"></span>
+                  <span class="glitter-dot gd-5" style="top: 52%; right: 18%;"></span>
+                  <span class="glitter-dot gd-6" style="bottom: 28%; left: 46%;"></span>
+                  <span class="glitter-dot gd-7" style="bottom: 18%; right: 30%;"></span>
+                </div>
+              </div>
+
+              <!-- Top Right: Rotating 100% ORGANIC • 100% VEGAN • GF FRIENDLY Seal Animation -->
+              <div class="hero-rotating-seal" aria-label="100% Organic, 100% Vegan, Gluten-Free Friendly Certified">
+                <svg class="seal-curve-svg" viewBox="0 0 100 100">
+                  <path id="heroSealPath" d="M 50, 50 m -37.5, 0 a 37.5,37.5 0 1,1 75,0 a 37.5,37.5 0 1,1 -75,0" fill="none" />
+                  <text class="seal-curve-text">
+                    <textPath href="#heroSealPath" startOffset="0%" textLength="235" lengthAdjust="spacingAndGlyphs">
+                      • 100% ORGANIC • 100% VEGAN • GF FRIENDLY •
+                    </textPath>
+                  </text>
+                </svg>
+                <div class="seal-inner-node">
+                  <svg viewBox="0 0 24 24" class="seal-leaf-icon" fill="currentColor">
+                    <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22l1-2.3A4.49,4.49 0 0,0 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Bottom Left: 100% Eco Delivery Animation Badge -->
+              <div class="hero-delivery-badge" aria-label="100% Eco Delivery Fast & Fresh">
+                <div class="delivery-badge-header">
+                  <span class="delivery-badge-title">100% Eco Delivery</span>
+                  <span class="delivery-badge-sub">Fast &amp; Fresh</span>
+                </div>
+                <div class="delivery-track-inner">
+                  <!-- Road Line -->
+                  <div class="delivery-road-line"></div>
+                  
+                  <!-- Animated Delivery Scooter -->
+                  <div class="delivery-bike-vehicle">
+                    <svg class="delivery-bike-svg" viewBox="0 0 110 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="bikeBeamGlow" x1="76" y1="26" x2="108" y2="26" gradientUnits="userSpaceOnUse">
+                          <stop stop-color="#FFEB3B" stop-opacity="0.8"/>
+                          <stop offset="1" stop-color="#FFEB3B" stop-opacity="0"/>
+                        </linearGradient>
+                        <linearGradient id="boxGrad" x1="10" y1="10" x2="35" y2="34" gradientUnits="userSpaceOnUse">
+                          <stop stop-color="#2E7D32"/>
+                          <stop offset="1" stop-color="#1B5E20"/>
+                        </linearGradient>
+                      </defs>
+
+                      <!-- Headlight beam -->
+                      <polygon points="76,25 106,17 106,33 76,27" fill="url(#bikeBeamGlow)" opacity="0.4"/>
+
+                      <!-- Delivery Thermal Box on rear -->
+                      <rect x="10" y="10" width="25" height="24" rx="4" fill="url(#boxGrad)" stroke="#144A18" stroke-width="1.2"/>
+                      <!-- Box Stripe & Leaf Accent -->
+                      <rect x="10" y="20" width="25" height="3" fill="#81C784" opacity="0.8"/>
+                      <path d="M22 17 C22 14, 25 13, 27 13 C27 15, 26 18, 23 18 Z" fill="#C8E6C9"/>
+
+                      <!-- Scooter Chassis / Body (Dark Green) -->
+                      <path d="M33 26 L48 26 L56 36 L66 36 L72 24 L74 24" stroke="#2E7D32" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    
+                      <!-- Scooter Footboard & Fairing -->
+                      <path d="M48 36 L66 36" stroke="#1B5E20" stroke-width="3.5" stroke-linecap="round"/>
+                      <!-- Front Apron -->
+                      <path d="M68 22 L72 32 L64 36" fill="#4CAF50" opacity="0.95"/>
+                      
+                      <!-- Rider Seat -->
+                      <path d="M36 24 C39 21, 47 21, 50 24 Z" fill="#1B3A1C"/>
+                      
+                      <!-- Handlebars -->
+                      <path d="M69 22 L65 14 L73 14" stroke="#1B3A1C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                      
+                      <!-- Headlight -->
+                      <circle cx="74" cy="24" r="2.5" fill="#FFF9C4" stroke="#FBC02D" stroke-width="0.8"/>
+
+                      <!-- Rear Wheel Assembly -->
+                      <circle cx="24" cy="42" r="10" fill="#263238" stroke="#37474F" stroke-width="1"/>
+                      <circle cx="24" cy="42" r="6" fill="#ECEFF1" stroke="#4CAF50" stroke-width="1.2"/>
+                      <g class="wheel-spinner" style="transform-origin: 24px 42px;">
+                        <line x1="24" y1="36" x2="24" y2="48" stroke="#2E7D32" stroke-width="1.2"/>
+                        <line x1="18" y1="42" x2="30" y2="42" stroke="#2E7D32" stroke-width="1.2"/>
+                        <circle cx="24" cy="42" r="2" fill="#1B5E20"/>
+                      </g>
+                      <!-- Rear Mudguard -->
+                      <path d="M14 40 A11 11 0 0 1 34 38" stroke="#1B5E20" stroke-width="2" fill="none"/>
+
+                      <!-- Front Wheel Assembly -->
+                      <circle cx="74" cy="42" r="10" fill="#263238" stroke="#37474F" stroke-width="1"/>
+                      <circle cx="74" cy="42" r="6" fill="#ECEFF1" stroke="#4CAF50" stroke-width="1.2"/>
+                      <g class="wheel-spinner" style="transform-origin: 74px 42px;">
+                        <line x1="74" y1="36" x2="74" y2="48" stroke="#2E7D32" stroke-width="1.2"/>
+                        <line x1="68" y1="42" x2="80" y2="42" stroke="#2E7D32" stroke-width="1.2"/>
+                        <circle cx="74" cy="42" r="2" fill="#1B5E20"/>
+                      </g>
+                      <!-- Front Mudguard -->
+                      <path d="M64 40 A11 11 0 0 1 84 39" stroke="#1B5E20" stroke-width="2" fill="none"/>
+
+                      <!-- Trailing Eco Leaf Particles -->
+                      <g class="bike-eco-leaf">
+                        <path d="M4 22 C3 20, 6 19, 8 20 C7 22, 5 23, 4 22 Z" fill="#81C784" opacity="0.85"/>
+                        <path d="M-2 26 C-3 24, 0 23, 2 24 C1 26, -1 27, -2 26 Z" fill="#A5D6A7" opacity="0.6"/>
+                      </g>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: FROM FARM TO PLATE (VIDEO SHOWCASE) -->
+    <section id="farmToPlate" class="gh-farm-video-section position-relative overflow-hidden">
+      <!-- Ambient Organic Decorative Background Elements -->
+      <div class="gh-farm-decor-orb gh-farm-orb-1" aria-hidden="true"></div>
+      <div class="gh-farm-decor-orb gh-farm-orb-2" aria-hidden="true"></div>
+      
+      <!-- Subtle Decorative Botanical Leaf Accents -->
+      <div class="gh-farm-leaf-accent gh-farm-leaf-left" aria-hidden="true">
+        <svg viewBox="0 0 120 180" fill="none" class="gh-farm-leaf-svg">
+          <path d="M-10,20 C30,40 60,20 80,50 C100,80 70,120 40,135 C10,150 -10,165 -15,180" stroke="rgba(46, 101, 24, 0.18)" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M80,50 C95,30 115,35 110,55 C100,75 80,70 80,50 Z" fill="rgba(168, 230, 207, 0.22)" stroke="rgba(46, 101, 24, 0.22)" stroke-width="1.2"/>
+          <path d="M40,135 C60,120 75,140 70,160 C60,180 40,165 40,135 Z" fill="rgba(136, 212, 184, 0.20)" stroke="rgba(46, 101, 24, 0.20)" stroke-width="1.2"/>
+        </svg>
+      </div>
+
+      <div class="container position-relative z-2 py-4 py-lg-5">
+        <div class="row align-items-center g-4 g-lg-5">
+          
+          <!-- Left Column: Content -->
+          <div class="col-lg-5 col-xl-5">
+            <div class="gh-farm-content-box">
+              <!-- Eyebrow Pill -->
+              <div class="gh-farm-eyebrow mb-3">
+                <span class="gh-farm-badge">
+                  <i class="bi bi-flower1 me-1 text-success"></i> FROM FARM TO PLATE
+                </span>
+              </div>
+
+              <!-- Main Heading -->
+              <h2 class="gh-farm-heading font-serif mb-3">
+                Fresh Ingredients.<br>
+                <span>Thoughtful Cooking.</span>
+              </h2>
+
+              <!-- Description -->
+              <p class="gh-farm-desc mb-4">
+                Discover how Green Haven transforms fresh, natural plant-based ingredients into delicious, beautifully crafted meals.
+              </p>
+
+              <!-- Micro Organic Ethos Features -->
+              <div class="gh-farm-highlights mb-4">
+                <div class="gh-farm-highlight-item">
+                  <div class="gh-farm-highlight-icon">
+                    <i class="bi bi-check2-circle"></i>
+                  </div>
+                  <div>
+                    <h6 class="fw-bold mb-0">100% Regenerative &amp; Organic</h6>
+                    <p class="small text-muted mb-0">Direct from Willamette &amp; Hood River Valley growers</p>
+                  </div>
+                </div>
+
+                <div class="gh-farm-highlight-item">
+                  <div class="gh-farm-highlight-icon">
+                    <i class="bi bi-check2-circle"></i>
+                  </div>
+                  <div>
+                    <h6 class="fw-bold mb-0">Zero Artificial Additives</h6>
+                    <p class="small text-muted mb-0">Pure cold-pressed reductions &amp; wild botanical infusions</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CTA Button -->
+              <div class="gh-farm-cta-wrapper pt-2">
+                <a href="about.html" class="btn btn-primary btn-lg gh-farm-cta-btn">
+                  Explore Our Story <i class="bi bi-arrow-right ms-2"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Video Showcase -->
+          <div class="col-lg-7 col-xl-7">
+            <div class="gh-video-card-container">
+              <div class="gh-video-frame" id="farmVideoFrame">
+                <!-- HTML5 Autoplay Video (Clean & Pure) -->
+                <video id="farmToPlateVideo" class="gh-farm-video" autoplay muted loop playsinline preload="auto" poster="assets/images/hero-dish.jpg">
+                  <source src="assets/videos/farm-to-plate.mp4" type="video/mp4">
+                  <source src="https://assets.mixkit.co/videos/preview/mixkit-chef-plating-a-salad-in-a-restaurant-kitchen-41883-large.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Signature Dishes Section (Page 2) -->
+    <section class="section-padding gh-dishes-nature-section position-relative overflow-hidden">
+      <div class="container position-relative z-2">
+        <div class="section-header text-center">
+          <span class="section-sub"><i class="bi bi-stars"></i> Chef's Signatures</span>
+          <h2 class="section-title font-serif">Popular Culinary Creations</h2>
+          <p class="section-desc">Handcrafted dishes loved by our diners. Order directly for swift table dining or home delivery.</p>
+        </div>
+
+        <div class="row g-4">
+          
+          <!-- Dish 1 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="gh-card dish-card">
+              <div class="dish-card-img">
+                <img src="assets/img/dishes/wild-truffle-forest-risotto.jpg" alt="Wild Truffle Risotto">
+                <div class="dish-card-badge">
+                  <span class="dietary-pill pill-vegan"><span class="pill-icon">🌱</span> 100% Vegan</span>
+                </div>
+                <div class="dish-card-price">$26.00</div>
+              </div>
+              <div class="dish-card-body">
+                <div class="dish-category">Mains</div>
+                <h3 class="dish-title"><a href="menu-details.html?dish=dish-2" class="btn-dish-details" data-dish-id="dish-2">Wild Truffle & Forest Risotto</a></h3>
+                <p class="dish-desc">Carnaroli rice slow-simmered in porcini stock, foraged chanterelles, black summer truffle, and cashew parmesan.</p>
+                <div class="d-flex align-items-center justify-content-between pt-3 border-top mt-auto">
+                  <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3 py-1.5 fw-semibold btn-dish-details" data-dish-id="dish-2">Details</button>
+                  <button type="button" class="btn btn-sm btn-primary" data-add-to-cart data-id="dish-2" data-name="Wild Truffle & Forest Risotto" data-price="26.00" data-image="assets/img/dishes/wild-truffle-forest-risotto.jpg" data-category="Mains">
+                    <i class="bi bi-cart-plus me-1"></i> Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dish 2 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="gh-card dish-card">
+              <div class="dish-card-img">
+                <img src="assets/img/dishes/botanical-harvest-bowl.jpg" alt="Botanical Harvest Bowl">
+                <div class="dish-card-badge">
+                  <span class="dietary-pill pill-gf"><span class="pill-icon">🌾</span> Gluten-Free (GF)</span>
+                </div>
+                <div class="dish-card-price">$18.50</div>
+              </div>
+              <div class="dish-card-body">
+                <div class="dish-category">Bowls</div>
+                <h3 class="dish-title"><a href="menu-details.html?dish=dish-3" class="btn-dish-details" data-dish-id="dish-3">Botanical Harvest Bowl</a></h3>
+                <p class="dish-desc">Tri-color quinoa, crispy turmeric chickpeas, roasted kabocha squash, avocado rose, kale, and green tahini.</p>
+                <div class="d-flex align-items-center justify-content-between pt-3 border-top mt-auto">
+                  <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3 py-1.5 fw-semibold btn-dish-details" data-dish-id="dish-3">Details</button>
+                  <button type="button" class="btn btn-sm btn-primary" data-add-to-cart data-id="dish-3" data-name="Botanical Harvest Bowl" data-price="18.50" data-image="assets/img/dishes/botanical-harvest-bowl.jpg" data-category="Bowls">
+                    <i class="bi bi-cart-plus me-1"></i> Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dish 3 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="gh-card dish-card">
+              <div class="dish-card-img">
+                <img src="assets/img/dishes/smoked-cauliflower-rib-steak.jpg" alt="Smoked Cauliflower Steak">
+                <div class="dish-card-badge">
+                  <span class="dietary-pill pill-organic"><span class="pill-icon">🌿</span> Raw &amp; Organic</span>
+                </div>
+                <div class="dish-card-price">$24.00</div>
+              </div>
+              <div class="dish-card-body">
+                <div class="dish-category">Mains</div>
+                <h3 class="dish-title"><a href="menu-details.html?dish=dish-4" class="btn-dish-details" data-dish-id="dish-4">Smoked Cauliflower Rib Steak</a></h3>
+                <p class="dish-desc">Charred organic cauliflower steak glazed in herb chimichurri over smooth parsnip velvet with pomegranate reduction.</p>
+                <div class="d-flex align-items-center justify-content-between pt-3 border-top mt-auto">
+                  <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3 py-1.5 fw-semibold btn-dish-details" data-dish-id="dish-4">Details</button>
+                  <button type="button" class="btn btn-sm btn-primary" data-add-to-cart data-id="dish-4" data-name="Smoked Cauliflower Rib Steak" data-price="24.00" data-image="assets/img/dishes/smoked-cauliflower-rib-steak.jpg" data-category="Mains">
+                    <i class="bi bi-cart-plus me-1"></i> Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="text-center mt-5">
+          <a href="menu.html" class="btn btn-outline-primary btn-lg px-5">
+            <i class="bi bi-grid me-2"></i> View Full Menu & Order Online
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Regenerative Soil & Farm Ethos Section (Page 3) -->
+    <section class="gh-regenerative-section position-relative overflow-hidden">
+      <div class="gh-nature-container position-relative z-2 py-lg-4">
+        <div class="row align-items-center g-5">
+          
+          <!-- Left Content Column -->
+          <div class="col-lg-6">
+            <div class="ethos-tag-badge mb-3">
+              <span class="ethos-tag-text">• FROM THE EARTH •</span>
+            </div>
+            
+            <div class="ethos-title-row mb-3">
+              <h2 class="ethos-heading font-serif">
+                Regenerative Soil,<br>
+                Uncompromising Flavor
+              </h2>
+              <div class="ethos-leaf-decor">
+                <svg viewBox="0 0 70 70" class="ethos-leaf-svg" width="56" height="56" fill="none">
+                  <path d="M18 56 C 16 34, 34 14, 56 8 C 64 6, 68 6, 68 6 C 68 6, 65 20, 56 36 C 44 54, 28 58, 18 56 Z" fill="#4CAF50"/>
+                  <path d="M18 56 C 30 44, 46 30, 60 16" stroke="#2E7D32" stroke-width="2.5" stroke-linecap="round"/>
+                  <path d="M30 58 C 27 42, 42 26, 60 20 C 66 18, 70 18, 70 18 C 70 18, 68 28, 62 40 C 53 54, 38 60, 30 58 Z" fill="#8BC34A" opacity="0.95"/>
+                  <path d="M30 58 C 40 48, 52 38, 64 28" stroke="#43A047" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
+
+            <p class="ethos-description mb-4">
+              We support select local farms practicing regenerative organic agriculture, ensuring rich soils, healthy crops free of GMOs and chemicals.
+            </p>
+
+            <!-- 2 Feature Cards Side-by-Side -->
+            <div class="ethos-features-grid mb-4">
+              <div class="ethos-feature-card">
+                <div class="ethos-card-icon-col">
+                  <span class="ethos-check-badge">
+                    <i class="bi bi-patch-check-fill"></i>
+                  </span>
+                </div>
+                <div class="ethos-card-content">
+                  <div class="ethos-card-title">100% Vegan &amp; GF Certified</div>
+                  <div class="ethos-card-sub">Pure plant-based &amp; celiac-safe options</div>
+                </div>
+              </div>
+
+              <div class="ethos-feature-card">
+                <div class="ethos-card-icon-col">
+                  <span class="ethos-check-badge">
+                    <i class="bi bi-shield-check"></i>
+                  </span>
+                </div>
+                <div class="ethos-card-content">
+                  <div class="ethos-card-title">All Non-GMO &amp; Raw Organic</div>
+                  <div class="ethos-card-sub">Regenerative soil, zero chemicals</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CTA Button -->
+            <div class="ethos-cta-wrap">
+              <a href="about.html" class="btn-ethos-story">
+                Learn About Our Story
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Image Column -->
+          <div class="col-lg-6">
+            <div class="ethos-img-wrapper">
+              <img src="assets/images/ethos-farm-harvest.jpg" alt="Regenerative Organic Farm Harvest" class="ethos-farm-img">
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Private Events & Catering Section (Page 4) -->
+    <section class="gh-events-nature-section text-white text-center position-relative overflow-hidden">
+      <div class="gh-nature-container position-relative z-2 py-5">
+        <div class="max-w-600 mx-auto" style="max-width: 720px; margin: 0 auto;">
+          <div class="events-tag-badge mb-3">
+            <span class="events-tag-text">PRIVATE EVENTS &amp; CATERING</span>
+          </div>
+          <h2 class="events-heading display-4 fw-bold font-serif mb-3 text-white">Elevate Your Next Celebration</h2>
+          <p class="events-lead lead text-white-50 mb-4">
+            From intimate greenhouse dinners to lavish plant-based wedding feasts, Green Haven brings bespoke culinary excellence to your special moments.
+          </p>
+          <div class="d-flex justify-content-center flex-wrap gap-3">
+            <a href="catering.html" class="btn btn-accent btn-lg px-4">
+              <i class="bi bi-pencil-square me-1"></i> Request Catering Quote
+            </a>
+            <a href="reservation.html" class="btn btn-outline-light btn-lg px-4">
+              <i class="bi bi-calendar2-check me-1"></i> Book a Dining Table
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+    <!-- Universal 4-Column Luxury Footer -->
+  <footer class="gh-footer">
+    <div class="container">
+      <div class="row g-4 g-lg-5 mb-5">
+        
+        <!-- Column 1: Brand & Tagline -->
+        <div class="col-lg-4 col-md-6">
+          <a class="gh-brand text-white mb-3 d-inline-flex align-items-center" href="index.html" aria-label="Green Haven Restaurant">
+            <img src="assets/images/logo-g.png" alt="Green Haven Logo" class="gh-brand-logo-img me-2">
+            <span class="gh-brand-text text-white">Green Haven</span>
+          </a>
+          <p class="footer-bio mb-4">
+            An organic plant-based restaurant sanctuary celebrating vibrant seasonal gastronomy, regenerative agriculture, and holistic well-being.
+          </p>
+          <div class="d-flex gap-2 flex-wrap">
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+            <a href="https://pinterest.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Pinterest"><i class="bi bi-pinterest"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+          </div>
+        </div>
+
+        <!-- Column 2: Navigation -->
+        <div class="col-6 col-md-4 col-lg-2">
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
+            <li><a href="index.html" class="footer-link"><i class="bi bi-chevron-right"></i> Home</a></li>
+            <li><a href="about.html" class="footer-link"><i class="bi bi-chevron-right"></i> About Us</a></li>
+            <li><a href="menu.html" class="footer-link"><i class="bi bi-chevron-right"></i> Our Menu</a></li>
+            <li><a href="cart.html" class="footer-link"><i class="bi bi-chevron-right"></i> Food Cart</a></li>
+            <li><a href="catering.html" class="footer-link"><i class="bi bi-chevron-right"></i> Catering</a></li>
+            <li><a href="contact.html" class="footer-link"><i class="bi bi-chevron-right"></i> Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Hours & Location -->
+        <div class="col-6 col-md-4 col-lg-3">
+          <h4 class="footer-col-title">Hours & Location</h4>
+          <p class="text-white-50 small mb-2"><i class="bi bi-geo-alt text-warning me-2"></i> 742 Evergreen Botanical Way, Portland</p>
+          <p class="text-white-50 small mb-2"><i class="bi bi-clock text-warning me-2"></i> Mon - Sun: 8:00 AM - 10:00 PM</p>
+          <p class="text-white-50 small mb-0"><i class="bi bi-telephone text-warning me-2"></i> <a href="tel:+15035550192" class="text-white text-decoration-none" style="color: #FFFFFF !important;">+1 (503) 555-0192</a></p>
+        </div>
+
+        <!-- Column 4: Botanical Digest -->
+        <div class="col-lg-3 col-md-6">
+          <h4 class="footer-col-title">Botanical Digest</h4>
+          <p class="text-white-50 small mb-3">Join our newsletter for seasonal menu previews and chef recipes.</p>
+          <form class="newsletter-form d-flex gap-2">
+            <input type="email" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Your email" required>
+            <button type="submit" class="btn btn-accent btn-sm px-3">Join</button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Bottom Line -->
+      <div class="footer-bottom border-top border-secondary border-opacity-25 pt-4 mt-4 text-white-50 small">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+          <div>&copy; 2026 Green Haven Restaurant. All Rights Reserved.</div>
+          <div class="d-flex gap-3">
+            <a href="#" class="text-white-50 text-decoration-none hover-white">Privacy Policy</a>
+            <span>&bull;</span>
+            <a href="#" class="text-white-50 text-decoration-none hover-white">Terms &amp; Conditions</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/shop.js"></script>
+  <script src="assets/js/dish-details.js"></script>
+</body>
+</html>

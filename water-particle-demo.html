@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <title>Water Particle Field - Modern Interactive Canvas Background</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/water-particles.css">
+  <link rel="stylesheet" href="assets/css/water-particles-demo.css">
+  <style>
+    /* Additional inline demo polish */
+    .pulse-btn {
+      position: relative;
+      overflow: hidden;
+    }
+    .ripple-effect-marker {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border: 2px solid rgba(56, 189, 248, 0.8);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      animation: clickWave 0.75s ease-out forwards;
+    }
+    @keyframes clickWave {
+      0% { width: 0; height: 0; opacity: 1; border-width: 3px; }
+      100% { width: 140px; height: 140px; opacity: 0; border-width: 1px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fullscreen Interactive Canvas Background -->
+  <canvas id="water-bg-canvas" class="water-particles-canvas"></canvas>
+
+  <!-- Page Content (High Z-Index Layer) -->
+  <div class="page-wrapper">
+    
+    <!-- Top Navigation -->
+    <header class="nav-bar">
+      <a href="#" class="logo">
+        <span class="logo-dot"></span>
+        <span>AetherFlow</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#features">Physics Engine</a></li>
+        <li><a href="#interaction">Interactions</a></li>
+        <li><a href="#code">Integration</a></li>
+        <li><a href="https://github.com" target="_blank" class="btn btn-secondary" style="padding: 6px 16px; font-size: 0.85rem;">View Source</a></li>
+      </ul>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="container" style="display: flex; flex-direction: column; align-items: center;">
+          <div class="badge">
+            <span class="badge-pulse"></span>
+            <span>Interactive Fluid Canvas Simulation</span>
+          </div>
+
+          <h1 class="hero-title">
+            Fluid Motion. <br>
+            <span class="gradient-text">Aligned Leaf Icons Grid</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            A minimalist geometric background with perfectly aligned leaf icons in rows and columns, soft pastel green tones, organic eco design, and interactive ripple waves on mouse move and click.
+          </p>
+
+          <div class="hero-actions">
+            <button id="btn-trigger-wave" class="btn btn-primary pulse-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="6"></circle>
+                <circle cx="12" cy="12" r="2"></circle>
+              </svg>
+              <span>Trigger Pulse Wave</span>
+            </button>
+            <a href="#code" class="btn btn-secondary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+              <span>Get Component Code</span>
+            </a>
+          </div>
+
+          <div class="hint-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            <span>Move mouse swiftly to generate fluid trailing ripples &bull; Click anywhere to propagate shockwaves</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Showcase Section -->
+      <section id="features" class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">Engine Architecture</h2>
+            <p class="section-desc">Engineered for silky-smooth 60 FPS animation with zero external dependencies.</p>
+          </div>
+
+          <div class="grid-3">
+            <div class="glass-card">
+              <div class="card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 12a10 10 0 0 1 10-10 10 10 0 0 1 10 10M2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10"/></svg>
+              </div>
+              <h3 class="card-title">Fluid Wake Dynamics</h3>
+              <p class="card-text">
+                Calculates cursor velocity vectors to impart realistic directional momentum and bow-waves to nearby leaf icons, swaying and tilting in real-time.
+              </p>
+            </div>
+
+            <div class="glass-card">
+              <div class="card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+              <h3 class="card-title">Spring-Damper Physics</h3>
+              <p class="card-text">
+                Every leaf node is anchored to its grid coordinates with Hooke's elasticity and viscous damping, ensuring organic recoil without abrupt snapping.
+              </p>
+            </div>
+
+            <div class="glass-card">
+              <div class="card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 4.24 4.24M14.83 14.83l4.24 4.24M14.83 9.17l4.24-4.24M4.93 19.07l4.24-4.24"/></svg>
+              </div>
+              <h3 class="card-title">Sinusoidal Shockwaves</h3>
+              <p class="card-text">
+                Continuous mouse movement and clicks trigger expanding circular ripples with accurate wave crest/trough phases, tilting and illuminating leaves.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Code Integration Section -->
+      <section id="code" class="section">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">Simple 3-Line Integration</h2>
+            <p class="section-desc">Drop the standalone component into any HTML5 page in seconds.</p>
+          </div>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>index.html</span>
+              <span>Vanilla JS / Zero Dependency</span>
+            </div>
+            <pre class="code-block"><code><span class="code-comment">&lt;!-- 1. Include the canvas element and script --&gt;</span>
+&lt;<span class="code-keyword">canvas</span> <span class="code-func">id</span>=<span class="code-string">"bg-canvas"</span> <span class="code-func">class</span>=<span class="code-string">"water-particles-canvas"</span>&gt;&lt;/<span class="code-keyword">canvas</span>&gt;
+&lt;<span class="code-keyword">script</span> <span class="code-func">src</span>=<span class="code-string">"assets/js/water-particles.js"</span>&gt;&lt;/<span class="code-keyword">script</span>&gt;
+
+<span class="code-comment">&lt;!-- 2. Initialize Minimalist Geometric Leaf Icons Grid Background --&gt;</span>
+&lt;<span class="code-keyword">script</span>&gt;
+  <span class="code-keyword">const</span> bg = <span class="code-keyword">new</span> <span class="code-func">WaterParticleField</span>({
+    canvas: <span class="code-string">'#bg-canvas'</span>,
+    gridMode: <span class="code-string">true</span>,              <span class="code-comment">// Perfectly aligned rows and columns</span>
+    gridSpacing: <span class="code-string">48</span>,             <span class="code-comment">// Distance between leaf nodes (px)</span>
+    shape: <span class="code-string">'leaf'</span>,               <span class="code-comment">// Minimalist organic leaf icon silhouette</span>
+    bubblePalette: [
+      { name: <span class="code-string">'mintGreen'</span>, color: <span class="code-string">'#98FF98'</span> },   <span class="code-comment">// Fresh Mint Green (#98FF98) → natural freshness</span>
+      { name: <span class="code-string">'leafGreen'</span>, color: <span class="code-string">'#228B22'</span> },   <span class="code-comment">// Deep Leaf Green (#228B22) → strong organic vibe</span>
+      { name: <span class="code-string">'aquaBlue'</span>, color: <span class="code-string">'#00CED1'</span> },     <span class="code-comment">// Aqua Blue (#00CED1) → purity &amp; calm</span>
+      { name: <span class="code-string">'softBeige'</span>, color: <span class="code-string">'#F5F5DC'</span> },    <span class="code-comment">// Soft Beige (#F5F5DC) → eco warmth</span>
+      { name: <span class="code-string">'whiteGlow'</span>, color: <span class="code-string">'rgba(255,255,255,0.50)'</span> } <span class="code-comment">// White Glow (#FFFFFF80) → highlight clarity</span>
+    ],
+    rippleOnMouseMove: <span class="code-string">true</span>,      <span class="code-comment">// Ripple waves on mouse move</span>
+    rippleOnClick: <span class="code-string">true</span>          <span class="code-comment">// Interactive ripple waves on click</span>
+  });
+&lt;/<span class="code-keyword">script</span>&gt;</code></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2026 Water Particle Background Engine. Built with HTML5 Canvas &amp; Vanilla JavaScript.</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Interactive Control HUD Floating Panel -->
+  <aside class="hud-panel" id="hud-panel">
+    <div class="hud-header" id="hud-header">
+      <div class="hud-title">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        <span>Live Customizer</span>
+      </div>
+      <button class="hud-toggle-btn" aria-label="Toggle Panel">&#x25BC;</button>
+    </div>
+
+    <div class="hud-body">
+      <!-- Live Stats Display -->
+      <div class="hud-stats-bar">
+        <span>FPS: <span id="stat-fps" class="stat-val">60</span></span>
+        <span>Particles: <span id="stat-count" class="stat-val">0</span></span>
+        <span>Ripples: <span id="stat-ripples" class="stat-val">0</span></span>
+      </div>
+
+      <!-- Theme Mode Selector -->
+      <div class="hud-group">
+        <label class="hud-label"><span>Background Theme</span></label>
+        <div class="preset-grid" style="grid-template-columns: 1fr 1fr;">
+          <button class="preset-btn active" id="btn-theme-light">
+            <span class="preset-dot" style="background: linear-gradient(135deg, #FCE2E8, #FAF8F5, #E0F4E8);"></span>
+            <span>☀️ Light Floral</span>
+          </button>
+          <button class="preset-btn" id="btn-theme-dark">
+            <span class="preset-dot" style="background: linear-gradient(135deg, #145A32, #013220);"></span>
+            <span>🌙 Dark Emerald</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Geometry Shape Selector -->
+      <div class="hud-group">
+        <label class="hud-label"><span>Grid Geometry</span></label>
+        <div class="preset-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+          <button class="preset-btn active" id="btn-shape-leaf">
+            <span>🌿 Leaves</span>
+          </button>
+          <button class="preset-btn" id="btn-shape-square">
+            <span>🟩 Squares</span>
+          </button>
+          <button class="preset-btn" id="btn-shape-mixed">
+            <span>✨ Mixed</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 🖱️ Mouse Interaction Modes -->
+      <div class="hud-group">
+        <label class="hud-label"><span>Mouse Interaction Mode</span></label>
+        <div class="preset-grid">
+          <button class="preset-btn active" data-mode="combined">
+            <span>🌀 Combined Flow</span>
+          </button>
+          <button class="preset-btn" data-mode="ripple">
+            <span>🌊 Ripple Waves</span>
+          </button>
+          <button class="preset-btn" data-mode="parallax">
+            <span>🌌 Parallax Float</span>
+          </button>
+          <button class="preset-btn" data-mode="hover">
+            <span>✨ Hover Glow</span>
+          </button>
+          <button class="preset-btn" data-mode="magnetic">
+            <span>🧲 Magnetic Pull</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Disturbance Radius Slider -->
+      <div class="hud-group">
+        <div class="hud-label">
+          <span>Wake Radius</span>
+          <span id="val-radius" class="stat-val">180px</span>
+        </div>
+        <input type="range" id="slider-radius" class="hud-slider" min="80" max="300" value="180">
+      </div>
+
+      <!-- Push Force Slider -->
+      <div class="hud-group">
+        <div class="hud-label">
+          <span>Displacement Force</span>
+          <span id="val-force" class="stat-val">0.72</span>
+        </div>
+        <input type="range" id="slider-force" class="hud-slider" min="0.2" max="2.0" step="0.05" value="0.72">
+      </div>
+
+      <!-- Spring Elasticity Slider -->
+      <div class="hud-group">
+        <div class="hud-label">
+          <span>Spring Tension</span>
+          <span id="val-spring" class="stat-val">0.038</span>
+        </div>
+        <input type="range" id="slider-spring" class="hud-slider" min="0.01" max="0.1" step="0.005" value="0.038">
+      </div>
+
+      <!-- Ripple Amplitude Slider -->
+      <div class="hud-group">
+        <div class="hud-label">
+          <span>Ripple Amplitude</span>
+          <span id="val-ripple-amp" class="stat-val">22px</span>
+        </div>
+        <input type="range" id="slider-ripple-amp" class="hud-slider" min="5" max="60" value="22">
+      </div>
+
+      <!-- Tension Web Checkbox -->
+      <div class="hud-group" style="flex-direction: row; justify-content: space-between; align-items: center; padding-top: 4px;">
+        <label for="check-connections" style="font-size: 0.82rem; color: var(--color-text-muted); cursor: pointer;">
+          Surface Tension Web
+        </label>
+        <input type="checkbox" id="check-connections" style="accent-color: var(--color-primary); cursor: pointer;">
+      </div>
+    </div>
+  </aside>
+
+  <!-- Load Background Class -->
+  <script src="assets/js/water-particles.js"></script>
+
+  <!-- Initialize & Controller Bindings -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Initialize Minimalist Geometric Grid Background
+      const bg = new WaterParticleField({
+        canvas: '#water-bg-canvas',
+        theme: 'light',
+        gridMode: true,
+        gridSpacing: 48,
+        shape: 'leaf',
+        interactionMode: 'combined',
+        parallaxEnabled: true,
+        parallaxFactor: 0.035,
+        hoverGlowEnabled: true,
+        hoverGlowRadius: 190,
+        rippleOnMouseMove: true,
+        rippleOnClick: true,
+        influenceRadius: 180,
+        pushForce: 0.72,
+        springTension: 0.038,
+        damping: 0.87,
+        rippleAmplitude: 22,
+        rippleSpeed: 4.2,
+        drawConnections: false
+      });
+
+      // 2. Theme Toggle Buttons (Light Mode / Dark Mode)
+      const btnThemeLight = document.getElementById('btn-theme-light');
+      const btnThemeDark = document.getElementById('btn-theme-dark');
+
+      btnThemeLight.addEventListener('click', (e) => {
+        e.stopPropagation();
+        btnThemeLight.classList.add('active');
+        btnThemeDark.classList.remove('active');
+        document.documentElement.setAttribute('data-bs-theme', 'light');
+        bg.setTheme('light');
+      });
+
+      btnThemeDark.addEventListener('click', (e) => {
+        e.stopPropagation();
+        btnThemeDark.classList.add('active');
+        btnThemeLight.classList.remove('active');
+        document.documentElement.setAttribute('data-bs-theme', 'dark');
+        bg.setTheme('dark');
+      });
+
+      // 3. Shape Mode Buttons (Leaf, Square, Mixed)
+      const shapeBtns = [
+        { btn: document.getElementById('btn-shape-leaf'), shape: 'leaf' },
+        { btn: document.getElementById('btn-shape-square'), shape: 'square' },
+        { btn: document.getElementById('btn-shape-mixed'), shape: 'mixed' }
+      ];
+
+      shapeBtns.forEach(({ btn, shape }) => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          shapeBtns.forEach(s => s.btn.classList.remove('active'));
+          btn.classList.add('active');
+          bg.setShape(shape);
+        });
+      });
+
+      // 4. Mouse Interaction Mode Buttons
+      const modeBtns = document.querySelectorAll('.hud-group button[data-mode]');
+      modeBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          modeBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const mode = btn.dataset.mode;
+          bg.setInteractionMode(mode);
+        });
+      });
+
+      // 5. Bind Sliders
+      const sliderRadius = document.getElementById('slider-radius');
+      const valRadius = document.getElementById('val-radius');
+      sliderRadius.addEventListener('input', (e) => {
+        const val = parseInt(e.target.value, 10);
+        valRadius.textContent = `${val}px`;
+        bg.setOptions({ influenceRadius: val });
+      });
+
+      const sliderForce = document.getElementById('slider-force');
+      const valForce = document.getElementById('val-force');
+      sliderForce.addEventListener('input', (e) => {
+        const val = parseFloat(e.target.value);
+        valForce.textContent = val.toFixed(2);
+        bg.setOptions({ pushForce: val });
+      });
+
+      const sliderSpring = document.getElementById('slider-spring');
+      const valSpring = document.getElementById('val-spring');
+      sliderSpring.addEventListener('input', (e) => {
+        const val = parseFloat(e.target.value);
+        valSpring.textContent = val.toFixed(3);
+        bg.setOptions({ springTension: val });
+      });
+
+      const sliderRippleAmp = document.getElementById('slider-ripple-amp');
+      const valRippleAmp = document.getElementById('val-ripple-amp');
+      sliderRippleAmp.addEventListener('input', (e) => {
+        const val = parseInt(e.target.value, 10);
+        valRippleAmp.textContent = `${val}px`;
+        bg.setOptions({ rippleAmplitude: val });
+      });
+
+      const checkConnections = document.getElementById('check-connections');
+      checkConnections.addEventListener('change', (e) => {
+        bg.setOptions({ drawConnections: e.target.checked });
+      });
+
+      // 6. Trigger Wave Button
+      const btnWave = document.getElementById('btn-trigger-wave');
+      btnWave.addEventListener('click', (e) => {
+        const rect = btnWave.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        bg.triggerRipple(centerX, centerY, 1.8);
+      });
+
+      // 7. HUD Collapse Toggle
+      const hudPanel = document.getElementById('hud-panel');
+      const hudHeader = document.getElementById('hud-header');
+      hudHeader.addEventListener('click', () => {
+        hudPanel.classList.toggle('collapsed');
+      });
+
+      // 8. Stats & FPS Counter
+      let frameCount = 0;
+      let lastFpsTime = performance.now();
+      const statFps = document.getElementById('stat-fps');
+      const statCount = document.getElementById('stat-count');
+      const statRipples = document.getElementById('stat-ripples');
+
+      function updateStats() {
+        frameCount++;
+        const now = performance.now();
+        if (now - lastFpsTime >= 500) {
+          const fps = Math.round((frameCount * 1000) / (now - lastFpsTime));
+          statFps.textContent = fps;
+          frameCount = 0;
+          lastFpsTime = now;
+        }
+
+        const stats = bg.getStats();
+        statCount.textContent = stats.particleCount;
+        statRipples.textContent = stats.activeRipples;
+
+        requestAnimationFrame(updateStats);
+      }
+      requestAnimationFrame(updateStats);
+    });
+  </script>
+</body>
+</html>

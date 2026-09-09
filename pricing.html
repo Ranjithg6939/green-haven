@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <title>Dining Packages & Tasting Menus | Green Haven Restaurant</title>
+  <meta name="description" content="Explore Green Haven's curated dining packages: Express Lunch, 5-Course Chef Degustation, Family Feast, and Biodynamic Wine Pairings.">
+  <meta name="keywords" content="vegan tasting menu, plant based dining packages, degustion menu portland, vegan food packages">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Custom Master Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <style>
+    /* Page Header Typography matching Our Services */
+    .page-header h1 {
+      color: #113813;
+      font-weight: 800;
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    [data-bs-theme="dark"] .page-header h1,
+    html.dark .page-header h1 {
+      color: #FFFFFF !important;
+    }
+
+    [data-bs-theme="dark"] .page-header p.text-muted,
+    html.dark .page-header p.text-muted,
+    [data-bs-theme="dark"] .breadcrumb-nav,
+    html.dark .breadcrumb-nav,
+    [data-bs-theme="dark"] .breadcrumb-nav a,
+    html.dark .breadcrumb-nav a {
+      color: #C5D7C2 !important;
+    }
+
+    [data-bs-theme="dark"] .text-success,
+    html.dark .text-success {
+      color: #00FF7F !important;
+    }
+
+    /* Luxury Pricing Cards */
+    .luxury-pricing-card {
+      background: rgba(255, 255, 255, 0.97) !important;
+      backdrop-filter: blur(20px) !important;
+      -webkit-backdrop-filter: blur(20px) !important;
+      border: 1.5px solid rgba(46, 101, 24, 0.2) !important;
+      border-radius: 26px !important;
+      overflow: hidden !important;
+      display: flex !important;
+      flex-direction: column !important;
+      height: 100% !important;
+      position: relative !important;
+      box-shadow: 0 14px 40px rgba(18, 48, 20, 0.08) !important;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                  box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                  border-color 0.4s ease !important;
+    }
+
+    .luxury-pricing-card:hover {
+      transform: translateY(-10px) !important;
+      box-shadow: 0 24px 55px rgba(18, 48, 20, 0.18) !important;
+      border-color: rgba(46, 101, 24, 0.45) !important;
+    }
+
+    .luxury-pricing-card.featured-tier {
+      border: 2px solid #2e6518 !important;
+      box-shadow: 0 20px 50px rgba(46, 101, 24, 0.2) !important;
+      transform: translateY(-6px);
+    }
+
+    .luxury-pricing-card.featured-tier:hover {
+      transform: translateY(-14px) !important;
+      box-shadow: 0 30px 65px rgba(46, 101, 24, 0.28) !important;
+    }
+
+    [data-bs-theme="dark"] .luxury-pricing-card,
+    html.dark .luxury-pricing-card {
+      background: rgba(2, 38, 24, 0.96) !important;
+      color: #F5F5DC !important;
+      border-color: rgba(0, 255, 127, 0.22) !important;
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    [data-bs-theme="dark"] .luxury-pricing-card.featured-tier,
+    html.dark .luxury-pricing-card.featured-tier {
+      border-color: #00FF7F !important;
+      box-shadow: 0 20px 50px rgba(0, 255, 127, 0.22) !important;
+    }
+
+    [data-bs-theme="dark"] .luxury-pricing-card h3,
+    html.dark .luxury-pricing-card h3 {
+      color: #FFFFFF !important;
+    }
+
+    [data-bs-theme="dark"] .luxury-pricing-card .pricing-card-body,
+    html.dark .luxury-pricing-card .pricing-card-body {
+      color: #F5F5DC !important;
+    }
+
+    [data-bs-theme="dark"] .luxury-pricing-card ul li,
+    html.dark .luxury-pricing-card ul li,
+    [data-bs-theme="dark"] .luxury-pricing-card ul li span,
+    html.dark .luxury-pricing-card ul li span {
+      color: #E2F4E2 !important;
+      font-weight: 500 !important;
+    }
+
+    [data-bs-theme="dark"] .luxury-pricing-card .text-muted,
+    html.dark .luxury-pricing-card .text-muted {
+      color: #A8D5BA !important;
+    }
+
+    [data-bs-theme="dark"] .pricing-card-body span[style*="color: #1b4d13"],
+    html.dark .pricing-card-body span[style*="color: #1b4d13"] {
+      color: #00FF7F !important;
+    }
+
+    .pricing-card-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(46, 101, 24, 0.12);
+    }
+
+    .pricing-card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .luxury-pricing-card:hover .pricing-card-img-wrap img {
+      transform: scale(1.09);
+    }
+
+    .pricing-floating-icon {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      z-index: 5;
+    }
+
+    [data-bs-theme="dark"] .pricing-floating-icon {
+      background: rgba(2, 44, 27, 0.92);
+    }
+
+    .pricing-category-pill {
+      position: absolute;
+      bottom: 12px;
+      left: 14px;
+      background: rgba(14, 42, 18, 0.88);
+      backdrop-filter: blur(8px);
+      color: #FFFFFF;
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      z-index: 5;
+    }
+
+    .pricing-card-body {
+      padding: 26px 24px 22px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .pricing-crown-badge {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #1b4d13 0%, #2e6518 100%);
+      color: #FFFFFF;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 5px 22px;
+      border-radius: 0 0 16px 16px;
+      z-index: 10;
+      white-space: nowrap;
+    }
+
+    [data-bs-theme="dark"] .pricing-crown-badge {
+      background: linear-gradient(135deg, #00FF7F 0%, #00a854 100%);
+      color: #012417;
+    }
+  </style>
+</head>
+<body class="nature-bg-page pricing-nature-page">
+
+  <!-- Main Navigation Bar -->
+  <header class="gh-navbar">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between">
+        
+        <!-- Brand Logo with Continuous Animated Outline -->
+        <a class="gh-brand gh-brand-auto" href="index.html" aria-label="Green Haven Restaurant">
+          <span class="gh-logo-wrapper">
+            <svg class="gh-logo-outline-svg" viewBox="0 0 100 100">
+              <circle class="gh-logo-outline-base" cx="50" cy="50" r="48" pathLength="100" />
+              <circle class="gh-logo-outline-stroke" cx="50" cy="50" r="48" pathLength="100" />
+            </svg>
+            <img src="assets/images/logo-g.png" alt="Green Haven Logo G" class="gh-logo-icon gh-logo-g">
+            <img src="assets/images/logo-h.png" alt="Green Haven Logo H" class="gh-logo-icon gh-logo-h">
+          </span>
+          <img src="assets/images/title.png" alt="Green Haven" class="gh-brand-title-img gh-title-light">
+          <img src="assets/images/title-dark.png" alt="Green Haven" class="gh-brand-title-img gh-title-dark">
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="d-none d-lg-flex align-items-center gap-1">
+          <div class="dropdown">
+            <a class="gh-nav-link  dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Home
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item " href="index.html"><i class="bi bi-house me-2"></i> Home 1 (Gourmet Landing)</a></li>
+              <li><a class="gh-dropdown-item " href="home-2.html"><i class="bi bi-flower1 me-2"></i> Home 2 (Farm to Plate)</a></li>
+            </ul>
+          </div>
+          <a class="gh-nav-link " href="about.html">About</a>
+          <a class="gh-nav-link " href="menu.html">Menu</a>
+          <div class="dropdown">
+            <a class="gh-nav-link  dropdown-toggle" href="services.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Services
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item " href="services.html"><i class="bi bi-grid-fill me-2"></i> Our Services</a></li>
+              <li><a class="gh-dropdown-item " href="service-details.html"><i class="bi bi-file-earmark-text me-2"></i> Service Details</a></li>
+            </ul>
+          </div>
+          <a class="gh-nav-link " href="catering.html">Catering</a>
+          <a class="gh-nav-link active" href="pricing.html">Packages</a>
+          <div class="dropdown">
+            <a class="gh-nav-link  dropdown-toggle" href="blog.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Blog
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item " href="blog.html"><i class="bi bi-card-text me-2"></i> Food &amp; Wellness Blog</a></li>
+              <li><a class="gh-dropdown-item " href="blog-details.html"><i class="bi bi-layout-text-window me-2"></i> Article Details</a></li>
+            </ul>
+          </div>
+          <div class="dropdown">
+            <a class="gh-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Pages
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
+              <li><a class="gh-dropdown-item" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
+              <li><a class="gh-dropdown-item" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
+            </ul>
+          </div>
+          <a class="gh-nav-link " href="contact.html">Contact</a>
+        </nav>
+
+        <!-- Navbar Controls & Dynamic Auth -->
+        <div class="d-flex align-items-center gap-2">
+          <!-- Theme Toggle (Dark Mode) -->
+          <button class="theme-toggle-btn" aria-label="Toggle Light/Dark Theme">
+            <i class="bi bi-moon-stars-fill"></i>
+          </button>
+
+          <!-- RTL / LTR Toggle -->
+          <button class="rtl-toggle-btn" aria-label="Toggle text direction" title="Switch text direction (RTL / LTR)">
+            <i class="bi bi-arrow-left-right"></i>
+          </button>
+
+          <!-- Cart Icon -->
+          <a href="cart.html" class="cart-nav-btn" title="View Cart">
+            <i class="bi bi-bag"></i>
+            <span id="navCartCount" class="cart-badge-count" style="display: none;">0</span>
+          </a>
+
+          <!-- Reserve Table -->
+          <a href="reservation.html" class="btn btn-primary d-none d-lg-inline-flex btn-sm">
+            <i class="bi bi-calendar2-check"></i> Reserve Table
+          </a>
+
+          <!-- Standard Desktop Auth (Sign In) -->
+          <div id="navAuthContainer" class="d-none d-md-block">
+            <div class="d-inline-flex align-items-center gap-2 flex-nowrap">
+              <a href="login.html" class="btn btn-outline-primary btn-sm">
+                <i class="bi bi-box-arrow-in-right me-1"></i> Sign In
+              </a>
+            </div>
+          </div>
+
+          <button class="btn btn-icon btn-outline-primary d-lg-none gh-mobile-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenuOffcanvas" aria-controls="mobileMenuOffcanvas" aria-label="Open mobile navigation">
+            <i class="bi bi-list fs-4"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Offcanvas Menu -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenuOffcanvas" aria-labelledby="mobileMenuOffcanvasLabel">
+    <div class="offcanvas-header border-bottom">
+      <a class="gh-brand gh-brand-auto" href="index.html" aria-label="Green Haven Restaurant">
+        <span class="gh-logo-wrapper">
+          <svg class="gh-logo-outline-svg" viewBox="0 0 100 100">
+            <circle class="gh-logo-outline-base" cx="50" cy="50" r="48" pathLength="100" />
+            <circle class="gh-logo-outline-stroke" cx="50" cy="50" r="48" pathLength="100" />
+          </svg>
+          <img src="assets/images/logo-g.png" alt="Green Haven Logo G" class="gh-logo-icon gh-logo-g">
+          <img src="assets/images/logo-h.png" alt="Green Haven Logo H" class="gh-logo-icon gh-logo-h">
+        </span>
+        <img src="assets/images/title.png" alt="Green Haven" class="gh-brand-title-img gh-title-light">
+        <img src="assets/images/title-dark.png" alt="Green Haven" class="gh-brand-title-img gh-title-dark">
+      </a>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-4 d-flex flex-column justify-content-between">
+      <div>
+        <div id="mobileNavAuthContainer" class="mb-3">
+          <div class="d-flex gap-2">
+            <a href="login.html" class="btn btn-outline-primary btn-sm flex-fill"><i class="bi bi-box-arrow-in-right me-1"></i> Sign In</a>
+          </div>
+        </div>
+        <nav class="d-flex flex-column gap-2">
+          <a class="gh-nav-link " href="index.html">Home (Gourmet)</a>
+          <a class="gh-nav-link " href="home-2.html">Home (Farm to Plate)</a>
+          <a class="gh-nav-link " href="about.html">About Us</a>
+          <a class="gh-nav-link " href="menu.html">Full Restaurant Menu</a>
+          <a class="gh-nav-link" href="cart.html"><i class="bi bi-bag me-1"></i> My Dining Cart</a>
+          <a class="gh-nav-link " href="services.html">Our Services</a>
+          <a class="gh-nav-link " href="catering.html">Plant-Based Catering</a>
+          <a class="gh-nav-link active" href="pricing.html">Dining Packages</a>
+          <a class="gh-nav-link " href="blog.html">Culinary Journal</a>
+          <div class="dropdown">
+            <a class="gh-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Pages
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
+              <li><a class="gh-dropdown-item" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
+              <li><a class="gh-dropdown-item" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
+            </ul>
+          </div>
+          <a class="gh-nav-link " href="contact.html">Contact Us</a>
+        </nav>
+      </div>
+      <div class="border-top pt-3">
+        <a href="reservation.html" class="btn btn-primary w-100 mb-2"><i class="bi bi-calendar2-check me-1"></i> Book Table</a>
+        <a href="menu.html" class="btn btn-outline-primary w-100"><i class="bi bi-bag-plus me-1"></i> Order Online</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- Page Header -->
+    <section class="page-header text-center pt-5 pb-4">
+      <div class="container">
+        <span class="section-sub mb-2 d-inline-flex align-items-center"><i class="bi bi-tags text-warning me-1"></i> Curated Experiences</span>
+        <h1 class="display-4 fw-bold font-serif mb-2">Dining Packages & Tasting Menus</h1>
+        <p class="text-muted mx-auto mb-3" style="max-width: 680px;">Experience the finest seasonal plant-based menus curated by Executive Chef Julian Vance.</p>
+        <div class="breadcrumb-nav justify-content-center">
+          <a href="index.html">Home</a>
+          <span>/</span>
+          <span class="text-success fw-semibold">Dining Packages</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Packages Grid -->
+    <section class="section-padding py-5">
+      <div class="container">
+        
+        <div class="row g-4 align-items-stretch justify-content-center">
+          
+          <!-- Tier 1 -->
+          <div class="col-lg-4 col-md-6">
+            <div class="luxury-pricing-card">
+              <div class="pricing-card-img-wrap">
+                <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?q=80&w=800&auto=format&fit=crop" alt="Botanical Express Lunch" loading="lazy">
+                <div class="pricing-floating-icon"><span>🥗</span></div>
+                <span class="pricing-category-pill">Midday Dining</span>
+              </div>
+              <div class="pricing-card-body">
+                <h3 class="fw-bold font-serif mb-1">Botanical Express Lunch</h3>
+                <p class="text-success fw-semibold small mb-3">Quick, energizing organic lunch course</p>
+                <div class="d-flex align-items-baseline gap-2 mb-3">
+                  <span class="fs-1 fw-bold font-serif" style="color: #1b4d13;">$28</span>
+                  <span class="text-muted small">/ person</span>
+                </div>
+                <ul class="list-unstyled mb-4">
+                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>Choice of Superfood Grain Bowl</span></li>
+                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>House Fermented Kimchi or Soup</span></li>
+                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>Cold-Pressed Elixir of the Day</span></li>
+                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>Raw Cacao Truffle Bite</span></li>
+                </ul>
+                <div class="mt-auto">
+                  <a href="reservation.html" class="btn btn-white-cta btn-lg w-100 rounded-pill shadow-sm">Reserve Express Lunch →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tier 2 (Featured) -->
+          <div class="col-lg-4 col-md-6">
+            <div class="luxury-pricing-card featured-tier">
+              <div class="pricing-crown-badge">★ Most Popular · Signature</div>
+              <div class="pricing-card-img-wrap">
+                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop" alt="Seasonal Degustation" loading="lazy">
+                <div class="pricing-floating-icon"><span>🌿</span></div>
+                <span class="pricing-category-pill">Chef's Tasting</span>
+              </div>
+              <div class="pricing-card-body">
+                <h3 class="fw-bold font-serif mb-1">5-Course Seasonal Degustation</h3>
+                <p class="text-success fw-semibold small mb-3">Our signature chef culinary journey</p>
+                <div class="d-flex align-items-baseline gap-2 mb-3">
+                  <span class="fs-1 fw-bold font-serif" style="color: #1b4d13;">$68</span>
+                  <span class="text-muted small">/ person</span>
+                </div>
+                <ul class="list-unstyled mb-4">
+                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>Amuse-bouche & Botanical Shot</span></li>
+                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>Heirloom Avocado & Tartine Course</span></li>
+                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>Wild Truffle Risotto or Rib Steak</span></li>
+                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>Cultured Cashew Cheese Plate</span></li>
+                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>Uji Matcha Silk Tart Dessert</span></li>
+                </ul>
+                <div class="mt-auto">
+                  <a href="reservation.html" class="btn btn-primary btn-lg w-100 rounded-pill shadow-sm">Book Tasting Experience →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tier 3 -->
+          <div class="col-lg-4 col-md-6">
+            <div class="luxury-pricing-card">
+              <div class="pricing-card-img-wrap">
+                <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=800&auto=format&fit=crop" alt="Family & Group Feast" loading="lazy">
+                <div class="pricing-floating-icon"><span>👑</span></div>
+                <span class="pricing-category-pill">Group Banquets</span>
+              </div>
+              <div class="pricing-card-body">
+                <h3 class="fw-bold font-serif mb-1">Family & Group Feast</h3>
+                <p class="text-success fw-semibold small mb-3">Shared banquet for 4 to 6 guests</p>
+                <div class="d-flex align-items-baseline gap-2 mb-3">
+                  <span class="fs-1 fw-bold font-serif" style="color: #1b4d13;">$180</span>
+                  <span class="text-muted small">/ group (4p)</span>
+                </div>
+                <ul class="list-unstyled mb-4">
+                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>2 Large Wood-Fired Flatbreads</span></li>
+                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>Large Golden Beet & Arugula Salad</span></li>
+                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>4 Full Sized Entrees of Choice</span></li>
+                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>Shared Grand Dessert Sampler</span></li>
+                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>4 Cold-Pressed Botanical Elixirs</span></li>
+                </ul>
+                <div class="mt-auto">
+                  <a href="reservation.html" class="btn btn-white-cta btn-lg w-100 rounded-pill shadow-sm">Reserve Group Feast →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+      <!-- Universal 4-Column Luxury Footer -->
+  <footer class="gh-footer">
+    <div class="container">
+      <div class="row g-4 g-lg-5 mb-5">
+        
+        <!-- Column 1: Brand & Tagline -->
+        <div class="col-lg-4 col-md-6">
+          <a class="gh-brand text-white mb-3 d-inline-flex align-items-center" href="index.html" aria-label="Green Haven Restaurant">
+            <img src="assets/images/logo-g.png" alt="Green Haven Logo" class="gh-brand-logo-img me-2">
+            <span class="gh-brand-text text-white">Green Haven</span>
+          </a>
+          <p class="footer-bio mb-4">
+            An organic plant-based restaurant sanctuary celebrating vibrant seasonal gastronomy, regenerative agriculture, and holistic well-being.
+          </p>
+          <div class="d-flex gap-2 flex-wrap">
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+            <a href="https://pinterest.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Pinterest"><i class="bi bi-pinterest"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+          </div>
+        </div>
+
+        <!-- Column 2: Navigation -->
+        <div class="col-6 col-md-4 col-lg-2">
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
+            <li><a href="index.html" class="footer-link"><i class="bi bi-chevron-right"></i> Home</a></li>
+            <li><a href="about.html" class="footer-link"><i class="bi bi-chevron-right"></i> About Us</a></li>
+            <li><a href="menu.html" class="footer-link"><i class="bi bi-chevron-right"></i> Our Menu</a></li>
+            <li><a href="cart.html" class="footer-link"><i class="bi bi-chevron-right"></i> Food Cart</a></li>
+            <li><a href="catering.html" class="footer-link"><i class="bi bi-chevron-right"></i> Catering</a></li>
+            <li><a href="contact.html" class="footer-link"><i class="bi bi-chevron-right"></i> Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Hours & Location -->
+        <div class="col-6 col-md-4 col-lg-3">
+          <h4 class="footer-col-title">Hours & Location</h4>
+          <p class="text-white-50 small mb-2"><i class="bi bi-geo-alt text-warning me-2"></i> 742 Evergreen Botanical Way, Portland</p>
+          <p class="text-white-50 small mb-2"><i class="bi bi-clock text-warning me-2"></i> Mon - Sun: 8:00 AM - 10:00 PM</p>
+          <p class="text-white-50 small mb-0"><i class="bi bi-telephone text-warning me-2"></i> <a href="tel:+15035550192" class="text-white text-decoration-none" style="color: #FFFFFF !important;">+1 (503) 555-0192</a></p>
+        </div>
+
+        <!-- Column 4: Botanical Digest -->
+        <div class="col-lg-3 col-md-6">
+          <h4 class="footer-col-title">Botanical Digest</h4>
+          <p class="text-white-50 small mb-3">Join our newsletter for seasonal menu previews and chef recipes.</p>
+          <form class="newsletter-form d-flex gap-2">
+            <input type="email" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Your email" required>
+            <button type="submit" class="btn btn-accent btn-sm px-3">Join</button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Bottom Line -->
+      <div class="footer-bottom border-top border-secondary border-opacity-25 pt-4 mt-4 text-white-50 small">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+          <div>&copy; 2026 Green Haven Restaurant. All Rights Reserved.</div>
+          <div class="d-flex gap-3">
+            <a href="#" class="text-white-50 text-decoration-none hover-white">Privacy Policy</a>
+            <span>&bull;</span>
+            <a href="#" class="text-white-50 text-decoration-none hover-white">Terms &amp; Conditions</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/shop.js"></script>
+</body>
+</html>

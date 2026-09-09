@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <title>Admin Dashboard | Green Haven Restaurant</title>
+  <meta name="description" content="Green Haven Restaurant Operations, Orders, Reservations, and Culinary Admin Console.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Custom Master Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    (function() {
+      var dir = localStorage.getItem('site-dir') || 'ltr';
+      document.documentElement.setAttribute('dir', dir);
+      if (dir === 'rtl') document.documentElement.classList.add('rtl');
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- Admin Layout Wrapper -->
+  <div class="admin-layout">
+    
+    <!-- Mobile Sidebar Backdrop Overlay -->
+    <div class="admin-sidebar-backdrop" id="adminSidebarBackdrop"></div>
+
+    <!-- Admin Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <!-- Brand Header -->
+      <div class="admin-sidebar-header">
+        <a href="admin.html" class="admin-brand">
+          <span class="gh-logo-wrapper" style="width: 38px; height: 38px;">
+            <svg class="gh-logo-outline-svg" viewBox="0 0 100 100">
+              <circle class="gh-logo-outline-base" cx="50" cy="50" r="48" pathLength="100" />
+              <circle class="gh-logo-outline-stroke" cx="50" cy="50" r="48" pathLength="100" />
+            </svg>
+            <img src="assets/images/logo-g.png" alt="Green Haven Logo" class="gh-logo-icon gh-logo-g" style="width: 20px; height: 20px;">
+            <img src="assets/images/logo-h.png" alt="Green Haven Logo" class="gh-logo-icon gh-logo-h" style="width: 20px; height: 20px;">
+          </span>
+          <div class="d-flex flex-column">
+            <span class="font-serif fw-bold fs-6 lh-1" style="letter-spacing: -0.01em;">Green Haven</span>
+            <span class="text-muted extra-small" style="font-size: 0.7rem;">CULINARY STUDIO</span>
+          </div>
+        </a>
+        <span class="admin-brand-badge">ADMIN</span>
+      </div>
+
+      <!-- Navigation Groups (Connected with main.js Section 14) -->
+      <div class="admin-nav-group">
+        <div class="admin-nav-heading">Main Overview</div>
+        <a href="#dashboard" class="admin-nav-item active" data-view="viewDashboard">
+          <i class="bi bi-grid-1x2-fill"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#orders" class="admin-nav-item" data-view="viewOrders">
+          <i class="bi bi-bag-check-fill"></i>
+          <span>Live Orders</span>
+          <span class="badge bg-warning-subtle text-dark ms-auto" style="font-size: 0.7rem;">12</span>
+        </a>
+        <a href="#reservations" class="admin-nav-item" data-view="viewReservations">
+          <i class="bi bi-calendar2-check-fill"></i>
+          <span>Reservations</span>
+          <span class="badge bg-success-subtle text-success ms-auto" style="font-size: 0.7rem;">8</span>
+        </a>
+
+        <div class="admin-nav-heading mt-3">Catalog &amp; Content</div>
+        <a href="#menu" class="admin-nav-item" data-view="viewMenu">
+          <i class="bi bi-journal-richtext"></i>
+          <span>Menu Items</span>
+        </a>
+        <a href="blog.html" class="admin-nav-item">
+          <i class="bi bi-layout-text-window"></i>
+          <span>Journal / Blog</span>
+        </a>
+        <a href="#customers" class="admin-nav-item" data-view="viewCustomers">
+          <i class="bi bi-people-fill"></i>
+          <span>Customers</span>
+        </a>
+
+        <div class="admin-nav-heading mt-3">Operations &amp; System</div>
+        <a href="#analytics" class="admin-nav-item" data-view="viewAnalytics">
+          <i class="bi bi-graph-up-arrow"></i>
+          <span>Financials</span>
+        </a>
+        <a href="admin-404.html" class="admin-nav-item text-danger-emphasis">
+          <i class="bi bi-exclamation-octagon text-danger"></i>
+          <span>Test 404 Page</span>
+        </a>
+        <a href="#settings" class="admin-nav-item" data-view="viewSettings">
+          <i class="bi bi-gear-fill"></i>
+          <span>Settings</span>
+        </a>
+      </div>
+
+      <!-- Sidebar User Footer -->
+      <div class="admin-sidebar-footer">
+        <div class="admin-user-card">
+          <div class="position-relative">
+            <img src="assets/images/elena-rostova.jpg" alt="Chef Elena Rostova" class="rounded-circle shadow-sm" style="width: 40px; height: 40px; object-fit: cover;">
+            <span class="position-absolute bottom-0 end-0 bg-success border border-white rounded-circle" style="width: 10px; height: 10px;"></span>
+          </div>
+          <div class="flex-grow-1 min-w-0">
+            <span class="d-block fw-bold small text-truncate">Chef Elena Rostova</span>
+            <span class="text-muted extra-small d-block text-truncate" style="font-size: 0.72rem;">Master Administrator</span>
+          </div>
+          <a href="index.html" class="text-muted hover-primary p-1" title="Sign Out / Storefront">
+            <i class="bi bi-box-arrow-right fs-6"></i>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Container -->
+    <div class="admin-main">
+      
+      <!-- Topbar Header -->
+      <header class="admin-topbar">
+        <!-- Left: Mobile Toggle & Breadcrumbs -->
+        <div class="d-flex align-items-center gap-3">
+          <button class="btn btn-sm btn-light border d-lg-none rounded-2 p-1.5" id="adminSidebarToggle" aria-label="Toggle navigation menu">
+            <i class="bi bi-list fs-5"></i>
+          </button>
+          
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 small">
+              <li class="breadcrumb-item"><a href="admin.html" class="text-decoration-none text-muted">Admin</a></li>
+              <li class="breadcrumb-item active text-dark fw-medium" aria-current="page">Operations Console</li>
+            </ol>
+          </nav>
+        </div>
+
+        <!-- Center: Search Input -->
+        <div class="admin-search-wrapper d-none d-md-block">
+          <i class="bi bi-search admin-search-icon"></i>
+          <input type="text" class="admin-search-input" placeholder="Search orders, reservations, dishes..." aria-label="Search dashboard">
+          <span class="admin-kbd-hint">⌘K</span>
+        </div>
+
+        <!-- Right: Actions & Profile -->
+        <div class="d-flex align-items-center gap-2">
+          <!-- View Live Storefront -->
+          <a href="index.html" class="btn btn-sm btn-outline-success rounded-pill px-3 d-none d-sm-inline-flex align-items-center gap-1.5 shadow-none" target="_blank" title="Open Public Restaurant Site">
+            <i class="bi bi-arrow-up-right-circle"></i>
+            <span>Live Site</span>
+          </a>
+
+          <!-- Notification Bell -->
+          <button class="btn btn-sm btn-light border rounded-circle p-2 position-relative text-muted" aria-label="View notifications">
+            <i class="bi bi-bell fs-6"></i>
+            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+              <span class="visually-hidden">New alerts</span>
+            </span>
+          </button>
+
+          <!-- Theme Toggle Button -->
+          <button class="theme-toggle-btn" aria-label="Toggle Light/Dark Theme" title="Switch Theme">
+            <i class="bi bi-moon-stars-fill"></i>
+          </button>
+
+          <!-- RTL Direction Toggle Button -->
+          <button class="rtl-toggle-btn" aria-label="Toggle text direction" title="Switch text direction (RTL / LTR)">
+            <i class="bi bi-arrow-left-right"></i>
+          </button>
+
+          <!-- User Avatar Chip -->
+          <div class="d-flex align-items-center gap-2 ps-2 border-start ms-1">
+            <img src="assets/images/elena-rostova.jpg" alt="Admin Avatar" class="rounded-circle shadow-sm" style="width: 34px; height: 34px; object-fit: cover;">
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Dashboard Body Views -->
+      <main class="p-4 p-md-5">
+        
+        <!-- View 1: Main Dashboard Pane -->
+        <section class="admin-view-pane" id="viewDashboard">
+          
+          <!-- Welcome Banner -->
+          <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+            <div>
+              <span class="badge bg-success-subtle text-success px-3 py-1 rounded-pill fw-bold text-uppercase extra-small mb-1">
+                <i class="bi bi-check2-circle me-1"></i> Kitchen Service Active
+              </span>
+              <h2 class="font-serif fw-bold mb-1">Portland Atelier Overview</h2>
+              <p class="text-muted small mb-0">Real-time orders, cellar fermentation batches, and dining reservations.</p>
+            </div>
+            <div class="d-flex gap-2">
+              <a href="admin-404.html" class="btn btn-outline-secondary rounded-pill px-3 py-2 btn-sm">
+                <i class="bi bi-link-45deg me-1"></i> Preview 404 Page
+              </a>
+              <button class="btn btn-primary rounded-pill px-3 py-2 btn-sm d-inline-flex align-items-center gap-1.5">
+                <i class="bi bi-plus-circle"></i> New Reservation
+              </button>
+            </div>
+          </div>
+
+          <!-- KPI Metrics Row -->
+          <div class="row g-3 mb-4">
+            <div class="col-sm-6 col-xl-3">
+              <div class="p-3.5 p-md-4 rounded-4 bg-card border shadow-sm h-100">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                  <span class="text-muted extra-small text-uppercase fw-bold">Today's Revenue</span>
+                  <span class="badge bg-success-subtle text-success rounded-pill">+18.4%</span>
+                </div>
+                <h3 class="fw-bold mb-1">$4,820.50</h3>
+                <span class="text-muted extra-small">Across 64 organic dining checks</span>
+              </div>
+            </div>
+            
+            <div class="col-sm-6 col-xl-3">
+              <div class="p-3.5 p-md-4 rounded-4 bg-card border shadow-sm h-100">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                  <span class="text-muted extra-small text-uppercase fw-bold">Active Orders</span>
+                  <span class="badge bg-warning-subtle text-dark rounded-pill">12 In Kitchen</span>
+                </div>
+                <h3 class="fw-bold mb-1">12 Orders</h3>
+                <span class="text-muted extra-small">Avg prep time: 14.5 mins</span>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-xl-3">
+              <div class="p-3.5 p-md-4 rounded-4 bg-card border shadow-sm h-100">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                  <span class="text-muted extra-small text-uppercase fw-bold">Table Reservations</span>
+                  <span class="badge bg-info-subtle text-info-emphasis rounded-pill">8 Tonight</span>
+                </div>
+                <h3 class="fw-bold mb-1">34 Guests</h3>
+                <span class="text-muted extra-small">Conservatory &amp; Hearth tables</span>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-xl-3">
+              <div class="p-3.5 p-md-4 rounded-4 bg-card border shadow-sm h-100">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                  <span class="text-muted extra-small text-uppercase fw-bold">Fermentation Maturation</span>
+                  <span class="badge bg-success-subtle text-success rounded-pill">Optimal</span>
+                </div>
+                <h3 class="fw-bold mb-1">4 Active Wheels</h3>
+                <span class="text-muted extra-small">Cashew Silk Cheese Aging</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Orders Table Section -->
+          <div class="p-4 rounded-4 bg-card border shadow-sm mb-4">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
+              <h5 class="font-serif fw-bold mb-0">Live Kitchen Orders</h5>
+              <div class="d-flex gap-2">
+                <input type="text" id="orderTableSearch" class="form-control form-control-sm rounded-pill px-3" placeholder="Filter orders..." style="max-width: 220px;">
+              </div>
+            </div>
+            
+            <div class="table-responsive">
+              <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                  <tr>
+                    <th>Order #</th>
+                    <th>Customer</th>
+                    <th>Dishes</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th class="text-end">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="orderTableBody">
+                  <tr>
+                    <td><strong class="font-monospace text-primary">#GH-8821</strong></td>
+                    <td>
+                      <div class="fw-bold small">Sophia Montgomery</div>
+                      <span class="text-muted extra-small">Table 4 &bull; Dine-In</span>
+                    </td>
+                    <td>Botanical Harvest Bowl, Chlorophyll Elixir</td>
+                    <td class="fw-bold">$38.50</td>
+                    <td><span class="badge bg-warning-subtle text-dark rounded-pill">Preparing</span></td>
+                    <td class="text-end"><button class="btn btn-sm btn-outline-primary rounded-pill px-2.5 py-1">View Details</button></td>
+                  </tr>
+                  <tr>
+                    <td><strong class="font-monospace text-primary">#GH-8820</strong></td>
+                    <td>
+                      <div class="fw-bold small">David Thorne</div>
+                      <span class="text-muted extra-small">Delivery &bull; Pearl District</span>
+                    </td>
+                    <td>Wild Truffle Risotto, Cashew Camembert Wedge</td>
+                    <td class="fw-bold">$54.00</td>
+                    <td><span class="badge bg-info-subtle text-info-emphasis rounded-pill">Out for Delivery</span></td>
+                    <td class="text-end"><button class="btn btn-sm btn-outline-primary rounded-pill px-2.5 py-1">Track</button></td>
+                  </tr>
+                  <tr>
+                    <td><strong class="font-monospace text-primary">#GH-8819</strong></td>
+                    <td>
+                      <div class="fw-bold small">Maya Lin</div>
+                      <span class="text-muted extra-small">Pickup &bull; 7:30 PM</span>
+                    </td>
+                    <td>Amazonian Acai Bowl, Hibiscus Kombucha</td>
+                    <td class="fw-bold">$26.50</td>
+                    <td><span class="badge bg-success-subtle text-success rounded-pill">Ready for Pickup</span></td>
+                    <td class="text-end"><button class="btn btn-sm btn-outline-primary rounded-pill px-2.5 py-1">Complete</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- View 2: Live Orders Pane -->
+        <section class="admin-view-pane" id="viewOrders" style="display: none;">
+          <h3 class="font-serif fw-bold mb-3">All Active &amp; Past Orders</h3>
+          <p class="text-muted small mb-4">Complete order log with customer receipts and delivery tracking coordinates.</p>
+          <div class="p-4 rounded-4 bg-card border shadow-sm">
+            <p class="text-muted">Order archive loaded. Use the search bar above to query by Order ID or Guest Name.</p>
+          </div>
+        </section>
+
+        <!-- View 3: Reservations Pane -->
+        <section class="admin-view-pane" id="viewReservations" style="display: none;">
+          <h3 class="font-serif fw-bold mb-3">Table Bookings &amp; Conservatory Seating</h3>
+          <p class="text-muted small mb-4">Manage guest party sizes, dietary alerts, and seating charts.</p>
+          <div class="p-4 rounded-4 bg-card border shadow-sm">
+            <p class="text-muted">All 8 reservations confirmed for evening tasting service.</p>
+          </div>
+        </section>
+
+        <!-- View 4: Customers Directory Pane -->
+        <section class="admin-view-pane" id="viewCustomers" style="display: none;">
+          <h3 class="font-serif fw-bold mb-3">Dining Members Directory</h3>
+          <div class="mb-3">
+            <input type="text" id="userTableSearch" class="form-control rounded-pill px-3" placeholder="Filter customer accounts..." style="max-width: 280px;">
+          </div>
+          <div class="table-responsive bg-card rounded-4 border shadow-sm">
+            <table class="table table-hover mb-0">
+              <thead class="table-light">
+                <tr><th>User</th><th>Email</th><th>Tier</th><th>Total Spent</th></tr>
+              </thead>
+              <tbody id="userTableBody">
+                <tr><td>Maya Lin</td><td>maya@example.com</td><td><span class="badge bg-success">VIP Member</span></td><td>$480.00</td></tr>
+                <tr><td>Julian Sterling</td><td>julian@greenhaven.com</td><td><span class="badge bg-secondary">Staff</span></td><td>—</td></tr>
+                <tr><td>Elena Rostova</td><td>elena@greenhaven.com</td><td><span class="badge bg-secondary">Staff</span></td><td>—</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- View 5: Settings / Other Panes -->
+        <section class="admin-view-pane" id="viewSettings" style="display: none;">
+          <h3 class="font-serif fw-bold mb-3">Restaurant Configuration</h3>
+          <div class="p-4 rounded-4 bg-card border shadow-sm">
+            <p class="text-muted">Operating hours: Tuesday – Sunday, 11:00 AM – 10:30 PM (Closed Mondays for foraging).</p>
+          </div>
+        </section>
+
+      </main>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Admin Sidebar Drawer Toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleBtn = document.getElementById('adminSidebarToggle');
+      const sidebar = document.getElementById('adminSidebar');
+      const backdrop = document.getElementById('adminSidebarBackdrop');
+
+      function toggleSidebar() {
+        if (sidebar) sidebar.classList.toggle('show');
+        if (backdrop) backdrop.classList.toggle('show');
+      }
+
+      if (toggleBtn) toggleBtn.addEventListener('click', toggleSidebar);
+      if (backdrop) backdrop.addEventListener('click', toggleSidebar);
+    });
+  </script>
+</body>
+</html>

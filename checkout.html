@@ -1,0 +1,593 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <title>Order Checkout | Green Haven Plant-Based Restaurant</title>
+  <meta name="description" content="Complete your Green Haven plant-based food order. Enter delivery address, select demo payment, and track your fresh order.">
+  <meta name="keywords" content="green haven checkout, vegan food order, restaurant checkout">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Custom Master Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+  <!-- Main Navigation Bar -->
+  <header class="gh-navbar">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between">
+        
+        <!-- Brand Logo with Continuous Animated Outline -->
+        <a class="gh-brand gh-brand-auto" href="index.html" aria-label="Green Haven Restaurant">
+          <span class="gh-logo-wrapper">
+            <svg class="gh-logo-outline-svg" viewBox="0 0 100 100">
+              <circle class="gh-logo-outline-base" cx="50" cy="50" r="48" pathLength="100" />
+              <circle class="gh-logo-outline-stroke" cx="50" cy="50" r="48" pathLength="100" />
+            </svg>
+            <img src="assets/images/logo-g.png" alt="Green Haven Logo G" class="gh-logo-icon gh-logo-g">
+            <img src="assets/images/logo-h.png" alt="Green Haven Logo H" class="gh-logo-icon gh-logo-h">
+          </span>
+          <img src="assets/images/title.png" alt="Green Haven" class="gh-brand-title-img gh-title-light">
+          <img src="assets/images/title-dark.png" alt="Green Haven" class="gh-brand-title-img gh-title-dark">
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="d-none d-lg-flex align-items-center gap-1">
+          <div class="dropdown">
+            <a class="gh-nav-link  dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Home
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item " href="index.html"><i class="bi bi-house me-2"></i> Home 1 (Gourmet Landing)</a></li>
+              <li><a class="gh-dropdown-item " href="home-2.html"><i class="bi bi-flower1 me-2"></i> Home 2 (Farm to Plate)</a></li>
+            </ul>
+          </div>
+          <a class="gh-nav-link " href="about.html">About</a>
+          <a class="gh-nav-link " href="menu.html">Menu</a>
+          <div class="dropdown">
+            <a class="gh-nav-link  dropdown-toggle" href="services.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Services
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item " href="services.html"><i class="bi bi-grid-fill me-2"></i> Our Services</a></li>
+              <li><a class="gh-dropdown-item " href="service-details.html"><i class="bi bi-file-earmark-text me-2"></i> Service Details</a></li>
+            </ul>
+          </div>
+          <a class="gh-nav-link " href="catering.html">Catering</a>
+          <a class="gh-nav-link " href="pricing.html">Packages</a>
+          <div class="dropdown">
+            <a class="gh-nav-link  dropdown-toggle" href="blog.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Blog
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item " href="blog.html"><i class="bi bi-card-text me-2"></i> Food &amp; Wellness Blog</a></li>
+              <li><a class="gh-dropdown-item " href="blog-details.html"><i class="bi bi-layout-text-window me-2"></i> Article Details</a></li>
+            </ul>
+          </div>
+          <div class="dropdown">
+            <a class="gh-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Pages
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
+              <li><a class="gh-dropdown-item" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
+              <li><a class="gh-dropdown-item" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
+            </ul>
+          </div>
+          <a class="gh-nav-link " href="contact.html">Contact</a>
+        </nav>
+
+        <!-- Navbar Controls & Dynamic Auth -->
+        <div class="d-flex align-items-center gap-2">
+          <!-- Theme Toggle (Dark Mode) -->
+          <button class="theme-toggle-btn" aria-label="Toggle Light/Dark Theme">
+            <i class="bi bi-moon-stars-fill"></i>
+          </button>
+
+          <!-- RTL / LTR Toggle -->
+          <button class="rtl-toggle-btn" aria-label="Toggle text direction" title="Switch text direction (RTL / LTR)">
+            <i class="bi bi-arrow-left-right"></i>
+          </button>
+
+          <!-- Cart Icon -->
+          <a href="cart.html" class="cart-nav-btn" title="View Cart">
+            <i class="bi bi-bag"></i>
+            <span id="navCartCount" class="cart-badge-count" style="display: none;">0</span>
+          </a>
+
+          <!-- Reserve Table -->
+          <a href="reservation.html" class="btn btn-primary d-none d-lg-inline-flex btn-sm">
+            <i class="bi bi-calendar2-check"></i> Reserve Table
+          </a>
+
+          <!-- Standard Desktop Auth (Sign In) -->
+          <div id="navAuthContainer" class="d-none d-md-block">
+            <div class="d-inline-flex align-items-center gap-2 flex-nowrap">
+              <a href="login.html" class="btn btn-outline-primary btn-sm">
+                <i class="bi bi-box-arrow-in-right me-1"></i> Sign In
+              </a>
+            </div>
+          </div>
+
+          <button class="btn btn-icon btn-outline-primary d-lg-none gh-mobile-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenuOffcanvas" aria-controls="mobileMenuOffcanvas" aria-label="Open mobile navigation">
+            <i class="bi bi-list fs-4"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Offcanvas Menu -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenuOffcanvas" aria-labelledby="mobileMenuOffcanvasLabel">
+    <div class="offcanvas-header border-bottom">
+      <a class="gh-brand gh-brand-auto" href="index.html" aria-label="Green Haven Restaurant">
+        <span class="gh-logo-wrapper">
+          <svg class="gh-logo-outline-svg" viewBox="0 0 100 100">
+            <circle class="gh-logo-outline-base" cx="50" cy="50" r="48" pathLength="100" />
+            <circle class="gh-logo-outline-stroke" cx="50" cy="50" r="48" pathLength="100" />
+          </svg>
+          <img src="assets/images/logo-g.png" alt="Green Haven Logo G" class="gh-logo-icon gh-logo-g">
+          <img src="assets/images/logo-h.png" alt="Green Haven Logo H" class="gh-logo-icon gh-logo-h">
+        </span>
+        <img src="assets/images/title.png" alt="Green Haven" class="gh-brand-title-img gh-title-light">
+        <img src="assets/images/title-dark.png" alt="Green Haven" class="gh-brand-title-img gh-title-dark">
+      </a>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-4 d-flex flex-column justify-content-between">
+      <div>
+        <div id="mobileNavAuthContainer" class="mb-3">
+          <div class="d-flex gap-2">
+            <a href="login.html" class="btn btn-outline-primary btn-sm flex-fill"><i class="bi bi-box-arrow-in-right me-1"></i> Sign In</a>
+          </div>
+        </div>
+        <nav class="d-flex flex-column gap-2">
+          <a class="gh-nav-link " href="index.html">Home (Gourmet)</a>
+          <a class="gh-nav-link " href="home-2.html">Home (Farm to Plate)</a>
+          <a class="gh-nav-link " href="about.html">About Us</a>
+          <a class="gh-nav-link " href="menu.html">Full Restaurant Menu</a>
+          <a class="gh-nav-link" href="cart.html"><i class="bi bi-bag me-1"></i> My Dining Cart</a>
+          <a class="gh-nav-link " href="services.html">Our Services</a>
+          <a class="gh-nav-link " href="catering.html">Plant-Based Catering</a>
+          <a class="gh-nav-link " href="pricing.html">Dining Packages</a>
+          <a class="gh-nav-link " href="blog.html">Culinary Journal</a>
+          <div class="dropdown">
+            <a class="gh-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Pages
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
+              <li><a class="gh-dropdown-item" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
+              <li><a class="gh-dropdown-item" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
+            </ul>
+          </div>
+          <a class="gh-nav-link " href="contact.html">Contact Us</a>
+        </nav>
+      </div>
+      <div class="border-top pt-3">
+        <a href="reservation.html" class="btn btn-primary w-100 mb-2"><i class="bi bi-calendar2-check me-1"></i> Book Table</a>
+        <a href="menu.html" class="btn btn-outline-primary w-100"><i class="bi bi-bag-plus me-1"></i> Order Online</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="flex-grow-1 py-5">
+    <div class="container">
+      
+      <!-- Page Header -->
+      <div class="mb-4">
+        <span class="section-sub"><i class="bi bi-shield-check"></i> Secure Checkout</span>
+        <h1 class="display-5 fw-bold mb-1">Complete Your Order</h1>
+        <p class="text-muted">Please provide your delivery destination and confirm payment method.</p>
+      </div>
+
+      <form id="checkoutForm" novalidate>
+        <div class="row g-5">
+          
+          <!-- Left Column: Customer & Delivery Details -->
+          <div class="col-lg-7">
+            
+            <!-- Step 1: Customer Info -->
+            <div class="p-4 rounded-4 bg-card border shadow-sm mb-4">
+              <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom">
+                <span class="badge bg-primary text-white rounded-circle p-2" style="width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center;">1</span>
+                <h5 class="fw-bold mb-0">Customer Information</h5>
+              </div>
+
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label" for="custName">Full Name *</label>
+                  <input type="text" class="form-control" id="custName" required placeholder="e.g. Maya Lin">
+                  <div class="invalid-feedback">Please enter your name.</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="custPhone">Phone Number *</label>
+                  <input type="tel" class="form-control" id="custPhone" required placeholder="e.g. (503) 555-0182">
+                  <div class="invalid-feedback">Please enter contact phone.</div>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="custEmail">Email Address (Order Confirmation) *</label>
+                  <input type="email" class="form-control" id="custEmail" required placeholder="e.g. maya@example.com">
+                  <div class="invalid-feedback">Please enter a valid email address.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2: Delivery Address -->
+            <div class="p-4 rounded-4 bg-card border shadow-sm mb-4">
+              <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom">
+                <span class="badge bg-primary text-white rounded-circle p-2" style="width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center;">2</span>
+                <h5 class="fw-bold mb-0">Delivery Address</h5>
+              </div>
+
+              <div class="row g-3">
+                <div class="col-12">
+                  <label class="form-label" for="delivAddress">Street Address *</label>
+                  <input type="text" class="form-control" id="delivAddress" required placeholder="e.g. 1420 NW Lovejoy Street">
+                  <div class="invalid-feedback">Please enter delivery address.</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="delivCity">City *</label>
+                  <input type="text" class="form-control" id="delivCity" required placeholder="e.g. Portland" value="Portland">
+                  <div class="invalid-feedback">Please enter city.</div>
+                </div>
+                <div class="col-md-3 col-6">
+                  <label class="form-label" for="delivState">State *</label>
+                  <input type="text" class="form-control" id="delivState" required placeholder="e.g. OR" value="OR">
+                  <div class="invalid-feedback">State required.</div>
+                </div>
+                <div class="col-md-3 col-6">
+                  <label class="form-label" for="delivZip">ZIP / Pincode *</label>
+                  <input type="text" class="form-control" id="delivZip" required placeholder="e.g. 97209">
+                  <div class="invalid-feedback">ZIP required.</div>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="delivInstructions">Delivery Notes (Optional)</label>
+                  <textarea class="form-control" id="delivInstructions" rows="2" placeholder="e.g. Leave at front door, gate code #4921, ring doorbell..."></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3: Payment Method (Demo) -->
+            <div class="p-4 rounded-4 bg-card border shadow-sm">
+              <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom">
+                <span class="badge bg-primary text-white rounded-circle p-2" style="width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center;">3</span>
+                <h5 class="fw-bold mb-0">Payment Method (Frontend Demo)</h5>
+              </div>
+
+              <div class="d-grid gap-3 mb-3">
+                <!-- Option 1: Card -->
+                <div class="payment-option-card selected" data-method="Credit / Debit Card" id="optCard">
+                  <input class="form-check-input" type="radio" name="paymentMethod" id="payCard" value="Credit / Debit Card" checked>
+                  <div class="payment-option-icon">
+                    <i class="bi bi-credit-card-2-front"></i>
+                  </div>
+                  <div class="flex-grow-1">
+                    <div class="fw-bold">Credit / Debit Card</div>
+                    <small class="text-muted">Pay securely with Visa, Mastercard, AMEX</small>
+                  </div>
+                </div>
+
+                <!-- Option 2: Cash on Delivery -->
+                <div class="payment-option-card" data-method="Cash on Delivery" id="optCOD">
+                  <input class="form-check-input" type="radio" name="paymentMethod" id="payCOD" value="Cash on Delivery">
+                  <div class="payment-option-icon">
+                    <i class="bi bi-cash-coin"></i>
+                  </div>
+                  <div class="flex-grow-1">
+                    <div class="fw-bold">Cash on Delivery (COD)</div>
+                    <small class="text-muted">Pay in cash when your food arrives at your door</small>
+                  </div>
+                </div>
+
+                <!-- Option 3: Online Payment / Wallet -->
+                <div class="payment-option-card" data-method="Online Payment / Wallet" id="optOnline">
+                  <input class="form-check-input" type="radio" name="paymentMethod" id="payOnline" value="Online Payment / Wallet">
+                  <div class="payment-option-icon">
+                    <i class="bi bi-wallet2"></i>
+                  </div>
+                  <div class="flex-grow-1">
+                    <div class="fw-bold">Online Payment / UPI / NetBanking</div>
+                    <small class="text-muted">Instant transfer via Google Pay, Apple Pay or UPI</small>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card Input Demo Fields -->
+              <div id="cardDetailsContainer" class="p-3 bg-light rounded-3 border">
+                <div class="row g-2">
+                  <div class="col-12">
+                    <label class="form-label small mb-1" for="cardNumber">Demo Card Number</label>
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text"><i class="bi bi-credit-card"></i></span>
+                      <input type="text" class="form-control" id="cardNumber" placeholder="4532 •••• •••• 8820" value="4532 8921 0023 8820">
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label small mb-1" for="cardExp">Expiration</label>
+                    <input type="text" class="form-control form-control-sm" id="cardExp" placeholder="MM/YY" value="08/28">
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label small mb-1" for="cardCvv">CVV</label>
+                    <input type="password" class="form-control form-control-sm" id="cardCvv" placeholder="•••" value="842" maxlength="4">
+                  </div>
+                </div>
+                <div class="extra-small text-muted mt-2">
+                  <i class="bi bi-info-circle me-1"></i> Demo mode only. No real payment charge will be processed.
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Right Column: Order Review & Placement -->
+          <div class="col-lg-5">
+            <div class="cart-summary-card">
+              <h4 class="fw-bold mb-3 pb-2 border-bottom">Review Your Order</h4>
+
+              <!-- Items List -->
+              <div id="checkoutItemsList" class="mb-3" style="max-height: 260px; overflow-y: auto;">
+                <!-- Injected via JavaScript -->
+              </div>
+
+              <div class="summary-row">
+                <span class="text-muted">Subtotal</span>
+                <span class="fw-semibold" id="checkoutSubtotalText">$0.00</span>
+              </div>
+
+              <div class="summary-row">
+                <span class="text-muted">Tax (8%)</span>
+                <span class="fw-semibold" id="checkoutTaxText">$0.00</span>
+              </div>
+
+              <div class="summary-row">
+                <span class="text-muted">Delivery Fee</span>
+                <span class="fw-semibold" id="checkoutDeliveryText">$5.00</span>
+              </div>
+
+              <div class="summary-row total">
+                <span>Total Due</span>
+                <span class="text-success" id="checkoutTotalText">$0.00</span>
+              </div>
+
+              <button type="submit" class="btn btn-primary w-100 py-3 fs-6 mt-4 shadow-md" id="btnPlaceOrder">
+                <i class="bi bi-bag-check-fill me-2"></i> Place Order Now
+              </button>
+
+              <div class="text-center mt-3">
+                <small class="text-muted extra-small">
+                  <i class="bi bi-shield-lock-fill text-success me-1"></i> 256-Bit Encrypted Order Dispatch
+                </small>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+  </main>
+
+      <!-- Universal 4-Column Luxury Footer -->
+  <footer class="gh-footer">
+    <div class="container">
+      <div class="row g-4 g-lg-5 mb-5">
+        
+        <!-- Column 1: Brand & Tagline -->
+        <div class="col-lg-4 col-md-6">
+          <a class="gh-brand text-white mb-3 d-inline-flex align-items-center" href="index.html" aria-label="Green Haven Restaurant">
+            <img src="assets/images/logo-g.png" alt="Green Haven Logo" class="gh-brand-logo-img me-2">
+            <span class="gh-brand-text text-white">Green Haven</span>
+          </a>
+          <p class="footer-bio mb-4">
+            An organic plant-based restaurant sanctuary celebrating vibrant seasonal gastronomy, regenerative agriculture, and holistic well-being.
+          </p>
+          <div class="d-flex gap-2 flex-wrap">
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+            <a href="https://pinterest.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Pinterest"><i class="bi bi-pinterest"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+          </div>
+        </div>
+
+        <!-- Column 2: Navigation -->
+        <div class="col-6 col-md-4 col-lg-2">
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
+            <li><a href="index.html" class="footer-link"><i class="bi bi-chevron-right"></i> Home</a></li>
+            <li><a href="about.html" class="footer-link"><i class="bi bi-chevron-right"></i> About Us</a></li>
+            <li><a href="menu.html" class="footer-link"><i class="bi bi-chevron-right"></i> Our Menu</a></li>
+            <li><a href="cart.html" class="footer-link"><i class="bi bi-chevron-right"></i> Food Cart</a></li>
+            <li><a href="catering.html" class="footer-link"><i class="bi bi-chevron-right"></i> Catering</a></li>
+            <li><a href="contact.html" class="footer-link"><i class="bi bi-chevron-right"></i> Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Hours & Location -->
+        <div class="col-6 col-md-4 col-lg-3">
+          <h4 class="footer-col-title">Hours & Location</h4>
+          <p class="text-white-50 small mb-2"><i class="bi bi-geo-alt text-warning me-2"></i> 742 Evergreen Botanical Way, Portland</p>
+          <p class="text-white-50 small mb-2"><i class="bi bi-clock text-warning me-2"></i> Mon - Sun: 8:00 AM - 10:00 PM</p>
+          <p class="text-white-50 small mb-0"><i class="bi bi-telephone text-warning me-2"></i> <a href="tel:+15035550192" class="text-white text-decoration-none" style="color: #FFFFFF !important;">+1 (503) 555-0192</a></p>
+        </div>
+
+        <!-- Column 4: Botanical Digest -->
+        <div class="col-lg-3 col-md-6">
+          <h4 class="footer-col-title">Botanical Digest</h4>
+          <p class="text-white-50 small mb-3">Join our newsletter for seasonal menu previews and chef recipes.</p>
+          <form class="newsletter-form d-flex gap-2">
+            <input type="email" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Your email" required>
+            <button type="submit" class="btn btn-accent btn-sm px-3">Join</button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Bottom Line -->
+      <div class="footer-bottom border-top border-secondary border-opacity-25 pt-4 mt-4 text-white-50 small">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+          <div>&copy; 2026 Green Haven Restaurant. All Rights Reserved.</div>
+          <div class="d-flex gap-3">
+            <a href="#" class="text-white-50 text-decoration-none hover-white">Privacy Policy</a>
+            <span>&bull;</span>
+            <a href="#" class="text-white-50 text-decoration-none hover-white">Terms &amp; Conditions</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/shop.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Enforce Protection: Only logged-in users can view/checkout
+      if (!GH_Auth.requireLogin('checkout.html')) {
+        return;
+      }
+
+      // 2. Enforce Non-empty Cart
+      const cartItems = GH_Cart.getCart();
+      if (cartItems.length === 0) {
+        alert('Your cart is empty. Redirecting to menu...');
+        window.location.href = 'menu.html';
+        return;
+      }
+
+      // 3. Pre-fill customer details from profile
+      const user = GH_Auth.getCurrentUser();
+      if (user) {
+        const nameField = document.getElementById('custName');
+        const emailField = document.getElementById('custEmail');
+        const phoneField = document.getElementById('custPhone');
+        const addressField = document.getElementById('delivAddress');
+        const zipField = document.getElementById('delivZip');
+
+        if (nameField && user.name) nameField.value = user.name;
+        if (emailField && user.email) emailField.value = user.email;
+        if (phoneField && user.phone) phoneField.value = user.phone;
+        if (addressField && user.address) addressField.value = user.address;
+        if (zipField && user.zip) zipField.value = user.zip;
+      }
+
+      // 4. Render Items in Checkout Sidebar
+      const checkoutItemsList = document.getElementById('checkoutItemsList');
+      if (checkoutItemsList) {
+        checkoutItemsList.innerHTML = cartItems.map(item => `
+          <div class="d-flex align-items-center justify-content-between py-2 border-bottom">
+            <div class="d-flex align-items-center gap-2">
+              <img src="${item.image}" alt="${item.name}" class="rounded-2" style="width: 44px; height: 44px; object-fit: cover;">
+              <div>
+                <div class="fw-bold small text-truncate" style="max-width: 170px;">${item.name}</div>
+                <div class="extra-small text-muted">Qty: ${item.qty} &times; $${item.price.toFixed(2)}</div>
+              </div>
+            </div>
+            <div class="fw-bold text-success small">$${(item.price * item.qty).toFixed(2)}</div>
+          </div>
+        `).join('');
+      }
+
+      const subtotal = GH_Cart.getSubtotal();
+      const tax = GH_Cart.getTax();
+      const delivery = GH_Cart.getDeliveryFee();
+      const total = GH_Cart.getTotal();
+
+      document.getElementById('checkoutSubtotalText').textContent = `$${subtotal.toFixed(2)}`;
+      document.getElementById('checkoutTaxText').textContent = `$${tax.toFixed(2)}`;
+      document.getElementById('checkoutDeliveryText').textContent = delivery === 0 ? 'FREE' : `$${delivery.toFixed(2)}`;
+      document.getElementById('checkoutTotalText').textContent = `$${total.toFixed(2)}`;
+
+      // 5. Handle Payment Option Card Toggles
+      const paymentCards = document.querySelectorAll('.payment-option-card');
+      const cardDetailsContainer = document.getElementById('cardDetailsContainer');
+
+      paymentCards.forEach(card => {
+        card.addEventListener('click', () => {
+          paymentCards.forEach(c => c.classList.remove('selected'));
+          card.classList.add('selected');
+          const radio = card.querySelector('input[type="radio"]');
+          if (radio) radio.checked = true;
+
+          const method = card.getAttribute('data-method');
+          if (cardDetailsContainer) {
+            cardDetailsContainer.style.display = (method === 'Credit / Debit Card') ? 'block' : 'none';
+          }
+        });
+      });
+
+      // 6. Handle Order Placement
+      const checkoutForm = document.getElementById('checkoutForm');
+      checkoutForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        if (!this.checkValidity()) {
+          e.stopPropagation();
+          this.classList.add('was-validated');
+          return;
+        }
+
+        const selectedPaymentRadio = document.querySelector('input[name="paymentMethod"]:checked');
+        const paymentMethod = selectedPaymentRadio ? selectedPaymentRadio.value : 'Credit / Debit Card';
+
+        const orderDetails = {
+          items: GH_Cart.getCart(),
+          subtotal: GH_Cart.getSubtotal(),
+          tax: GH_Cart.getTax(),
+          deliveryFee: GH_Cart.getDeliveryFee(),
+          total: GH_Cart.getTotal(),
+          customer: {
+            name: document.getElementById('custName').value.trim(),
+            email: document.getElementById('custEmail').value.trim(),
+            phone: document.getElementById('custPhone').value.trim()
+          },
+          deliveryAddress: {
+            street: document.getElementById('delivAddress').value.trim(),
+            city: document.getElementById('delivCity').value.trim(),
+            state: document.getElementById('delivState').value.trim(),
+            zip: document.getElementById('delivZip').value.trim(),
+            instructions: document.getElementById('delivInstructions').value.trim()
+          },
+          paymentMethod: paymentMethod
+        };
+
+        // Save updated address to user profile
+        const currUser = GH_Auth.getCurrentUser();
+        if (currUser) {
+          currUser.phone = orderDetails.customer.phone;
+          currUser.address = orderDetails.deliveryAddress.street;
+          currUser.zip = orderDetails.deliveryAddress.zip;
+          localStorage.setItem('gh_user', JSON.stringify(currUser));
+        }
+
+        // Place Order
+        const placedOrder = GH_Orders.placeOrder(orderDetails);
+
+        // Redirect to Order Success Page
+        window.location.href = `order-success.html?orderId=${placedOrder.id}`;
+      });
+
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <title>My Orders & Delivery History | Green Haven Restaurant</title>
+  <meta name="description" content="View your past and active plant-based food orders, track live deliveries, and easily reorder your favorite organic dishes.">
+  <meta name="keywords" content="green haven orders, order history, track vegan food order">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Custom Master Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+  <!-- Main Navigation Bar -->
+  <header class="gh-navbar">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between">
+        
+        <!-- Brand Logo with Continuous Animated Outline -->
+        <a class="gh-brand gh-brand-auto" href="index.html" aria-label="Green Haven Restaurant">
+          <span class="gh-logo-wrapper">
+            <svg class="gh-logo-outline-svg" viewBox="0 0 100 100">
+              <circle class="gh-logo-outline-base" cx="50" cy="50" r="48" pathLength="100" />
+              <circle class="gh-logo-outline-stroke" cx="50" cy="50" r="48" pathLength="100" />
+            </svg>
+            <img src="assets/images/logo-g.png" alt="Green Haven Logo G" class="gh-logo-icon gh-logo-g">
+            <img src="assets/images/logo-h.png" alt="Green Haven Logo H" class="gh-logo-icon gh-logo-h">
+          </span>
+          <img src="assets/images/title.png" alt="Green Haven" class="gh-brand-title-img gh-title-light">
+          <img src="assets/images/title-dark.png" alt="Green Haven" class="gh-brand-title-img gh-title-dark">
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="d-none d-lg-flex align-items-center gap-1">
+          <div class="dropdown">
+            <a class="gh-nav-link  dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Home
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item " href="index.html"><i class="bi bi-house me-2"></i> Home 1 (Gourmet Landing)</a></li>
+              <li><a class="gh-dropdown-item " href="home-2.html"><i class="bi bi-flower1 me-2"></i> Home 2 (Farm to Plate)</a></li>
+            </ul>
+          </div>
+          <a class="gh-nav-link " href="about.html">About</a>
+          <a class="gh-nav-link " href="menu.html">Menu</a>
+          <div class="dropdown">
+            <a class="gh-nav-link  dropdown-toggle" href="services.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Services
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item " href="services.html"><i class="bi bi-grid-fill me-2"></i> Our Services</a></li>
+              <li><a class="gh-dropdown-item " href="service-details.html"><i class="bi bi-file-earmark-text me-2"></i> Service Details</a></li>
+            </ul>
+          </div>
+          <a class="gh-nav-link " href="catering.html">Catering</a>
+          <a class="gh-nav-link " href="pricing.html">Packages</a>
+          <div class="dropdown">
+            <a class="gh-nav-link  dropdown-toggle" href="blog.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Blog
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item " href="blog.html"><i class="bi bi-card-text me-2"></i> Food &amp; Wellness Blog</a></li>
+              <li><a class="gh-dropdown-item " href="blog-details.html"><i class="bi bi-layout-text-window me-2"></i> Article Details</a></li>
+            </ul>
+          </div>
+          <div class="dropdown">
+            <a class="gh-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Pages
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
+              <li><a class="gh-dropdown-item" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
+              <li><a class="gh-dropdown-item" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
+            </ul>
+          </div>
+          <a class="gh-nav-link " href="contact.html">Contact</a>
+        </nav>
+
+        <!-- Navbar Controls & Dynamic Auth -->
+        <div class="d-flex align-items-center gap-2">
+          <!-- Theme Toggle (Dark Mode) -->
+          <button class="theme-toggle-btn" aria-label="Toggle Light/Dark Theme">
+            <i class="bi bi-moon-stars-fill"></i>
+          </button>
+
+          <!-- RTL / LTR Toggle -->
+          <button class="rtl-toggle-btn" aria-label="Toggle text direction" title="Switch text direction (RTL / LTR)">
+            <i class="bi bi-arrow-left-right"></i>
+          </button>
+
+          <!-- Cart Icon -->
+          <a href="cart.html" class="cart-nav-btn" title="View Cart">
+            <i class="bi bi-bag"></i>
+            <span id="navCartCount" class="cart-badge-count" style="display: none;">0</span>
+          </a>
+
+          <!-- Reserve Table -->
+          <a href="reservation.html" class="btn btn-primary d-none d-lg-inline-flex btn-sm">
+            <i class="bi bi-calendar2-check"></i> Reserve Table
+          </a>
+
+          <!-- Standard Desktop Auth (Sign In) -->
+          <div id="navAuthContainer" class="d-none d-md-block">
+            <div class="d-inline-flex align-items-center gap-2 flex-nowrap">
+              <a href="login.html" class="btn btn-outline-primary btn-sm">
+                <i class="bi bi-box-arrow-in-right me-1"></i> Sign In
+              </a>
+            </div>
+          </div>
+
+          <button class="btn btn-icon btn-outline-primary d-lg-none gh-mobile-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenuOffcanvas" aria-controls="mobileMenuOffcanvas" aria-label="Open mobile navigation">
+            <i class="bi bi-list fs-4"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Offcanvas Menu -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenuOffcanvas" aria-labelledby="mobileMenuOffcanvasLabel">
+    <div class="offcanvas-header border-bottom">
+      <a class="gh-brand gh-brand-auto" href="index.html" aria-label="Green Haven Restaurant">
+        <span class="gh-logo-wrapper">
+          <svg class="gh-logo-outline-svg" viewBox="0 0 100 100">
+            <circle class="gh-logo-outline-base" cx="50" cy="50" r="48" pathLength="100" />
+            <circle class="gh-logo-outline-stroke" cx="50" cy="50" r="48" pathLength="100" />
+          </svg>
+          <img src="assets/images/logo-g.png" alt="Green Haven Logo G" class="gh-logo-icon gh-logo-g">
+          <img src="assets/images/logo-h.png" alt="Green Haven Logo H" class="gh-logo-icon gh-logo-h">
+        </span>
+        <img src="assets/images/title.png" alt="Green Haven" class="gh-brand-title-img gh-title-light">
+        <img src="assets/images/title-dark.png" alt="Green Haven" class="gh-brand-title-img gh-title-dark">
+      </a>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-4 d-flex flex-column justify-content-between">
+      <div>
+        <div id="mobileNavAuthContainer" class="mb-3">
+          <div class="d-flex gap-2">
+            <a href="login.html" class="btn btn-outline-primary btn-sm flex-fill"><i class="bi bi-box-arrow-in-right me-1"></i> Sign In</a>
+          </div>
+        </div>
+        <nav class="d-flex flex-column gap-2">
+          <a class="gh-nav-link " href="index.html">Home (Gourmet)</a>
+          <a class="gh-nav-link " href="home-2.html">Home (Farm to Plate)</a>
+          <a class="gh-nav-link " href="about.html">About Us</a>
+          <a class="gh-nav-link " href="menu.html">Full Restaurant Menu</a>
+          <a class="gh-nav-link" href="cart.html"><i class="bi bi-bag me-1"></i> My Dining Cart</a>
+          <a class="gh-nav-link " href="services.html">Our Services</a>
+          <a class="gh-nav-link " href="catering.html">Plant-Based Catering</a>
+          <a class="gh-nav-link " href="pricing.html">Dining Packages</a>
+          <a class="gh-nav-link " href="blog.html">Culinary Journal</a>
+          <div class="dropdown">
+            <a class="gh-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Pages
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
+              <li><a class="gh-dropdown-item" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
+              <li><a class="gh-dropdown-item" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
+            </ul>
+          </div>
+          <a class="gh-nav-link " href="contact.html">Contact Us</a>
+        </nav>
+      </div>
+      <div class="border-top pt-3">
+        <a href="reservation.html" class="btn btn-primary w-100 mb-2"><i class="bi bi-calendar2-check me-1"></i> Book Table</a>
+        <a href="menu.html" class="btn btn-outline-primary w-100"><i class="bi bi-bag-plus me-1"></i> Order Online</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="flex-grow-1 py-5">
+    <div class="container">
+      
+      <!-- Page Header -->
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4 pb-3 border-bottom">
+        <div>
+          <span class="section-sub"><i class="bi bi-bag-check"></i> Order History</span>
+          <h1 class="display-5 fw-bold mb-1">My Orders & Receipts</h1>
+          <p class="text-muted mb-0">Track real-time delivery status or reorder previous organic dishes.</p>
+        </div>
+        <div class="d-flex gap-2">
+          <a href="menu.html" class="btn btn-primary">
+            <i class="bi bi-plus-circle me-1"></i> Order Fresh Food
+          </a>
+          <a href="my-account.html" class="btn btn-outline-primary">
+            <i class="bi bi-person-circle me-1"></i> My Profile
+          </a>
+        </div>
+      </div>
+
+      <!-- Empty State View -->
+      <div id="emptyOrdersView" class="text-center py-5" style="display: none;">
+        <div class="order-success-icon bg-light text-muted mx-auto mb-4" style="width: 100px; height: 100px; font-size: 3.2rem;">
+          <i class="bi bi-clock-history"></i>
+        </div>
+        <h3 class="fw-bold mb-2">No Previous Orders Found</h3>
+        <p class="text-muted max-w-600 mx-auto mb-4" style="max-width: 500px; margin: 0 auto;">
+          You haven't placed any online orders yet. Experience our farm-to-table plant-based menu today!
+        </p>
+        <a href="menu.html" class="btn btn-primary btn-lg px-4">
+          <i class="bi bi-grid-fill me-1"></i> Explore Our Menu
+        </a>
+      </div>
+
+      <!-- Orders List Container -->
+      <div id="activeOrdersList" class="d-flex flex-column gap-4">
+        <!-- Dynamic Orders Injected via JavaScript -->
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Track Order Modal -->
+  <div class="modal fade" id="trackOrderModal" tabindex="-1" aria-labelledby="trackOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content rounded-4 border shadow-lg">
+        <div class="modal-header border-bottom">
+          <h5 class="modal-title fw-bold" id="trackOrderModalLabel">
+            <i class="bi bi-bicycle text-success me-2"></i> Live Delivery Tracking (<span id="modalTrackOrderId"></span>)
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <div class="text-center mb-4">
+            <span class="badge bg-success-subtle text-success px-3 py-1 rounded-pill fw-bold text-uppercase mb-2">On Schedule</span>
+            <h4 class="fw-bold mb-1">Estimated Arrival in <span class="text-success">28 Minutes</span></h4>
+            <p class="small text-muted mb-0">Courier is en route with your freshly plated dishes.</p>
+          </div>
+
+          <div class="tracker-timeline my-4">
+            <div class="tracker-step completed">
+              <div class="tracker-step-icon"><i class="bi bi-check2"></i></div>
+              <div class="tracker-step-label">Confirmed</div>
+              <div class="tracker-step-time">12:15 PM</div>
+            </div>
+            <div class="tracker-step completed">
+              <div class="tracker-step-icon"><i class="bi bi-fire"></i></div>
+              <div class="tracker-step-label">Kitchen Plated</div>
+              <div class="tracker-step-time">12:30 PM</div>
+            </div>
+            <div class="tracker-step active">
+              <div class="tracker-step-icon"><i class="bi bi-bicycle"></i></div>
+              <div class="tracker-step-label">On the Way</div>
+              <div class="tracker-step-time">Live</div>
+            </div>
+            <div class="tracker-step">
+              <div class="tracker-step-icon"><i class="bi bi-house-door"></i></div>
+              <div class="tracker-step-label">Delivered</div>
+              <div class="tracker-step-time">Est. 1:00 PM</div>
+            </div>
+          </div>
+
+          <div class="p-3 bg-light rounded-3 border d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+              <div class="service-icon text-primary" style="width: 48px; height: 48px; font-size: 1.3rem;">
+                <i class="bi bi-person-badge"></i>
+              </div>
+              <div>
+                <div class="fw-bold mb-0">Courier: Marcus Vance</div>
+                <div class="extra-small text-muted">Eco-Electric Delivery Van #04</div>
+              </div>
+            </div>
+            <a href="tel:+15035550192" class="btn btn-outline-primary btn-sm">
+              <i class="bi bi-telephone me-1"></i> Contact
+            </a>
+          </div>
+
+        </div>
+        <div class="modal-footer border-top">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Details Modal -->
+  <div class="modal fade" id="orderDetailsModal" tabindex="-1" aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content rounded-4 border shadow-lg">
+        <div class="modal-header border-bottom">
+          <h5 class="modal-title fw-bold" id="orderDetailsModalLabel">
+            <i class="bi bi-receipt text-primary me-2"></i> Order Receipt & Breakdown
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4" id="modalOrderDetailsBody">
+          <!-- Injected dynamically -->
+        </div>
+        <div class="modal-footer border-top">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+      <!-- Universal 4-Column Luxury Footer -->
+  <footer class="gh-footer">
+    <div class="container">
+      <div class="row g-4 g-lg-5 mb-5">
+        
+        <!-- Column 1: Brand & Tagline -->
+        <div class="col-lg-4 col-md-6">
+          <a class="gh-brand text-white mb-3 d-inline-flex align-items-center" href="index.html" aria-label="Green Haven Restaurant">
+            <img src="assets/images/logo-g.png" alt="Green Haven Logo" class="gh-brand-logo-img me-2">
+            <span class="gh-brand-text text-white">Green Haven</span>
+          </a>
+          <p class="footer-bio mb-4">
+            An organic plant-based restaurant sanctuary celebrating vibrant seasonal gastronomy, regenerative agriculture, and holistic well-being.
+          </p>
+          <div class="d-flex gap-2 flex-wrap">
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+            <a href="https://pinterest.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Pinterest"><i class="bi bi-pinterest"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+          </div>
+        </div>
+
+        <!-- Column 2: Navigation -->
+        <div class="col-6 col-md-4 col-lg-2">
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
+            <li><a href="index.html" class="footer-link"><i class="bi bi-chevron-right"></i> Home</a></li>
+            <li><a href="about.html" class="footer-link"><i class="bi bi-chevron-right"></i> About Us</a></li>
+            <li><a href="menu.html" class="footer-link"><i class="bi bi-chevron-right"></i> Our Menu</a></li>
+            <li><a href="cart.html" class="footer-link"><i class="bi bi-chevron-right"></i> Food Cart</a></li>
+            <li><a href="catering.html" class="footer-link"><i class="bi bi-chevron-right"></i> Catering</a></li>
+            <li><a href="contact.html" class="footer-link"><i class="bi bi-chevron-right"></i> Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Hours & Location -->
+        <div class="col-6 col-md-4 col-lg-3">
+          <h4 class="footer-col-title">Hours & Location</h4>
+          <p class="text-white-50 small mb-2"><i class="bi bi-geo-alt text-warning me-2"></i> 742 Evergreen Botanical Way, Portland</p>
+          <p class="text-white-50 small mb-2"><i class="bi bi-clock text-warning me-2"></i> Mon - Sun: 8:00 AM - 10:00 PM</p>
+          <p class="text-white-50 small mb-0"><i class="bi bi-telephone text-warning me-2"></i> <a href="tel:+15035550192" class="text-white text-decoration-none" style="color: #FFFFFF !important;">+1 (503) 555-0192</a></p>
+        </div>
+
+        <!-- Column 4: Botanical Digest -->
+        <div class="col-lg-3 col-md-6">
+          <h4 class="footer-col-title">Botanical Digest</h4>
+          <p class="text-white-50 small mb-3">Join our newsletter for seasonal menu previews and chef recipes.</p>
+          <form class="newsletter-form d-flex gap-2">
+            <input type="email" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Your email" required>
+            <button type="submit" class="btn btn-accent btn-sm px-3">Join</button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Bottom Line -->
+      <div class="footer-bottom border-top border-secondary border-opacity-25 pt-4 mt-4 text-white-50 small">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+          <div>&copy; 2026 Green Haven Restaurant. All Rights Reserved.</div>
+          <div class="d-flex gap-3">
+            <a href="#" class="text-white-50 text-decoration-none hover-white">Privacy Policy</a>
+            <span>&bull;</span>
+            <a href="#" class="text-white-50 text-decoration-none hover-white">Terms &amp; Conditions</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/shop.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Enforce Login Protection
+      if (!GH_Auth.requireLogin('orders.html')) return;
+
+      const orders = GH_Orders.getOrders();
+      const emptyView = document.getElementById('emptyOrdersView');
+      const listContainer = document.getElementById('activeOrdersList');
+
+      if (orders.length === 0) {
+        if (emptyView) emptyView.style.display = 'block';
+        if (listContainer) listContainer.style.display = 'none';
+        return;
+      }
+
+      if (emptyView) emptyView.style.display = 'none';
+      if (listContainer) listContainer.style.display = 'flex';
+
+      function getStatusBadge(status) {
+        switch (status) {
+          case 'Confirmed': return '<span class="badge-status badge-status-confirmed"><i class="bi bi-check2"></i> Confirmed</span>';
+          case 'Preparing': return '<span class="badge-status badge-status-preparing"><i class="bi bi-fire"></i> Preparing</span>';
+          case 'Out for Delivery': return '<span class="badge-status badge-status-out-for-delivery"><i class="bi bi-bicycle"></i> Out for Delivery</span>';
+          case 'Delivered': return '<span class="badge-status badge-status-delivered"><i class="bi bi-house-check"></i> Delivered</span>';
+          case 'Cancelled': return '<span class="badge-status badge-status-cancelled"><i class="bi bi-x-circle"></i> Cancelled</span>';
+          default: return '<span class="badge-status badge-status-pending"><i class="bi bi-clock"></i> Processing</span>';
+        }
+      }
+
+      if (listContainer) {
+        listContainer.innerHTML = orders.map(order => {
+          const itemCount = (order.items || []).reduce((acc, i) => acc + (i.qty || 1), 0);
+          const firstItemImages = (order.items || []).slice(0, 4).map(i => `
+            <img src="${i.image}" alt="${i.name}" title="${i.name} (${i.qty}x)" class="rounded-3 shadow-sm" style="width: 52px; height: 52px; object-fit: cover;">
+          `).join('');
+
+          return `
+            <div class="p-4 rounded-4 bg-card border shadow-sm">
+              <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2 pb-3 mb-3 border-bottom">
+                <div>
+                  <div class="d-flex align-items-center gap-2">
+                    <h5 class="fw-bold mb-0 text-primary">#${order.id}</h5>
+                    ${getStatusBadge(order.status)}
+                  </div>
+                  <small class="text-muted">Placed on ${order.formattedDate || 'Recent'}</small>
+                </div>
+                <div class="text-md-end">
+                  <span class="text-muted small">Total Paid:</span>
+                  <div class="fs-5 fw-bold text-success">$${(order.total || 0).toFixed(2)}</div>
+                </div>
+              </div>
+
+              <div class="row align-items-center g-3">
+                <div class="col-md-7">
+                  <div class="d-flex align-items-center gap-2 flex-wrap mb-2">
+                    ${firstItemImages}
+                    ${order.items.length > 4 ? `<span class="badge bg-secondary-subtle text-secondary p-2 rounded-3">+${order.items.length - 4} more</span>` : ''}
+                  </div>
+                  <div class="small text-muted">
+                    <strong>${itemCount} items</strong>: ${(order.items || []).map(i => `${i.qty}x ${i.name}`).join(', ')}
+                  </div>
+                </div>
+
+                <div class="col-md-5 text-md-end">
+                  <div class="d-flex flex-wrap justify-content-md-end gap-2">
+                    <button type="button" class="btn btn-outline-primary btn-sm" onclick="openTrackModal('${order.id}')">
+                      <i class="bi bi-bicycle me-1"></i> Track Order
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="openDetailsModal('${order.id}')">
+                      <i class="bi bi-receipt me-1"></i> View Receipt
+                    </button>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="handleReorder('${order.id}')">
+                      <i class="bi bi-arrow-repeat me-1"></i> Reorder
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Handler for tracking modal
+      window.openTrackModal = function(orderId) {
+        document.getElementById('modalTrackOrderId').textContent = `#${orderId}`;
+        const modal = new bootstrap.Modal(document.getElementById('trackOrderModal'));
+        modal.show();
+      };
+
+      // Handler for order details modal
+      window.openDetailsModal = function(orderId) {
+        const order = GH_Orders.getOrderById(orderId);
+        if (!order) return;
+
+        const body = document.getElementById('modalOrderDetailsBody');
+        body.innerHTML = `
+          <div class="row g-3 mb-3">
+            <div class="col-6">
+              <span class="text-muted small">Order ID</span>
+              <div class="fw-bold">#${order.id}</div>
+            </div>
+            <div class="col-6 text-end">
+              <span class="text-muted small">Date</span>
+              <div class="fw-bold">${order.formattedDate}</div>
+            </div>
+            <div class="col-12 border-top pt-2">
+              <span class="text-muted small">Delivery Address:</span>
+              <div class="fw-semibold">${order.deliveryAddress?.street || ''}, ${order.deliveryAddress?.city || 'Portland'} ${order.deliveryAddress?.zip || ''}</div>
+            </div>
+          </div>
+
+          <h6 class="fw-bold text-muted small text-uppercase mb-2">Items Ordered</h6>
+          <div class="table-responsive mb-3">
+            <table class="table table-sm align-middle">
+              <tbody>
+                ${(order.items || []).map(i => `
+                  <tr>
+                    <td><img src="${i.image}" class="rounded-2" style="width: 36px; height: 36px; object-fit: cover;"></td>
+                    <td class="fw-bold">${i.name}</td>
+                    <td class="text-center">${i.qty} &times; $${i.price.toFixed(2)}</td>
+                    <td class="text-end fw-bold text-success">$${(i.price * i.qty).toFixed(2)}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="border-top pt-2">
+            <div class="d-flex justify-content-between small text-muted"><span>Subtotal:</span><span>$${(order.subtotal || 0).toFixed(2)}</span></div>
+            <div class="d-flex justify-content-between small text-muted"><span>Tax (8%):</span><span>$${(order.tax || 0).toFixed(2)}</span></div>
+            <div class="d-flex justify-content-between small text-muted"><span>Delivery:</span><span>$${(order.deliveryFee || 0).toFixed(2)}</span></div>
+            <div class="d-flex justify-content-between fs-5 fw-bold mt-1 text-success"><span>Total Paid:</span><span>$${(order.total || 0).toFixed(2)}</span></div>
+          </div>
+        `;
+
+        const modal = new bootstrap.Modal(document.getElementById('orderDetailsModal'));
+        modal.show();
+      };
+
+      // Handler for reordering all items
+      window.handleReorder = function(orderId) {
+        const order = GH_Orders.getOrderById(orderId);
+        if (!order || !order.items) return;
+
+        order.items.forEach(item => {
+          GH_Cart.addToCart(item, item.qty);
+        });
+
+        alert(`All ${order.items.length} dishes from order #${order.id} have been added to your cart!`);
+        window.location.href = 'cart.html';
+      };
+
+    });
+  </script>
+</body>
+</html>

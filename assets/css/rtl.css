@@ -1,0 +1,699 @@
+/* ================================================================
+ * Green Haven - Master RTL (Right-to-Left) Stylesheet
+ * Complete UI layout, navigation, cards, forms, animations & Admin Dashboard mirroring
+ * Version: 2.0.0 (Production RTL Architecture)
+ * ================================================================ */
+
+/* --------------------------------------------------
+   1. GOOGLE FONTS FOR RTL (Cairo & Amiri)
+-------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@300;400;500;600;700;800;900&display=swap');
+
+/* --------------------------------------------------
+   2. GLOBAL RTL DIRECTION & TYPOGRAPHY
+-------------------------------------------------- */
+[dir="rtl"],
+html.rtl,
+html[dir="rtl"] {
+  direction: rtl !important;
+  text-align: right;
+  --font-sans: 'Cairo', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Amiri', 'Playfair Display', Georgia, serif;
+  --font-heading: 'Cairo', 'Amiri', 'Playfair Display', serif;
+}
+
+[dir="rtl"] body {
+  direction: rtl !important;
+  text-align: right;
+  font-family: var(--font-sans);
+  letter-spacing: normal !important;
+}
+
+/* Headings in RTL */
+[dir="rtl"] h1, 
+[dir="rtl"] h2, 
+[dir="rtl"] h3, 
+[dir="rtl"] h4, 
+[dir="rtl"] h5, 
+[dir="rtl"] h6,
+[dir="rtl"] .font-heading,
+[dir="rtl"] .font-serif,
+[dir="rtl"] .section-title {
+  font-family: var(--font-heading);
+  letter-spacing: 0 !important;
+}
+
+/* --------------------------------------------------
+   3. BOOTSTRAP UTILITY MIRRORING FOR RTL
+-------------------------------------------------- */
+/* Text Alignments */
+[dir="rtl"] .text-start { text-align: right !important; }
+[dir="rtl"] .text-end { text-align: left !important; }
+[dir="rtl"] .text-center { text-align: center !important; }
+
+/* Floats */
+[dir="rtl"] .float-start { float: right !important; }
+[dir="rtl"] .float-end { float: left !important; }
+
+/* Margins (Right to Left swap) */
+[dir="rtl"] .me-0 { margin-left: 0 !important; margin-right: 0 !important; }
+[dir="rtl"] .me-1 { margin-left: 0.25rem !important; margin-right: 0 !important; }
+[dir="rtl"] .me-2 { margin-left: 0.5rem !important; margin-right: 0 !important; }
+[dir="rtl"] .me-3 { margin-left: 1rem !important; margin-right: 0 !important; }
+[dir="rtl"] .me-4 { margin-left: 1.5rem !important; margin-right: 0 !important; }
+[dir="rtl"] .me-5 { margin-left: 3rem !important; margin-right: 0 !important; }
+[dir="rtl"] .me-auto { margin-left: auto !important; margin-right: 0 !important; }
+
+[dir="rtl"] .ms-0 { margin-right: 0 !important; margin-left: 0 !important; }
+[dir="rtl"] .ms-1 { margin-right: 0.25rem !important; margin-left: 0 !important; }
+[dir="rtl"] .ms-2 { margin-right: 0.5rem !important; margin-left: 0 !important; }
+[dir="rtl"] .ms-3 { margin-right: 1rem !important; margin-left: 0 !important; }
+[dir="rtl"] .ms-4 { margin-right: 1.5rem !important; margin-left: 0 !important; }
+[dir="rtl"] .ms-5 { margin-right: 3rem !important; margin-left: 0 !important; }
+[dir="rtl"] .ms-auto { margin-right: auto !important; margin-left: 0 !important; }
+
+/* Paddings (Right to Left swap) */
+[dir="rtl"] .pe-0 { padding-left: 0 !important; padding-right: 0 !important; }
+[dir="rtl"] .pe-1 { padding-left: 0.25rem !important; padding-right: 0 !important; }
+[dir="rtl"] .pe-2 { padding-left: 0.5rem !important; padding-right: 0 !important; }
+[dir="rtl"] .pe-3 { padding-left: 1rem !important; padding-right: 0 !important; }
+[dir="rtl"] .pe-4 { padding-left: 1.5rem !important; padding-right: 0 !important; }
+[dir="rtl"] .pe-5 { padding-left: 3rem !important; padding-right: 0 !important; }
+
+[dir="rtl"] .ps-0 { padding-right: 0 !important; padding-left: 0 !important; }
+[dir="rtl"] .ps-1 { padding-right: 0.25rem !important; padding-left: 0 !important; }
+[dir="rtl"] .ps-2 { padding-right: 0.5rem !important; padding-left: 0 !important; }
+[dir="rtl"] .ps-3 { padding-right: 1rem !important; padding-left: 0 !important; }
+[dir="rtl"] .ps-4 { padding-right: 1.5rem !important; padding-left: 0 !important; }
+[dir="rtl"] .ps-5 { padding-right: 3rem !important; padding-left: 0 !important; }
+
+/* Borders */
+[dir="rtl"] .border-start {
+  border-left: none !important;
+  border-right: 1px solid var(--gh-border, rgba(45, 42, 38, 0.08)) !important;
+}
+
+[dir="rtl"] .border-end {
+  border-right: none !important;
+  border-left: 1px solid var(--gh-border, rgba(45, 42, 38, 0.08)) !important;
+}
+
+/* Border Radius */
+[dir="rtl"] .rounded-start {
+  border-radius: 0 var(--radius-md, 16px) var(--radius-md, 16px) 0 !important;
+}
+
+[dir="rtl"] .rounded-end {
+  border-radius: var(--radius-md, 16px) 0 0 var(--radius-md, 16px) !important;
+}
+
+/* Positioning Coordinates */
+[dir="rtl"] .start-0 { left: auto !important; right: 0 !important; }
+[dir="rtl"] .end-0 { right: auto !important; left: 0 !important; }
+[dir="rtl"] .start-50 { left: auto !important; right: 50% !important; }
+[dir="rtl"] .end-50 { right: auto !important; left: 50% !important; }
+[dir="rtl"] .start-100 { left: auto !important; right: 100% !important; }
+[dir="rtl"] .end-100 { right: auto !important; left: 100% !important; }
+
+[dir="rtl"] .translate-middle-x {
+  transform: translateX(50%) !important;
+}
+
+[dir="rtl"] .translate-middle {
+  transform: translate(50%, -50%) !important;
+}
+
+/* --------------------------------------------------
+   4. NAVBAR & HEADER MIRRORING
+-------------------------------------------------- */
+[dir="rtl"] .gh-navbar {
+  direction: rtl;
+}
+
+[dir="rtl"] .gh-brand {
+  margin-right: 0 !important;
+  margin-left: 1.5rem !important;
+}
+
+[dir="rtl"] .gh-brand .gh-brand-logo-img,
+[dir="rtl"] .gh-brand .gh-logo-wrapper {
+  margin-right: 0 !important;
+  margin-left: 0.65rem !important;
+}
+
+[dir="rtl"] .gh-nav-link {
+  font-family: var(--font-sans);
+}
+
+[dir="rtl"] .gh-nav-link i.bi-chevron-down {
+  margin-left: 0 !important;
+  margin-right: 0.35rem !important;
+}
+
+/* Dropdown Menus */
+[dir="rtl"] .dropdown-menu,
+[dir="rtl"] .gh-dropdown-menu {
+  text-align: right !important;
+  left: auto !important;
+  right: 0 !important;
+  transform-origin: top right !important;
+}
+
+[dir="rtl"] .dropdown-item,
+[dir="rtl"] .gh-dropdown-item {
+  text-align: right !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+[dir="rtl"] .dropdown-item i,
+[dir="rtl"] .gh-dropdown-item i {
+  margin-right: 0 !important;
+  margin-left: 0.65rem !important;
+}
+
+[dir="rtl"] .dropdown-menu-end {
+  right: auto !important;
+  left: 0 !important;
+  transform-origin: top left !important;
+}
+
+/* Offcanvas Mobile Navigation Menu */
+[dir="rtl"] .offcanvas-end {
+  right: auto !important;
+  left: 0 !important;
+  transform: translateX(-100%) !important;
+  border-left: none !important;
+  border-right: 1px solid var(--gh-border, rgba(45, 42, 38, 0.08)) !important;
+}
+
+[dir="rtl"] .offcanvas-end.show {
+  transform: translateX(0) !important;
+}
+
+[dir="rtl"] .offcanvas-header .btn-close {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+/* --------------------------------------------------
+   5. HERO & BREADCRUMB SECTIONS
+-------------------------------------------------- */
+[dir="rtl"] .hero-section {
+  text-align: right;
+}
+
+[dir="rtl"] .hero-content {
+  text-align: right;
+}
+
+[dir="rtl"] .breadcrumb-nav {
+  direction: rtl;
+}
+
+[dir="rtl"] .breadcrumb-nav a i {
+  margin-right: 0 !important;
+  margin-left: 0.35rem !important;
+}
+
+/* --------------------------------------------------
+   6. CARDS, DISHES & MENU COMPONENTS
+-------------------------------------------------- */
+[dir="rtl"] .dish-card,
+[dir="rtl"] .gh-card,
+[dir="rtl"] .luxury-pricing-card,
+[dir="rtl"] .luxury-catering-card {
+  text-align: right;
+}
+
+[dir="rtl"] .dish-card-price,
+[dir="rtl"] .dish-card-price-pill,
+[dir="rtl"] .pricing-floating-icon,
+[dir="rtl"] .catering-floating-icon {
+  right: auto !important;
+  left: 10px !important;
+}
+
+[dir="rtl"] .dish-card-badge,
+[dir="rtl"] .dish-card-dietary-badge,
+[dir="rtl"] .pricing-category-pill,
+[dir="rtl"] .catering-category-pill {
+  left: auto !important;
+  right: 10px !important;
+}
+
+[dir="rtl"] .pricing-card.featured::before {
+  right: auto !important;
+  left: 24px !important;
+}
+
+[dir="rtl"] .dish-card-rating {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+[dir="rtl"] .dish-card-actions {
+  flex-direction: row-reverse;
+}
+
+/* Quantity Controls in RTL */
+[dir="rtl"] .dish-card-qty-btn.minus,
+[dir="rtl"] .cart-qty-btn.minus {
+  border-radius: 0 var(--radius-full) var(--radius-full) 0 !important;
+}
+
+[dir="rtl"] .dish-card-qty-btn.plus,
+[dir="rtl"] .cart-qty-btn.plus {
+  border-radius: var(--radius-full) 0 0 var(--radius-full) !important;
+}
+
+/* Lists with Icons */
+[dir="rtl"] ul.list-unstyled li,
+[dir="rtl"] .catering-features-list li,
+[dir="rtl"] .pricing-features li {
+  text-align: right;
+}
+
+[dir="rtl"] ul.list-unstyled li i,
+[dir="rtl"] .catering-features-list li i,
+[dir="rtl"] .pricing-features li i {
+  margin-right: 0 !important;
+  margin-left: 0.5rem !important;
+}
+
+/* --------------------------------------------------
+   7. CART DRAWER (Opens from Left in RTL)
+-------------------------------------------------- */
+[dir="rtl"] .gh-cart-drawer {
+  right: auto !important;
+  left: 0 !important;
+  transform: translateX(-100%) !important;
+  border-left: none !important;
+  border-right: 1px solid var(--gh-border, rgba(45, 42, 38, 0.08)) !important;
+  box-shadow: 15px 0 45px rgba(22, 19, 17, 0.22) !important;
+}
+
+[dir="rtl"] .gh-cart-drawer.is-open {
+  transform: translateX(0) !important;
+}
+
+[data-bs-theme="dark"][dir="rtl"] .gh-cart-drawer,
+html.dark[dir="rtl"] .gh-cart-drawer {
+  box-shadow: 15px 0 45px rgba(0, 0, 0, 0.7) !important;
+  border-right-color: var(--gh-border) !important;
+}
+
+[dir="rtl"] .gh-cart-header .btn-close-cart {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+[dir="rtl"] .gh-cart-item {
+  text-align: right;
+}
+
+[dir="rtl"] .gh-cart-item-img {
+  margin-right: 0 !important;
+  margin-left: 1rem !important;
+}
+
+[dir="rtl"] .gh-cart-item-remove {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+/* --------------------------------------------------
+   8. FORMS & INPUT CONTROLS
+-------------------------------------------------- */
+[dir="rtl"] .form-label {
+  text-align: right !important;
+  display: block;
+}
+
+[dir="rtl"] .form-control,
+[dir="rtl"] .form-select,
+[dir="rtl"] textarea.form-control {
+  text-align: right !important;
+  direction: rtl !important;
+}
+
+[dir="rtl"] .form-select {
+  background-position: left 0.75rem center !important;
+  padding-left: 2.25rem !important;
+  padding-right: 0.75rem !important;
+}
+
+[dir="rtl"] .input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+  margin-right: -1px !important;
+  margin-left: 0 !important;
+  border-top-left-radius: var(--radius-sm, 10px) !important;
+  border-bottom-left-radius: var(--radius-sm, 10px) !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+[dir="rtl"] .input-group > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating) {
+  border-top-right-radius: var(--radius-sm, 10px) !important;
+  border-bottom-right-radius: var(--radius-sm, 10px) !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+[dir="rtl"] .input-group-text i {
+  margin-left: 0 !important;
+}
+
+/* Checkboxes & Radios */
+[dir="rtl"] .form-check {
+  text-align: right !important;
+  padding-left: 0 !important;
+  padding-right: 1.75em !important;
+}
+
+[dir="rtl"] .form-check .form-check-input {
+  float: right !important;
+  margin-left: 0 !important;
+  margin-right: -1.75em !important;
+}
+
+/* --------------------------------------------------
+   9. DIRECTIONAL ICONS (Mirrored in RTL)
+-------------------------------------------------- */
+[dir="rtl"] .bi-arrow-right,
+[dir="rtl"] .bi-arrow-left,
+[dir="rtl"] .bi-chevron-right,
+[dir="rtl"] .bi-chevron-left,
+[dir="rtl"] .bi-caret-right,
+[dir="rtl"] .bi-caret-left,
+[dir="rtl"] .bi-caret-right-fill,
+[dir="rtl"] .bi-caret-left-fill,
+[dir="rtl"] .bi-chevron-double-right,
+[dir="rtl"] .bi-chevron-double-left,
+[dir="rtl"] .bi-arrow-up-right,
+[dir="rtl"] .bi-arrow-return-right,
+[dir="rtl"] .bi-box-arrow-right,
+[dir="rtl"] .bi-reply,
+[dir="rtl"] .bi-reply-fill {
+  transform: scaleX(-1) !important;
+  display: inline-block;
+}
+
+/* NON-DIRECTIONAL ICONS (Preserved - NEVER Flipped) */
+[dir="rtl"] .bi-search,
+[dir="rtl"] .bi-heart,
+[dir="rtl"] .bi-heart-fill,
+[dir="rtl"] .bi-person,
+[dir="rtl"] .bi-person-circle,
+[dir="rtl"] .bi-bag,
+[dir="rtl"] .bi-bag-plus,
+[dir="rtl"] .bi-cart,
+[dir="rtl"] .bi-cart3,
+[dir="rtl"] .bi-telephone,
+[dir="rtl"] .bi-telephone-fill,
+[dir="rtl"] .bi-envelope,
+[dir="rtl"] .bi-envelope-fill,
+[dir="rtl"] .bi-geo-alt,
+[dir="rtl"] .bi-geo-alt-fill,
+[dir="rtl"] .bi-flower1,
+[dir="rtl"] .bi-flower2,
+[dir="rtl"] .bi-leaf,
+[dir="rtl"] .bi-star,
+[dir="rtl"] .bi-star-fill,
+[dir="rtl"] .bi-shield-check,
+[dir="rtl"] .bi-moon-stars,
+[dir="rtl"] .bi-sun,
+[dir="rtl"] .bi-check-circle,
+[dir="rtl"] .bi-check-circle-fill,
+[dir="rtl"] .bi-check2,
+[dir="rtl"] .bi-door-open,
+[dir="rtl"] .bi-door-open-fill,
+[dir="rtl"] .bi-broadcast,
+[dir="rtl"] .bi-clock,
+[dir="rtl"] .bi-clock-fill,
+[dir="rtl"] .bi-lightning-charge-fill,
+[dir="rtl"] .bi-activity,
+[dir="rtl"] .bi-sparkles {
+  transform: none !important;
+}
+
+/* --------------------------------------------------
+   10. ADMIN DASHBOARD RTL MIRRORING
+-------------------------------------------------- */
+[dir="rtl"] .admin-layout-container,
+[dir="rtl"] .admin-layout {
+  direction: rtl !important;
+}
+
+/* Admin Sidebar positioned on the right */
+[dir="rtl"] .admin-sidebar,
+[dir="rtl"] aside.admin-sidebar {
+  left: auto !important;
+  right: 0 !important;
+  border-right: none !important;
+  border-left: 1px solid var(--admin-border, rgba(45, 42, 38, 0.08)) !important;
+}
+
+/* Admin Main Content offset to make room for right sidebar */
+[dir="rtl"] .admin-main,
+[dir="rtl"] .admin-layout-container .admin-main {
+  margin-left: 0 !important;
+  margin-right: var(--admin-sidebar-w, 270px) !important;
+  transition: margin-right 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+@media (max-width: 991.98px) {
+  [dir="rtl"] .admin-sidebar,
+  [dir="rtl"] aside.admin-sidebar {
+    transform: translateX(100%) !important;
+  }
+  
+  [dir="rtl"] .admin-sidebar.show,
+  [dir="rtl"] aside.admin-sidebar.show {
+    transform: translateX(0) !important;
+  }
+  
+  [dir="rtl"] .admin-main,
+  [dir="rtl"] .admin-layout-container .admin-main {
+    margin-right: 0 !important;
+  }
+}
+
+/* Admin Topbar */
+[dir="rtl"] .admin-topbar,
+[dir="rtl"] header.admin-topbar {
+  direction: rtl;
+}
+
+[dir="rtl"] .admin-search-wrapper {
+  position: relative;
+}
+
+[dir="rtl"] .admin-search-icon {
+  left: auto !important;
+  right: 0.85rem !important;
+}
+
+[dir="rtl"] .admin-search-input {
+  padding-right: 2.3rem !important;
+  padding-left: 1rem !important;
+  text-align: right;
+}
+
+/* Admin Sidebar Nav Items */
+[dir="rtl"] .admin-nav-item {
+  text-align: right;
+}
+
+[dir="rtl"] .admin-nav-item:hover {
+  transform: translateX(-3px) !important;
+}
+
+[dir="rtl"] .admin-nav-heading {
+  text-align: right;
+}
+
+/* Admin Data Tables */
+[dir="rtl"] .table,
+[dir="rtl"] .admin-table {
+  text-align: right !important;
+  direction: rtl !important;
+}
+
+[dir="rtl"] .table th,
+[dir="rtl"] .table td {
+  text-align: right !important;
+}
+
+[dir="rtl"] .table td:last-child,
+[dir="rtl"] .table th:last-child {
+  text-align: left !important;
+}
+
+/* Admin KPI & View Panes */
+[dir="rtl"] .admin-view-pane {
+  text-align: right;
+}
+
+/* Admin 404 Layout */
+[dir="rtl"] .admin-404-container {
+  direction: rtl;
+}
+
+[dir="rtl"] .admin-quick-chip {
+  direction: rtl;
+}
+
+/* --------------------------------------------------
+   11. FOOTER & FLOATING ACTIONS
+-------------------------------------------------- */
+[dir="rtl"] .gh-footer {
+  text-align: right;
+  direction: rtl;
+}
+
+[dir="rtl"] .gh-footer .footer-link i {
+  margin-right: 0 !important;
+  margin-left: 0.5rem !important;
+}
+
+[dir="rtl"] .footer-social-btn {
+  margin-right: 0 !important;
+  margin-left: 0.5rem !important;
+}
+
+[dir="rtl"] .back-to-top {
+  right: auto !important;
+  left: 25px !important;
+}
+
+/* --------------------------------------------------
+   12. RTL TOGGLE BUTTON STYLING
+-------------------------------------------------- */
+.rtl-toggle-btn {
+  position: relative;
+  min-width: 38px;
+  height: 38px;
+  padding: 0 0.65rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--gh-border);
+  background-color: var(--gh-surface);
+  color: var(--gh-text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.rtl-toggle-btn:hover {
+  background-color: var(--gh-secondary-light);
+  color: var(--gh-accent);
+  border-color: var(--gh-accent);
+  transform: translateY(-2px);
+}
+
+[data-bs-theme="dark"] .rtl-toggle-btn,
+html.dark .rtl-toggle-btn {
+  background-color: var(--gh-surface);
+  color: var(--gh-text);
+  border-color: var(--gh-border);
+}
+
+[data-bs-theme="dark"] .rtl-toggle-btn:hover,
+html.dark .rtl-toggle-btn:hover {
+  background-color: var(--gh-surface-alt);
+  color: #00FF7F;
+  border-color: #00FF7F;
+  box-shadow: 0 0 12px rgba(0, 255, 127, 0.25);
+}
+
+/* --------------------------------------------------
+   13. ACCORDIONS, MODALS, ALERTS & PAGINATION
+-------------------------------------------------- */
+/* Accordion in RTL */
+[dir="rtl"] .accordion-button {
+  text-align: right !important;
+}
+
+[dir="rtl"] .accordion-button::after {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+/* Modal in RTL */
+[dir="rtl"] .modal-header {
+  flex-direction: row;
+}
+
+[dir="rtl"] .modal-header .btn-close {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+[dir="rtl"] .modal-footer {
+  justify-content: flex-start !important;
+}
+
+/* Alerts & Toasts in RTL */
+[dir="rtl"] .alert-dismissible {
+  padding-left: 3rem !important;
+  padding-right: 1.25rem !important;
+}
+
+[dir="rtl"] .alert-dismissible .btn-close {
+  right: auto !important;
+  left: 0 !important;
+}
+
+/* Floating Labels in RTL */
+[dir="rtl"] .form-floating > label {
+  right: 0 !important;
+  left: auto !important;
+  transform-origin: top right !important;
+  padding-right: 1rem !important;
+  padding-left: 0.75rem !important;
+}
+
+/* Pagination in RTL */
+[dir="rtl"] .pagination {
+  direction: rtl;
+}
+
+[dir="rtl"] .pagination .page-item:first-child .page-link {
+  border-radius: 0 var(--radius-sm, 10px) var(--radius-sm, 10px) 0 !important;
+}
+
+[dir="rtl"] .pagination .page-item:last-child .page-link {
+  border-radius: var(--radius-sm, 10px) 0 0 var(--radius-sm, 10px) !important;
+}
+
+/* Breadcrumb dividers */
+[dir="rtl"] .breadcrumb-item + .breadcrumb-item::before {
+  float: right !important;
+  padding-right: 0 !important;
+  padding-left: var(--bs-breadcrumb-item-padding-x, 0.5rem) !important;
+}
+
+/* Search Modal */
+[dir="rtl"] .gh-search-modal .input-group input {
+  text-align: right !important;
+}
+
+/* Category Navigation Pill Bar in RTL */
+[dir="rtl"] .sticky-category-nav {
+  direction: rtl !important;
+}
+
+[dir="rtl"] .cat-nav-link {
+  direction: rtl !important;
+}
+
+[dir="rtl"] .cat-nav-link .cat-star {
+  margin-left: 0.25rem !important;
+  margin-right: 0 !important;
+}
+
+

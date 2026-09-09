@@ -1,0 +1,107 @@
+[
+  {
+    "name": "Heirloom Avocado Tartine",
+    "price": "$14.00",
+    "category": "Starters",
+    "desc": "Grilled artisanal sourdough, whipped Meyer lemon avocado mousse, shaved radishes, pickled shallots, and hemp dukkah spice.",
+    "dietary": "🌱"
+  },
+  {
+    "name": "Wood-Fired Wild Herb Flatbread",
+    "price": "$15.50",
+    "category": "Starters",
+    "desc": "Heritage spelt dough, roasted garlic puree, slow-braised leeks, pine nut ricotta, and garden-picked rosemary oil.",
+    "dietary": "🌱"
+  },
+  {
+    "name": "Crispy Truffled Polenta Bites",
+    "price": "$13.50",
+    "category": "Starters",
+    "desc": "Golden pan-seared organic polenta cubes infused with black summer truffle, garlic aioli, micro chives, and aged balsamic glaze.",
+    "dietary": "🌾"
+  },
+  {
+    "name": "Wild Truffle & Forest Risotto",
+    "price": "$26.00",
+    "category": "Main Courses",
+    "desc": "Carnaroli rice slow-simmered in porcini stock, foraged chanterelles, black summer truffle carpaccio, and cashew parmesan silk.",
+    "dietary": "🌾"
+  },
+  {
+    "name": "Smoked Cauliflower Rib Steak",
+    "price": "$24.00",
+    "category": "Main Courses",
+    "desc": "Charred organic cauliflower steak glazed in herb chimichurri, served over smooth parsnip velvet with pomegranate reduction.",
+    "dietary": ""
+  },
+  {
+    "name": "Pan-Seared King Oyster Scallops",
+    "price": "$28.00",
+    "category": "Main Courses",
+    "desc": "Thick diamond-scored Sonoma king oyster mushroom medallions seared in herb butter over sweet pea emulsion and heirloom baby carrots.",
+    "dietary": "🌾"
+  },
+  {
+    "name": "Botanical Harvest Bowl",
+    "price": "$18.50",
+    "category": "Bowls &amp; Salads",
+    "desc": "Tri-color quinoa, crispy turmeric chickpeas, roasted kabocha squash, avocado rose, massaged kale, and green tahini sauce.",
+    "dietary": "🌿"
+  },
+  {
+    "name": "Golden Beet &amp; Arugula Salad",
+    "price": "$16.50",
+    "category": "Bowls &amp; Salads",
+    "desc": "Roasted yellow beets, baby arugula, sprouted candied walnuts, house cultured almond chevre, and blood orange reduction.",
+    "dietary": "🌾"
+  },
+  {
+    "name": "Amazonian Acai Power Bowl",
+    "price": "$15.00",
+    "category": "Bowls &amp; Salads",
+    "desc": "Thick organic wild acai puree, grain-free coconut almond granola, sliced bananas, dragonfruit, and chia hemp clusters.",
+    "dietary": "🌱"
+  },
+  {
+    "name": "Uji Matcha Silk Tart",
+    "price": "$14.00",
+    "category": "Desserts",
+    "desc": "Raw date-almond crust, ceremonial matcha cashew cream, candied Sicilian pistachios, and raspberry coulis drizzle.",
+    "dietary": "🌿"
+  },
+  {
+    "name": "Raw Dark Cacao &amp; Espresso Torte",
+    "price": "$13.00",
+    "category": "Desserts",
+    "desc": "Single-origin Ecuadorian heirloom raw cacao, espresso bean infusion, hazelnut praline crust, and vanilla sea salt.",
+    "dietary": "🌱"
+  },
+  {
+    "name": "Meyer Lemon Verbena Panna Cotta",
+    "price": "$12.50",
+    "category": "Desserts",
+    "desc": "Silky coconut cream panna cotta infused with lemon verbena, Meyer lemon curd glaze, and candied lavender petals.",
+    "dietary": "🌾"
+  },
+  {
+    "name": "Emerald Chlorophyll Elixir",
+    "price": "$9.50",
+    "category": "Drinks",
+    "desc": "Cold-pressed crisp celery, Japanese cucumber, Granny Smith apple, spirulina, ginger, and organic holy basil.",
+    "dietary": "🌿"
+  },
+  {
+    "name": "Golden Turmeric Adaptogen Tonic",
+    "price": "$8.50",
+    "category": "Drinks",
+    "desc": "Fresh Hawaiian wild turmeric root, Ceylon cinnamon, Madagascar vanilla, ashwagandha, oat milk, and cold-pressed ginger.",
+    "dietary": "🌱"
+  },
+  {
+    "name": "Wild Hibiscus Rose Kombucha",
+    "price": "$9.00",
+    "category": "Drinks",
+    "desc": "In-house fermented live sparkling kombucha infused with organic Sudanese hibiscus calyces, Bulgarian rose water, and fresh lime.",
+    "dietary": "🌿"
+  }
+]

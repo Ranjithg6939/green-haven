@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <title>Green Haven - Complete Template Documentation & Developer Guide</title>
+  <meta name="description" content="Official documentation and developer integration guide for Green Haven - Premium Vegan & Plant-Based Restaurant HTML5 Template with Online Ordering System.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <style>
+    :root {
+      --gh-primary: #2E6518;
+      --gh-primary-light: #DEF5D6;
+      --gh-secondary: #558742;
+      --gh-accent: #FF6A16;
+      --gh-bg-cream: #F9FAF7;
+      --gh-surface: #FFFFFF;
+      --gh-text: #182415;
+      --gh-text-muted: #5C685B;
+      --gh-footer-bg: #121E13;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: linear-gradient(135deg, #DCEADE 0%, #F9FAF7 50%, #DEF5D6 100%) fixed !important;
+      background-attachment: fixed !important;
+      background-size: cover !important;
+      color: #182415;
+      line-height: 1.7;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: #182415;
+    }
+    .doc-sidebar {
+      position: sticky;
+      top: 2rem;
+    }
+    .doc-nav-link {
+      color: #5C685B;
+      font-weight: 500;
+      padding: 0.45rem 0.85rem;
+      border-radius: 8px;
+      display: block;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .doc-nav-link:hover, .doc-nav-link.active {
+      background-color: rgba(46, 101, 24, 0.12);
+      color: #2E6518;
+      font-weight: 600;
+    }
+    .code-block {
+      background: #121E13;
+      color: #FAF5EE;
+      padding: 1.2rem;
+      border-radius: 10px;
+      font-family: Consolas, 'Courier New', monospace;
+      font-size: 0.88rem;
+      overflow-x: auto;
+    }
+    .feature-badge {
+      background-color: rgba(46, 101, 24, 0.15);
+      color: #2E6518;
+      font-weight: 600;
+      padding: 0.4rem 0.85rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.84rem;
+    }
+    .highlight-box {
+      background-color: #FFFFFF;
+      border-left: 4px solid var(--gh-primary);
+      padding: 1.25rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Documentation Header -->
+  <header class="bg-white border-bottom py-3 mb-4 shadow-sm">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-3">
+        <a class="gh-brand gh-brand-auto" href="../index.html" aria-label="Green Haven Restaurant">
+          <span class="gh-logo-wrapper">
+            <svg class="gh-logo-outline-svg" viewBox="0 0 100 100">
+              <circle class="gh-logo-outline-base" cx="50" cy="50" r="48" pathLength="100" />
+              <circle class="gh-logo-outline-stroke" cx="50" cy="50" r="48" pathLength="100" />
+            </svg>
+            <img src="../assets/images/logo-g.png" alt="Green Haven Logo G" class="gh-logo-icon gh-logo-g">
+            <img src="../assets/images/logo-h.png" alt="Green Haven Logo H" class="gh-logo-icon gh-logo-h">
+          </span>
+          <img src="../assets/images/title.png" alt="Green Haven" class="gh-brand-title-img gh-title-light">
+          <img src="../assets/images/title-dark.png" alt="Green Haven" class="gh-brand-title-img gh-title-dark">
+        </a>
+        <div class="border-start ps-3">
+          <span class="text-muted extra-small" style="font-size: 0.8rem; display: block;">HTML5 Restaurant Template Documentation v2.0</span>
+        </div>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+        <a href="../menu.html" class="btn btn-outline-success btn-sm"><i class="bi bi-grid me-1"></i> Food Menu</a>
+        <a href="../cart.html" class="btn btn-outline-success btn-sm"><i class="bi bi-bag me-1"></i> Ordering Cart</a>
+        <a href="../index.html" class="btn btn-success btn-sm" style="background-color: var(--gh-primary); border-color: var(--gh-primary);"><i class="bi bi-eye me-1"></i> Live Website</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="container py-4">
+    <div class="row g-5">
+      
+      <!-- Sidebar Navigation -->
+      <aside class="col-lg-3">
+        <div class="doc-sidebar p-3 bg-white border rounded-4 shadow-sm">
+          <h6 class="fw-bold text-uppercase text-muted small mb-3">Documentation Index</h6>
+          <nav class="d-flex flex-column gap-1">
+            <a href="#overview" class="doc-nav-link active">1. Template Overview</a>
+            <a href="#structure" class="doc-nav-link">2. File & Page Structure</a>
+            <a href="#ordering-system" class="doc-nav-link">3. Online Ordering System</a>
+            <a href="#auth-rules" class="doc-nav-link">4. Guest vs Auth Access Rules</a>
+            <a href="#localstorage" class="doc-nav-link">5. LocalStorage Data Models</a>
+            <a href="#styling" class="doc-nav-link">6. Colors & Typography</a>
+            <a href="#rtl-dark" class="doc-nav-link">7. Dark Mode & RTL Engine</a>
+            <a href="#customization" class="doc-nav-link">8. Customization & Production</a>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Main Documentation Content -->
+      <main class="col-lg-9">
+        
+        <!-- 1. Overview -->
+        <section id="overview" class="mb-5 pb-4 border-bottom">
+          <span class="feature-badge mb-3"><i class="bi bi-patch-check-fill text-success"></i> Premium Restaurant Template</span>
+          <h1 class="display-5 fw-bold mb-3">Green Haven - Vegan & Plant-Based Restaurant</h1>
+          <p class="lead text-secondary">
+            <strong>Green Haven</strong> is a complete, production-ready, front-end HTML5 website template specifically designed for modern vegan, organic, farm-to-table, plant-based restaurants, bistros, cafes, and gourmet catering businesses.
+          </p>
+          <div class="row g-3 mt-3">
+            <div class="col-md-4">
+              <div class="p-3 bg-white border rounded-3 text-center">
+                <i class="bi bi-bag-check-fill fs-2 text-success mb-2 d-block"></i>
+                <h6 class="fw-bold mb-1">Online Food Ordering</h6>
+                <small class="text-muted">Dynamic cart, coupons, checkout, delivery tracker</small>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="p-3 bg-white border rounded-3 text-center">
+                <i class="bi bi-shield-lock-fill fs-2 text-warning mb-2 d-block"></i>
+                <h6 class="fw-bold mb-1">Strict Auth-Gated Flow</h6>
+                <small class="text-muted">Guest browsing + mandatory login/signup to place orders</small>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="p-3 bg-white border rounded-3 text-center">
+                <i class="bi bi-moon-stars-fill fs-2 text-primary mb-2 d-block"></i>
+                <h6 class="fw-bold mb-1">Dark Mode & RTL</h6>
+                <small class="text-muted">Full bidirectional RTL and instant light/dark toggle</small>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Structure -->
+        <section id="structure" class="mb-5 pb-4 border-bottom">
+          <h2 class="fw-bold mb-3">2. File & Page Structure</h2>
+          <p class="text-secondary">The template includes 23 structured HTML pages, unified CSS, and modern modular JavaScript engines:</p>
+
+          <div class="table-responsive bg-white border rounded-3 mb-4">
+            <table class="table table-hover mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>Page / File</th>
+                  <th>Description</th>
+                  <th>Access Rule</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>index.html</code></td>
+                  <td>Home 1 � Gourmet Restaurant Landing (Hero, Featured Menu, Story, Testimonials)</td>
+                  <td><span class="badge bg-secondary">Public</span></td>
+                </tr>
+                <tr>
+                  <td><code>home-2.html</code></td>
+                  <td>Home 2 � Editorial Bistro & Farm Journal (Alternative layout)</td>
+                  <td><span class="badge bg-secondary">Public</span></td>
+                </tr>
+                <tr>
+                  <td><code>menu.html</code></td>
+                  <td>Interactive Filterable Restaurant Menu with instant "Add to Cart"</td>
+                  <td><span class="badge bg-secondary">Public</span></td>
+                </tr>
+                <tr>
+                  <td><code>menu-details.html</code></td>
+                  <td>Dish details page with ingredients, nutrition, reviews, and quantity cart stepper</td>
+                  <td><span class="badge bg-secondary">Public</span></td>
+                </tr>
+                <tr>
+                  <td><code>cart.html</code></td>
+                  <td>Dining Cart with quantity controls, remove item, coupon code (<code>VEGAN10</code>), and checkout gate</td>
+                  <td><span class="badge bg-secondary">Public View</span></td>
+                </tr>
+                <tr>
+                  <td><code>checkout.html</code></td>
+                  <td>Protected multi-step order checkout, customer details, demo payment gateway</td>
+                  <td><span class="badge bg-success">Logged-in Only</span></td>
+                </tr>
+                <tr>
+                  <td><code>order-success.html</code></td>
+                  <td>Order confirmation, dynamic ID (<code>GH-XXXXXX</code>), and live 4-stage delivery tracker</td>
+                  <td><span class="badge bg-success">Logged-in Only</span></td>
+                </tr>
+                <tr>
+                  <td><code>orders.html</code></td>
+                  <td>Past Order History, live order status badges, receipt viewer modal, reorder shortcut</td>
+                  <td><span class="badge bg-success">Logged-in Only</span></td>
+                </tr>
+                <tr>
+                  <td><code>my-account.html</code></td>
+                  <td>User Profile, delivery addresses, dietary preferences checklist, session manager</td>
+                  <td><span class="badge bg-success">Logged-in Only</span></td>
+                </tr>
+                <tr>
+                  <td><code>login.html</code></td>
+                  <td>Login page with redirect query param support (<code>?redirect=checkout.html</code>) & demo autofill</td>
+                  <td><span class="badge bg-secondary">Public</span></td>
+                </tr>
+                <tr>
+                  <td><code>register.html</code></td>
+                  <td>User registration form with automatic login session creation and redirect return</td>
+                  <td><span class="badge bg-secondary">Public</span></td>
+                </tr>
+                <tr>
+                  <td><code>reservation.html</code></td>
+                  <td>Online Table Booking system with party size, date/time, and dietary notes</td>
+                  <td><span class="badge bg-secondary">Public</span></td>
+                </tr>
+                <tr>
+                  <td><code>catering.html</code></td>
+                  <td>Plant-based event catering, weddings, private dining inquiry builder</td>
+                  <td><span class="badge bg-secondary">Public</span></td>
+                </tr>
+                <tr>
+                  <td><code>services.html</code> / <code>service-details.html</code></td>
+                  <td>Restaurant hospitality services, tasting menus, private sommelier</td>
+                  <td><span class="badge bg-secondary">Public</span></td>
+                </tr>
+                <tr>
+                  <td><code>pricing.html</code></td>
+                  <td>Tasting packages, monthly chef table subscriptions, VIP culinary tiers</td>
+                  <td><span class="badge bg-secondary">Public</span></td>
+                </tr>
+                <tr>
+                  <td><code>blog.html</code> / <code>blog-details.html</code></td>
+                  <td>Culinary journal, botanical fermentation guides, guest comments, related posts</td>
+                  <td><span class="badge bg-secondary">Public</span></td>
+                </tr>
+                <tr>
+                  <td><code>about.html</code> / <code>contact.html</code></td>
+                  <td>Restaurant philosophy, chef team, Portland location map, contact forms</td>
+                  <td><span class="badge bg-secondary">Public</span></td>
+                </tr>
+                <tr>
+                  <td><code>404.html</code> / <code>coming-soon.html</code> / <code>maintenance.html</code></td>
+                  <td>404 Error page, seasonal launch countdown timer, system maintenance page</td>
+                  <td><span class="badge bg-secondary">Public</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 3. Ordering System -->
+        <section id="ordering-system" class="mb-5 pb-4 border-bottom">
+          <h2 class="fw-bold mb-3">3. Online Ordering System Architecture</h2>
+          <p class="text-secondary">
+            All shopping cart calculations, authentication checks, order placements, and delivery trackers are encapsulated in <code>assets/js/shop.js</code>.
+          </p>
+
+          <div class="highlight-box mb-4">
+            <h5 class="fw-bold mb-2"><i class="bi bi-code-slash text-success me-2"></i> Modular Core in <code>shop.js</code></h5>
+            <ul class="mb-0 text-secondary small">
+              <li><code>GH_Auth</code>: Handles login status, current session, credentials verification, logout, navbar state rendering, and route protection.</li>
+              <li><code>GH_Cart</code>: Manages item additions, quantity modifications, removals, subtotal, tax (8%), delivery fee ($3.99), and coupon discounts.</li>
+              <li><code>GH_Orders</code>: Stores placed orders, retrieves past records, generates unique Order IDs (<code>GH-XXXXXX</code>), and handles reordering.</li>
+              <li><code>GH_UI</code>: Shows toast notifications, updates cart badge count across pages, and binds interactive buttons.</li>
+            </ul>
+          </div>
+
+          <h5 class="fw-bold mt-4 mb-2">Adding Items to Cart from Any Page</h5>
+          <p class="text-secondary small">Any button with <code>data-add-to-cart</code> attributes will automatically bind to the cart engine:</p>
+          <div class="code-block mb-3">
+&lt;button class="btn btn-primary" 
+        data-add-to-cart 
+        data-id="101" 
+        data-name="Truffle Wild Forest Risotto" 
+        data-price="26.00" 
+        data-image="assets/img/dishes/risotto.jpg" 
+        data-category="Mains"&gt;
+  &lt;i class="bi bi-bag-plus"&gt;&lt;/i&gt; Add to Cart
+&lt;/button&gt;
+          </div>
+        </section>
+
+        <!-- 4. Auth Rules -->
+        <section id="auth-rules" class="mb-5 pb-4 border-bottom">
+          <h2 class="fw-bold mb-3">4. Guest vs Authenticated User Access Rules</h2>
+          <p class="text-secondary">Strict access boundaries are enforced across all customer touchpoints:</p>
+
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <div class="card border-0 shadow-sm rounded-3 p-4 bg-white h-100">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                  <span class="badge bg-secondary px-3 py-1">Guest User Permitted</span>
+                </div>
+                <ul class="list-unstyled small text-secondary d-flex flex-column gap-2 mb-0">
+                  <li><i class="bi bi-check2 text-success me-2"></i> Browse full seasonal menu & filters</li>
+                  <li><i class="bi bi-check2 text-success me-2"></i> Search dishes by keyword / ingredients</li>
+                  <li><i class="bi bi-check2 text-success me-2"></i> View dish details, recipes & nutrition</li>
+                  <li><i class="bi bi-check2 text-success me-2"></i> Add/modify items in cart (stored locally)</li>
+                  <li><i class="bi bi-check2 text-success me-2"></i> View cart contents and apply coupons</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="card border border-warning border-2 shadow-sm rounded-3 p-4 bg-white h-100">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                  <span class="badge bg-warning text-dark px-3 py-1">Guest Gated Actions (Redirected to Login)</span>
+                </div>
+                <ul class="list-unstyled small text-secondary d-flex flex-column gap-2 mb-0">
+                  <li><i class="bi bi-x-circle text-danger me-2"></i> <strong>Proceed to Checkout:</strong> Redirected to <code>login.html?redirect=checkout.html</code></li>
+                  <li><i class="bi bi-x-circle text-danger me-2"></i> <strong>Place Order:</strong> Requires active session</li>
+                  <li><i class="bi bi-x-circle text-danger me-2"></i> <strong>Order History:</strong> Redirected to <code>login.html?redirect=orders.html</code></li>
+                  <li><i class="bi bi-x-circle text-danger me-2"></i> <strong>My Account:</strong> Redirected to <code>login.html?redirect=my-account.html</code></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="highlight-box">
+            <h6 class="fw-bold mb-1"><i class="bi bi-info-circle text-primary me-2"></i> Login Notice & Auto-Return</h6>
+            <p class="text-secondary small mb-0">
+              When a guest is redirected to <code>login.html</code>, a prominent alert informs them: <em>�Please login or sign up to continue with your order.�</em> Once authenticated, they are returned seamlessly to their destination.
+            </p>
+          </div>
+        </section>
+
+        <!-- 5. LocalStorage Data Models -->
+        <section id="localstorage" class="mb-5 pb-4 border-bottom">
+          <h2 class="fw-bold mb-3">5. LocalStorage Data Models</h2>
+          <p class="text-secondary">All client state persists across page refreshes using HTML5 <code>localStorage</code>:</p>
+
+          <div class="table-responsive bg-white border rounded-3 mb-3">
+            <table class="table table-hover mb-0 small">
+              <thead class="table-light">
+                <tr>
+                  <th>Storage Key</th>
+                  <th>Type</th>
+                  <th>Structure & Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>gh_logged_in</code></td>
+                  <td><code>string</code></td>
+                  <td><code>"true"</code> or absent</td>
+                </tr>
+                <tr>
+                  <td><code>gh_user</code></td>
+                  <td><code>JSON Object</code></td>
+                  <td><code>{"name":"Eleanor Vance","email":"eleanor@greenhaven.com","phone":"+15035550192","address":"742 Botanical Way","zip":"97201","diet":"vegan"}</code></td>
+                </tr>
+                <tr>
+                  <td><code>gh_cart</code></td>
+                  <td><code>JSON Array</code></td>
+                  <td><code>[{"id":"101","name":"Truffle Wild Risotto","price":26,"qty":2,"image":"...","category":"Mains"}]</code></td>
+                </tr>
+                <tr>
+                  <td><code>gh_orders</code></td>
+                  <td><code>JSON Array</code></td>
+                  <td><code>[{"id":"GH-928410","date":"2026-09-04T12:00:00Z","formattedDate":"Sep 04, 2026","items":[...],"subtotal":52,"tax":4.16,"deliveryFee":3.99,"total":60.15,"status":"Confirmed","paymentMethod":"Credit / Debit Card"}]</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 6. Styling -->
+        <section id="styling" class="mb-5 pb-4 border-bottom">
+          <h2 class="fw-bold mb-3">6. Brand Colors & Typography</h2>
+          <p class="text-secondary">Green Haven uses CSS custom properties defined in <code>assets/css/style.css</code>:</p>
+
+          <div class="row g-3 mb-4">
+            <div class="col-sm-6 col-md-3">
+              <div class="p-3 rounded-3 text-white text-center" style="background-color: #2E6518;">
+                <div class="fw-bold">Primary (Leaf Green)</div>
+                <code>#2E6518</code>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="p-3 rounded-3 text-white text-center" style="background-color: #558742;">
+                <div class="fw-bold">Secondary (Olive Sage)</div>
+                <code>#558742</code>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="p-3 rounded-3 text-dark text-center border" style="background-color: #F9FAF7;">
+                <div class="fw-bold">Background (Soft Canvas)</div>
+                <code>#F9FAF7</code>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="p-3 rounded-3 text-dark text-center border" style="background-color: #FFFFFF;">
+                <div class="fw-bold">Card Background</div>
+                <code>#FFFFFF</code>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="p-3 rounded-3 text-white text-center border" style="background-color: #FF6A16;">
+                <div class="fw-bold">Accent (Tangerine Orange)</div>
+                <code>#FF6A16</code>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="p-3 rounded-3 text-white text-center" style="background-color: #182415;">
+                <div class="fw-bold">Text (Botanical Charcoal)</div>
+                <code>#182415</code>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="p-3 rounded-3 text-white text-center" style="background-color: #5C685B;">
+                <div class="fw-bold">Muted Slate Olive</div>
+                <code>#5C685B</code>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="p-3 rounded-3 text-white text-center" style="background-color: #121E13;">
+                <div class="fw-bold">Dark Mode / Footer</div>
+                <code>#121E13</code>
+              </div>
+            </div>
+          </div>
+
+          <h5 class="fw-bold mt-4 mb-2">Typography</h5>
+          <ul class="text-secondary small">
+            <li><strong>Display Headings:</strong> <code>Cormorant Garamond</code> & <code>Playfair Display</code></li>
+            <li><strong>Body & Controls:</strong> <code>Plus Jakarta Sans</code></li>
+          </ul>
+        </section>
+
+        <!-- 7. RTL & Dark Mode -->
+        <section id="rtl-dark" class="mb-5 pb-4 border-bottom">
+          <h2 class="fw-bold mb-3">7. Dark Mode & RTL Compatibility</h2>
+          <p class="text-secondary">Every page includes header controls for instant theme toggling and bidirectional layout switching:</p>
+          <ul class="text-secondary small">
+            <li><strong>Theme Engine:</strong> Toggles <code>data-bs-theme="dark"</code> or <code>"light"</code> on <code>&lt;html&gt;</code> and persists selection to <code>localStorage.theme</code>.</li>
+            <li><strong>RTL Engine:</strong> Toggles <code>dir="rtl"</code> or <code>"ltr"</code> on <code>&lt;html&gt;</code> and dynamically links the Bootstrap RTL stylesheet when enabled.</li>
+          </ul>
+        </section>
+
+        <!-- 8. Customization -->
+        <section id="customization" class="mb-5">
+          <h2 class="fw-bold mb-3">8. Customization & Connecting Backend APIs</h2>
+          <p class="text-secondary">
+            To connect Green Haven to a backend server (Node.js, Laravel, Django, Python FastAPI, or Firebase/Supabase), replace the mock methods in <code>assets/js/shop.js</code> with <code>fetch()</code> or <code>axios</code> calls:
+          </p>
+
+          <div class="code-block mb-3">
+// Example: Connecting placeOrder to your REST API
+placeOrder: async function(orderData) {
+  try {
+    const response = await fetch('/api/v1/orders', {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${GH_Auth.getToken()}`
+      },
+      body: JSON.stringify(orderData)
+    });
+    return await response.json();
+  } catch (err) {
+    console.error('Order dispatch error:', err);
+  }
+}
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Documentation Footer -->
+  <footer class="bg-white border-top py-4 text-center text-muted small">
+    <div class="container">
+      &copy; 2026 Green Haven Vegan & Plant-Based Restaurant HTML5 Template. Built with Bootstrap 5 & Vanilla JS.
+    </div>
+  </footer>
+
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

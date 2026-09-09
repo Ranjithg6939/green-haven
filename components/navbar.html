@@ -1,0 +1,159 @@
+<!-- Main Navigation Bar Component -->
+<header class="gh-navbar">
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-between">
+      
+      <!-- Brand Logo with Continuous Animated Outline -->
+      <a class="gh-brand gh-brand-auto" href="index.html" aria-label="Green Haven Restaurant">
+        <span class="gh-logo-wrapper">
+          <svg class="gh-logo-outline-svg" viewBox="0 0 100 100">
+            <circle class="gh-logo-outline-base" cx="50" cy="50" r="48" pathLength="100" />
+            <circle class="gh-logo-outline-stroke" cx="50" cy="50" r="48" pathLength="100" />
+          </svg>
+          <img src="assets/images/logo-g.png" alt="Green Haven Logo G" class="gh-logo-icon gh-logo-g">
+          <img src="assets/images/logo-h.png" alt="Green Haven Logo H" class="gh-logo-icon gh-logo-h">
+        </span>
+        <img src="assets/images/title.png" alt="Green Haven" class="gh-brand-title-img gh-title-light">
+        <img src="assets/images/title-dark.png" alt="Green Haven" class="gh-brand-title-img gh-title-dark">
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="d-none d-lg-flex align-items-center gap-1">
+        <div class="dropdown">
+          <a class="gh-nav-link dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Home
+          </a>
+          <ul class="dropdown-menu gh-dropdown-menu">
+            <li><a class="gh-dropdown-item" href="index.html"><i class="bi bi-house me-2"></i> Home 1 (Gourmet Landing)</a></li>
+            <li><a class="gh-dropdown-item" href="home-2.html"><i class="bi bi-flower1 me-2"></i> Home 2 (Farm to Plate)</a></li>
+          </ul>
+        </div>
+        <a class="gh-nav-link" href="about.html">About</a>
+        <a class="gh-nav-link" href="menu.html">Menu</a>
+        <div class="dropdown">
+          <a class="gh-nav-link dropdown-toggle" href="services.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Services
+          </a>
+          <ul class="dropdown-menu gh-dropdown-menu">
+            <li><a class="gh-dropdown-item" href="services.html"><i class="bi bi-grid-fill me-2"></i> Our Services</a></li>
+            <li><a class="gh-dropdown-item" href="service-details.html"><i class="bi bi-file-earmark-text me-2"></i> Service Details</a></li>
+          </ul>
+        </div>
+        <a class="gh-nav-link" href="catering.html">Catering</a>
+        <a class="gh-nav-link" href="pricing.html">Packages</a>
+        <div class="dropdown">
+          <a class="gh-nav-link dropdown-toggle" href="blog.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Blog
+          </a>
+          <ul class="dropdown-menu gh-dropdown-menu">
+            <li><a class="gh-dropdown-item" href="blog.html"><i class="bi bi-card-text me-2"></i> Food &amp; Wellness Blog</a></li>
+            <li><a class="gh-dropdown-item" href="blog-details.html"><i class="bi bi-layout-text-window me-2"></i> Article Details</a></li>
+          </ul>
+        </div>
+        <div class="dropdown">
+          <a class="gh-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Pages
+          </a>
+          <ul class="dropdown-menu gh-dropdown-menu">
+            <li><a class="gh-dropdown-item" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
+            <li><a class="gh-dropdown-item" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
+            <li><a class="gh-dropdown-item" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
+          </ul>
+        </div>
+        <a class="gh-nav-link" href="contact.html">Contact</a>
+      </nav>
+
+      <!-- Navbar Controls & Dynamic Auth -->
+      <div class="d-flex align-items-center gap-2">
+        <!-- Theme Toggle (Dark Mode) -->
+        <button class="theme-toggle-btn" aria-label="Toggle Light/Dark Theme">
+          <i class="bi bi-moon-stars-fill"></i>
+        </button>
+
+        <!-- RTL / LTR Toggle -->
+        <button class="rtl-toggle-btn" aria-label="Toggle text direction" title="Switch text direction (RTL / LTR)">
+            <i class="bi bi-arrow-left-right"></i>
+          </button>
+
+        <!-- Cart Icon -->
+        <a href="cart.html" class="cart-nav-btn" title="View Cart">
+          <i class="bi bi-bag"></i>
+          <span id="navCartCount" class="cart-badge-count" style="display: none;">0</span>
+        </a>
+
+        <!-- Reserve Table -->
+        <a href="reservation.html" class="btn btn-primary d-none d-lg-inline-flex btn-sm">
+          <i class="bi bi-calendar2-check"></i> Reserve Table
+        </a>
+
+        <!-- Standard Desktop Auth (Sign In) -->
+        <div id="navAuthContainer" class="d-none d-md-block">
+          <div class="d-inline-flex align-items-center gap-2 flex-nowrap">
+            <a href="login.html" class="btn btn-outline-primary btn-sm">
+              <i class="bi bi-box-arrow-in-right me-1"></i> Sign In
+            </a>
+          </div>
+        </div>
+
+        <button class="btn btn-icon btn-outline-primary d-lg-none gh-mobile-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenuOffcanvas" aria-controls="mobileMenuOffcanvas" aria-label="Open mobile navigation">
+          <i class="bi bi-list fs-4"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Offcanvas Menu Component -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenuOffcanvas" aria-labelledby="mobileMenuOffcanvasLabel">
+  <div class="offcanvas-header border-bottom">
+    <a class="gh-brand gh-brand-auto" href="index.html" aria-label="Green Haven Restaurant">
+      <span class="gh-logo-wrapper">
+        <svg class="gh-logo-outline-svg" viewBox="0 0 100 100">
+          <circle class="gh-logo-outline-base" cx="50" cy="50" r="48" pathLength="100" />
+          <circle class="gh-logo-outline-stroke" cx="50" cy="50" r="48" pathLength="100" />
+        </svg>
+        <img src="assets/images/logo-g.png" alt="Green Haven Logo G" class="gh-logo-icon gh-logo-g">
+        <img src="assets/images/logo-h.png" alt="Green Haven Logo H" class="gh-logo-icon gh-logo-h">
+      </span>
+      <img src="assets/images/title.png" alt="Green Haven" class="gh-brand-title-img gh-title-light">
+      <img src="assets/images/title-dark.png" alt="Green Haven" class="gh-brand-title-img gh-title-dark">
+    </a>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body p-4 d-flex flex-column justify-content-between">
+    <div>
+      <div id="mobileNavAuthContainer" class="mb-3">
+        <div class="d-flex gap-2">
+          <a href="login.html" class="btn btn-outline-primary btn-sm flex-fill"><i class="bi bi-box-arrow-in-right me-1"></i> Sign In</a>
+        </div>
+      </div>
+      <nav class="d-flex flex-column gap-2">
+        <a class="gh-nav-link" href="index.html">Home (Gourmet)</a>
+        <a class="gh-nav-link" href="home-2.html">Home (Farm to Plate)</a>
+        <a class="gh-nav-link" href="about.html">About Us</a>
+        <a class="gh-nav-link" href="menu.html">Full Restaurant Menu</a>
+        <a class="gh-nav-link" href="cart.html"><i class="bi bi-bag me-1"></i> My Dining Cart</a>
+        <a class="gh-nav-link" href="services.html">Our Services</a>
+        <a class="gh-nav-link" href="catering.html">Plant-Based Catering</a>
+        <a class="gh-nav-link" href="pricing.html">Dining Packages</a>
+        <a class="gh-nav-link" href="blog.html">Culinary Journal</a>
+        <div class="dropdown">
+          <a class="gh-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Pages
+          </a>
+          <ul class="dropdown-menu gh-dropdown-menu">
+            <li><a class="gh-dropdown-item" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
+            <li><a class="gh-dropdown-item" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
+            <li><a class="gh-dropdown-item" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
+          </ul>
+        </div>
+        <a class="gh-nav-link" href="contact.html">Contact Us</a>
+      </nav>
+    </div>
+    <div class="border-top pt-3">
+      <a href="reservation.html" class="btn btn-primary w-100 mb-2"><i class="bi bi-calendar2-check me-1"></i> Book Table</a>
+      <a href="menu.html" class="btn btn-outline-primary w-100"><i class="bi bi-bag-plus me-1"></i> Order Online</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <title>404 - Page Not Found | Green Haven Admin Dashboard</title>
+  <meta name="description" content="Green Haven Restaurant Admin Console - 404 Page Not Found.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Custom Master Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    (function() {
+      var dir = localStorage.getItem('site-dir') || 'ltr';
+      document.documentElement.setAttribute('dir', dir);
+      if (dir === 'rtl') document.documentElement.classList.add('rtl');
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- Admin Layout Wrapper -->
+  <div class="admin-layout">
+    
+    <!-- Mobile Sidebar Backdrop Overlay -->
+    <div class="admin-sidebar-backdrop" id="adminSidebarBackdrop"></div>
+
+    <!-- Admin Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <!-- Brand Header -->
+      <div class="admin-sidebar-header">
+        <a href="admin.html" class="admin-brand">
+          <span class="gh-logo-wrapper" style="width: 38px; height: 38px;">
+            <svg class="gh-logo-outline-svg" viewBox="0 0 100 100">
+              <circle class="gh-logo-outline-base" cx="50" cy="50" r="48" pathLength="100" />
+              <circle class="gh-logo-outline-stroke" cx="50" cy="50" r="48" pathLength="100" />
+            </svg>
+            <img src="assets/images/logo-g.png" alt="Green Haven Logo" class="gh-logo-icon gh-logo-g" style="width: 20px; height: 20px;">
+            <img src="assets/images/logo-h.png" alt="Green Haven Logo" class="gh-logo-icon gh-logo-h" style="width: 20px; height: 20px;">
+          </span>
+          <div class="d-flex flex-column">
+            <span class="font-serif fw-bold fs-6 lh-1" style="letter-spacing: -0.01em;">Green Haven</span>
+            <span class="text-muted extra-small" style="font-size: 0.7rem;">CULINARY STUDIO</span>
+          </div>
+        </a>
+        <span class="admin-brand-badge">ADMIN</span>
+      </div>
+
+      <!-- Navigation Groups -->
+      <div class="admin-nav-group">
+        <div class="admin-nav-heading">Main Overview</div>
+        <a href="admin.html" class="admin-nav-item">
+          <i class="bi bi-grid-1x2-fill"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="admin.html#orders" class="admin-nav-item">
+          <i class="bi bi-bag-check-fill"></i>
+          <span>Live Orders</span>
+          <span class="badge bg-warning-subtle text-dark ms-auto" style="font-size: 0.7rem;">12</span>
+        </a>
+        <a href="admin.html#reservations" class="admin-nav-item">
+          <i class="bi bi-calendar2-check-fill"></i>
+          <span>Reservations</span>
+          <span class="badge bg-success-subtle text-success ms-auto" style="font-size: 0.7rem;">8</span>
+        </a>
+
+        <div class="admin-nav-heading mt-3">Catalog &amp; Content</div>
+        <a href="admin.html#menu" class="admin-nav-item">
+          <i class="bi bi-journal-richtext"></i>
+          <span>Menu Items</span>
+        </a>
+        <a href="blog.html" class="admin-nav-item">
+          <i class="bi bi-layout-text-window"></i>
+          <span>Journal / Blog</span>
+        </a>
+        <a href="admin.html#customers" class="admin-nav-item">
+          <i class="bi bi-people-fill"></i>
+          <span>Customers</span>
+        </a>
+
+        <div class="admin-nav-heading mt-3">Operations</div>
+        <a href="admin.html#analytics" class="admin-nav-item">
+          <i class="bi bi-graph-up-arrow"></i>
+          <span>Financials</span>
+        </a>
+        <a href="admin.html#inventory" class="admin-nav-item">
+          <i class="bi bi-box-seam-fill"></i>
+          <span>Pantry &amp; Stock</span>
+        </a>
+        <a href="admin.html#settings" class="admin-nav-item">
+          <i class="bi bi-gear-fill"></i>
+          <span>Settings</span>
+        </a>
+      </div>
+
+      <!-- Sidebar User Footer -->
+      <div class="admin-sidebar-footer">
+        <div class="admin-user-card">
+          <div class="position-relative">
+            <img src="assets/images/elena-rostova.jpg" alt="Chef Elena Rostova" class="rounded-circle shadow-sm" style="width: 40px; height: 40px; object-fit: cover;">
+            <span class="position-absolute bottom-0 end-0 bg-success border border-white rounded-circle" style="width: 10px; height: 10px;"></span>
+          </div>
+          <div class="flex-grow-1 min-w-0">
+            <span class="d-block fw-bold small text-truncate">Chef Elena Rostova</span>
+            <span class="text-muted extra-small d-block text-truncate" style="font-size: 0.72rem;">Master Administrator</span>
+          </div>
+          <a href="index.html" class="text-muted hover-primary p-1" title="Sign Out / Storefront">
+            <i class="bi bi-box-arrow-right fs-6"></i>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Container -->
+    <div class="admin-main">
+      
+      <!-- Topbar Header -->
+      <header class="admin-topbar">
+        <!-- Left: Mobile Toggle & Breadcrumbs -->
+        <div class="d-flex align-items-center gap-3">
+          <button class="btn btn-sm btn-light border d-lg-none rounded-2 p-1.5" id="adminSidebarToggle" aria-label="Toggle navigation menu">
+            <i class="bi bi-list fs-5"></i>
+          </button>
+          
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 small">
+              <li class="breadcrumb-item">
+                <a href="admin.html" class="text-decoration-none text-muted d-flex align-items-center gap-1">
+                  <i class="bi bi-house-door"></i> Admin
+                </a>
+              </li>
+              <li class="breadcrumb-item active text-dark fw-medium" aria-current="page">Page Not Found</li>
+            </ol>
+          </nav>
+        </div>
+
+        <!-- Center: Search Input -->
+        <div class="admin-search-wrapper d-none d-md-block">
+          <i class="bi bi-search admin-search-icon"></i>
+          <input type="text" class="admin-search-input" placeholder="Search dashboard, orders, dishes..." aria-label="Search dashboard">
+          <span class="admin-kbd-hint">⌘K</span>
+        </div>
+
+        <!-- Right: Actions & Profile -->
+        <div class="d-flex align-items-center gap-2">
+          <!-- View Live Storefront -->
+          <a href="index.html" class="btn btn-sm btn-outline-success rounded-pill px-3 d-none d-sm-inline-flex align-items-center gap-1.5 shadow-none" target="_blank" title="Open Public Restaurant Site">
+            <i class="bi bi-arrow-up-right-circle"></i>
+            <span>Live Site</span>
+          </a>
+
+          <!-- Notification Bell -->
+          <button class="btn btn-sm btn-light border rounded-circle p-2 position-relative text-muted" aria-label="View notifications">
+            <i class="bi bi-bell fs-6"></i>
+            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+              <span class="visually-hidden">New alerts</span>
+            </span>
+          </button>
+
+          <!-- Theme Toggle Button -->
+          <button class="theme-toggle-btn" aria-label="Toggle Light/Dark Theme" title="Switch Theme">
+            <i class="bi bi-moon-stars-fill"></i>
+          </button>
+
+          <!-- RTL Direction Toggle Button -->
+          <button class="rtl-toggle-btn" aria-label="Toggle text direction" title="Switch text direction (RTL / LTR)">
+            <i class="bi bi-arrow-left-right"></i>
+          </button>
+
+          <!-- User Avatar Chip -->
+          <div class="d-flex align-items-center gap-2 ps-2 border-start ms-1">
+            <img src="assets/images/elena-rostova.jpg" alt="Admin Avatar" class="rounded-circle shadow-sm" style="width: 34px; height: 34px; object-fit: cover;">
+          </div>
+        </div>
+      </header>
+
+      <!-- 404 Canvas Area -->
+      <main class="admin-404-container">
+        
+        <!-- Floating Animated Botanical Leaves -->
+        <div class="admin-floating-leaf admin-leaf-1" aria-hidden="true">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 80C25 50 45 30 80 20C75 50 55 70 20 80Z" fill="#2E6518" fill-opacity="0.35"/>
+            <path d="M20 80C40 60 60 40 80 20" stroke="#1B4314" stroke-width="3" stroke-linecap="round"/>
+            <path d="M42 58C52 61 60 64 68 67" stroke="#1B4314" stroke-width="2" stroke-linecap="round"/>
+            <path d="M56 44C66 47 72 49 78 51" stroke="#1B4314" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+
+        <div class="admin-floating-leaf admin-leaf-2" aria-hidden="true">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 85C20 45 50 25 85 15C80 55 50 75 15 85Z" fill="#588B38" fill-opacity="0.3"/>
+            <path d="M15 85C40 60 65 35 85 15" stroke="#2E6518" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+
+        <div class="admin-floating-leaf admin-leaf-3" aria-hidden="true">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M25 75C30 50 45 35 75 25C70 50 55 65 25 75Z" fill="#A88350" fill-opacity="0.25"/>
+            <path d="M25 75C42 58 58 42 75 25" stroke="#8A6B3D" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+
+        <!-- 404 Central Presentation Card -->
+        <div class="admin-404-card">
+          
+          <!-- Organic Leaf Central Emblem Badge -->
+          <div class="admin-leaf-icon-badge">
+            <svg class="admin-leaf-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 85C20 40 50 18 88 12C82 58 52 80 15 85Z" fill="url(#leafGradient404)" />
+              <path d="M15 85C42 58 65 35 88 12" stroke="#FAF8F5" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M38 62C52 64 64 68 76 72" stroke="#FAF8F5" stroke-width="2.5" stroke-linecap="round" />
+              <path d="M54 46C66 48 74 51 82 54" stroke="#FAF8F5" stroke-width="2.5" stroke-linecap="round" />
+              <path d="M28 72C35 74 42 77 48 80" stroke="#FAF8F5" stroke-width="2" stroke-linecap="round" />
+              <defs>
+                <linearGradient id="leafGradient404" x1="15" y1="85" x2="88" y2="12" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#1B4314"/>
+                  <stop offset="0.6" stop-color="#2E6518"/>
+                  <stop offset="1" stop-color="#7BAE53"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <!-- Large 404 Number -->
+          <div class="admin-404-number-wrap">
+            <div class="admin-404-number">404</div>
+          </div>
+
+          <!-- Heading -->
+          <h1 class="admin-404-heading">Page Not Found</h1>
+
+          <!-- Description -->
+          <p class="admin-404-desc">
+            The page you’re looking for doesn’t exist or may have been moved.
+          </p>
+
+          <!-- Action Buttons -->
+          <div class="admin-404-actions">
+            <a href="admin.html" class="admin-btn-dashboard">
+              <i class="bi bi-grid-1x2-fill"></i>
+              <span>Back to Dashboard</span>
+            </a>
+            
+            <button type="button" class="admin-btn-back" onclick="window.history.length > 1 ? window.history.back() : window.location.href='admin.html'">
+              <i class="bi bi-arrow-left"></i>
+              <span>Go Back</span>
+            </button>
+          </div>
+
+          <!-- Quick Navigation Suggestions -->
+          <div class="admin-quick-links">
+            <span class="extra-small text-muted me-1"><i class="bi bi-compass me-1"></i> Quick Jumps:</span>
+            <a href="admin.html#orders" class="admin-quick-chip"><i class="bi bi-bag-check me-1"></i> Orders</a>
+            <a href="admin.html#reservations" class="admin-quick-chip"><i class="bi bi-calendar2-check me-1"></i> Reservations</a>
+            <a href="admin.html#menu" class="admin-quick-chip"><i class="bi bi-journal-richtext me-1"></i> Menu Catalog</a>
+            <a href="documentation/index.html" class="admin-quick-chip"><i class="bi bi-book me-1"></i> Admin Docs</a>
+          </div>
+
+        </div>
+
+      </main>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Admin Dashboard Specific Drawer Toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleBtn = document.getElementById('adminSidebarToggle');
+      const sidebar = document.getElementById('adminSidebar');
+      const backdrop = document.getElementById('adminSidebarBackdrop');
+
+      function toggleSidebar() {
+        if (sidebar) sidebar.classList.toggle('show');
+        if (backdrop) backdrop.classList.toggle('show');
+      }
+
+      if (toggleBtn) toggleBtn.addEventListener('click', toggleSidebar);
+      if (backdrop) backdrop.addEventListener('click', toggleSidebar);
+    });
+  </script>
+</body>
+</html>

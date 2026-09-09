@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <title>Reserve a Table - Table Booking & Dining | Green Haven Restaurant</title>
+  <meta name="description" content="Book your table at Green Haven Restaurant in Portland, Oregon. Enjoy 100% plant-based and organic seasonal dining. Instant reservation confirmation.">
+  <meta name="keywords" content="vegan restaurant reservation, book table portland, plant based dining reservation">
+  <meta property="og:title" content="Reserve a Table - Green Haven Restaurant">
+  <meta property="og:description" content="Reserve your table online at Green Haven. Wholesome organic plant-based dining.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Custom Master Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="nature-bg-page reservation-nature-page">
+
+
+
+  <!-- Main Navigation Bar -->
+  <header class="gh-navbar">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between">
+        
+        <!-- Brand Logo with Continuous Animated Outline -->
+        <a class="gh-brand gh-brand-auto" href="index.html" aria-label="Green Haven Restaurant">
+          <span class="gh-logo-wrapper">
+            <svg class="gh-logo-outline-svg" viewBox="0 0 100 100">
+              <circle class="gh-logo-outline-base" cx="50" cy="50" r="48" pathLength="100" />
+              <circle class="gh-logo-outline-stroke" cx="50" cy="50" r="48" pathLength="100" />
+            </svg>
+            <img src="assets/images/logo-g.png" alt="Green Haven Logo G" class="gh-logo-icon gh-logo-g">
+            <img src="assets/images/logo-h.png" alt="Green Haven Logo H" class="gh-logo-icon gh-logo-h">
+          </span>
+          <img src="assets/images/title.png" alt="Green Haven" class="gh-brand-title-img gh-title-light">
+          <img src="assets/images/title-dark.png" alt="Green Haven" class="gh-brand-title-img gh-title-dark">
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="d-none d-lg-flex align-items-center gap-1">
+          <div class="dropdown">
+            <a class="gh-nav-link  dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Home
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item " href="index.html"><i class="bi bi-house me-2"></i> Home 1 (Gourmet Landing)</a></li>
+              <li><a class="gh-dropdown-item " href="home-2.html"><i class="bi bi-flower1 me-2"></i> Home 2 (Farm to Plate)</a></li>
+            </ul>
+          </div>
+          <a class="gh-nav-link " href="about.html">About</a>
+          <a class="gh-nav-link " href="menu.html">Menu</a>
+          <div class="dropdown">
+            <a class="gh-nav-link  dropdown-toggle" href="services.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Services
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item " href="services.html"><i class="bi bi-grid-fill me-2"></i> Our Services</a></li>
+              <li><a class="gh-dropdown-item " href="service-details.html"><i class="bi bi-file-earmark-text me-2"></i> Service Details</a></li>
+            </ul>
+          </div>
+          <a class="gh-nav-link " href="catering.html">Catering</a>
+          <a class="gh-nav-link " href="pricing.html">Packages</a>
+          <div class="dropdown">
+            <a class="gh-nav-link  dropdown-toggle" href="blog.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Blog
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item " href="blog.html"><i class="bi bi-card-text me-2"></i> Food &amp; Wellness Blog</a></li>
+              <li><a class="gh-dropdown-item " href="blog-details.html"><i class="bi bi-layout-text-window me-2"></i> Article Details</a></li>
+            </ul>
+          </div>
+          <div class="dropdown">
+            <a class="gh-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Pages
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
+              <li><a class="gh-dropdown-item" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
+              <li><a class="gh-dropdown-item" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
+            </ul>
+          </div>
+          <a class="gh-nav-link " href="contact.html">Contact</a>
+        </nav>
+
+        <!-- Navbar Controls & Dynamic Auth -->
+        <div class="d-flex align-items-center gap-2">
+          <!-- Theme Toggle (Dark Mode) -->
+          <button class="theme-toggle-btn" aria-label="Toggle Light/Dark Theme">
+            <i class="bi bi-moon-stars-fill"></i>
+          </button>
+
+          <!-- RTL / LTR Toggle -->
+          <button class="rtl-toggle-btn" aria-label="Toggle text direction" title="Switch text direction (RTL / LTR)">
+            <i class="bi bi-arrow-left-right"></i>
+          </button>
+
+          <!-- Cart Icon -->
+          <a href="cart.html" class="cart-nav-btn" title="View Cart">
+            <i class="bi bi-bag"></i>
+            <span id="navCartCount" class="cart-badge-count" style="display: none;">0</span>
+          </a>
+
+          <!-- Reserve Table -->
+          <a href="reservation.html" class="btn btn-primary d-none d-lg-inline-flex btn-sm">
+            <i class="bi bi-calendar2-check"></i> Reserve Table
+          </a>
+
+          <!-- Standard Desktop Auth (Sign In) -->
+          <div id="navAuthContainer" class="d-none d-md-block">
+            <div class="d-inline-flex align-items-center gap-2 flex-nowrap">
+              <a href="login.html" class="btn btn-outline-primary btn-sm">
+                <i class="bi bi-box-arrow-in-right me-1"></i> Sign In
+              </a>
+            </div>
+          </div>
+
+          <button class="btn btn-icon btn-outline-primary d-lg-none gh-mobile-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenuOffcanvas" aria-controls="mobileMenuOffcanvas" aria-label="Open mobile navigation">
+            <i class="bi bi-list fs-4"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Offcanvas Menu -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenuOffcanvas" aria-labelledby="mobileMenuOffcanvasLabel">
+    <div class="offcanvas-header border-bottom">
+      <a class="gh-brand gh-brand-auto" href="index.html" aria-label="Green Haven Restaurant">
+        <span class="gh-logo-wrapper">
+          <svg class="gh-logo-outline-svg" viewBox="0 0 100 100">
+            <circle class="gh-logo-outline-base" cx="50" cy="50" r="48" pathLength="100" />
+            <circle class="gh-logo-outline-stroke" cx="50" cy="50" r="48" pathLength="100" />
+          </svg>
+          <img src="assets/images/logo-g.png" alt="Green Haven Logo G" class="gh-logo-icon gh-logo-g">
+          <img src="assets/images/logo-h.png" alt="Green Haven Logo H" class="gh-logo-icon gh-logo-h">
+        </span>
+        <img src="assets/images/title.png" alt="Green Haven" class="gh-brand-title-img gh-title-light">
+        <img src="assets/images/title-dark.png" alt="Green Haven" class="gh-brand-title-img gh-title-dark">
+      </a>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-4 d-flex flex-column justify-content-between">
+      <div>
+        <div id="mobileNavAuthContainer" class="mb-3">
+          <div class="d-flex gap-2">
+            <a href="login.html" class="btn btn-outline-primary btn-sm flex-fill"><i class="bi bi-box-arrow-in-right me-1"></i> Sign In</a>
+          </div>
+        </div>
+        <nav class="d-flex flex-column gap-2">
+          <a class="gh-nav-link " href="index.html">Home (Gourmet)</a>
+          <a class="gh-nav-link " href="home-2.html">Home (Farm to Plate)</a>
+          <a class="gh-nav-link " href="about.html">About Us</a>
+          <a class="gh-nav-link " href="menu.html">Full Restaurant Menu</a>
+          <a class="gh-nav-link" href="cart.html"><i class="bi bi-bag me-1"></i> My Dining Cart</a>
+          <a class="gh-nav-link " href="services.html">Our Services</a>
+          <a class="gh-nav-link " href="catering.html">Plant-Based Catering</a>
+          <a class="gh-nav-link " href="pricing.html">Dining Packages</a>
+          <a class="gh-nav-link " href="blog.html">Culinary Journal</a>
+          <div class="dropdown">
+            <a class="gh-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Pages
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
+              <li><a class="gh-dropdown-item" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
+              <li><a class="gh-dropdown-item" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
+            </ul>
+          </div>
+          <a class="gh-nav-link " href="contact.html">Contact Us</a>
+        </nav>
+      </div>
+      <div class="border-top pt-3">
+        <a href="reservation.html" class="btn btn-primary w-100 mb-2"><i class="bi bi-calendar2-check me-1"></i> Book Table</a>
+        <a href="menu.html" class="btn btn-outline-primary w-100"><i class="bi bi-bag-plus me-1"></i> Order Online</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- Page Header & Breadcrumbs -->
+    <section class="page-header">
+      <div class="container">
+        <span class="section-sub"><i class="bi bi-calendar-check"></i> Direct Table Booking</span>
+        <h1 class="display-4 fw-bold">Reserve Your Dining Experience</h1>
+        <div class="breadcrumb-nav">
+          <a href="index.html">Home</a>
+          <span>/</span>
+          <span class="text-success fw-semibold">Table Reservation</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Reservation Section -->
+    <section class="section-padding">
+      <div class="container">
+        <div class="row g-5">
+          <!-- Reservation Form Column -->
+          <div class="col-lg-8">
+            <div class="p-4 p-md-5 rounded-4 section-bg-alt border shadow-lg">
+              <div class="mb-4">
+                <span class="section-sub"><i class="bi bi-flower1"></i> Instant Booking</span>
+                <h2 class="section-title">Table Details</h2>
+                <p class="text-muted">Please fill in your preferences. For parties larger than 8, please call our hospitality concierge.</p>
+              </div>
+
+              <form id="reservationForm" novalidate>
+                <div class="row g-3">
+                  <!-- Name -->
+                  <div class="col-md-6">
+                    <label class="form-label" for="resName">Full Name *</label>
+                    <input type="text" class="form-control" id="resName" placeholder="e.g. Julian Sterling" required>
+                    <div class="invalid-feedback">Please enter your name.</div>
+                  </div>
+
+                  <!-- Email -->
+                  <div class="col-md-6">
+                    <label class="form-label" for="resEmail">Email Address *</label>
+                    <input type="email" class="form-control" id="resEmail" placeholder="e.g. julian@example.com" required>
+                    <div class="invalid-feedback">Please provide a valid email.</div>
+                  </div>
+
+                  <!-- Phone -->
+                  <div class="col-md-6">
+                    <label class="form-label" for="resPhone">Phone Number *</label>
+                    <input type="tel" class="form-control" id="resPhone" placeholder="e.g. +1 (503) 555-0144" required>
+                    <div class="invalid-feedback">Please provide your phone number.</div>
+                  </div>
+
+                  <!-- Number of Guests -->
+                  <div class="col-md-6">
+                    <label class="form-label" for="resGuests">Number of Guests *</label>
+                    <select class="form-select" id="resGuests" required>
+                      <option value="" selected disabled>Select Party Size</option>
+                      <option value="1">1 Guest (Solo Dining)</option>
+                      <option value="2">2 Guests (Intimate Table)</option>
+                      <option value="3">3 Guests</option>
+                      <option value="4">4 Guests (Standard Table)</option>
+                      <option value="5">5 Guests</option>
+                      <option value="6">6 Guests (Large Table)</option>
+                      <option value="7">7 Guests</option>
+                      <option value="8">8 Guests (Party Maximum)</option>
+                    </select>
+                    <div class="invalid-feedback">Please select party size.</div>
+                  </div>
+
+                  <!-- Date -->
+                  <div class="col-md-6">
+                    <label class="form-label" for="resDate">Reservation Date *</label>
+                    <input type="date" class="form-control" id="resDate" required>
+                    <div class="invalid-feedback">Please select a valid date.</div>
+                  </div>
+
+                  <!-- Time -->
+                  <div class="col-md-6">
+                    <label class="form-label" for="resTime">Preferred Time Slot *</label>
+                    <select class="form-select" id="resTime" required>
+                      <option value="" selected disabled>Select Time</option>
+                      <option value="8:30 AM">8:30 AM (Breakfast)</option>
+                      <option value="10:00 AM">10:00 AM (Brunch)</option>
+                      <option value="11:30 AM">11:30 AM (Lunch)</option>
+                      <option value="1:00 PM">1:00 PM (Lunch)</option>
+                      <option value="5:30 PM">5:30 PM (Early Dinner)</option>
+                      <option value="6:30 PM">6:30 PM (Prime Dinner)</option>
+                      <option value="7:45 PM">7:45 PM (Prime Dinner)</option>
+                      <option value="8:45 PM">8:45 PM (Late Dinner)</option>
+                    </select>
+                    <div class="invalid-feedback">Please select a time slot.</div>
+                  </div>
+
+                  <!-- Seating Preference -->
+                  <div class="col-12">
+                    <label class="form-label" for="resSeating">Seating Area Preference *</label>
+                    <select class="form-select" id="resSeating" required>
+                      <option value="Indoor Garden Sanctuary" selected>Indoor Botanical Garden Sanctuary</option>
+                      <option value="Glasshouse Sunroom Patio">Glasshouse Sunroom Patio</option>
+                      <option value="Chef's Open Kitchen Counter">Chef's Open Plating Counter</option>
+                      <option value="Private Mezzanine Dining Room">Private Mezzanine Dining Room</option>
+                    </select>
+                  </div>
+
+                  <!-- Special Requests -->
+                  <div class="col-12">
+                    <label class="form-label" for="resSpecial">Special Dietary Notes or Occasion Details</label>
+                    <textarea class="form-control" id="resSpecial" rows="3" placeholder="Let us know if you are celebrating a birthday, anniversary, or have specific allergy needs (e.g., severe nut allergy, raw food only)..."></textarea>
+                  </div>
+
+                  <!-- Submit Button -->
+                  <div class="col-12 text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg w-100 py-3">
+                      <i class="bi bi-calendar2-check-fill me-2"></i> Reserve My Table
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <div id="reservationFeedback"></div>
+            </div>
+          </div>
+
+          <!-- Reservation Info & Policies Column -->
+          <div class="col-lg-4">
+            <div class="p-4 rounded-4 section-bg-alt border mb-4">
+              <h4 class="fw-bold mb-3 font-serif"><i class="bi bi-clock-history text-success me-2"></i>Dining Hours</h4>
+              <ul class="list-unstyled text-muted small mb-0">
+                <li class="py-2 border-bottom d-flex justify-content-between">
+                  <span>Mon - Thu Lunch:</span>
+                  <strong class="text-dark">11:00 AM - 3:00 PM</strong>
+                </li>
+                <li class="py-2 border-bottom d-flex justify-content-between">
+                  <span>Mon - Thu Dinner:</span>
+                  <strong class="text-dark">5:00 PM - 9:30 PM</strong>
+                </li>
+                <li class="py-2 border-bottom d-flex justify-content-between">
+                  <span>Fri - Sat Dinner:</span>
+                  <strong class="text-dark">5:00 PM - 11:00 PM</strong>
+                </li>
+                <li class="py-2 d-flex justify-content-between">
+                  <span>Sunday Brunch:</span>
+                  <strong class="text-dark">9:00 AM - 3:30 PM</strong>
+                </li>
+              </ul>
+            </div>
+
+            <div class="p-4 rounded-4 section-bg-alt border mb-4 shadow-sm">
+              <h5 class="fw-bold mb-3 font-serif"><i class="bi bi-shield-check text-success me-2"></i>Reservation Policies</h5>
+              <ul class="list-unstyled small text-muted mb-0">
+                <li class="mb-2"><i class="bi bi-check2 text-success me-2"></i><strong>Grace Period:</strong> We hold reserved tables for 15 minutes past your booking time.</li>
+                <li class="mb-2"><i class="bi bi-check2 text-success me-2"></i><strong>Cancellations:</strong> Free cancellations up to 2 hours before your seating.</li>
+                <li class="mb-2"><i class="bi bi-check2 text-success me-2"></i><strong>Large Groups:</strong> Parties of 9+ please call for dedicated banquet seating.</li>
+                <li class="mb-0"><i class="bi bi-check2 text-success me-2"></i><strong>Zero-Waste:</strong> We encourage mindful dining and provide compostable take-home boxes.</li>
+              </ul>
+            </div>
+
+            <div class="p-4 rounded-4 bg-dark text-white text-center">
+              <i class="bi bi-telephone-outbound text-warning fs-2 mb-2 d-block"></i>
+              <h5 class="fw-bold text-white mb-1">Prefer to Call Us?</h5>
+              <p class="text-white-50 small mb-3">Our concierge is happy to assist with special arrangements.</p>
+              <a href="tel:+15035550192" class="btn btn-accent btn-sm w-100">
+                <i class="bi bi-telephone-fill me-1"></i> +1 (503) 555-0192
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Reservation Success Confirmation Modal -->
+  <div class="modal fade" id="reservationSuccessModal" tabindex="-1" aria-labelledby="resModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg text-center p-4">
+        <div class="modal-body">
+          <div class="service-icon mx-auto mb-3 bg-success text-white">
+            <i class="bi bi-check2-all fs-2"></i>
+          </div>
+          <h3 class="fw-bold mb-2 font-serif text-success" id="resModalLabel">Table Reserved!</h3>
+          <p class="text-muted mb-3">We look forward to welcoming you to Green Haven.</p>
+          <div id="resModalDetails"></div>
+          <button type="button" class="btn btn-primary px-4" data-bs-dismiss="modal">Wonderful, Got It!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+      <!-- Universal 4-Column Luxury Footer -->
+  <footer class="gh-footer">
+    <div class="container">
+      <div class="row g-4 g-lg-5 mb-5">
+        
+        <!-- Column 1: Brand & Tagline -->
+        <div class="col-lg-4 col-md-6">
+          <a class="gh-brand text-white mb-3 d-inline-flex align-items-center" href="index.html" aria-label="Green Haven Restaurant">
+            <img src="assets/images/logo-g.png" alt="Green Haven Logo" class="gh-brand-logo-img me-2">
+            <span class="gh-brand-text text-white">Green Haven</span>
+          </a>
+          <p class="footer-bio mb-4">
+            An organic plant-based restaurant sanctuary celebrating vibrant seasonal gastronomy, regenerative agriculture, and holistic well-being.
+          </p>
+          <div class="d-flex gap-2 flex-wrap">
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+            <a href="https://pinterest.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Pinterest"><i class="bi bi-pinterest"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+          </div>
+        </div>
+
+        <!-- Column 2: Navigation -->
+        <div class="col-6 col-md-4 col-lg-2">
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
+            <li><a href="index.html" class="footer-link"><i class="bi bi-chevron-right"></i> Home</a></li>
+            <li><a href="about.html" class="footer-link"><i class="bi bi-chevron-right"></i> About Us</a></li>
+            <li><a href="menu.html" class="footer-link"><i class="bi bi-chevron-right"></i> Our Menu</a></li>
+            <li><a href="cart.html" class="footer-link"><i class="bi bi-chevron-right"></i> Food Cart</a></li>
+            <li><a href="catering.html" class="footer-link"><i class="bi bi-chevron-right"></i> Catering</a></li>
+            <li><a href="contact.html" class="footer-link"><i class="bi bi-chevron-right"></i> Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Hours & Location -->
+        <div class="col-6 col-md-4 col-lg-3">
+          <h4 class="footer-col-title">Hours & Location</h4>
+          <p class="text-white-50 small mb-2"><i class="bi bi-geo-alt text-warning me-2"></i> 742 Evergreen Botanical Way, Portland</p>
+          <p class="text-white-50 small mb-2"><i class="bi bi-clock text-warning me-2"></i> Mon - Sun: 8:00 AM - 10:00 PM</p>
+          <p class="text-white-50 small mb-0"><i class="bi bi-telephone text-warning me-2"></i> <a href="tel:+15035550192" class="text-white text-decoration-none" style="color: #FFFFFF !important;">+1 (503) 555-0192</a></p>
+        </div>
+
+        <!-- Column 4: Botanical Digest -->
+        <div class="col-lg-3 col-md-6">
+          <h4 class="footer-col-title">Botanical Digest</h4>
+          <p class="text-white-50 small mb-3">Join our newsletter for seasonal menu previews and chef recipes.</p>
+          <form class="newsletter-form d-flex gap-2">
+            <input type="email" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Your email" required>
+            <button type="submit" class="btn btn-accent btn-sm px-3">Join</button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Bottom Line -->
+      <div class="footer-bottom border-top border-secondary border-opacity-25 pt-4 mt-4 text-white-50 small">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+          <div>&copy; 2026 Green Haven Restaurant. All Rights Reserved.</div>
+          <div class="d-flex gap-3">
+            <a href="#" class="text-white-50 text-decoration-none hover-white">Privacy Policy</a>
+            <span>&bull;</span>
+            <a href="#" class="text-white-50 text-decoration-none hover-white">Terms &amp; Conditions</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Quick Search Modal -->
+  <div class="modal fade" id="quickSearchModal" tabindex="-1" aria-labelledby="quickSearchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg">
+        <div class="modal-header border-bottom">
+          <h5 class="modal-title fw-bold" id="quickSearchModalLabel"><i class="bi bi-search me-2 text-success"></i> Search Green Haven</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <form action="menu.html" method="GET">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control form-control-lg" name="q" placeholder="Search dishes, ingredients, blog..." aria-label="Search">
+              <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="back-to-top" aria-label="Scroll back to top">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/shop.js"></script>
+</body>
+</html>
