@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Green Haven - Premium Vegan & Plant-Based Restaurant HTML5 Template",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js",
+    "start": "node scripts/server.js",
+    "dev": "node scripts/server.js",
     "build:pdf": "node scripts/generate-menu-pdf.js"
   },
   "keywords": [
