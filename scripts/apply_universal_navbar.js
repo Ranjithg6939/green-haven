@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const dir = 'd:/green-haven';
+const dir = path.resolve(__dirname, '..');
 
 const pageActiveMap = {
   'index.html': 'home1',
