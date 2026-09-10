@@ -9,13 +9,55 @@
   // LocalStorage Keys
   const AUTH_KEY = 'gh_logged_in';
   const USER_KEY = 'gh_user';
+  const USERS_KEY = 'gh_users';
   const CART_KEY = 'gh_cart';
   const ORDERS_KEY = 'gh_orders';
+  const PENDING_ACTION_KEY = 'gh_pending_order_action';
+
+  // Seed default registered accounts for seamless demonstration
+  const DEFAULT_USERS = [
+    {
+      name: 'Maya Lin',
+      email: 'maya@greenhaven.com',
+      password: 'Password123!',
+      phone: '+1 (503) 555-0199',
+      diet: '100% Plant-Based / Vegan',
+      createdAt: new Date().toISOString()
+    },
+    {
+      name: 'Julian Sterling',
+      email: 'julian@greenhaven.com',
+      password: 'Password123!',
+      phone: '+1 (503) 555-0144',
+      diet: '100% Plant-Based / Vegan',
+      createdAt: new Date().toISOString()
+    }
+  ];
 
   /* ==========================================================================
      1. AUTHENTICATION MODULE
      ========================================================================== */
   const Auth = {
+    getUsers() {
+      try {
+        const raw = localStorage.getItem(USERS_KEY);
+        if (!raw) {
+          localStorage.setItem(USERS_KEY, JSON.stringify(DEFAULT_USERS));
+          return [...DEFAULT_USERS];
+        }
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [...DEFAULT_USERS];
+      } catch (e) {
+        return [...DEFAULT_USERS];
+      }
+    },
+
+    findUserByEmail(email) {
+      if (!email) return null;
+      const clean = String(email).trim().toLowerCase();
+      return this.getUsers().find(u => u.email.trim().toLowerCase() === clean) || null;
+    },
+
     isLoggedIn() {
       return localStorage.getItem(AUTH_KEY) === 'true';
     },
@@ -29,21 +71,109 @@
       }
     },
 
-    loginUser(userData, redirectUrl = 'index.html') {
-      localStorage.setItem(AUTH_KEY, 'true');
-      localStorage.setItem(USER_KEY, JSON.stringify(userData));
-      this.updateNavbar();
-      if (redirectUrl) {
-        window.location.href = redirectUrl;
+    registerUser(userData) {
+      const cleanEmail = String(userData.email || '').trim().toLowerCase();
+      const users = this.getUsers();
+
+      if (users.some(u => u.email.trim().toLowerCase() === cleanEmail)) {
+        return {
+          success: false,
+          error: 'duplicate_email',
+          message: 'An account with this email already exists.'
+        };
       }
+
+      const fullName = (userData.name || `${userData.firstName || ''} ${userData.lastName || ''}`).trim();
+      const newUser = {
+        name: fullName,
+        firstName: String(userData.firstName || (fullName.split(' ')[0] || '')).trim(),
+        lastName: String(userData.lastName || (fullName.split(' ').slice(1).join(' ') || '')).trim(),
+        email: cleanEmail,
+        password: String(userData.password || ''),
+        phone: String(userData.phone || '').trim(),
+        diet: String(userData.diet || '100% Plant-Based / Vegan'),
+        createdAt: new Date().toISOString()
+      };
+
+      users.push(newUser);
+      localStorage.setItem(USERS_KEY, JSON.stringify(users));
+
+      return {
+        success: true,
+        user: newUser
+      };
     },
 
-    registerUser(userData, redirectUrl = 'index.html') {
+    validateCredentials(email, password) {
+      const cleanEmail = String(email || '').trim().toLowerCase();
+      const user = this.findUserByEmail(cleanEmail);
+
+      if (!user) {
+        return {
+          success: false,
+          error: 'not_found',
+          message: 'Account not found. Please create an account first.'
+        };
+      }
+
+      if (String(user.password || '') !== String(password || '')) {
+        return {
+          success: false,
+          error: 'wrong_password',
+          message: 'Incorrect password. Please try again.'
+        };
+      }
+
+      return {
+        success: true,
+        user
+      };
+    },
+
+    loginUser(userData, redirectUrl = 'index.html') {
       localStorage.setItem(AUTH_KEY, 'true');
-      localStorage.setItem(USER_KEY, JSON.stringify(userData));
+
+      // Do not store raw password in active session
+      const sessionUser = {
+        name: userData.name,
+        email: userData.email,
+        phone: userData.phone || '',
+        diet: userData.diet || '100% Plant-Based / Vegan'
+      };
+      localStorage.setItem(USER_KEY, JSON.stringify(sessionUser));
       this.updateNavbar();
+
+      if (window.showToast) {
+        window.showToast.success('Welcome back!', `Signed in successfully as ${sessionUser.name}.`);
+      }
+
+      // Resume any pending order action seamlessly
+      let pendingAction = null;
+      try {
+        const rawPending = localStorage.getItem(PENDING_ACTION_KEY);
+        if (rawPending) {
+          pendingAction = JSON.parse(rawPending);
+          localStorage.removeItem(PENDING_ACTION_KEY);
+        }
+      } catch (e) {}
+
+      if (pendingAction) {
+        if (pendingAction.type === 'add_to_cart' && pendingAction.item) {
+          Cart.addToCart(pendingAction.item, pendingAction.qty || 1, true);
+          if (window.showToast) {
+            window.showToast.success('Order Resumed', `Added ${pendingAction.qty || 1}x ${pendingAction.item.name} to your dining cart.`);
+          }
+          const target = pendingAction.returnUrl || 'menu.html';
+          setTimeout(() => { window.location.href = target; }, 600);
+          return;
+        } else if (pendingAction.type === 'checkout') {
+          setTimeout(() => { window.location.href = 'checkout.html'; }, 600);
+          return;
+        }
+      }
+
       if (redirectUrl) {
-        window.location.href = redirectUrl;
+        setTimeout(() => { window.location.href = redirectUrl; }, 600);
       }
     },
 
@@ -51,23 +181,140 @@
       localStorage.removeItem(AUTH_KEY);
       localStorage.removeItem(USER_KEY);
       this.updateNavbar();
-      // If currently on a protected page, redirect to login
+
+      if (window.showToast) {
+        window.showToast.info('Signed Out', 'Logged out successfully.');
+      }
+
       const protectedPages = ['checkout.html', 'order-success.html', 'my-account.html', 'orders.html'];
       const currentPage = window.location.pathname.split('/').pop() || 'index.html';
       if (protectedPages.includes(currentPage)) {
-        window.location.href = 'login.html';
-      } else {
-        window.location.reload();
+        setTimeout(() => { window.location.href = 'login.html'; }, 650);
       }
     },
 
     requireLogin(targetRedirect = null) {
       if (!this.isLoggedIn()) {
         const currentPage = targetRedirect || window.location.pathname.split('/').pop() || 'index.html';
-        window.location.href = `login.html?redirect=${encodeURIComponent(currentPage)}`;
+        this.showAuthPrompt({
+          message: 'Please sign in to continue with your order.',
+          pendingAction: { type: 'checkout' },
+          returnUrl: currentPage
+        });
         return false;
       }
       return true;
+    },
+
+    showAuthPrompt(options = {}) {
+      const message = options.message || 'Please sign in to continue with your order.';
+      const returnUrl = options.returnUrl || window.location.pathname.split('/').pop() || 'index.html';
+
+      if (options.pendingAction) {
+        localStorage.setItem(PENDING_ACTION_KEY, JSON.stringify({
+          ...options.pendingAction,
+          returnUrl
+        }));
+      }
+
+      let modalEl = document.getElementById('ghAuthPromptModal');
+      if (!modalEl) {
+        modalEl = document.createElement('div');
+        modalEl.id = 'ghAuthPromptModal';
+        modalEl.className = 'modal fade';
+        modalEl.setAttribute('tabindex', '-1');
+        modalEl.setAttribute('aria-hidden', 'true');
+        modalEl.innerHTML = `
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content gh-auth-modal-card border-0">
+              <div class="p-4 p-md-5 text-center position-relative">
+                <button type="button" class="btn-close position-absolute top-0 end-0 m-4" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="mx-auto mb-3 d-flex align-items-center justify-content-center rounded-circle bg-success bg-opacity-10 text-success" style="width: 64px; height: 64px;">
+                  <i class="bi bi-bag-heart-fill fs-2"></i>
+                </div>
+                <h4 class="font-serif fw-bold mb-2" style="color: var(--gh-heading-color, #262422);">Authentication Required</h4>
+                <p class="text-muted mb-4 fs-6" id="ghAuthPromptMsgText">${escapeHtml(message)}</p>
+
+                <div id="ghAuthPromptPendingBox" class="p-3 rounded-3 bg-light border mb-4 text-start small d-none">
+                  <div class="d-flex align-items-center gap-2">
+                    <i class="bi bi-flower1 text-success fs-5"></i>
+                    <div>
+                      <span class="text-muted d-block" style="font-size: 0.72rem; letter-spacing: 0.5px; text-transform: uppercase;">Selected Dish:</span>
+                      <strong id="ghAuthPromptPendingName" class="text-dark">Dish Name</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="d-flex flex-column gap-2">
+                  <a href="login.html?redirect=${encodeURIComponent(returnUrl)}" class="btn btn-primary py-2.5 fw-semibold" id="btnAuthPromptSignIn">
+                    <i class="bi bi-box-arrow-in-right me-1"></i> Sign In
+                  </a>
+                  <a href="register.html?redirect=${encodeURIComponent(returnUrl)}" class="btn btn-outline-primary py-2.5 fw-semibold" id="btnAuthPromptRegister">
+                    <i class="bi bi-person-plus me-1"></i> Create Account
+                  </a>
+                  <button type="button" class="btn btn-link text-muted py-2 text-decoration-none small" data-bs-dismiss="modal">
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(modalEl);
+      } else {
+        const msgEl = modalEl.querySelector('#ghAuthPromptMsgText');
+        if (msgEl) msgEl.textContent = message;
+        const signInBtn = modalEl.querySelector('#btnAuthPromptSignIn');
+        if (signInBtn) signInBtn.href = `login.html?redirect=${encodeURIComponent(returnUrl)}`;
+        const regBtn = modalEl.querySelector('#btnAuthPromptRegister');
+        if (regBtn) regBtn.href = `register.html?redirect=${encodeURIComponent(returnUrl)}`;
+      }
+
+      const pendingBox = modalEl.querySelector('#ghAuthPromptPendingBox');
+      const pendingName = modalEl.querySelector('#ghAuthPromptPendingName');
+      if (options.pendingAction && options.pendingAction.item && options.pendingAction.item.name) {
+        if (pendingBox && pendingName) {
+          pendingName.textContent = options.pendingAction.item.name;
+          pendingBox.classList.remove('d-none');
+        }
+      } else if (pendingBox) {
+        pendingBox.classList.add('d-none');
+      }
+
+      if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+        const bsModal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+        bsModal.show();
+      }
+    },
+
+    initPasswordToggles() {
+      document.querySelectorAll('.gh-password-toggle').forEach(btn => {
+        if (btn.dataset.bound) return;
+        btn.dataset.bound = 'true';
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          const targetId = this.getAttribute('data-target');
+          const input = document.getElementById(targetId);
+          if (!input) return;
+          const icon = this.querySelector('i');
+          if (input.type === 'password') {
+            input.type = 'text';
+            if (icon) {
+              icon.classList.remove('bi-eye');
+              icon.classList.add('bi-eye-slash');
+            }
+            this.setAttribute('aria-label', 'Hide password');
+          } else {
+            input.type = 'password';
+            if (icon) {
+              icon.classList.remove('bi-eye-slash');
+              icon.classList.add('bi-eye');
+            }
+            this.setAttribute('aria-label', 'Show password');
+          }
+        });
+      });
     },
 
     updateNavbar() {
@@ -78,15 +325,15 @@
 
       const getDesktopHtml = () => {
         if (loggedIn && user) {
-          const firstName = (user.name || 'Foodie').split(' ')[0];
+          const firstName = (user.name || 'Member').split(' ')[0];
           return `
             <div class="dropdown d-inline-block">
               <button class="btn btn-outline-primary btn-sm dropdown-toggle d-inline-flex align-items-center gap-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-person-circle fs-6"></i>
-                <span>Hi, <strong>${firstName}</strong></span>
+                <i class="bi bi-person-circle fs-6 text-success"></i>
+                <span>Hi, <strong>${escapeHtml(firstName)}</strong></span>
               </button>
               <ul class="dropdown-menu dropdown-menu-end gh-dropdown-menu shadow-lg">
-                <li><h6 class="dropdown-header small text-muted">${user.email || 'Guest Member'}</h6></li>
+                <li><h6 class="dropdown-header small text-muted">${escapeHtml(user.email || 'Member')}</h6></li>
                 <li><a class="dropdown-item gh-dropdown-item" href="my-account.html"><i class="bi bi-person-vcard me-2 text-primary"></i> My Profile</a></li>
                 <li><a class="dropdown-item gh-dropdown-item" href="orders.html"><i class="bi bi-bag-check me-2 text-success"></i> My Orders</a></li>
                 <li><a class="dropdown-item gh-dropdown-item" href="cart.html"><i class="bi bi-cart3 me-2 text-warning"></i> My Cart</a></li>
@@ -111,10 +358,10 @@
           return `
             <div class="p-3 bg-light rounded-3 mb-3 border">
               <div class="d-flex align-items-center gap-2 mb-2">
-                <i class="bi bi-person-circle fs-4 text-primary"></i>
+                <i class="bi bi-person-circle fs-4 text-success"></i>
                 <div>
-                  <div class="fw-bold">${user.name || 'User'}</div>
-                  <div class="small text-muted">${user.email || ''}</div>
+                  <div class="fw-bold">${escapeHtml(user.name || 'Member')}</div>
+                  <div class="small text-muted">${escapeHtml(user.email || '')}</div>
                 </div>
               </div>
               <div class="d-grid gap-2">
@@ -136,7 +383,6 @@
       if (authContainer) authContainer.innerHTML = getDesktopHtml();
       if (mobileAuthContainer) mobileAuthContainer.innerHTML = getMobileHtml();
 
-      // Bind logout click listeners
       const btnLogoutDesktop = document.getElementById('btnLogoutDesktop');
       if (btnLogoutDesktop) {
         btnLogoutDesktop.addEventListener('click', (e) => {
@@ -194,6 +440,20 @@
     },
 
     addToCart(item, qty = 1, openDrawer = true) {
+      if (!Auth.isLoggedIn()) {
+        Auth.showAuthPrompt({
+          message: "Please sign in to continue with your order.",
+          pendingAction: {
+            type: 'add_to_cart',
+            item: item,
+            qty: qty,
+            openDrawer: openDrawer
+          },
+          returnUrl: window.location.pathname.split('/').pop() || 'menu.html'
+        });
+        return;
+      }
+
       const items = this.getCart();
       const existing = items.find(i => String(i.id) === String(item.id));
       
@@ -380,6 +640,17 @@
       overlay?.addEventListener('click', () => this.closeDrawer());
       drawer.querySelector('#ghCartCloseBtn')?.addEventListener('click', () => this.closeDrawer());
       drawer.querySelector('#ghCartContinueShopping')?.addEventListener('click', () => this.closeDrawer());
+      drawer.querySelector('#ghCartCheckoutBtn')?.addEventListener('click', (e) => {
+        if (!Auth.isLoggedIn()) {
+          e.preventDefault();
+          this.closeDrawer();
+          Auth.showAuthPrompt({
+            message: 'Please sign in to continue with your order.',
+            pendingAction: { type: 'checkout' },
+            returnUrl: 'checkout.html'
+          });
+        }
+      });
 
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && this.isDrawerOpen()) {
@@ -612,6 +883,14 @@
      ========================================================================== */
   const UI = {
     showToast(title, message, icon = 'bi-check-circle-fill') {
+      if (window.showToast) {
+        window.showToast({
+          type: 'success',
+          title: title,
+          message: message
+        });
+        return;
+      }
       let toastContainer = document.getElementById('ghToastContainer');
       if (!toastContainer) {
         toastContainer = document.createElement('div');
@@ -691,6 +970,7 @@
   // Initialize Global Navbar, Cart Drawer & Cart Badges on Load
   function initApp() {
     Auth.updateNavbar();
+    Auth.initPasswordToggles();
     Cart.initDrawer();
     Cart.updateBadges();
     Cart.bindNavCartButtons();

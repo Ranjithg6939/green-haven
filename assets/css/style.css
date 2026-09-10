@@ -1258,6 +1258,11 @@ nav a:hover, nav a.active {
   white-space: nowrap !important;
 }
 
+#navAuthContainer a[href="register.html"],
+#mobileNavAuthContainer a[href="register.html"] {
+  display: none !important;
+}
+
 /* Navbar Buttons Uniform Height & Alignment */
 .gh-navbar .btn:not(.d-lg-none),
 .nx-navbar .btn:not(.d-lg-none) {
@@ -14310,6 +14315,674 @@ html.dark .admin-404-number {
     display: none;
   }
 }
+
+/* ================================================================
+   100. MASTER TOAST NOTIFICATION SYSTEM (GREEN HAVEN LUXURY SUITE)
+   Supports multiple models: Standard, Rich Reservation Card, Action Toasts
+   ================================================================ */
+
+.gh-toast-container {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 10999;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  pointer-events: none;
+  max-width: 440px;
+  width: calc(100vw - 32px);
+}
+
+[dir="rtl"] .gh-toast-container {
+  right: auto;
+  left: 24px;
+}
+
+@media (max-width: 576px) {
+  .gh-toast-container {
+    top: 16px;
+    right: 16px;
+    left: 16px;
+    width: auto;
+    max-width: none;
+  }
+}
+
+.gh-toast {
+  position: relative;
+  pointer-events: auto;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(45, 42, 38, 0.12);
+  box-shadow: 
+    0 20px 45px -10px rgba(45, 42, 38, 0.18),
+    0 4px 14px rgba(45, 42, 38, 0.05),
+    0 0 0 1px rgba(255, 255, 255, 0.85) inset;
+  padding: 16px 18px;
+  color: var(--gh-text, #3D3833);
+  overflow: hidden;
+  transform-origin: top right;
+  animation: ghToastSlideIn 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+}
+
+.gh-toast:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 24px 50px -10px rgba(45, 42, 38, 0.24),
+    0 6px 18px rgba(45, 42, 38, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.95) inset;
+}
+
+.gh-toast.gh-toast--closing {
+  animation: ghToastSlideOut 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+/* Dark Mode Alignment */
+[data-bs-theme="dark"] .gh-toast,
+html.dark .gh-toast {
+  background: rgba(1, 42, 27, 0.95);
+  border: 1px solid rgba(0, 255, 127, 0.32);
+  color: #F5F5DC;
+  box-shadow: 
+    0 22px 50px -10px rgba(0, 0, 0, 0.85),
+    0 0 25px rgba(0, 255, 127, 0.14),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+}
+
+/* Toast Header / Row */
+.gh-toast__main {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.gh-toast__icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gh-toast:hover .gh-toast__icon-box {
+  transform: scale(1.1) rotate(4deg);
+}
+
+.gh-toast__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.gh-toast__title {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--gh-heading-color, #262422);
+  margin-bottom: 3px;
+  line-height: 1.35;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+[data-bs-theme="dark"] .gh-toast__title,
+html.dark .gh-toast__title {
+  color: #FFFFFF;
+}
+
+.gh-toast__message {
+  font-size: 0.86rem;
+  color: var(--gh-text-muted, #5C554E);
+  line-height: 1.45;
+  margin-bottom: 0;
+  word-break: break-word;
+}
+
+[data-bs-theme="dark"] .gh-toast__message,
+html.dark .gh-toast__message {
+  color: #C5D7C2;
+}
+
+.gh-toast__close {
+  background: transparent;
+  border: none;
+  color: #9C958C;
+  cursor: pointer;
+  padding: 4px;
+  margin-top: -4px;
+  margin-right: -4px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+.gh-toast__close:hover {
+  color: var(--gh-heading-color, #262422);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+[data-bs-theme="dark"] .gh-toast__close:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Toast Progress Bar */
+.gh-toast__progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3.5px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+[data-bs-theme="dark"] .gh-toast__progress {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.gh-toast__progress-fill {
+  height: 100%;
+  width: 100%;
+  transform-origin: left;
+  animation: ghToastProgress linear forwards;
+}
+
+.gh-toast:hover .gh-toast__progress-fill {
+  animation-play-state: paused;
+}
+
+/* Model Styles */
+/* 1. Success Model */
+.gh-toast--success .gh-toast__icon-box {
+  background: #E8F8EE;
+  color: #2E6518;
+  border: 1px solid rgba(46, 101, 24, 0.22);
+}
+.gh-toast--success .gh-toast__progress-fill {
+  background: linear-gradient(90deg, #2E6518, #00FF7F);
+}
+[data-bs-theme="dark"] .gh-toast--success .gh-toast__icon-box {
+  background: rgba(0, 255, 127, 0.16);
+  color: #00FF7F;
+  border: 1px solid rgba(0, 255, 127, 0.38);
+}
+
+/* 2. Info Model */
+.gh-toast--info .gh-toast__icon-box {
+  background: #EBF3FA;
+  color: #1D6FB8;
+  border: 1px solid rgba(29, 111, 184, 0.22);
+}
+.gh-toast--info .gh-toast__progress-fill {
+  background: linear-gradient(90deg, #1D6FB8, #5BC0BE);
+}
+[data-bs-theme="dark"] .gh-toast--info .gh-toast__icon-box {
+  background: rgba(91, 192, 190, 0.16);
+  color: #70D6FF;
+  border: 1px solid rgba(112, 214, 255, 0.38);
+}
+
+/* 3. Warning Model */
+.gh-toast--warning .gh-toast__icon-box {
+  background: #FFF4E5;
+  color: #D97706;
+  border: 1px solid rgba(217, 119, 6, 0.22);
+}
+.gh-toast--warning .gh-toast__progress-fill {
+  background: linear-gradient(90deg, #D97706, #EE9A59);
+}
+[data-bs-theme="dark"] .gh-toast--warning .gh-toast__icon-box {
+  background: rgba(238, 154, 89, 0.18);
+  color: #FFAA5A;
+  border: 1px solid rgba(238, 154, 89, 0.4);
+}
+
+/* 4. Error Model */
+.gh-toast--error .gh-toast__icon-box {
+  background: #FEE2E2;
+  color: #DC2626;
+  border: 1px solid rgba(220, 38, 38, 0.22);
+}
+.gh-toast--error .gh-toast__progress-fill {
+  background: linear-gradient(90deg, #DC2626, #EF4444);
+}
+[data-bs-theme="dark"] .gh-toast--error .gh-toast__icon-box {
+  background: rgba(239, 68, 68, 0.22);
+  color: #FF6B6B;
+  border: 1px solid rgba(255, 107, 107, 0.4);
+}
+
+/* 5. Rich Reservation Card Model */
+.gh-toast--reservation {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(244, 252, 245, 0.95) 100%);
+  border: 1.5px solid rgba(46, 101, 24, 0.28);
+}
+[data-bs-theme="dark"] .gh-toast--reservation {
+  background: linear-gradient(135deg, rgba(1, 46, 30, 0.97) 0%, rgba(0, 32, 20, 0.95) 100%);
+  border: 1.5px solid rgba(0, 255, 127, 0.48);
+}
+
+.gh-toast--reservation .gh-toast__icon-box {
+  background: linear-gradient(135deg, #2E6518 0%, #1A420E 100%);
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(46, 101, 24, 0.3);
+}
+[data-bs-theme="dark"] .gh-toast--reservation .gh-toast__icon-box {
+  background: linear-gradient(135deg, #00FF7F 0%, #00B359 100%);
+  color: #012817;
+  box-shadow: 0 4px 16px rgba(0, 255, 127, 0.4);
+}
+
+.gh-toast--reservation .gh-toast__progress-fill {
+  background: linear-gradient(90deg, #2E6518, #00FF7F, #D4AF37);
+}
+
+.gh-toast__badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  background: rgba(46, 101, 24, 0.12);
+  color: #2E6518;
+}
+[data-bs-theme="dark"] .gh-toast__badge-pill {
+  background: rgba(0, 255, 127, 0.18);
+  color: #00FF7F;
+}
+
+.gh-toast__details-card {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: rgba(45, 42, 38, 0.035);
+  border: 1px solid rgba(45, 42, 38, 0.07);
+  border-radius: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+[data-bs-theme="dark"] .gh-toast__details-card {
+  background: rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.gh-toast__detail-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--gh-text, #3D3833);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+[data-bs-theme="dark"] .gh-toast__detail-item {
+  color: #F5F5DC;
+}
+
+.gh-toast__detail-item i {
+  color: #2E6518;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+[data-bs-theme="dark"] .gh-toast__detail-item i {
+  color: #00FF7F;
+}
+
+.gh-toast__actions {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gh-toast__btn {
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.gh-toast__btn--primary {
+  background: #2E6518;
+  color: #FFFFFF !important;
+}
+.gh-toast__btn--primary:hover {
+  background: #1E4310;
+  transform: translateY(-1px);
+}
+[data-bs-theme="dark"] .gh-toast__btn--primary {
+  background: #00FF7F;
+  color: #012817 !important;
+  font-weight: 700;
+}
+[data-bs-theme="dark"] .gh-toast__btn--primary:hover {
+  background: #2aff9b;
+  color: #012817 !important;
+}
+
+.gh-toast__btn--ghost {
+  background: rgba(45, 42, 38, 0.06);
+  color: var(--gh-text, #3D3833);
+}
+.gh-toast__btn--ghost:hover {
+  background: rgba(45, 42, 38, 0.12);
+}
+[data-bs-theme="dark"] .gh-toast__btn--ghost {
+  background: rgba(255, 255, 255, 0.08);
+  color: #F5F5DC;
+}
+
+/* Animations */
+@keyframes ghToastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-16px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes ghToastSlideOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    max-height: 250px;
+    margin-bottom: 0;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.92);
+    max-height: 0;
+    margin-bottom: -14px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+@keyframes ghToastProgress {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+/* ================================================================
+   101. RESERVATION CONFIRMATION RECEIPT MODAL
+   ================================================================ */
+.receipt-modal-card {
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(45, 42, 38, 0.12);
+  background: var(--gh-bg, #FAF8F5);
+  box-shadow: var(--shadow-lg);
+}
+
+[data-bs-theme="dark"] .receipt-modal-card,
+html.dark .receipt-modal-card {
+  background: #013220;
+  border-color: rgba(0, 255, 127, 0.3);
+}
+
+.receipt-header {
+  background: linear-gradient(135deg, #1A420E 0%, #2E6518 100%);
+  color: #FFFFFF;
+  padding: 32px 24px 28px;
+  text-align: center;
+  position: relative;
+}
+
+[data-bs-theme="dark"] .receipt-header {
+  background: linear-gradient(135deg, #002213 0%, #013f27 100%);
+  border-bottom: 1px solid rgba(0, 255, 127, 0.25);
+}
+
+.receipt-header__badge {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.receipt-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 24px;
+  background: var(--gh-surface, #FFFFFF);
+  border-radius: 16px;
+  border: 1px solid rgba(45, 42, 38, 0.08);
+}
+
+[data-bs-theme="dark"] .receipt-grid {
+  background: rgba(1, 50, 32, 0.65);
+  border-color: rgba(0, 255, 127, 0.15);
+}
+
+@media (max-width: 480px) {
+  .receipt-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.receipt-item-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--gh-text-muted, #5C554E);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.receipt-item-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--gh-heading-color, #262422);
+}
+
+[data-bs-theme="dark"] .receipt-item-value {
+  color: #FFFFFF;
+}
+
+.receipt-perforation {
+  height: 2px;
+  background: repeating-linear-gradient(90deg, rgba(45,42,38,0.15) 0, rgba(45,42,38,0.15) 8px, transparent 8px, transparent 16px);
+  margin: 16px 0;
+}
+
+[data-bs-theme="dark"] .receipt-perforation {
+  background: repeating-linear-gradient(90deg, rgba(0,255,127,0.25) 0, rgba(0,255,127,0.25) 8px, transparent 8px, transparent 16px);
+}
+
+/* ================================================================
+   102. RESERVATION SECTION EQUAL HEIGHT COLUMNS
+   Ensures both left and right columns start and end at the exact same vertical position.
+   ================================================================ */
+@media (min-width: 992px) {
+  .reservation-row {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .reservation-form-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .reservation-form-card {
+    height: 100% !important;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .reservation-form-card form {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .reservation-submit-wrapper {
+    margin-top: auto !important;
+    padding-top: 1.5rem;
+  }
+
+  .reservation-sidebar-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    gap: 1.25rem;
+  }
+
+  .reservation-sidebar-col > .reservation-sidebar-card {
+    margin-bottom: 0 !important;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+/* ================================================================
+   103. AUTHENTICATION & PASSWORD TOGGLE SUITE
+   ================================================================ */
+.gh-password-group {
+  position: relative !important;
+}
+
+/* Ensure password input in input-group retains rounded right corners and room for eye toggle */
+.gh-password-group .form-control,
+.input-group:has(.gh-password-toggle) .form-control,
+.input-group > .gh-password-input,
+.input-group > input[type="password"] {
+  border-top-right-radius: 0.375rem !important;
+  border-bottom-right-radius: 0.375rem !important;
+  padding-right: 2.85rem !important;
+}
+
+/* Remove Bootstrap's default background exclamation SVG icon to prevent overlapping with the eye icon */
+.form-control[type="password"].is-invalid,
+.form-control[type="text"].gh-password-input.is-invalid,
+.gh-password-group .form-control.is-invalid,
+.input-group:has(.gh-password-toggle) .form-control.is-invalid {
+  background-image: none !important;
+  padding-right: 2.85rem !important;
+}
+
+.gh-password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent !important;
+  border: none !important;
+  color: var(--gh-text-muted, #7c746b) !important;
+  cursor: pointer;
+  z-index: 10;
+  padding: 6px;
+  font-size: 1.15rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease, transform 0.15s ease;
+  user-select: none;
+}
+
+.gh-password-toggle:hover {
+  color: var(--gh-accent, #2E6518) !important;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.gh-password-toggle:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+[data-bs-theme="dark"] .gh-password-toggle {
+  color: #A0C1B0 !important;
+}
+
+[data-bs-theme="dark"] .gh-password-toggle:hover {
+  color: #00FF7F !important;
+}
+
+/* Form validation styling & clean error placement */
+.form-control.is-invalid,
+.form-select.is-invalid {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.15) !important;
+}
+
+.invalid-feedback {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #dc3545;
+  margin-top: 0.35rem;
+  width: 100%;
+}
+
+[data-bs-theme="dark"] .invalid-feedback {
+  color: #ff6b6b;
+}
+
+.input-group:has(.is-invalid) + .invalid-feedback {
+  display: block;
+}
+
+/* Auth Modal Styling */
+.gh-auth-modal-card {
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(45, 42, 38, 0.12);
+  background: var(--gh-bg, #FAF8F5);
+  box-shadow: var(--shadow-lg);
+}
+
+[data-bs-theme="dark"] .gh-auth-modal-card {
+  background: #013220;
+  border-color: rgba(0, 255, 127, 0.28);
+}
+
+
+
 
 
 

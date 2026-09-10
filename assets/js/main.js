@@ -22,6 +22,277 @@
   } catch (e) {}
 })();
 
+/* ================================================================
+   GREEN HAVEN LUXURY TOAST NOTIFICATION ENGINE
+   Models: Standard (Success/Info/Warning/Error), Rich Reservation Card, Action Toasts
+   ================================================================ */
+const GreenHavenToast = {
+  container: null,
+
+  getContainer() {
+    if (!this.container || !document.body.contains(this.container)) {
+      this.container = document.getElementById('ghMasterToastContainer');
+      if (!this.container) {
+        this.container = document.createElement('div');
+        this.container.id = 'ghMasterToastContainer';
+        this.container.className = 'gh-toast-container';
+        this.container.setAttribute('aria-live', 'polite');
+        document.body.appendChild(this.container);
+      }
+    }
+    return this.container;
+  },
+
+  playChime(type) {
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      const now = ctx.currentTime;
+
+      if (type === 'error') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(320, now);
+        osc.frequency.exponentialRampToValueAtTime(200, now + 0.22);
+      } else if (type === 'warning') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(460, now);
+        osc.frequency.exponentialRampToValueAtTime(380, now + 0.22);
+      } else {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, now); // D5
+        osc.frequency.exponentialRampToValueAtTime(880, now + 0.14); // A5
+      }
+
+      gain.gain.setValueAtTime(0.05, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
+      osc.start(now);
+      osc.stop(now + 0.35);
+    } catch (e) {}
+  },
+
+  show(options, messageArg, typeArg) {
+    let opts = {};
+    if (typeof options === 'string') {
+      opts = {
+        title: options,
+        message: messageArg || '',
+        type: typeArg || 'success'
+      };
+    } else {
+      opts = { ...options };
+    }
+
+    const type = opts.type || 'success';
+    const title = opts.title || (type === 'success' ? 'Success' : type === 'reservation' ? 'Reservation Confirmed' : 'Notification');
+    const message = opts.message || '';
+    const duration = typeof opts.duration === 'number' ? opts.duration : (type === 'reservation' ? 7000 : 4500);
+    const details = opts.details || null;
+    const action = opts.action || null;
+    const playSound = opts.sound !== false;
+
+    if (playSound) {
+      this.playChime(type);
+    }
+
+    const container = this.getContainer();
+    const toastId = 'ght_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+
+    let icon = 'bi-check-circle-fill';
+    let modelClass = 'gh-toast--' + type;
+    let badgeText = 'Confirmed';
+
+    if (type === 'reservation') {
+      icon = 'bi-calendar2-check-fill';
+      badgeText = 'Reserved';
+    } else if (type === 'info') {
+      icon = 'bi-info-circle-fill';
+      badgeText = 'Notice';
+    } else if (type === 'warning') {
+      icon = 'bi-exclamation-triangle-fill';
+      badgeText = 'Attention';
+    } else if (type === 'error') {
+      icon = 'bi-x-circle-fill';
+      badgeText = 'Alert';
+    }
+
+    // Build details card for reservation or detailed views
+    let detailsHtml = '';
+    if (details) {
+      detailsHtml = `
+        <div class="gh-toast__details-card">
+          ${details.date ? `<div class="gh-toast__detail-item" title="${details.date}"><i class="bi bi-calendar3"></i> <span>${details.date}</span></div>` : ''}
+          ${details.time ? `<div class="gh-toast__detail-item" title="${details.time}"><i class="bi bi-clock"></i> <span>${details.time}</span></div>` : ''}
+          ${details.guests ? `<div class="gh-toast__detail-item" title="${details.guests}"><i class="bi bi-people-fill"></i> <span>${details.guests}</span></div>` : ''}
+          ${details.seating ? `<div class="gh-toast__detail-item" title="${details.seating}"><i class="bi bi-geo-alt-fill"></i> <span>${details.seating}</span></div>` : ''}
+        </div>
+      `;
+    }
+
+    // Actions
+    let actionsHtml = '';
+    if (action) {
+      actionsHtml = `
+        <div class="gh-toast__actions">
+          <button type="button" class="gh-toast__btn gh-toast__btn--primary" id="${toastId}_action">
+            ${action.icon ? `<i class="bi ${action.icon}"></i>` : ''} ${action.text || 'View'}
+          </button>
+          <button type="button" class="gh-toast__btn gh-toast__btn--ghost" id="${toastId}_dismiss">Dismiss</button>
+        </div>
+      `;
+    } else if (type === 'reservation') {
+      actionsHtml = `
+        <div class="gh-toast__actions">
+          <button type="button" class="gh-toast__btn gh-toast__btn--primary" id="${toastId}_viewPass">
+            <i class="bi bi-receipt"></i> View Pass
+          </button>
+          <button type="button" class="gh-toast__btn gh-toast__btn--ghost" id="${toastId}_dismiss">Dismiss</button>
+        </div>
+      `;
+    }
+
+    const toast = document.createElement('div');
+    toast.id = toastId;
+    toast.className = `gh-toast ${modelClass}`;
+    toast.setAttribute('role', 'alert');
+    toast.setAttribute('aria-atomic', 'true');
+
+    toast.innerHTML = `
+      <div class="gh-toast__main">
+        <div class="gh-toast__icon-box">
+          <i class="bi ${icon}"></i>
+        </div>
+        <div class="gh-toast__content">
+          <div class="gh-toast__title">
+            <span>${title}</span>
+            <span class="gh-toast__badge-pill">${badgeText}</span>
+          </div>
+          ${message ? `<p class="gh-toast__message">${message}</p>` : ''}
+          ${detailsHtml}
+          ${actionsHtml}
+        </div>
+        <button type="button" class="gh-toast__close" aria-label="Close notification">&times;</button>
+      </div>
+      <div class="gh-toast__progress">
+        <div class="gh-toast__progress-fill" style="animation-duration: ${duration}ms;"></div>
+      </div>
+    `;
+
+    container.appendChild(toast);
+
+    let timer = null;
+    let remaining = duration;
+    let startTime = Date.now();
+    let isClosing = false;
+
+    const closeToast = () => {
+      if (isClosing) return;
+      isClosing = true;
+      clearTimeout(timer);
+      toast.classList.add('gh-toast--closing');
+      setTimeout(() => {
+        if (toast.parentNode) toast.parentNode.removeChild(toast);
+      }, 330);
+    };
+
+    if (duration > 0) {
+      timer = setTimeout(closeToast, duration);
+    }
+
+    toast.addEventListener('mouseenter', () => {
+      clearTimeout(timer);
+      remaining -= (Date.now() - startTime);
+    });
+
+    toast.addEventListener('mouseleave', () => {
+      if (remaining > 0 && !isClosing) {
+        startTime = Date.now();
+        timer = setTimeout(closeToast, remaining);
+      }
+    });
+
+    const closeBtn = toast.querySelector('.gh-toast__close');
+    if (closeBtn) closeBtn.addEventListener('click', closeToast);
+
+    const dismissBtn = toast.querySelector(`#${toastId}_dismiss`);
+    if (dismissBtn) dismissBtn.addEventListener('click', closeToast);
+
+    if (action && action.onClick) {
+      const actBtn = toast.querySelector(`#${toastId}_action`);
+      if (actBtn) {
+        actBtn.addEventListener('click', (e) => {
+          action.onClick(e, toast);
+          closeToast();
+        });
+      }
+    } else if (type === 'reservation') {
+      const passBtn = toast.querySelector(`#${toastId}_viewPass`);
+      if (passBtn) {
+        passBtn.addEventListener('click', () => {
+          closeToast();
+          const modalEl = document.getElementById('resReceiptModal');
+          if (modalEl && typeof bootstrap !== 'undefined') {
+            const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+            modal.show();
+          }
+        });
+      }
+    }
+
+    return {
+      id: toastId,
+      element: toast,
+      close: closeToast
+    };
+  }
+};
+
+// Global Exposing
+window.GreenHavenToast = GreenHavenToast;
+window.showToast = function(opts, msg, type) {
+  return GreenHavenToast.show(opts, msg, type);
+};
+window.showToast.success = (title, message, extra) => GreenHavenToast.show({ type: 'success', title, message, ...extra });
+window.showToast.info = (title, message, extra) => GreenHavenToast.show({ type: 'info', title, message, ...extra });
+window.showToast.warning = (title, message, extra) => GreenHavenToast.show({ type: 'warning', title, message, ...extra });
+window.showToast.error = (title, message, extra) => GreenHavenToast.show({ type: 'error', title, message, ...extra });
+window.showToast.reservation = (data) => {
+  return GreenHavenToast.show({
+    type: 'reservation',
+    title: 'Reservation Confirmed! 🎉',
+    message: `Table confirmed for ${data.name || 'our guest'}. We sent booking details to ${data.email || 'your email'}.`,
+    details: {
+      date: data.date,
+      time: data.time,
+      guests: data.guests ? (String(data.guests).includes('Guest') ? data.guests : `${data.guests} Guests`) : '2 Guests',
+      seating: data.seating || 'Indoor Sanctuary'
+    },
+    duration: 8000
+  });
+};
+
+// Gracefully intercept legacy alert(...) so users never see standard browser popups
+if (typeof window !== 'undefined' && !window.__nativeAlert) {
+  window.__nativeAlert = window.alert;
+  window.alert = function(msg) {
+    if (typeof msg === 'string') {
+      const lower = msg.toLowerCase();
+      if (lower.includes('confirm') || lower.includes('success') || lower.includes('added') || lower.includes('saved')) {
+        window.showToast.success('Green Haven Notification', msg);
+        return;
+      } else if (lower.includes('empty') || lower.includes('error') || lower.includes('invalid') || lower.includes('fail') || lower.includes('require')) {
+        window.showToast.warning('Notice', msg);
+        return;
+      }
+    }
+    window.showToast.info('Green Haven Concierge', String(msg));
+  };
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
@@ -713,31 +984,60 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const name = document.getElementById('resName')?.value || 'Guest';
       const email = document.getElementById('resEmail')?.value || 'N/A';
+      const phone = document.getElementById('resPhone')?.value || 'N/A';
       const date = document.getElementById('resDate')?.value || 'Selected Date';
       const time = document.getElementById('resTime')?.value || 'Selected Time';
       const guests = document.getElementById('resGuests')?.value || '2';
       const seating = document.getElementById('resSeating')?.value || 'Indoor Dining';
+      const special = document.getElementById('resSpecial')?.value || '';
+
+      const bookingRef = 'GH-2026-' + Math.floor(10000 + Math.random() * 90000);
 
       const receiptName = document.getElementById('receiptName');
       const receiptEmail = document.getElementById('receiptEmail');
+      const receiptPhone = document.getElementById('receiptPhone');
       const receiptDate = document.getElementById('receiptDate');
       const receiptTime = document.getElementById('receiptTime');
       const receiptGuests = document.getElementById('receiptGuests');
       const receiptSeating = document.getElementById('receiptSeating');
+      const receiptCode = document.getElementById('receiptCode');
 
       if (receiptName) receiptName.textContent = name;
       if (receiptEmail) receiptEmail.textContent = email;
+      if (receiptPhone) receiptPhone.textContent = phone;
       if (receiptDate) receiptDate.textContent = date;
       if (receiptTime) receiptTime.textContent = time;
-      if (receiptGuests) receiptGuests.textContent = `${guests} Guests`;
+      if (receiptGuests) receiptGuests.textContent = String(guests).includes('Guest') ? guests : `${guests} Guests`;
       if (receiptSeating) receiptSeating.textContent = seating;
+      if (receiptCode) receiptCode.textContent = `#${bookingRef}`;
 
+      // Update Google Calendar action button if available
+      const calBtn = document.getElementById('resCalendarBtn');
+      if (calBtn) {
+        const calTitle = encodeURIComponent(`Green Haven Table Reservation (${seating})`);
+        const calDetails = encodeURIComponent(`Table reservation for ${name} (${guests} Guests) at Green Haven Restaurant.\nConfirmation Code: #${bookingRef}\nSeating: ${seating}\nNotes: ${special || 'None'}`);
+        const calLoc = encodeURIComponent('Green Haven Restaurant, 742 Evergreen Botanical Way, Portland');
+        calBtn.href = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${calTitle}&details=${calDetails}&location=${calLoc}`;
+      }
+
+      // 1. Show the Rich Reservation Card Toast Model
+      if (window.showToast && window.showToast.reservation) {
+        window.showToast.reservation({
+          name,
+          email,
+          date,
+          time,
+          guests,
+          seating,
+          code: bookingRef
+        });
+      }
+
+      // 2. Display the Luxury Confirmation Receipt Modal
       const modalEl = document.getElementById('resReceiptModal');
       if (modalEl && typeof bootstrap !== 'undefined') {
-        const modal = new bootstrap.Modal(modalEl);
+        const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
         modal.show();
-      } else {
-        alert(`Reservation Confirmed for ${name}! Date: ${date} at ${time}. Confirmation sent to ${email}.`);
       }
 
       reservationForm.reset();
@@ -802,67 +1102,36 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* --------------------------------------------------
-     12. AUTH FORMS (LOGIN & REGISTER)
+     12. AUTH FORMS & PASSWORD VISIBILITY
   -------------------------------------------------- */
-  const loginForm = document.getElementById('loginForm');
-  if (loginForm) {
-    loginForm.addEventListener('submit', function(e) {
+  // Initialize password visibility toggles across forms
+  document.querySelectorAll('.gh-password-toggle').forEach(btn => {
+    if (btn.dataset.bound) return;
+    btn.dataset.bound = 'true';
+    btn.addEventListener('click', function(e) {
       e.preventDefault();
-      if (!this.checkValidity()) {
-        e.stopPropagation();
-        this.classList.add('was-validated');
-        return;
-      }
-      const email = document.getElementById('loginEmail')?.value;
-      const feedback = document.getElementById('loginFeedback');
-      if (feedback) {
-        feedback.innerHTML = `
-          <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-            <i class="bi bi-check-circle-fill me-2"></i>
-            Signed in successfully as <strong>${email}</strong>. Welcome back!
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-        `;
-      }
-    });
-  }
-
-  const registerForm = document.getElementById('registerForm');
-  if (registerForm) {
-    registerForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const pass = document.getElementById('regPassword')?.value;
-      const confirmPass = document.getElementById('regConfirmPassword')?.value;
-      const confirmInput = document.getElementById('regConfirmPassword');
-
-      if (pass !== confirmPass) {
-        if (confirmInput) confirmInput.setCustomValidity('Passwords do not match');
+      e.stopPropagation();
+      const targetId = this.getAttribute('data-target');
+      const input = document.getElementById(targetId);
+      if (!input) return;
+      const icon = this.querySelector('i');
+      if (input.type === 'password') {
+        input.type = 'text';
+        if (icon) {
+          icon.classList.remove('bi-eye');
+          icon.classList.add('bi-eye-slash');
+        }
+        this.setAttribute('aria-label', 'Hide password');
       } else {
-        if (confirmInput) confirmInput.setCustomValidity('');
+        input.type = 'password';
+        if (icon) {
+          icon.classList.remove('bi-eye-slash');
+          icon.classList.add('bi-eye');
+        }
+        this.setAttribute('aria-label', 'Show password');
       }
-
-      if (!this.checkValidity()) {
-        e.stopPropagation();
-        this.classList.add('was-validated');
-        return;
-      }
-
-      const name = document.getElementById('regName')?.value;
-      const feedback = document.getElementById('registerFeedback');
-      if (feedback) {
-        feedback.innerHTML = `
-          <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-            <i class="bi bi-check-circle-fill me-2"></i>
-            Account created successfully for <strong>${name}</strong>! Redirecting to login...
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-        `;
-      }
-      setTimeout(() => {
-        window.location.href = 'login.html';
-      }, 1200);
     });
-  }
+  });
 
   /* --------------------------------------------------
      13. NEWSLETTER FORMS

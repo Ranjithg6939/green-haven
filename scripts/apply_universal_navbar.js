@@ -152,7 +152,6 @@ function buildNavbarSnippet(activeKey) {
         <div id="mobileNavAuthContainer" class="mb-3">
           <div class="d-flex gap-2">
             <a href="login.html" class="btn btn-outline-primary btn-sm flex-fill"><i class="bi bi-box-arrow-in-right me-1"></i> Sign In</a>
-            <a href="register.html" class="btn btn-primary btn-sm flex-fill"><i class="bi bi-person-plus me-1"></i> Register</a>
           </div>
         </div>
         <nav class="d-flex flex-column gap-2">

@@ -203,84 +203,74 @@
             </div>
 
             <!-- Registration Form -->
-            <form id="registerForm" novalidate>
+            <form id="registerForm" novalidate autocomplete="off">
               <div class="row g-3">
                 
-                <div class="col-12">
-                  <label class="form-label" for="regName">Full Name *</label>
+                <!-- First Name -->
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold" for="regFirstName">First Name *</label>
                   <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-person"></i></span>
-                    <input type="text" class="form-control" id="regName" placeholder="e.g. Liam Montgomery" required>
-                    <div class="invalid-feedback">Please enter your full name.</div>
+                    <input type="text" class="form-control" id="regFirstName" placeholder="e.g. Liam" required autocomplete="given-name">
                   </div>
+                  <div class="invalid-feedback" id="regFirstNameFeedback">Please enter your first name.</div>
                 </div>
 
+                <!-- Last Name -->
                 <div class="col-md-6">
-                  <label class="form-label" for="regEmail">Email Address *</label>
+                  <label class="form-label fw-semibold" for="regLastName">Last Name *</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                    <input type="text" class="form-control" id="regLastName" placeholder="e.g. Montgomery" required autocomplete="family-name">
+                  </div>
+                  <div class="invalid-feedback" id="regLastNameFeedback">Please enter your last name.</div>
+                </div>
+
+                <!-- Email Address -->
+                <div class="col-12">
+                  <label class="form-label fw-semibold" for="regEmail">Email Address *</label>
                   <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                    <input type="email" class="form-control" id="regEmail" placeholder="e.g. liam@example.com" required>
-                    <div class="invalid-feedback">Please provide a valid email.</div>
+                    <input type="email" class="form-control" id="regEmail" placeholder="e.g. liam@example.com" required autocomplete="email">
                   </div>
+                  <div class="invalid-feedback" id="regEmailFeedback">This field is required.</div>
                 </div>
 
+                <!-- Password -->
                 <div class="col-md-6">
-                  <label class="form-label" for="regPhone">Phone Number *</label>
-                  <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-telephone"></i></span>
-                    <input type="tel" class="form-control" id="regPhone" placeholder="e.g. (503) 555-0144" required>
-                    <div class="invalid-feedback">Please enter phone number.</div>
-                  </div>
-                </div>
-
-                <div class="col-12">
-                  <label class="form-label" for="regDiet">Dietary Style Preference</label>
-                  <select class="form-select" id="regDiet">
-                    <option value="100% Plant-Based / Vegan" selected>100% Plant-Based / Vegan</option>
-                    <option value="Gluten-Free & Vegan">Gluten-Free & Vegan</option>
-                    <option value="Raw Living Vegan">Raw Living Vegan</option>
-                    <option value="Nut-Free Vegan">Nut-Free Vegan</option>
-                    <option value="Plant-Curious">Plant-Curious / Flexitarian</option>
-                  </select>
-                </div>
-
-                <div class="col-md-6">
-                  <label class="form-label" for="regPassword">Password *</label>
-                  <div class="input-group">
+                  <label class="form-label fw-semibold" for="regPassword">Password *</label>
+                  <div class="input-group gh-password-group">
                     <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                    <input type="password" class="form-control" id="regPassword" placeholder="••••••••" required minlength="6">
-                    <div class="invalid-feedback">At least 6 characters required.</div>
+                    <input type="password" class="form-control gh-password-input" id="regPassword" placeholder="Min. 8 characters" required minlength="8" autocomplete="new-password">
+                    <button type="button" class="gh-password-toggle" data-target="regPassword" aria-label="Toggle password visibility" tabindex="-1">
+                      <i class="bi bi-eye"></i>
+                    </button>
                   </div>
+                  <div class="invalid-feedback" id="regPasswordFeedback">This field is required.</div>
                 </div>
 
+                <!-- Confirm Password -->
                 <div class="col-md-6">
-                  <label class="form-label" for="regConfirmPassword">Confirm Password *</label>
-                  <div class="input-group">
+                  <label class="form-label fw-semibold" for="regConfirmPassword">Confirm Password *</label>
+                  <div class="input-group gh-password-group">
                     <span class="input-group-text"><i class="bi bi-shield-lock"></i></span>
-                    <input type="password" class="form-control" id="regConfirmPassword" placeholder="••••••••" required>
-                    <div class="invalid-feedback">Passwords must match.</div>
+                    <input type="password" class="form-control gh-password-input" id="regConfirmPassword" placeholder="Confirm password" required autocomplete="new-password">
+                    <button type="button" class="gh-password-toggle" data-target="regConfirmPassword" aria-label="Toggle password visibility" tabindex="-1">
+                      <i class="bi bi-eye"></i>
+                    </button>
                   </div>
-                </div>
-
-                <div class="col-12">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="regTerms" required checked>
-                    <label class="form-check-label text-muted small" for="regTerms">
-                      I agree to the <a href="404.html" class="text-success">Terms of Service</a> & <a href="404.html" class="text-success">Privacy Policy</a>.
-                    </label>
-                    <div class="invalid-feedback">You must agree before submitting.</div>
-                  </div>
+                  <div class="invalid-feedback" id="regConfirmPasswordFeedback">This field is required.</div>
                 </div>
 
                 <div class="col-12 mt-4">
-                  <button type="submit" class="btn btn-primary w-100 py-2 fs-6">
-                    <i class="bi bi-person-check-fill me-1"></i> Create Free Account
+                  <button type="submit" class="btn btn-primary w-100 py-3 fs-6 fw-bold" id="btnRegisterSubmit">
+                    <i class="bi bi-person-check-fill me-1"></i> Create Account
                   </button>
                 </div>
               </div>
             </form>
 
-            <div id="registerFeedback"></div>
+            <div id="registerFeedback" class="mt-3"></div>
 
             <div class="text-center mt-3 pt-3 border-top">
               <small class="text-muted">Already have a Green Haven account?</small>
@@ -316,22 +306,22 @@
           </div>
         </div>
 
-        <!-- Column 2: Navigation -->
-        <div class="col-6 col-md-4 col-lg-2">
+        <!-- Column 2: Navigation Links -->
+        <div class="col-lg-2 col-md-6">
           <h4 class="footer-col-title">Navigation</h4>
-          <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
-            <li><a href="index.html" class="footer-link"><i class="bi bi-chevron-right"></i> Home</a></li>
-            <li><a href="about.html" class="footer-link"><i class="bi bi-chevron-right"></i> About Us</a></li>
-            <li><a href="menu.html" class="footer-link"><i class="bi bi-chevron-right"></i> Our Menu</a></li>
-            <li><a href="cart.html" class="footer-link"><i class="bi bi-chevron-right"></i> Food Cart</a></li>
-            <li><a href="catering.html" class="footer-link"><i class="bi bi-chevron-right"></i> Catering</a></li>
-            <li><a href="contact.html" class="footer-link"><i class="bi bi-chevron-right"></i> Contact Us</a></li>
+          <ul class="footer-links">
+            <li><a href="index.html">Sanctuary Home</a></li>
+            <li><a href="menu.html">Seasonal Gastronomy</a></li>
+            <li><a href="about.html">Our Living Ethos</a></li>
+            <li><a href="reservation.html">Reserve a Table</a></li>
+            <li><a href="catering.html">Private Celebrations</a></li>
+            <li><a href="contact.html">Hospitality Concierge</a></li>
           </ul>
         </div>
 
-        <!-- Column 3: Hours & Location -->
-        <div class="col-6 col-md-4 col-lg-3">
-          <h4 class="footer-col-title">Hours & Location</h4>
+        <!-- Column 3: Contact Details -->
+        <div class="col-lg-3 col-md-6">
+          <h4 class="footer-col-title">The Sanctuary</h4>
           <p class="text-white-50 small mb-2"><i class="bi bi-geo-alt text-warning me-2"></i> 742 Evergreen Botanical Way, Portland</p>
           <p class="text-white-50 small mb-2"><i class="bi bi-clock text-warning me-2"></i> Mon - Sun: 8:00 AM - 10:00 PM</p>
           <p class="text-white-50 small mb-0"><i class="bi bi-telephone text-warning me-2"></i> <a href="tel:+15035550192" class="text-white text-decoration-none" style="color: #FFFFFF !important;">+1 (503) 555-0192</a></p>
@@ -354,14 +344,18 @@
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
           <div>&copy; 2026 Green Haven Restaurant. All Rights Reserved.</div>
           <div class="d-flex gap-3">
-            <a href="#" class="text-white-50 text-decoration-none hover-white">Privacy Policy</a>
+            <a href="404.html" class="text-white-50 text-decoration-none hover-white">Privacy Policy</a>
             <span>&bull;</span>
-            <a href="#" class="text-white-50 text-decoration-none hover-white">Terms &amp; Conditions</a>
+            <a href="404.html" class="text-white-50 text-decoration-none hover-white">Terms &amp; Conditions</a>
           </div>
         </div>
       </div>
     </div>
   </footer>
+
+  <button class="back-to-top" aria-label="Scroll back to top">
+    <i class="bi bi-arrow-up"></i>
+  </button>
 
   <script src="assets/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/main.js"></script>
@@ -377,48 +371,167 @@
       }
 
       const registerForm = document.getElementById('registerForm');
+      const btnSubmit = document.getElementById('btnRegisterSubmit');
+
+      const firstNameInput = document.getElementById('regFirstName');
+      const lastNameInput = document.getElementById('regLastName');
+      const emailInput = document.getElementById('regEmail');
+      const passInput = document.getElementById('regPassword');
+      const confirmInput = document.getElementById('regConfirmPassword');
+
+      const firstNameFeedback = document.getElementById('regFirstNameFeedback');
+      const lastNameFeedback = document.getElementById('regLastNameFeedback');
+      const emailFeedback = document.getElementById('regEmailFeedback');
+      const passFeedback = document.getElementById('regPasswordFeedback');
+      const confirmFeedback = document.getElementById('regConfirmPasswordFeedback');
+
+      function setError(input, feedbackEl, message) {
+        if (!input) return;
+        input.classList.add('is-invalid');
+        if (feedbackEl) {
+          feedbackEl.textContent = message;
+          feedbackEl.style.display = 'block';
+        }
+      }
+
+      function clearError(input, feedbackEl) {
+        if (!input) return;
+        input.classList.remove('is-invalid');
+        if (feedbackEl) {
+          feedbackEl.style.display = '';
+        }
+      }
+
+      // Real-time error clearing when user edits fields
+      [
+        { input: firstNameInput, feedback: firstNameFeedback },
+        { input: lastNameInput, feedback: lastNameFeedback },
+        { input: emailInput, feedback: emailFeedback },
+        { input: passInput, feedback: passFeedback },
+        { input: confirmInput, feedback: confirmFeedback }
+      ].forEach(pair => {
+        if (pair.input) {
+          pair.input.addEventListener('input', () => clearError(pair.input, pair.feedback));
+        }
+      });
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
       if (registerForm) {
         registerForm.addEventListener('submit', function (e) {
           e.preventDefault();
 
-          const pass = document.getElementById('regPassword').value;
-          const confirmPass = document.getElementById('regConfirmPassword').value;
-          const confirmInput = document.getElementById('regConfirmPassword');
+          let hasError = false;
 
-          if (pass !== confirmPass) {
-            confirmInput.setCustomValidity('Passwords do not match');
+          const firstNameVal = firstNameInput ? firstNameInput.value.trim() : '';
+          const lastNameVal = lastNameInput ? lastNameInput.value.trim() : '';
+          const emailVal = emailInput ? emailInput.value.trim().toLowerCase() : '';
+          const passVal = passInput ? passInput.value : '';
+          const confirmVal = confirmInput ? confirmInput.value : '';
+
+          // 1. First Name check
+          if (!firstNameVal) {
+            setError(firstNameInput, firstNameFeedback, 'Please enter your first name.');
+            hasError = true;
           } else {
-            confirmInput.setCustomValidity('');
+            clearError(firstNameInput, firstNameFeedback);
           }
 
-          if (!this.checkValidity()) {
-            e.stopPropagation();
-            this.classList.add('was-validated');
+          // 2. Last Name check
+          if (!lastNameVal) {
+            setError(lastNameInput, lastNameFeedback, 'Please enter your last name.');
+            hasError = true;
+          } else {
+            clearError(lastNameInput, lastNameFeedback);
+          }
+
+          // 3. Email check
+          if (!emailVal) {
+            setError(emailInput, emailFeedback, 'This field is required.');
+            hasError = true;
+          } else if (!emailRegex.test(emailVal)) {
+            setError(emailInput, emailFeedback, 'Please enter a valid email address.');
+            hasError = true;
+          } else if (window.GH_Auth && window.GH_Auth.findUserByEmail(emailVal)) {
+            setError(emailInput, emailFeedback, 'An account with this email already exists.');
+            if (window.showToast) {
+              window.showToast.warning('Account Exists', 'An account with this email already exists.');
+            }
+            hasError = true;
+          } else {
+            clearError(emailInput, emailFeedback);
+          }
+
+          // 4. Password check (minimum 8 characters)
+          if (!passVal) {
+            setError(passInput, passFeedback, 'This field is required.');
+            hasError = true;
+          } else if (passVal.length < 8) {
+            setError(passInput, passFeedback, 'Password must be at least 8 characters.');
+            hasError = true;
+          } else {
+            clearError(passInput, passFeedback);
+          }
+
+          // 5. Confirm Password check
+          if (!confirmVal) {
+            setError(confirmInput, confirmFeedback, 'This field is required.');
+            hasError = true;
+          } else if (confirmVal !== passVal) {
+            setError(confirmInput, confirmFeedback, 'Passwords do not match.');
+            hasError = true;
+          } else {
+            clearError(confirmInput, confirmFeedback);
+          }
+
+          if (hasError) {
             return;
           }
 
-          const newUser = {
-            name: document.getElementById('regName').value.trim(),
-            email: document.getElementById('regEmail').value.trim(),
-            phone: document.getElementById('regPhone').value.trim(),
-            diet: document.getElementById('regDiet').value,
-            address: '742 Evergreen Terrace',
-            zip: '97201'
-          };
+          // Disable submit button while processing
+          if (btnSubmit) {
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Creating Account...';
+          }
 
-          const feedback = document.getElementById('registerFeedback');
-          if (feedback) {
-            feedback.innerHTML = `
-              <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-                <i class="bi bi-check-circle-fill me-2"></i>
-                Account created successfully for <strong>${newUser.name}</strong>! Redirecting...
-              </div>
-            `;
+          const registerResult = window.GH_Auth.registerUser({
+            name: `${firstNameVal} ${lastNameVal}`.trim(),
+            firstName: firstNameVal,
+            lastName: lastNameVal,
+            email: emailVal,
+            password: passVal
+          });
+
+          if (!registerResult.success) {
+            if (btnSubmit) {
+              btnSubmit.disabled = false;
+              btnSubmit.innerHTML = '<i class="bi bi-person-check-fill me-1"></i> Create Account';
+            }
+            if (registerResult.error === 'duplicate_email') {
+              setError(emailInput, emailFeedback, 'An account with this email already exists.');
+              if (window.showToast) {
+                window.showToast.warning('Account Exists', 'An account with this email already exists.');
+              }
+            }
+            return;
+          }
+
+          // Set flash message for login page
+          try {
+            sessionStorage.setItem('gh_auth_flash', JSON.stringify({
+              type: 'success',
+              title: 'Account Created',
+              message: 'Account created successfully. Please sign in.'
+            }));
+          } catch (err) {}
+
+          if (window.showToast) {
+            window.showToast.success('Account Created', 'Account created successfully. Please sign in.');
           }
 
           setTimeout(() => {
-            GH_Auth.registerUser(newUser, redirectTarget);
-          }, 800);
+            window.location.href = `login.html?redirect=${encodeURIComponent(redirectTarget)}&email=${encodeURIComponent(emailVal)}&registered=1`;
+          }, 450);
         });
       }
     });

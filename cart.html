@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
 <head>
   <meta charset="UTF-8">
@@ -525,15 +525,23 @@
         btnProceedCheckout.addEventListener('click', (e) => {
           e.preventDefault();
           if (GH_Cart.getCart().length === 0) {
-            alert('Your cart is empty! Please add items before checking out.');
+            if (window.showToast) {
+              window.showToast.warning('Cart Empty', 'Your cart is empty! Please add items before checking out.');
+            } else {
+              alert('Your cart is empty! Please add items before checking out.');
+            }
             return;
           }
 
           if (GH_Auth.isLoggedIn()) {
             window.location.href = 'checkout.html';
           } else {
-            // Guard: Guest cannot checkout directly
-            window.location.href = 'login.html?redirect=checkout.html';
+            // Guard: Guest cannot checkout directly - prompt with Auth modal
+            GH_Auth.showAuthPrompt({
+              message: 'Please sign in to continue with your order.',
+              pendingAction: { type: 'checkout' },
+              returnUrl: 'checkout.html'
+            });
           }
         });
       }

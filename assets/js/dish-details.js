@@ -942,7 +942,11 @@
             bsModalInstance.hide();
           }
         } else {
-          alert(`Added ${qty}x ${currentModalDish.name} to cart!`);
+          if (window.showToast) {
+            window.showToast.success('Added to Cart', `Added ${qty}x ${currentModalDish.name} to cart!`);
+          } else {
+            alert(`Added ${qty}x ${currentModalDish.name} to cart!`);
+          }
         }
       });
     }

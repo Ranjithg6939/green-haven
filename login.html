@@ -225,24 +225,27 @@
             <!-- Form with Client Validation -->
             <form id="loginForm" novalidate>
               <div class="mb-3">
-                <label class="form-label" for="loginEmail">Email Address</label>
+                <label class="form-label fw-semibold" for="loginEmail">Email Address</label>
                 <div class="input-group">
                   <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                  <input type="email" class="form-control" id="loginEmail" placeholder="e.g. guest@greenhaven.com" required value="maya@greenhaven.com">
-                  <div class="invalid-feedback">Please enter a valid email address.</div>
+                  <input type="email" class="form-control" id="loginEmail" placeholder="e.g. guest@greenhaven.com" required autocomplete="email">
                 </div>
+                <div class="invalid-feedback" id="loginEmailFeedback">Please enter a valid email address.</div>
               </div>
 
               <div class="mb-3">
                 <div class="d-flex justify-content-between align-items-center mb-1">
-                  <label class="form-label mb-0" for="loginPassword">Password</label>
-                  <a href="#" class="small text-success fw-semibold" onclick="alert('Password reset link sent to your email.'); return false;">Forgot password?</a>
+                  <label class="form-label fw-semibold mb-0" for="loginPassword">Password</label>
+                  <a href="#" class="small text-success fw-semibold" onclick="if (window.showToast) { window.showToast.info('Password Reset', 'Password reset link sent to your email.'); } else { alert('Password reset link sent to your email.'); } return false;">Forgot password?</a>
                 </div>
-                <div class="input-group">
+                <div class="input-group gh-password-group">
                   <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                  <input type="password" class="form-control" id="loginPassword" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" required minlength="6" value="vegan2026">
-                  <div class="invalid-feedback">Password must be at least 6 characters.</div>
+                  <input type="password" class="form-control gh-password-input" id="loginPassword" placeholder="Enter your password" required autocomplete="current-password">
+                  <button type="button" class="gh-password-toggle" data-target="loginPassword" aria-label="Toggle password visibility" tabindex="-1">
+                    <i class="bi bi-eye"></i>
+                  </button>
                 </div>
+                <div class="invalid-feedback" id="loginPasswordFeedback">Please enter your password.</div>
               </div>
 
               <div class="form-check mb-4">
@@ -252,8 +255,8 @@
                 </label>
               </div>
 
-              <button type="submit" class="btn btn-primary w-100 py-2 fs-6 mb-3">
-                <i class="bi bi-box-arrow-in-right me-1"></i> Sign In to Account
+              <button type="submit" class="btn btn-primary w-100 py-2.5 fs-6 fw-bold mb-3" id="btnLoginSubmit">
+                <i class="bi bi-box-arrow-in-right me-1"></i> Sign In
               </button>
             </form>
 
@@ -269,7 +272,7 @@
 
             <div class="text-center mt-4 pt-3 border-top">
               <small class="text-muted">Don't have an account?</small>
-              <a href="register.html" class="text-success fw-bold ms-1 small" id="registerLink">Register</a>
+              <a href="register.html" class="text-success fw-bold ms-1 small" id="registerLink">Create Account</a>
             </div>
 
           </div>
@@ -356,6 +359,35 @@
       const urlParams = new URLSearchParams(window.location.search);
       const redirectTarget = urlParams.get('redirect') || 'my-account.html';
 
+      // Check for flash toast message (e.g., from registration redirect)
+      try {
+        const rawFlash = sessionStorage.getItem('gh_auth_flash');
+        if (rawFlash) {
+          sessionStorage.removeItem('gh_auth_flash');
+          const flash = JSON.parse(rawFlash);
+          if (flash && flash.message) {
+            setTimeout(() => {
+              if (window.showToast) {
+                if (flash.type === 'success' && typeof window.showToast.success === 'function') {
+                  window.showToast.success(flash.title || 'Success', flash.message);
+                } else if (typeof window.showToast === 'function') {
+                  window.showToast({ type: flash.type || 'success', title: flash.title || 'Success', message: flash.message });
+                }
+              }
+            }, 250);
+          }
+        }
+      } catch (e) {}
+
+      // Pre-fill email if passed in query string (e.g. from registration)
+      const emailQuery = urlParams.get('email');
+      const emailInput = document.getElementById('loginEmail');
+      const passwordInput = document.getElementById('loginPassword');
+      if (emailQuery && emailInput) {
+        emailInput.value = decodeURIComponent(emailQuery);
+        if (passwordInput) passwordInput.focus();
+      }
+
       // Show notice if redirected from protected checkout or orders
       if (urlParams.get('redirect')) {
         const alertEl = document.getElementById('checkoutRedirectAlert');
@@ -375,8 +407,16 @@
       const btnFillDemo = document.getElementById('btnFillDemoUser');
       if (btnFillDemo) {
         btnFillDemo.addEventListener('click', () => {
-          document.getElementById('loginEmail').value = 'maya@greenhaven.com';
-          document.getElementById('loginPassword').value = 'vegan2026';
+          if (emailInput) {
+            emailInput.value = 'maya@greenhaven.com';
+            emailInput.classList.remove('is-invalid');
+          }
+          if (passwordInput) {
+            passwordInput.value = 'vegan2026';
+            passwordInput.classList.remove('is-invalid');
+          }
+          const feedback = document.getElementById('loginFeedback');
+          if (feedback) feedback.innerHTML = '';
         });
       }
 
@@ -395,49 +435,110 @@
         });
       }
 
+      // Validation Helpers
+      const emailFeedback = document.getElementById('loginEmailFeedback');
+      const passwordFeedback = document.getElementById('loginPasswordFeedback');
+
+      function setInputError(input, feedbackEl, message) {
+        if (!input) return;
+        input.classList.add('is-invalid');
+        if (feedbackEl) {
+          feedbackEl.textContent = message;
+          feedbackEl.style.display = 'block';
+        }
+      }
+
+      function clearInputError(input, feedbackEl) {
+        if (!input) return;
+        input.classList.remove('is-invalid');
+        if (feedbackEl) {
+          feedbackEl.style.display = '';
+        }
+      }
+
+      if (emailInput) {
+        emailInput.addEventListener('input', () => clearInputError(emailInput, emailFeedback));
+      }
+      if (passwordInput) {
+        passwordInput.addEventListener('input', () => clearInputError(passwordInput, passwordFeedback));
+      }
+
       // Handle Standard Login Form
       const loginForm = document.getElementById('loginForm');
       if (loginForm) {
         loginForm.addEventListener('submit', function (e) {
           e.preventDefault();
 
-          if (!this.checkValidity()) {
-            e.stopPropagation();
-            this.classList.add('was-validated');
+          clearInputError(emailInput, emailFeedback);
+          clearInputError(passwordInput, passwordFeedback);
+
+          const email = (emailInput ? emailInput.value : '').trim();
+          const password = passwordInput ? passwordInput.value : '';
+
+          let hasError = false;
+
+          // 1. Required & format validation
+          if (!email) {
+            setInputError(emailInput, emailFeedback, 'Email address is required.');
+            hasError = true;
+          } else {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+              setInputError(emailInput, emailFeedback, 'Please enter a valid email address.');
+              hasError = true;
+            }
+          }
+
+          if (!password) {
+            setInputError(passwordInput, passwordFeedback, 'Password is required.');
+            hasError = true;
+          }
+
+          if (hasError) return;
+
+          // 2. Validate against registered accounts
+          const result = GH_Auth.validateCredentials(email, password);
+
+          if (!result.success) {
+            if (result.error === 'not_found') {
+              setInputError(emailInput, emailFeedback, 'Account not found. Please create an account first.');
+              if (window.showToast) {
+                window.showToast.error('Account Not Found', 'Account not found. Please create an account first.');
+              }
+            } else if (result.error === 'wrong_password') {
+              setInputError(passwordInput, passwordFeedback, 'Incorrect password. Please try again.');
+              if (window.showToast) {
+                window.showToast.error('Invalid Password', 'Incorrect password. Please try again.');
+              }
+            }
             return;
           }
 
-          const email = document.getElementById('loginEmail').value.trim();
-          let userName = 'Maya Lin';
-          if (email.includes('@')) {
-            const part = email.split('@')[0];
-            userName = part.charAt(0).toUpperCase() + part.slice(1);
-          }
-
-          const existingUser = GH_Auth.getCurrentUser();
-          const userData = existingUser && existingUser.email === email ? existingUser : {
-            name: userName,
-            email: email,
-            phone: '(503) 555-0182',
-            address: '742 Evergreen Terrace',
-            zip: '97201',
-            diet: '100% Plant-Based / Vegan'
-          };
-
+          // 3. Success Login
+          const user = result.user;
           const feedback = document.getElementById('loginFeedback');
           if (feedback) {
             feedback.innerHTML = `
               <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
                 <i class="bi bi-check-circle-fill me-2"></i>
-                Signed in successfully as <strong>${userData.name}</strong>. Returning to your destination...
+                Signed in successfully as <strong>${escapeHtml(user.name)}</strong>. Redirecting...
               </div>
             `;
           }
 
-          setTimeout(() => {
-            GH_Auth.loginUser(userData, redirectTarget);
-          }, 800);
+          GH_Auth.loginUser(user, redirectTarget);
         });
+      }
+
+      function escapeHtml(str) {
+        if (!str) return '';
+        return String(str).replace(/[&<>"']/g, m => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;'
+        })[m]);
       }
 
     });
