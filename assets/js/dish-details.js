@@ -837,7 +837,7 @@
                     <label for="dishModalInstructions" class="form-label extra-small text-muted fw-bold text-uppercase letter-spacing-1 mb-1" style="font-size: 0.72rem;">
                       <i class="bi bi-pencil-square text-success me-1"></i> Special Instructions
                     </label>
-                    <textarea class="form-control form-control-sm rounded-3 py-1.5 px-2.5" id="dishModalInstructions" rows="1" placeholder="e.g., Dressing on side, extra herbs..." style="font-size: 0.82rem; min-height: 38px;"></textarea>
+                    <textarea class="form-control form-control-sm rounded-3 py-1.5 px-2.5" id="dishModalInstructions" rows="1" placeholder="e.g., Dressing on side, extra herbs...\u200E" style="font-size: 0.82rem; min-height: 38px;"></textarea>
                   </div>
 
                   <!-- Quantity Selector & Primary Add to Cart -->

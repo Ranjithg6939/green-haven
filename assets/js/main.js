@@ -345,6 +345,82 @@ document.addEventListener('DOMContentLoaded', () => {
   const rtlToggleBtns = document.querySelectorAll('.rtl-toggle-btn');
   const storedDir = localStorage.getItem('site-dir') || 'ltr';
 
+  const PUNCT_END_REGEX = /([.?!:;…\)\]"'\u201D\u2019]+)(\s*)$/;
+
+  function fixAllPunctuationBidi(isRtl) {
+    // 1. All text nodes across the document (headings, paragraphs, lists, spans, labels, etc.)
+    try {
+      if (document.body) {
+        const walker = document.createTreeWalker(
+          document.body,
+          NodeFilter.SHOW_TEXT,
+          {
+            acceptNode(node) {
+              const parent = node.parentElement;
+              if (!parent) return NodeFilter.FILTER_REJECT;
+              const tag = parent.tagName.toLowerCase();
+              if (
+                tag === 'script' ||
+                tag === 'style' ||
+                tag === 'code' ||
+                tag === 'pre' ||
+                tag === 'noscript' ||
+                tag === 'textarea' ||
+                tag === 'svg'
+              ) {
+                return NodeFilter.FILTER_REJECT;
+              }
+              // Skip elements with strict LTR isolation
+              if (parent.closest('.price, [data-price], .numeric, .ltr-isolate, bdi')) {
+                return NodeFilter.FILTER_REJECT;
+              }
+              const val = node.nodeValue;
+              if (!val || !val.trim()) return NodeFilter.FILTER_REJECT;
+              return NodeFilter.FILTER_ACCEPT;
+            }
+          }
+        );
+
+        const textNodes = [];
+        let cur;
+        while ((cur = walker.nextNode())) {
+          textNodes.push(cur);
+        }
+
+        textNodes.forEach(node => {
+          const text = node.nodeValue;
+          if (isRtl) {
+            // If text ends with punctuation and isn't already followed by \u200E
+            if (PUNCT_END_REGEX.test(text) && !/\u200E(\s*)$/.test(text)) {
+              node.nodeValue = text.replace(PUNCT_END_REGEX, '$1\u200E$2');
+            }
+          } else {
+            if (text.includes('\u200E')) {
+              node.nodeValue = text.replace(/\u200E/g, '');
+            }
+          }
+        });
+      }
+    } catch (err) {}
+
+    // 2. All input and textarea placeholders across the site
+    try {
+      document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(el => {
+        let ph = el.getAttribute('data-original-ph') || el.getAttribute('placeholder') || '';
+        if (!el.hasAttribute('data-original-ph')) {
+          el.setAttribute('data-original-ph', ph);
+        }
+        if (isRtl) {
+          if (PUNCT_END_REGEX.test(ph.trim()) && !ph.endsWith('\u200E')) {
+            el.setAttribute('placeholder', ph + '\u200E');
+          }
+        } else {
+          el.setAttribute('placeholder', ph.replace(/\u200E$/, ''));
+        }
+      });
+    } catch (err) {}
+  }
+
   function applyDir(dir) {
     document.documentElement.setAttribute('dir', dir);
     if (dir === 'rtl') {
@@ -354,6 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.setAttribute('aria-label', 'Switch to Left-to-Right layout (LTR)');
         btn.setAttribute('title', 'Switch to Left-to-Right layout (LTR)');
       });
+      fixAllPunctuationBidi(true);
     } else {
       document.documentElement.classList.remove('rtl');
       rtlToggleBtns.forEach(btn => {
@@ -361,6 +438,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.setAttribute('aria-label', 'Switch to Right-to-Left layout (RTL)');
         btn.setAttribute('title', 'Switch to Right-to-Left layout (RTL)');
       });
+      fixAllPunctuationBidi(false);
     }
     localStorage.setItem('site-dir', dir);
     window.dispatchEvent(new CustomEvent('siteDirectionChange', { detail: { dir } }));
@@ -378,15 +456,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Re-run punctuation protection when modals are shown or DOM loads in RTL mode
+  document.addEventListener('show.bs.modal', () => {
+    if (document.documentElement.getAttribute('dir') === 'rtl') {
+      setTimeout(() => fixAllPunctuationBidi(true), 50);
+    }
+  });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      if (document.documentElement.getAttribute('dir') === 'rtl') {
+        fixAllPunctuationBidi(true);
+      }
+    });
+  } else {
+    if (document.documentElement.getAttribute('dir') === 'rtl') {
+      fixAllPunctuationBidi(true);
+    }
+  }
+
   /* --------------------------------------------------
      3. STICKY NAVBAR & BACK-TO-TOP BUTTON
   -------------------------------------------------- */
   const navbars = document.querySelectorAll('.gh-navbar, .nx-navbar');
   const backToTopBtn = document.querySelector('.back-to-top');
 
-  window.addEventListener('scroll', () => {
+  function checkNavbarScroll() {
+    const isScrolled = window.scrollY > 20;
     navbars.forEach(navbar => {
-      if (window.scrollY > 40) {
+      if (isScrolled) {
         navbar.classList.add('scrolled');
       } else {
         navbar.classList.remove('scrolled');
@@ -400,7 +498,33 @@ document.addEventListener('DOMContentLoaded', () => {
         backToTopBtn.classList.remove('show');
       }
     }
-  });
+  }
+
+  window.addEventListener('scroll', checkNavbarScroll, { passive: true });
+  checkNavbarScroll();
+
+  /* Universal Active Navigation Link Highlighter */
+  function updateActiveNavLinks() {
+    const rawPath = window.location.pathname;
+    let page = rawPath.split('/').pop() || 'index.html';
+    if (page === '' || page === '/') page = 'index.html';
+
+    document.querySelectorAll('.gh-navbar .gh-nav-link, .gh-navbar .gh-dropdown-item, .offcanvas nav .gh-nav-link').forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || href === '#' || href.startsWith('javascript:')) return;
+      const targetPage = href.split('/').pop().split('#')[0];
+      if (targetPage === page) {
+        link.classList.add('active');
+        const dropdown = link.closest('.dropdown');
+        if (dropdown) {
+          const toggle = dropdown.querySelector('.dropdown-toggle');
+          if (toggle) toggle.classList.add('active');
+        }
+      }
+    });
+  }
+
+  updateActiveNavLinks();
 
   if (backToTopBtn) {
     backToTopBtn.addEventListener('click', (e) => {

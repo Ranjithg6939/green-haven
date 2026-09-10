@@ -50,10 +50,10 @@
   --gh-text-muted: #5C554E;       /* Muted Warm Slate - Enhanced Light Mode Contrast */
   --gh-footer-bg: #1C1917;        /* Deep Obsidian Espresso Footer */
 
-  /* Global Typography System */
-  --font-serif: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --font-heading: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  /* Global Typography System (Unified for both LTR & RTL) */
+  --font-serif: 'Playfair Display', 'Cormorant Garamond', 'Amiri', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', 'Cairo', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Playfair Display', 'Cormorant Garamond', 'Amiri', Georgia, serif;
 
   /* Global Elevation & Radius */
   --shadow-sm: 0 2px 10px rgba(45, 42, 38, 0.04);
@@ -350,9 +350,10 @@ html.dark .catering-nature-page h1[style*="color: #113813"] {
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 84px;
   font-size: 16px;
   min-height: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
 }
 
@@ -366,10 +367,14 @@ body {
   line-height: 1.7;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
   max-width: 100%;
   transition: color 0.3s ease, background 0.3s ease;
+}
+
+[id] {
+  scroll-margin-top: 92px;
 }
 
 [data-bs-theme="dark"] body,
@@ -628,6 +633,83 @@ html.dark .btn-outline-primary:hover {
   color: #ffffff;
 }
 
+/* Modal Close Buttons: Dark Green color only */
+.btn-modal-close,
+.modal-footer .btn-secondary {
+  background-color: #2E6518 !important;
+  border-color: #2E6518 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  border-radius: var(--radius-full);
+  padding: 0.65rem 1.6rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(46, 101, 24, 0.3);
+  cursor: pointer;
+}
+
+.btn-modal-close:hover {
+  background-color: #224D12 !important;
+  border-color: #224D12 !important;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 101, 24, 0.45) !important;
+}
+
+/* Click / Active / Pressed: Change to RED color */
+.btn-modal-close:active,
+.btn-modal-close:focus,
+.btn-modal-close.btn-clicked-red,
+.modal-footer .btn-secondary:active,
+.modal-footer .btn-secondary:focus,
+.modal-footer .btn-secondary.btn-clicked-red {
+  transform: translateY(0) scale(0.96);
+  background-color: #DC3545 !important;
+  border-color: #DC3545 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 18px rgba(220, 53, 69, 0.55) !important;
+}
+
+/* Dark mode support */
+[data-bs-theme="dark"] .btn-modal-close,
+[data-bs-theme="dark"] .modal-footer .btn-secondary,
+html.dark .btn-modal-close,
+html.dark .modal-footer .btn-secondary {
+  background-color: #2E6518 !important;
+  border-color: #2E6518 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+[data-bs-theme="dark"] .btn-modal-close:hover,
+[data-bs-theme="dark"] .btn-modal-close:focus,
+[data-bs-theme="dark"] .modal-footer .btn-secondary:hover,
+[data-bs-theme="dark"] .modal-footer .btn-secondary:focus,
+html.dark .btn-modal-close:hover,
+html.dark .btn-modal-close:focus,
+html.dark .modal-footer .btn-secondary:hover,
+html.dark .modal-footer .btn-secondary:focus {
+  background-color: #387B1E !important;
+  border-color: #387B1E !important;
+  color: #ffffff !important;
+}
+
+/* Modal header top-right close icon */
+.modal-header .btn-close {
+  opacity: 0.75;
+  transition: all 0.25s ease-in-out;
+  border-radius: 50%;
+  padding: 0.55rem;
+}
+
+.modal-header .btn-close:hover,
+.modal-header .btn-close:focus,
+.modal-header .btn-close:active {
+  opacity: 1;
+  background-color: #A8E6CF;
+  transform: rotate(90deg);
+  box-shadow: 0 2px 8px rgba(168, 230, 207, 0.5);
+}
+
 .btn-light-green {
   background-color: var(--gh-primary-light);
   border-color: var(--gh-secondary);
@@ -752,9 +834,12 @@ html.dark .btn-outline-primary:hover {
 }
 
 .gh-navbar, .nx-navbar {
-  position: sticky;
-  top: 0;
-  z-index: 1020;
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1030 !important;
   background-color: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -763,22 +848,158 @@ html.dark .btn-outline-primary:hover {
   display: flex !important;
   align-items: center !important;
   padding: 0.5rem 0;
-  transition: box-shadow 0.25s ease, background-color 0.25s ease;
+  margin: 0 !important;
+  transition: box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease !important;
   width: 100% !important;
   box-sizing: border-box !important;
+  flex-shrink: 0 !important;
 }
 
 [data-bs-theme="dark"] .gh-navbar,
-[data-bs-theme="dark"] .nx-navbar {
+[data-bs-theme="dark"] .nx-navbar,
+html.dark .gh-navbar,
+html.dark .nx-navbar {
   background-color: rgba(18, 30, 19, 0.96);
   border-bottom-color: var(--gh-border);
 }
 
 .gh-navbar.scrolled, .nx-navbar.scrolled {
-  box-shadow: var(--shadow-md);
-  min-height: 84px;
-  padding: 0.5rem 0;
+  background-color: rgba(255, 255, 255, 0.98) !important;
+  box-shadow: 0 4px 20px rgba(45, 42, 38, 0.08) !important;
+  border-bottom-color: rgba(46, 101, 24, 0.15) !important;
 }
+
+[data-bs-theme="dark"] .gh-navbar.scrolled,
+[data-bs-theme="dark"] .nx-navbar.scrolled,
+html.dark .gh-navbar.scrolled,
+html.dark .nx-navbar.scrolled {
+  background-color: rgba(18, 30, 19, 0.98) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Authentication Page Brand Logo - Centered Circular G Logo with Brand Name Below */
+.gh-brand-auth,
+[dir="rtl"] .gh-brand-auth {
+  display: inline-flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+  margin: 0 auto 1.25rem auto !important;
+  text-decoration: none !important;
+  transition: transform 0.25s ease;
+}
+
+.gh-brand-auth:hover {
+  transform: translateY(-2px);
+}
+
+.gh-brand-auth .gh-logo-wrapper {
+  width: 64px !important;
+  height: 64px !important;
+  flex-shrink: 0;
+  box-shadow: none !important;
+}
+
+.gh-brand-auth .gh-logo-static {
+  opacity: 1 !important;
+  visibility: visible !important;
+  animation: none !important;
+  transform: scale(1) !important;
+  z-index: 2;
+  border-radius: 50% !important;
+  border: 1px solid rgba(46, 101, 24, 0.25) !important;
+  box-shadow: 0 4px 14px rgba(46, 101, 24, 0.18) !important;
+}
+
+[data-bs-theme="dark"] .gh-brand-auth .gh-logo-static,
+html.dark .gh-brand-auth .gh-logo-static {
+  border-color: rgba(0, 255, 127, 0.3) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+}
+
+.gh-brand-auth .gh-auth-brand-name {
+  font-family: var(--font-heading) !important;
+  font-size: 1.35rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px !important;
+  line-height: 1.2 !important;
+  color: #1A3E1F !important;
+  transition: color 0.25s ease;
+}
+
+[data-bs-theme="dark"] .gh-brand-auth .gh-auth-brand-name,
+html.dark .gh-brand-auth .gh-auth-brand-name {
+  color: #FFFFFF !important;
+}
+
+@media (max-width: 575.98px) {
+  .gh-brand-auth .gh-logo-wrapper {
+    width: 54px !important;
+    height: 54px !important;
+  }
+  .gh-brand-auth .gh-auth-brand-name {
+    font-size: 1.2rem !important;
+  }
+}
+
+
+/* Quick Test / Demo Account Box */
+.gh-demo-box {
+  background-color: var(--gh-surface-alt, #F7F4EF) !important;
+  border: 1px solid var(--gh-border, rgba(45, 42, 38, 0.12)) !important;
+  transition: var(--transition);
+}
+
+.gh-demo-box .gh-demo-title {
+  color: var(--gh-accent, #2E6518) !important;
+}
+
+.gh-demo-box .btn-demo-action {
+  color: var(--gh-accent, #2E6518) !important;
+  border-color: var(--gh-accent, #2E6518) !important;
+  background-color: transparent !important;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.gh-demo-box .btn-demo-action:hover,
+.gh-demo-box .btn-demo-action:focus {
+  background-color: var(--gh-accent, #2E6518) !important;
+  color: #FFFFFF !important;
+  border-color: var(--gh-accent, #2E6518) !important;
+}
+
+[data-bs-theme="dark"] .gh-demo-box,
+html.dark .gh-demo-box {
+  background-color: #072316 !important;
+  border: 1px solid rgba(0, 255, 127, 0.25) !important;
+}
+
+[data-bs-theme="dark"] .gh-demo-box .gh-demo-title,
+html.dark .gh-demo-box .gh-demo-title {
+  color: #00FF7F !important;
+  text-shadow: 0 0 10px rgba(0, 255, 127, 0.35);
+}
+
+[data-bs-theme="dark"] .gh-demo-box .btn-demo-action,
+html.dark .gh-demo-box .btn-demo-action {
+  color: #00FF7F !important;
+  border-color: rgba(0, 255, 127, 0.5) !important;
+  background-color: rgba(0, 255, 127, 0.08) !important;
+}
+
+[data-bs-theme="dark"] .gh-demo-box .btn-demo-action:hover,
+[data-bs-theme="dark"] .gh-demo-box .btn-demo-action:focus,
+html.dark .gh-demo-box .btn-demo-action:hover,
+html.dark .gh-demo-box .btn-demo-action:focus {
+  background-color: #00FF7F !important;
+  color: #013220 !important;
+  border-color: #00FF7F !important;
+  box-shadow: 0 0 14px rgba(0, 255, 127, 0.35);
+}
+
 
 /* Navbar Container - Wide edge-to-edge single-line layout with full coverage */
 .gh-navbar .container,
@@ -3329,7 +3550,7 @@ body.nature-bg-page {
               url('../images/home-2-bg.jpg') center center / cover no-repeat fixed !important;
   background-attachment: fixed !important;
   background-color: #F4FAF5 !important;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 [data-bs-theme="dark"] .about-nature-page,
@@ -3467,7 +3688,7 @@ body.menu-details-nature-page,
               url('../images/home-2-bg.jpg') center center / cover no-repeat fixed !important;
   background-attachment: fixed !important;
   background-color: #F4FAF5 !important;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 [data-bs-theme="dark"] body.menu-details-nature-page,
@@ -5995,34 +6216,39 @@ html.dark .gh-pagination .page-item.disabled .page-link {
 .nx-footer .gh-brand {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 0.85rem !important;
-  font-family: var(--font-heading);
-  font-size: 1.6rem;
-  font-weight: 700;
-  letter-spacing: 0.3px;
+  gap: 0.75rem !important;
   text-decoration: none !important;
   color: #FFFFFF !important;
   text-shadow: none !important;
+  transition: transform 0.25s ease;
+}
+
+.gh-footer .gh-brand:hover,
+.nx-footer .gh-brand:hover {
+  transform: translateY(-2px);
 }
 
 .gh-footer .gh-brand-logo-img,
 .nx-footer .gh-brand-logo-img {
-  width: 44px !important;
-  height: 44px !important;
+  width: 46px !important;
+  height: 46px !important;
   object-fit: contain !important;
   border-radius: 50% !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.45) !important;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35) !important;
   flex-shrink: 0 !important;
+  margin: 0 !important;
 }
 
 .gh-footer .gh-brand-text,
 .nx-footer .gh-brand-text {
   font-family: var(--font-heading) !important;
-  font-size: 1.6rem !important;
+  font-size: 1.65rem !important;
   font-weight: 700 !important;
   color: #FFFFFF !important;
   letter-spacing: 0.3px !important;
+  line-height: 1 !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
 }
 
 .gh-footer .footer-bio {
@@ -6099,6 +6325,17 @@ html.dark .gh-pagination .page-item.disabled .page-link {
   -webkit-backdrop-filter: blur(6px);
 }
 
+.footer-social-btn i,
+.gh-footer .footer-social-btn i,
+.gh-footer .footer-social-icon i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+
 .footer-social-btn:hover,
 .gh-footer .footer-social-btn:hover,
 .gh-footer .footer-social-icon:hover {
@@ -6171,7 +6408,7 @@ html.dark .gh-pagination .page-item.disabled .page-link {
    13. RTL (RIGHT-TO-LEFT) COMPATIBILITY
 -------------------------------------------------- */
 [dir="rtl"], html.rtl {
-  text-align: right;
+  text-align: start;
 }
 
 [dir="rtl"] .me-1, [dir="rtl"] .me-2, [dir="rtl"] .me-3, [dir="rtl"] .me-4 {
@@ -7563,7 +7800,7 @@ body.home-2-page {
   background-attachment: fixed !important;
   background-color: #F4FAF5 !important;
   position: relative;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 [data-bs-theme="dark"] body.home-2-page,
@@ -10484,6 +10721,15 @@ html.dark .gh-farm-video-section {
   text-decoration: none;
   transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
+}
+
+.chef-social-btn i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
 }
 
 .chef-social-btn:hover {
