@@ -1131,6 +1131,17 @@
     ensureModalExists();
     bindDishTriggers();
     handleStandalonePage();
+
+    // Support in-page modal auto-trigger via URL param ?dish= or hash #dish= on any page (e.g. menu.html)
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const qDish = urlParams.get('dish') || urlParams.get('id');
+      const hashMatch = window.location.hash.match(/dish=([a-z0-9-]+)/i);
+      const targetDish = qDish || (hashMatch ? hashMatch[1] : null);
+      if (targetDish && DISHES_CATALOG[targetDish] && !window.location.pathname.includes('menu-details.html')) {
+        setTimeout(() => openDishDetails(targetDish), 350);
+      }
+    } catch (err) {}
   }
 
   if (document.readyState === 'loading') {

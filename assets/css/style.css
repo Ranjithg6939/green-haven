@@ -50,6 +50,20 @@
   --gh-text-muted: #5C554E;       /* Muted Warm Slate - Enhanced Light Mode Contrast */
   --gh-footer-bg: #1C1917;        /* Deep Obsidian Espresso Footer */
 
+  /* Standard Unified Color System */
+  --color-primary: var(--gh-primary);
+  --color-secondary: var(--gh-secondary);
+  --color-accent: var(--gh-accent);
+  --color-background: var(--gh-bg);
+  --color-surface: var(--gh-surface);
+  --color-surface-alt: var(--gh-surface-alt);
+  --color-text: var(--gh-text);
+  --color-text-muted: var(--gh-text-muted);
+  --color-border: var(--gh-border);
+  --color-success: #198754;
+  --color-warning: #EE9A59;
+  --color-error: #DC3545;
+
   /* Global Typography System (Unified for both LTR & RTL) */
   --font-serif: 'Playfair Display', 'Cormorant Garamond', 'Amiri', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', 'Cairo', system-ui, -apple-system, sans-serif;
@@ -88,6 +102,20 @@ html.dark {
   --gh-heading-color: #FFFFFF;    /* Heading Text: Crisp White (#FFFFFF) */
   --gh-text-muted: #C5D7C2;       /* Light Sage Text */
   --gh-footer-bg: #001A10;        /* Deep Obsidian Forest Footer */
+
+  /* Standard Unified Color System (Dark Mode) */
+  --color-primary: #FFFFFF;
+  --color-secondary: #00FF7F;
+  --color-accent: #69F0AE;
+  --color-background: #013220;
+  --color-surface: rgba(1, 50, 32, 0.88);
+  --color-surface-alt: #0D3A26;
+  --color-text: #F5F5DC;
+  --color-text-muted: #C5D7C2;
+  --color-border: rgba(0, 255, 127, 0.22);
+  --color-success: #20C997;
+  --color-warning: #FFC107;
+  --color-error: #EA868F;
 
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.65);
@@ -172,6 +200,30 @@ html.dark .card:not(.bg-primary):not(.bg-warning):not(.bg-success):not(.bg-dange
 html.dark .card .border-bottom,
 html.dark .card .border-top {
   border-color: var(--gh-border) !important;
+}
+
+/* --------------------------------------------------
+   2.1 ACCESSIBILITY: KEYBOARD FOCUS & REDUCED MOTION
+-------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--gh-accent, #2E6518) !important;
+  outline-offset: 3px !important;
+}
+
+[data-bs-theme="dark"] :focus-visible,
+html.dark :focus-visible {
+  outline-color: #00FF7F !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Maintenance page specific dark mode elements */
@@ -274,6 +326,8 @@ html.dark .gh-vip-input:focus {
   max-width: 280px;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 3;
 }
 
 [data-bs-theme="dark"] .floating-award-card,
@@ -4472,8 +4526,9 @@ html.dark .menu-nature-page .section-bg-alt {
   border-radius: 22px;
   padding: 2.25rem 2.25rem;
   box-shadow: 0 14px 36px rgba(22, 62, 22, 0.08);
-  height: 100%;
-  max-height: 460px;
+  height: auto;
+  min-height: 460px;
+  max-height: none;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -12444,20 +12499,104 @@ html.dark .contact-nature-page .form-select {
 .service-narrative-box {
   background: rgba(255, 255, 255, 0.98) !important;
   border: 1.5px solid rgba(46, 101, 24, 0.25) !important;
-  box-shadow: 0 14px 40px rgba(22, 60, 22, 0.12) !important;
+  box-shadow: 0 12px 32px rgba(22, 62, 22, 0.1) !important;
+  border-radius: 20px !important;
+  height: 100% !important;
+  min-height: auto !important;
+  max-height: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  overflow: visible !important;
 }
 
 [data-bs-theme="dark"] .service-narrative-box,
 html.dark .service-narrative-box {
   background: rgba(2, 44, 27, 0.95) !important;
   border-color: rgba(0, 255, 127, 0.25) !important;
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6) !important;
+}
+
+.service-narrative-box .section-title {
+  font-size: clamp(1.25rem, 1.65vw, 1.55rem) !important;
+  line-height: 1.25 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.service-narrative-box p {
+  font-size: 0.88rem !important;
+  line-height: 1.5 !important;
+  margin-bottom: 0.65rem !important;
+}
+
+.service-narrative-box .service-feature-text {
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  color: #2b472e !important;
+  line-height: 1.35 !important;
+}
+
+[data-bs-theme="dark"] .service-narrative-box .service-feature-text,
+html.dark .service-narrative-box .service-feature-text {
+  color: #d1e7dd !important;
+}
+
+.service-overview-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 3px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+[data-bs-theme="dark"] .service-overview-img-wrap,
+html.dark .service-overview-img-wrap {
+  border: 2px solid rgba(0, 255, 127, 0.25);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.6);
+}
+
+.service-overview-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-overview-img-wrap:hover .service-overview-img {
+  transform: scale(1.03);
+}
+
+@media (max-width: 991.98px) {
+  .service-narrative-box {
+    height: auto !important;
+    min-height: auto !important;
+  }
+  .service-overview-img-wrap {
+    min-height: 260px;
+    height: 300px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .service-overview-img-wrap {
+    min-height: 240px;
+    height: 260px;
+  }
 }
 
 .service-feature-text {
   color: #113813 !important;
-  font-weight: 700 !important;
-  font-size: 0.92rem !important;
+  font-weight: 600 !important;
+  font-size: 0.82rem !important;
 }
 
 [data-bs-theme="dark"] .service-feature-text,
@@ -15344,6 +15483,154 @@ html.dark .receipt-modal-card {
   background: #013220;
   border-color: rgba(0, 255, 127, 0.28);
 }
+
+/* ==========================================================================
+   UNIVERSAL CARD & CONTAINER SIZING ARCHITECTURE
+   Guarantees balanced width, equal heights, aligned action buttons,
+   and robust responsive behavior across all website pages and themes.
+   ========================================================================== */
+
+/* 1. Universal Flex Column Stretching for Card Grids */
+.row.align-items-stretch > [class*="col"],
+.row-cards-stretch > [class*="col"],
+.contact-cards-row > [class*="col"],
+.menu-items-grid > [class*="col"],
+.services-nature-page .row.g-4 > [class*="col"],
+.about-pillars-section .row > [class*="col"],
+.about-timeline-section .row > [class*="col"],
+.about-chefs-section .row > [class*="col"],
+.partner-cards-grid > [class*="col"],
+.gh-dishes-nature-section .row > [class*="col"] {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* 2. Universal Card Full Height & Flex Column Foundation */
+.dish-card,
+.luxury-dish-card,
+.luxury-service-card,
+.luxury-catering-card,
+.luxury-pricing-card,
+.pillar-card,
+.timeline-card,
+.chef-profile-card,
+.partner-farm-card,
+.user-model-card,
+.contact-info-card,
+.service-trust-pillar,
+.ethos-feature-card,
+.h2-journey-card {
+  height: 100% !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-sizing: border-box !important;
+}
+
+/* 3. Universal Card Body Flexibility */
+.dish-card-body,
+.dish-card-content,
+.luxury-service-body,
+.catering-card-body,
+.pricing-card-body,
+.pillar-card,
+.timeline-card,
+.chef-profile-card,
+.user-model-card .p-4,
+.contact-info-card {
+  display: flex !important;
+  flex-direction: column !important;
+  flex-grow: 1 !important;
+}
+
+/* 4. Flexible Description & Body Text Containers */
+.dish-desc,
+.dish-card-description,
+.luxury-service-desc,
+.catering-tier-subtitle,
+.catering-features-list,
+.pricing-card-body ul,
+.partner-farm-desc,
+.timeline-card p,
+.pillar-card p,
+.chef-profile-card p,
+.user-model-card .dish-desc {
+  flex-grow: 1 !important;
+}
+
+/* 5. Baseline Bottom Pinning for Action Bars, CTAs & Footers */
+.dish-card-actions,
+.btn-service-action,
+.btn-package-action,
+.btn-tier-action,
+.chef-social-links,
+.partner-card-footer,
+.read-article-pill-btn,
+.contact-info-card > div:last-child {
+  margin-top: auto !important;
+}
+
+/* 6. Services Page: Harmonized Grid Card Height */
+@media (min-width: 992px) {
+  .luxury-service-card {
+    min-height: 540px !important;
+  }
+}
+
+/* 7. Contact Cards Row Alignment */
+.contact-cards-row {
+  align-items: stretch !important;
+}
+
+.contact-info-card {
+  text-align: center !important;
+  padding: 1.75rem 1.25rem !important;
+  justify-content: space-between !important;
+}
+
+.contact-info-card > div:first-child {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  flex-grow: 1 !important;
+  justify-content: flex-start !important;
+}
+
+/* 8. Reservation Sidebar Harmonization */
+.reservation-sidebar-col {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1.5rem !important;
+  height: 100% !important;
+}
+
+.reservation-sidebar-card {
+  width: 100% !important;
+}
+
+/* 9. Blog Article Card Balancing */
+.user-model-card {
+  border-radius: 18px !important;
+  overflow: hidden !important;
+}
+
+.user-model-card > div:first-child {
+  height: 230px !important;
+  flex-shrink: 0 !important;
+}
+
+/* 10. Partner Farm Card Clean Containment */
+.partner-farm-card {
+  min-height: 285px !important;
+}
+
+.partner-farm-card .partner-farm-desc {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
 
 
 

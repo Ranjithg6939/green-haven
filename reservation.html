@@ -64,34 +64,18 @@
           </div>
           <a class="gh-nav-link " href="about.html">About</a>
           <a class="gh-nav-link " href="menu.html">Menu</a>
-          <div class="dropdown">
-            <a class="gh-nav-link  dropdown-toggle" href="services.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Services
-            </a>
-            <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item " href="services.html"><i class="bi bi-grid-fill me-2"></i> Our Services</a></li>
-              <li><a class="gh-dropdown-item " href="service-details.html"><i class="bi bi-file-earmark-text me-2"></i> Service Details</a></li>
-            </ul>
-          </div>
+          <a class="gh-nav-link " href="services.html">Services</a>
           <a class="gh-nav-link " href="catering.html">Catering</a>
           <a class="gh-nav-link " href="pricing.html">Packages</a>
+          <a class="gh-nav-link " href="blog.html">Blog</a>
           <div class="dropdown">
-            <a class="gh-nav-link  dropdown-toggle" href="blog.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Blog
-            </a>
-            <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item " href="blog.html"><i class="bi bi-card-text me-2"></i> Food &amp; Wellness Blog</a></li>
-              <li><a class="gh-dropdown-item " href="blog-details.html"><i class="bi bi-layout-text-window me-2"></i> Article Details</a></li>
-            </ul>
-          </div>
-          <div class="dropdown">
-            <a class="gh-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="gh-nav-link  dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Pages
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
-              <li><a class="gh-dropdown-item" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
-              <li><a class="gh-dropdown-item" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
+              <li><a class="gh-dropdown-item " href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
+              <li><a class="gh-dropdown-item " href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
+              <li><a class="gh-dropdown-item " href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
             </ul>
           </div>
           <a class="gh-nav-link " href="contact.html">Contact</a>
@@ -177,9 +161,9 @@
               Pages
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
-              <li><a class="gh-dropdown-item" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
-              <li><a class="gh-dropdown-item" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
+              <li><a class="gh-dropdown-item " href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
+              <li><a class="gh-dropdown-item " href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
+              <li><a class="gh-dropdown-item " href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
             </ul>
           </div>
           <a class="gh-nav-link " href="contact.html">Contact Us</a>
@@ -211,8 +195,8 @@
       <div class="container">
         <div class="row g-5 reservation-row align-items-stretch">
           <!-- Reservation Form Column -->
-          <div class="col-lg-8 reservation-form-col">
-            <div class="p-4 p-md-5 rounded-4 section-bg-alt border shadow-lg reservation-form-card">
+          <div class="col-lg-8 reservation-form-col d-flex flex-column">
+            <div class="p-4 p-md-5 rounded-4 section-bg-alt border shadow-lg reservation-form-card h-100 d-flex flex-column">
               <div class="mb-4">
                 <span class="section-sub"><i class="bi bi-flower1"></i> Instant Booking</span>
                 <h2 class="section-title">Table Details</h2>
@@ -439,9 +423,9 @@
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
           <div>&copy; 2026 Green Haven Restaurant. All Rights Reserved.</div>
           <div class="d-flex gap-3">
-            <a href="#" class="text-white-50 text-decoration-none hover-white">Privacy Policy</a>
+            <a href="#privacyPolicy" class="text-white-50 text-decoration-none hover-white gh-legal-link" data-legal="privacy" role="button">Privacy Policy</a>
             <span>&bull;</span>
-            <a href="#" class="text-white-50 text-decoration-none hover-white">Terms &amp; Conditions</a>
+            <a href="#termsConditions" class="text-white-50 text-decoration-none hover-white gh-legal-link" data-legal="terms" role="button">Terms &amp; Conditions</a>
           </div>
         </div>
       </div>
@@ -523,7 +507,7 @@
           <!-- Actions -->
           <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center">
             <div class="d-flex flex-wrap gap-2">
-              <a href="#" id="resCalendarBtn" target="_blank" rel="noopener noreferrer" class="btn btn-outline-success btn-sm px-3 py-2 rounded-pill fw-semibold">
+              <a href="#" id="resCalendarBtn" target="_blank" rel="noopener noreferrer" role="button" class="btn btn-outline-success btn-sm px-3 py-2 rounded-pill fw-semibold">
                 <i class="bi bi-calendar-plus me-1"></i> Add to Google Calendar
               </a>
               <button type="button" class="btn btn-outline-secondary btn-sm px-3 py-2 rounded-pill fw-semibold" onclick="window.print()">

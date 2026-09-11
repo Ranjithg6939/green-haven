@@ -8,13 +8,10 @@ const pageActiveMap = {
   'home-2.html': 'home2',
   'about.html': 'about',
   'menu.html': 'menu',
-  'menu-details.html': 'menu',
   'services.html': 'services',
-  'service-details.html': 'service-details',
   'catering.html': 'catering',
   'pricing.html': 'packages',
   'blog.html': 'blog',
-  'blog-details.html': 'blog-details',
   'contact.html': 'contact',
   'reservation.html': 'none',
   'login.html': 'none',
@@ -24,15 +21,14 @@ const pageActiveMap = {
   'orders.html': 'none',
   'order-success.html': 'none',
   'my-account.html': 'none',
-  '404.html': 'none',
-  'coming-soon.html': 'none',
-  'maintenance.html': 'none'
+  '404.html': '404',
+  'coming-soon.html': 'coming-soon',
+  'maintenance.html': 'maintenance'
 };
 
 function buildNavbarSnippet(activeKey) {
   const isHome = activeKey === 'home1' || activeKey === 'home2';
-  const isServices = activeKey === 'services' || activeKey === 'service-details';
-  const isBlog = activeKey === 'blog' || activeKey === 'blog-details';
+  const isPages = activeKey === '404' || activeKey === 'coming-soon' || activeKey === 'maintenance';
 
   return `<!-- Main Navigation Bar -->
   <header class="gh-navbar">
@@ -66,24 +62,18 @@ function buildNavbarSnippet(activeKey) {
           </div>
           <a class="gh-nav-link ${activeKey === 'about' ? 'active' : ''}" href="about.html">About</a>
           <a class="gh-nav-link ${activeKey === 'menu' ? 'active' : ''}" href="menu.html">Menu</a>
-          <div class="dropdown">
-            <a class="gh-nav-link ${isServices ? 'active' : ''} dropdown-toggle" href="services.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Services
-            </a>
-            <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item ${activeKey === 'services' ? 'active' : ''}" href="services.html"><i class="bi bi-grid-fill me-2"></i> Our Services</a></li>
-              <li><a class="gh-dropdown-item ${activeKey === 'service-details' ? 'active' : ''}" href="service-details.html"><i class="bi bi-file-earmark-text me-2"></i> Service Details</a></li>
-            </ul>
-          </div>
+          <a class="gh-nav-link ${activeKey === 'services' ? 'active' : ''}" href="services.html">Services</a>
           <a class="gh-nav-link ${activeKey === 'catering' ? 'active' : ''}" href="catering.html">Catering</a>
           <a class="gh-nav-link ${activeKey === 'packages' ? 'active' : ''}" href="pricing.html">Packages</a>
+          <a class="gh-nav-link ${activeKey === 'blog' ? 'active' : ''}" href="blog.html">Blog</a>
           <div class="dropdown">
-            <a class="gh-nav-link ${isBlog ? 'active' : ''} dropdown-toggle" href="blog.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Blog
+            <a class="gh-nav-link ${isPages ? 'active' : ''} dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Pages
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item ${activeKey === 'blog' ? 'active' : ''}" href="blog.html"><i class="bi bi-card-text me-2"></i> Food &amp; Wellness Blog</a></li>
-              <li><a class="gh-dropdown-item ${activeKey === 'blog-details' ? 'active' : ''}" href="blog-details.html"><i class="bi bi-layout-text-window me-2"></i> Article Details</a></li>
+              <li><a class="gh-dropdown-item ${activeKey === '404' ? 'active' : ''}" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
+              <li><a class="gh-dropdown-item ${activeKey === 'coming-soon' ? 'active' : ''}" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
+              <li><a class="gh-dropdown-item ${activeKey === 'maintenance' ? 'active' : ''}" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
             </ul>
           </div>
           <a class="gh-nav-link ${activeKey === 'contact' ? 'active' : ''}" href="contact.html">Contact</a>
@@ -160,10 +150,20 @@ function buildNavbarSnippet(activeKey) {
           <a class="gh-nav-link ${activeKey === 'about' ? 'active' : ''}" href="about.html">About Us</a>
           <a class="gh-nav-link ${activeKey === 'menu' ? 'active' : ''}" href="menu.html">Full Restaurant Menu</a>
           <a class="gh-nav-link" href="cart.html"><i class="bi bi-bag me-1"></i> My Dining Cart</a>
-          <a class="gh-nav-link ${activeKey === 'services' || activeKey === 'service-details' ? 'active' : ''}" href="services.html">Our Services</a>
+          <a class="gh-nav-link ${activeKey === 'services' ? 'active' : ''}" href="services.html">Our Services</a>
           <a class="gh-nav-link ${activeKey === 'catering' ? 'active' : ''}" href="catering.html">Plant-Based Catering</a>
           <a class="gh-nav-link ${activeKey === 'packages' ? 'active' : ''}" href="pricing.html">Dining Packages</a>
-          <a class="gh-nav-link ${activeKey === 'blog' || activeKey === 'blog-details' ? 'active' : ''}" href="blog.html">Culinary Journal</a>
+          <a class="gh-nav-link ${activeKey === 'blog' ? 'active' : ''}" href="blog.html">Culinary Journal</a>
+          <div class="dropdown">
+            <a class="gh-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Pages
+            </a>
+            <ul class="dropdown-menu gh-dropdown-menu">
+              <li><a class="gh-dropdown-item ${activeKey === '404' ? 'active' : ''}" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
+              <li><a class="gh-dropdown-item ${activeKey === 'coming-soon' ? 'active' : ''}" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
+              <li><a class="gh-dropdown-item ${activeKey === 'maintenance' ? 'active' : ''}" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
+            </ul>
+          </div>
           <a class="gh-nav-link ${activeKey === 'contact' ? 'active' : ''}" href="contact.html">Contact Us</a>
         </nav>
       </div>

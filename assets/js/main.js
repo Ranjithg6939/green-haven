@@ -1220,6 +1220,9 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         `;
       }
+      if (window.showToast && window.showToast.success) {
+        window.showToast.success('Message Received', `Thank you, ${name}! Your inquiry has been sent to our concierge desk.`);
+      }
       contactForm.reset();
       contactForm.classList.remove('was-validated');
     });
@@ -1610,6 +1613,107 @@ document.addEventListener('DOMContentLoaded', () => {
         sparkle.remove();
       }, 750);
     });
+  });
+
+  /* --------------------------------------------------
+     29. UNIVERSAL LEGAL & PRIVACY MODAL ENGINE
+  -------------------------------------------------- */
+  const LEGAL_CONTENT = {
+    privacy: {
+      title: 'Privacy Policy',
+      badge: 'Updated 2026',
+      html: `
+        <h6 class="fw-bold text-success mb-2"><i class="bi bi-shield-check me-1"></i> Respecting Your Digital & Dining Privacy</h6>
+        <p class="small text-muted mb-3">At Green Haven, your privacy is treated with the same intentional care as our organic ingredients. We never sell, lease, or monetize personal dining data, dietary preferences, or payment credentials.</p>
+        <h6 class="fw-bold text-dark mb-1">1. Information We Collect</h6>
+        <p class="small text-muted mb-3">We collect personal contact details provided directly by you when reserving tables, ordering online, or contacting our hospitality concierge (such as name, email, phone number, and special dietary/allergen notes).</p>
+        <h6 class="fw-bold text-dark mb-1">2. Culinary Personalization</h6>
+        <p class="small text-muted mb-3">Allergen information provided during table bookings is communicated strictly to our executive culinary squad for your dining safety and table preparation.</p>
+        <h6 class="fw-bold text-dark mb-1">3. Data Security & Retention</h6>
+        <p class="small text-muted mb-0">We employ industry-standard encryption protocols. You may request deletion or export of your dining history at any time by contacting <a href="mailto:privacy@greenhaven.com" class="text-success">privacy@greenhaven.com</a>.</p>
+      `
+    },
+    terms: {
+      title: 'Terms & Conditions',
+      badge: 'Hospitality Charter',
+      html: `
+        <h6 class="fw-bold text-success mb-2"><i class="bi bi-file-earmark-text me-1"></i> Green Haven Hospitality & Dining Terms</h6>
+        <p class="small text-muted mb-3">By reserving a table, placing an online delivery order, or booking catering with Green Haven, you agree to our mindful hospitality terms outlined below.</p>
+        <h6 class="fw-bold text-dark mb-1">1. Table Reservations & Grace Period</h6>
+        <p class="small text-muted mb-3">Tables are held for 15 minutes past your scheduled reservation time. If your party is delayed, please notify our reception concierge via phone to preserve your seating arrangement.</p>
+        <h6 class="fw-bold text-dark mb-1">2. Allergen Notice & Cross-Contact</h6>
+        <p class="small text-muted mb-3">Green Haven operates a 100% plant-based facility free from animal products. While we practice strict ingredient segregation, please inform our team of severe nut or gluten sensitivities prior to dining.</p>
+        <h6 class="fw-bold text-dark mb-1">3. Catering & Event Commitments</h6>
+        <p class="small text-muted mb-0">Custom catering proposals require confirmed guest tallies 72 hours in advance of the milestone event date to guarantee farm-direct produce sourcing.</p>
+      `
+    }
+  };
+
+  function openLegalModal(type) {
+    const item = LEGAL_CONTENT[type] || LEGAL_CONTENT.privacy;
+    let modalEl = document.getElementById('ghLegalModal');
+    if (!modalEl) {
+      modalEl = document.createElement('div');
+      modalEl.id = 'ghLegalModal';
+      modalEl.className = 'modal fade';
+      modalEl.setAttribute('tabindex', '-1');
+      modalEl.setAttribute('aria-hidden', 'true');
+      modalEl.innerHTML = `
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content rounded-4 border-0 shadow-lg" style="background: var(--gh-surface, #fff);">
+            <div class="modal-header border-bottom py-3 px-4">
+              <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-feather text-success fs-5"></i>
+                <h5 class="modal-title font-heading fw-bold mb-0" id="ghLegalModalTitle">Privacy Policy</h5>
+                <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-2.5 py-1 extra-small" id="ghLegalModalBadge">Updated</span>
+              </div>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4" id="ghLegalModalBody"></div>
+            <div class="modal-footer border-top py-2.5 px-4 d-flex justify-content-between">
+              <span class="small text-muted">Green Haven Hospitality Desk</span>
+              <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modalEl);
+    }
+
+    const titleEl = document.getElementById('ghLegalModalTitle');
+    const badgeEl = document.getElementById('ghLegalModalBadge');
+    const bodyEl = document.getElementById('ghLegalModalBody');
+
+    if (titleEl) titleEl.textContent = item.title;
+    if (badgeEl) badgeEl.textContent = item.badge;
+    if (bodyEl) bodyEl.innerHTML = item.html;
+
+    if (typeof bootstrap !== 'undefined') {
+      const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+      modal.show();
+    }
+  }
+
+  // Bind all legal links across the page (including dynamically loaded footers)
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[data-legal], .gh-legal-link');
+    if (link) {
+      e.preventDefault();
+      const type = link.getAttribute('data-legal') || (link.textContent.toLowerCase().includes('terms') ? 'terms' : 'privacy');
+      openLegalModal(type);
+      return;
+    }
+    const plainLink = e.target.closest('a');
+    if (plainLink && (plainLink.getAttribute('href') === '#' || !plainLink.getAttribute('href'))) {
+      const text = plainLink.textContent.trim().toLowerCase();
+      if (text.includes('privacy policy')) {
+        e.preventDefault();
+        openLegalModal('privacy');
+      } else if (text.includes('terms') || text.includes('conditions')) {
+        e.preventDefault();
+        openLegalModal('terms');
+      }
+    }
   });
 
 });
