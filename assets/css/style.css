@@ -945,6 +945,124 @@ html.dark .gh-brand-auth .gh-auth-brand-name {
 }
 
 
+/* Social Auth Buttons (Google & Apple Sign-In) */
+.gh-social-auth-group {
+  margin-bottom: 1.25rem;
+}
+
+.gh-btn-social {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-family: var(--font-body, "Plus Jakarta Sans", sans-serif);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: 0.15px;
+  min-height: 44px;
+  border-radius: var(--border-radius-md, 10px);
+  padding: 0.625rem 1.25rem;
+  transition: all 0.22s ease;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid var(--gh-border, rgba(45, 42, 38, 0.16));
+  background-color: var(--gh-surface, #FFFFFF);
+  color: var(--gh-heading, #1A3E1F);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.gh-btn-social:hover {
+  background-color: var(--gh-surface-alt, #F7F4EF);
+  border-color: var(--gh-accent, #2E6518);
+  color: var(--gh-accent, #2E6518);
+  box-shadow: 0 3px 10px rgba(46, 101, 24, 0.12);
+  transform: translateY(-1px);
+}
+
+.gh-btn-social:focus-visible {
+  outline: 2px solid var(--gh-accent, #2E6518);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(46, 101, 24, 0.2);
+}
+
+.gh-btn-social:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.gh-btn-social .gh-social-icon {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease;
+}
+
+.gh-btn-social:hover .gh-social-icon {
+  transform: scale(1.08);
+}
+
+.gh-btn-social .gh-social-btn-text {
+  display: inline-block;
+  line-height: 1.2;
+}
+
+/* Apple Button Specifics */
+.gh-btn-apple {
+  color: #111111;
+}
+
+.gh-btn-apple .gh-apple-icon {
+  fill: currentColor;
+}
+
+/* Dark Theme Support */
+[data-bs-theme="dark"] .gh-btn-social,
+html.dark .gh-btn-social {
+  background-color: #072316 !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+[data-bs-theme="dark"] .gh-btn-social .gh-social-btn-text,
+html.dark .gh-btn-social .gh-social-btn-text {
+  color: #FFFFFF !important;
+}
+
+[data-bs-theme="dark"] .gh-btn-social:hover,
+html.dark .gh-btn-social:hover {
+  background-color: #0d3823 !important;
+  border-color: #00FF7F !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 14px rgba(0, 255, 127, 0.2);
+}
+
+[data-bs-theme="dark"] .gh-btn-social:focus-visible,
+html.dark .gh-btn-social:focus-visible {
+  outline: 2px solid #00FF7F;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(0, 255, 127, 0.25);
+}
+
+[data-bs-theme="dark"] .gh-btn-apple,
+html.dark .gh-btn-apple,
+[data-bs-theme="dark"] .gh-btn-apple .gh-apple-icon,
+html.dark .gh-btn-apple .gh-apple-icon {
+  color: #FFFFFF !important;
+  fill: #FFFFFF !important;
+}
+
+/* RTL Support */
+[dir="rtl"] .gh-btn-social .gh-social-icon,
+html.rtl .gh-btn-social .gh-social-icon,
+html[dir="rtl"] .gh-btn-social .gh-social-icon {
+  margin-right: 0 !important;
+  margin-left: 0.5rem !important;
+}
+
 /* Quick Test / Demo Account Box */
 .gh-demo-box {
   background-color: var(--gh-surface-alt, #F7F4EF) !important;
