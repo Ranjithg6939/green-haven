@@ -1750,18 +1750,18 @@ button.btn-icon.d-lg-none {
   .gh-brand-title-img,
   .gh-title-light,
   .gh-title-dark {
-    height: 34px !important;
-    max-height: 34px !important;
+    height: 60px !important;
+    max-height: 62px !important;
     width: auto !important;
-    max-width: 90px !important;
-    margin-left: 0.2rem !important;
+    max-width: 155px !important;
+    margin-left: 0.4rem !important;
     object-fit: contain !important;
   }
   .gh-logo-wrapper {
-    width: 36px !important;
-    height: 36px !important;
-    max-width: 36px !important;
-    max-height: 36px !important;
+    width: 48px !important;
+    height: 48px !important;
+    max-width: 48px !important;
+    max-height: 48px !important;
   }
   .gh-navbar .d-flex.align-items-center.gap-2,
   .nx-navbar .d-flex.align-items-center.gap-2 {
@@ -1805,6 +1805,23 @@ html.dark .offcanvas#mobileMenuOffcanvas {
 .offcanvas-header {
   padding: 1.15rem 1.25rem !important;
   border-bottom: 1px solid var(--gh-border) !important;
+}
+
+.offcanvas-header .gh-brand-title-img,
+.offcanvas-header .gh-title-light,
+.offcanvas-header .gh-title-dark {
+  height: 64px !important;
+  max-height: 66px !important;
+  width: auto !important;
+  max-width: 165px !important;
+  object-fit: contain !important;
+}
+
+.offcanvas-header .gh-logo-wrapper {
+  width: 52px !important;
+  height: 52px !important;
+  max-width: 52px !important;
+  max-height: 52px !important;
 }
 
 .offcanvas-body {
@@ -7779,20 +7796,28 @@ a.btn,
 /* --- F. Ultra-Small & Compact Mobile Screens (< 575.98px down to 320px) --- */
 @media (max-width: 575.98px) {
   .gh-navbar, .nx-navbar {
-    min-height: 70px !important;
+    min-height: 74px !important;
     padding: 0.35rem 0 !important;
   }
   .gh-brand-auto,
   .gh-brand-flip {
     gap: 0.35rem !important;
   }
-  .gh-brand-title-img {
-    height: 40px !important;
-    margin-left: 0.2rem !important;
+  .gh-brand-title-img,
+  .gh-title-light,
+  .gh-title-dark {
+    height: 56px !important;
+    max-height: 58px !important;
+    width: auto !important;
+    max-width: 145px !important;
+    margin-left: 0.35rem !important;
+    object-fit: contain !important;
   }
   .gh-logo-wrapper {
-    width: 40px !important;
-    height: 40px !important;
+    width: 44px !important;
+    height: 44px !important;
+    max-width: 44px !important;
+    max-height: 44px !important;
   }
   .gh-hero-nature {
     padding: 2.2rem 0 2.8rem;
