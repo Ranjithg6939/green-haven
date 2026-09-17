@@ -6327,37 +6327,157 @@ html.dark .gh-pagination .page-item.disabled .page-link {
   letter-spacing: 1px;
 }
 
-/* Back to Top */
+/* ================================================================
+   SCROLL TO TOP BUTTON (LUXURY BOTANICAL MODEL)
+   Fixed circular up-arrow button with smooth scroll, desktop hover,
+   mobile touch feedback, dark/light theme & RTL support.
+   ================================================================ */
 .back-to-top {
   position: fixed;
-  bottom: 25px;
-  right: 25px;
-  width: 44px;
-  height: 44px;
-  background-color: var(--gh-primary);
-  color: #ffffff;
+  bottom: 28px;
+  right: 28px;
+  left: auto !important;
+  width: 46px;
+  height: 46px;
+  min-width: 46px;
+  min-height: 46px;
   border-radius: 50%;
-  display: flex;
+  background-color: #2E7D32;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
-  box-shadow: var(--shadow-lg);
+  font-size: 1.25rem;
+  line-height: 1;
+  text-decoration: none !important;
+  box-shadow: 0 6px 18px rgba(46, 125, 50, 0.35);
   cursor: pointer;
   opacity: 0;
   visibility: hidden;
-  transition: var(--transition);
-  z-index: 999;
+  pointer-events: none;
+  transform: translateY(14px) scale(0.88);
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease,
+              border-color 0.2s ease,
+              box-shadow 0.2s ease;
+  z-index: 1040;
+  padding: 0;
+  margin: 0;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  direction: ltr !important;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.back-to-top i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  transition: transform 0.2s ease;
 }
 
 .back-to-top.show {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
 }
 
-.back-to-top:hover {
-  transform: translateY(-3px);
-  background-color: var(--gh-primary-hover);
-  color: #ffffff;
+/* Desktop hover effect on fine pointer devices */
+@media (hover: hover) and (pointer: fine) {
+  .back-to-top:hover {
+    background-color: #256628;
+    border-color: #256628;
+    color: #FFFFFF !important;
+    transform: translateY(-4px) scale(1.06);
+    box-shadow: 0 10px 24px rgba(46, 125, 50, 0.45);
+  }
+
+  .back-to-top:hover i {
+    transform: translateY(-2px);
+  }
+}
+
+/* Mobile touch & active feedback */
+.back-to-top:active,
+.back-to-top.touch-active {
+  background-color: #1E5220 !important;
+  border-color: #1E5220 !important;
+  color: #FFFFFF !important;
+  transform: scale(0.92) !important;
+  box-shadow: 0 3px 10px rgba(46, 125, 50, 0.4) !important;
+  transition: none !important;
+}
+
+/* Dark theme styling */
+[data-bs-theme="dark"] .back-to-top,
+html.dark .back-to-top {
+  background-color: #1B4D21 !important;
+  border-color: rgba(0, 255, 127, 0.35);
+  color: #FFFFFF !important;
+  box-shadow: 0 6px 20px rgba(0, 255, 127, 0.25), 0 0 10px rgba(0, 255, 127, 0.15);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-bs-theme="dark"] .back-to-top:hover,
+  html.dark .back-to-top:hover {
+    background-color: #00FF7F;
+    border-color: #00FF7F;
+    color: #021A0D !important;
+    box-shadow: 0 8px 24px rgba(0, 255, 127, 0.5);
+  }
+
+  [data-bs-theme="dark"] .back-to-top:hover i,
+  html.dark .back-to-top:hover i {
+    color: #021A0D !important;
+    transform: translateY(-2px);
+  }
+}
+
+[data-bs-theme="dark"] .back-to-top:active,
+[data-bs-theme="dark"] .back-to-top.touch-active,
+html.dark .back-to-top:active,
+html.dark .back-to-top.touch-active {
+  background-color: #00CC66 !important;
+  border-color: #00CC66 !important;
+  color: #021A0D !important;
+  transform: scale(0.92) !important;
+}
+
+/* Accessible focus styling */
+.back-to-top:focus-visible {
+  outline: 2px solid #2E7D32;
+  outline-offset: 3px;
+}
+
+[data-bs-theme="dark"] .back-to-top:focus-visible,
+html.dark .back-to-top:focus-visible {
+  outline: 2px solid #00FF7F;
+  outline-offset: 3px;
+}
+
+.back-to-top:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 576px) {
+  .back-to-top {
+    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    right: 20px;
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    font-size: 1.15rem;
+  }
 }
 
 /* --------------------------------------------------
@@ -6510,9 +6630,12 @@ html.dark .gh-pagination .page-item.disabled .page-link {
   justify-content: center;
   font-size: 1.05rem;
   text-decoration: none !important;
-  transition: all 0.25s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, color 0.2s ease;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  cursor: pointer;
 }
 
 .footer-social-btn i,
@@ -6526,14 +6649,64 @@ html.dark .gh-pagination .page-item.disabled .page-link {
   padding: 0;
 }
 
-.footer-social-btn:hover,
-.gh-footer .footer-social-btn:hover,
-.gh-footer .footer-social-icon:hover {
-  background-color: #2E7D32;
-  border-color: #2E7D32;
+/* Desktop/laptop hover: keep existing hover effect on devices with fine pointer & hover */
+@media (hover: hover) and (pointer: fine) {
+  .footer-social-btn:hover,
+  .gh-footer .footer-social-btn:hover,
+  .gh-footer .footer-social-icon:hover {
+    background-color: #2E7D32;
+    border-color: #2E7D32;
+    color: #FFFFFF !important;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(46, 125, 50, 0.35);
+  }
+}
+
+/* Mobile/touch active & tap state: instant color feedback without layout shift */
+.footer-social-btn:active,
+.gh-footer .footer-social-btn:active,
+.gh-footer .footer-social-icon:active,
+.footer-social-btn.touch-active,
+.gh-footer .footer-social-btn.touch-active,
+.gh-footer .footer-social-icon.touch-active {
+  background-color: #2E7D32 !important;
+  border-color: #2E7D32 !important;
   color: #FFFFFF !important;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 14px rgba(46, 125, 50, 0.35);
+  transform: none !important;
+  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.35) !important;
+  transition: none !important;
+}
+
+/* Prevent unwanted sticky hover or displacement on mobile / touch devices */
+@media (hover: none), (pointer: coarse) {
+  .footer-social-btn:hover,
+  .gh-footer .footer-social-btn:hover,
+  .gh-footer .footer-social-icon:hover {
+    transform: none !important;
+  }
+
+  .footer-social-btn:not(:active):not(.touch-active),
+  .gh-footer .footer-social-btn:not(:active):not(.touch-active),
+  .gh-footer .footer-social-icon:not(:active):not(.touch-active) {
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.22);
+    color: #FFFFFF !important;
+    transform: none !important;
+    box-shadow: none;
+  }
+}
+
+.footer-social-btn:focus-visible,
+.gh-footer .footer-social-btn:focus-visible,
+.gh-footer .footer-social-icon:focus-visible {
+  outline: 2px solid #2E7D32;
+  outline-offset: 2px;
+}
+
+.footer-social-btn:focus:not(:focus-visible),
+.gh-footer .footer-social-btn:focus:not(:focus-visible),
+.gh-footer .footer-social-icon:focus:not(:focus-visible) {
+  outline: none;
 }
 
 .gh-footer .newsletter-form {
@@ -6627,8 +6800,20 @@ html.dark .gh-pagination .page-item.disabled .page-link {
 }
 
 [dir="rtl"] .back-to-top {
-  right: auto;
-  left: 25px;
+  right: 28px !important;
+  left: auto !important;
+  inset-inline-start: auto !important;
+  inset-inline-end: 28px !important;
+  direction: ltr !important;
+}
+
+@media (max-width: 576px) {
+  [dir="rtl"] .back-to-top {
+    right: 20px !important;
+    left: auto !important;
+    inset-inline-start: auto !important;
+    inset-inline-end: 20px !important;
+  }
 }
 
 /* --------------------------------------------------

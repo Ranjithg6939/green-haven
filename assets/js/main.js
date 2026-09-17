@@ -479,10 +479,22 @@ document.addEventListener('DOMContentLoaded', () => {
      3. STICKY NAVBAR & BACK-TO-TOP BUTTON
   -------------------------------------------------- */
   const navbars = document.querySelectorAll('.gh-navbar, .nx-navbar');
-  const backToTopBtn = document.querySelector('.back-to-top');
+  let backToTopBtn = document.querySelector('.back-to-top');
+
+  // Dynamically ensure back-to-top button exists in DOM if not present in static markup
+  if (!backToTopBtn && document.body) {
+    backToTopBtn = document.createElement('button');
+    backToTopBtn.type = 'button';
+    backToTopBtn.className = 'back-to-top';
+    backToTopBtn.setAttribute('aria-label', 'Scroll to top');
+    backToTopBtn.setAttribute('title', 'Scroll to top');
+    backToTopBtn.innerHTML = '<i class="bi bi-arrow-up" aria-hidden="true"></i>';
+    document.body.appendChild(backToTopBtn);
+  }
 
   function checkNavbarScroll() {
-    const isScrolled = window.scrollY > 20;
+    const scrollY = window.pageYOffset || document.documentElement.scrollTop || window.scrollY || 0;
+    const isScrolled = scrollY > 20;
     navbars.forEach(navbar => {
       if (isScrolled) {
         navbar.classList.add('scrolled');
@@ -492,7 +504,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (backToTopBtn) {
-      if (window.scrollY > 300) {
+      if (scrollY > 300) {
         backToTopBtn.classList.add('show');
       } else {
         backToTopBtn.classList.remove('show');
@@ -530,7 +542,26 @@ document.addEventListener('DOMContentLoaded', () => {
     backToTopBtn.addEventListener('click', (e) => {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => {
+        if (typeof backToTopBtn.blur === 'function') backToTopBtn.blur();
+        backToTopBtn.classList.remove('touch-active');
+      }, 250);
     });
+
+    // Mobile touch press feedback
+    backToTopBtn.addEventListener('touchstart', () => {
+      backToTopBtn.classList.add('touch-active');
+    }, { passive: true });
+
+    backToTopBtn.addEventListener('touchend', () => {
+      setTimeout(() => {
+        backToTopBtn.classList.remove('touch-active');
+      }, 180);
+    }, { passive: true });
+
+    backToTopBtn.addEventListener('touchcancel', () => {
+      backToTopBtn.classList.remove('touch-active');
+    }, { passive: true });
   }
 
   /* Responsive Mobile Offcanvas Toggle Enforcer */
@@ -1859,6 +1890,120 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
+
+  /* ================================================================
+     FOOTER SOCIAL MEDIA ICONS - MOBILE / TOUCH INTERACTION ENGINE
+     Provides instant color-change feedback on tap/touch, eliminates
+     sticky hover artifacts, prevents layout shifts, and ensures clean
+     reversion across iOS Safari, Android Chrome, and touch devices.
+     ================================================================ */
+  (function initFooterSocialTouch() {
+    let activeBtn = null;
+    let touchTimer = null;
+    let startX = 0;
+    let startY = 0;
+
+    function applyActive(btn) {
+      if (!btn) return;
+      if (activeBtn && activeBtn !== btn) {
+        removeActive(activeBtn);
+      }
+      activeBtn = btn;
+      btn.classList.add('touch-active');
+      if (touchTimer) {
+        clearTimeout(touchTimer);
+        touchTimer = null;
+      }
+    }
+
+    function removeActive(btn) {
+      if (!btn) return;
+      btn.classList.remove('touch-active');
+      if (typeof btn.blur === 'function') {
+        btn.blur();
+      }
+      if (activeBtn === btn) {
+        activeBtn = null;
+      }
+    }
+
+    function releaseActive(btn, delay) {
+      if (!btn) return;
+      if (delay > 0) {
+        if (touchTimer) clearTimeout(touchTimer);
+        touchTimer = setTimeout(function() {
+          removeActive(btn);
+        }, delay);
+      } else {
+        removeActive(btn);
+      }
+    }
+
+    // Touch Start: instant color change feedback
+    document.addEventListener('touchstart', function(e) {
+      const btn = e.target.closest('.footer-social-btn, .gh-footer .footer-social-icon');
+      if (!btn) return;
+      if (e.touches && e.touches.length > 0) {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+      }
+      applyActive(btn);
+    }, { passive: true });
+
+    // Touch Move: if finger scrolls / pans, cancel immediately to prevent stuck state
+    document.addEventListener('touchmove', function(e) {
+      if (!activeBtn) return;
+      if (e.touches && e.touches.length > 0) {
+        const deltaX = Math.abs(e.touches[0].clientX - startX);
+        const deltaY = Math.abs(e.touches[0].clientY - startY);
+        if (deltaX > 10 || deltaY > 10) {
+          removeActive(activeBtn);
+        }
+      }
+    }, { passive: true });
+
+    // Touch End: maintain color change for 180ms so the visual tap is clearly perceived, then release & blur
+    document.addEventListener('touchend', function(e) {
+      const btn = e.target.closest('.footer-social-btn, .gh-footer .footer-social-icon') || activeBtn;
+      if (btn) {
+        releaseActive(btn, 180);
+      }
+    }, { passive: true });
+
+    // Touch Cancel: immediate cleanup
+    document.addEventListener('touchcancel', function() {
+      if (activeBtn) removeActive(activeBtn);
+    }, { passive: true });
+
+    // Window blur or tab hidden: ensure no stuck state when switching tabs/apps
+    window.addEventListener('blur', function() {
+      if (activeBtn) removeActive(activeBtn);
+      const allActive = document.querySelectorAll('.footer-social-btn.touch-active, .gh-footer .footer-social-icon.touch-active');
+      for (let i = 0; i < allActive.length; i++) {
+        removeActive(allActive[i]);
+      }
+    });
+
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden) {
+        if (activeBtn) removeActive(activeBtn);
+        const allActive = document.querySelectorAll('.footer-social-btn.touch-active, .gh-footer .footer-social-icon.touch-active');
+        for (let i = 0; i < allActive.length; i++) {
+          removeActive(allActive[i]);
+        }
+      }
+    });
+
+    // Click blur: prevent persistent focus outlines or sticky states after mouse/tap clicks
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.footer-social-btn, .gh-footer .footer-social-icon');
+      if (btn) {
+        setTimeout(function() {
+          if (typeof btn.blur === 'function') btn.blur();
+        }, 200);
+      }
+    });
+  })();
 
 });
 

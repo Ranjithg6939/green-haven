@@ -725,6 +725,9 @@ html.dark[dir="rtl"] .gh-cart-drawer {
   margin: 0 !important;
   line-height: 1 !important;
   direction: ltr !important;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 [dir="rtl"] .footer-social-btn i,
@@ -773,10 +776,20 @@ html.dark[dir="rtl"] .gh-cart-drawer {
 }
 
 [dir="rtl"] .back-to-top {
-  inset-inline-start: 25px !important;
-  inset-inline-end: auto !important;
-  right: auto !important;
-  left: 25px !important;
+  right: 28px !important;
+  left: auto !important;
+  inset-inline-start: auto !important;
+  inset-inline-end: 28px !important;
+  direction: ltr !important;
+}
+
+@media (max-width: 576px) {
+  [dir="rtl"] .back-to-top {
+    right: 20px !important;
+    left: auto !important;
+    inset-inline-start: auto !important;
+    inset-inline-end: 20px !important;
+  }
 }
 
 /* --------------------------------------------------
