@@ -302,7 +302,8 @@
                     </div>
                     <div class="col-md-6">
                       <label class="form-label small fw-semibold" for="contactPhone">Phone Number</label>
-                      <input type="tel" class="form-control" id="contactPhone" placeholder="+1 (503) 000-0000">
+                      <input type="tel" class="form-control" id="contactPhone" placeholder="e.g. 5030000000" inputmode="numeric" pattern="[0-9]{10,15}" minlength="10" maxlength="15" autocomplete="tel" title="Please enter numbers only (10 to 15 digits)">
+                      <div class="invalid-feedback" id="contactPhoneFeedback">Please enter a valid phone number (10 to 15 digits, numbers only).</div>
                     </div>
                     <div class="col-md-6">
                       <label class="form-label small fw-semibold" for="contactSubject">Inquiry Subject *</label>

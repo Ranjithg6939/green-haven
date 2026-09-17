@@ -1170,12 +1170,128 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* --------------------------------------------------
+     HELPER: NUMERIC-ONLY PHONE INPUT RESTRICTION & VALIDATION
+  -------------------------------------------------- */
+  function setupNumericPhoneInput(input, isRequired = false) {
+    if (!input) return null;
+    const feedback = document.getElementById(input.id + 'Feedback') || input.nextElementSibling;
+
+    const validate = () => {
+      const val = input.value.trim();
+      if (!val) {
+        if (isRequired) {
+          input.setCustomValidity('Please provide your phone number.');
+          if (feedback && feedback.classList.contains('invalid-feedback')) {
+            feedback.textContent = 'Please provide your phone number.';
+          }
+          return false;
+        } else {
+          input.setCustomValidity('');
+          return true;
+        }
+      }
+      if (!/^\d+$/.test(val)) {
+        input.setCustomValidity('Only numbers are allowed.');
+        if (feedback && feedback.classList.contains('invalid-feedback')) {
+          feedback.textContent = 'Please enter numbers only (no letters, spaces, or symbols).';
+        }
+        return false;
+      }
+      if (val.length < 10) {
+        input.setCustomValidity('Phone number must be at least 10 digits.');
+        if (feedback && feedback.classList.contains('invalid-feedback')) {
+          feedback.textContent = 'Please enter a valid phone number (at least 10 digits, numbers only).';
+        }
+        return false;
+      }
+      if (val.length > 15) {
+        input.setCustomValidity('Phone number cannot exceed 15 digits.');
+        if (feedback && feedback.classList.contains('invalid-feedback')) {
+          feedback.textContent = 'Phone number cannot exceed 15 digits.';
+        }
+        return false;
+      }
+      input.setCustomValidity('');
+      return true;
+    };
+
+    // 1. Prevent typing of non-numeric characters (letters, spaces, special symbols)
+    input.addEventListener('keydown', function(e) {
+      const allowedControlKeys = [
+        'Backspace', 'Delete', 'Tab', 'Escape', 'Enter',
+        'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown',
+        'Home', 'End'
+      ];
+      if (allowedControlKeys.includes(e.key)) return;
+      if (e.ctrlKey || e.metaKey) return;
+      if (e.key.startsWith('F') && e.key.length > 1) return;
+      if (!/^[0-9]$/.test(e.key) || e.shiftKey) {
+        e.preventDefault();
+      }
+    });
+
+    // 2. beforeinput event for modern desktop & mobile browsers
+    input.addEventListener('beforeinput', function(e) {
+      if (e.data && !/^\d+$/.test(e.data)) {
+        e.preventDefault();
+      }
+    });
+
+    // 3. Paste event: strip non-numeric characters and insert only numbers up to 15 digits
+    input.addEventListener('paste', function(e) {
+      e.preventDefault();
+      const pasteText = (e.clipboardData || window.clipboardData)?.getData('text') || '';
+      const numbersOnly = pasteText.replace(/\D/g, '');
+      if (!numbersOnly) return;
+
+      const start = this.selectionStart ?? this.value.length;
+      const end = this.selectionEnd ?? this.value.length;
+      const currentVal = this.value;
+      const maxLen = 15;
+      const availableSpace = maxLen - (currentVal.length - (end - start));
+      if (availableSpace <= 0) return;
+
+      const toInsert = numbersOnly.slice(0, availableSpace);
+      this.value = currentVal.slice(0, start) + toInsert + currentVal.slice(end);
+      const newCursor = start + toInsert.length;
+      this.setSelectionRange(newCursor, newCursor);
+      this.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+
+    // 4. Input event fallback: strip any non-numeric characters and revalidate
+    input.addEventListener('input', function() {
+      const start = this.selectionStart;
+      const cleaned = this.value.replace(/\D/g, '').slice(0, 15);
+      if (this.value !== cleaned) {
+        this.value = cleaned;
+        if (start !== null) {
+          const newPos = Math.min(start, cleaned.length);
+          this.setSelectionRange(newPos, newPos);
+        }
+      }
+      validate();
+    });
+
+    input.addEventListener('blur', validate);
+
+    return validate;
+  }
+
+  /* --------------------------------------------------
      10. CATERING INQUIRY FORM
   -------------------------------------------------- */
   const cateringForm = document.getElementById('cateringForm');
+  const cateringPhone = document.getElementById('cateringPhone');
+  const validateCateringPhone = setupNumericPhoneInput(cateringPhone, true);
+
   if (cateringForm) {
     cateringForm.addEventListener('submit', function(e) {
       e.preventDefault();
+
+      if (validateCateringPhone) {
+        validateCateringPhone();
+      }
+
       if (!this.checkValidity()) {
         e.stopPropagation();
         this.classList.add('was-validated');
@@ -1194,6 +1310,16 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       cateringForm.reset();
       cateringForm.classList.remove('was-validated');
+      if (cateringPhone) {
+        cateringPhone.setCustomValidity('');
+      }
+    });
+
+    cateringForm.addEventListener('reset', function() {
+      if (cateringPhone) {
+        cateringPhone.setCustomValidity('');
+      }
+      cateringForm.classList.remove('was-validated');
     });
   }
 
@@ -1201,9 +1327,17 @@ document.addEventListener('DOMContentLoaded', () => {
      11. CONTACT FORM
   -------------------------------------------------- */
   const contactForm = document.getElementById('contactForm');
+  const contactPhone = document.getElementById('contactPhone');
+  const validateContactPhone = setupNumericPhoneInput(contactPhone, false);
+
   if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
       e.preventDefault();
+
+      if (validateContactPhone) {
+        validateContactPhone();
+      }
+
       if (!this.checkValidity()) {
         e.stopPropagation();
         this.classList.add('was-validated');
@@ -1224,6 +1358,16 @@ document.addEventListener('DOMContentLoaded', () => {
         window.showToast.success('Message Received', `Thank you, ${name}! Your inquiry has been sent to our concierge desk.`);
       }
       contactForm.reset();
+      contactForm.classList.remove('was-validated');
+      if (contactPhone) {
+        contactPhone.setCustomValidity('');
+      }
+    });
+
+    contactForm.addEventListener('reset', function() {
+      if (contactPhone) {
+        contactPhone.setCustomValidity('');
+      }
       contactForm.classList.remove('was-validated');
     });
   }

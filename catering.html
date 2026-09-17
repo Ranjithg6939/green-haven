@@ -1316,8 +1316,8 @@
 
                   <div class="col-md-6">
                     <label class="form-label" for="cateringPhone">Phone Number *</label>
-                    <input type="tel" class="form-control" id="cateringPhone" placeholder="e.g. (503) 555-0199" required>
-                    <div class="invalid-feedback">Please provide your phone number.</div>
+                    <input type="tel" class="form-control" id="cateringPhone" placeholder="e.g. 5035550199" inputmode="numeric" pattern="[0-9]{10,15}" minlength="10" maxlength="15" required autocomplete="tel" title="Please enter numbers only (10 to 15 digits)">
+                    <div class="invalid-feedback" id="cateringPhoneFeedback">Please enter a valid phone number (10 to 15 digits, numbers only).</div>
                   </div>
 
                   <div class="col-md-6">
