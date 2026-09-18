@@ -3598,6 +3598,64 @@ html.dark .page-header .section-sub {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.55) !important;
 }
 
+/* Page Header Subtitle Badge Mobile Alignment */
+.services-header-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.45rem !important;
+}
+
+.services-header-badge .badge-part-main {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.35rem !important;
+  white-space: nowrap !important;
+}
+
+.services-header-badge .badge-part-sub {
+  display: inline !important;
+  white-space: nowrap !important;
+}
+
+@media (max-width: 575.98px) {
+  .services-nature-page .page-header .section-sub.services-header-badge,
+  .page-header .section-sub.services-header-badge,
+  .services-header-badge {
+    display: inline-flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 0.42rem 1.25rem !important;
+    gap: 0.18rem !important;
+    font-size: 0.74rem !important;
+    letter-spacing: 1.1px !important;
+    line-height: 1.35 !important;
+    border-radius: 9999px !important;
+  }
+
+  .services-header-badge .badge-part-main {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.35rem !important;
+    white-space: nowrap !important;
+  }
+
+  .services-header-badge .badge-part-main i {
+    display: inline-block !important;
+    font-size: 0.9em !important;
+  }
+
+  .services-header-badge .badge-part-sub {
+    display: block !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+  }
+}
+
+
 .page-header p.lead,
 .page-header .text-muted {
   color: #1A331D !important;

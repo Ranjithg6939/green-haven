@@ -582,6 +582,63 @@
       color: #69F0AE !important;
       text-decoration: underline !important;
     }
+
+    /* Page Header Subtitle Badge Mobile Alignment */
+    .services-header-badge {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 0.45rem !important;
+    }
+
+    .services-header-badge .badge-part-main {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 0.35rem !important;
+      white-space: nowrap !important;
+    }
+
+    .services-header-badge .badge-part-sub {
+      display: inline !important;
+      white-space: nowrap !important;
+    }
+
+    @media (max-width: 575.98px) {
+      .services-nature-page .page-header .section-sub.services-header-badge,
+      .page-header .section-sub.services-header-badge,
+      .services-header-badge {
+        display: inline-flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        padding: 0.42rem 1.25rem !important;
+        gap: 0.18rem !important;
+        font-size: 0.74rem !important;
+        letter-spacing: 1.1px !important;
+        line-height: 1.35 !important;
+        border-radius: 9999px !important;
+      }
+
+      .services-header-badge .badge-part-main {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.35rem !important;
+        white-space: nowrap !important;
+      }
+
+      .services-header-badge .badge-part-main i {
+        display: inline-block !important;
+        font-size: 0.9em !important;
+      }
+
+      .services-header-badge .badge-part-sub {
+        display: block !important;
+        text-align: center !important;
+        white-space: nowrap !important;
+      }
+    }
   </style>
 </head>
 <body class="nature-bg-page services-nature-page">
@@ -783,7 +840,7 @@
     <!-- Page Header (Exact Content) -->
     <section class="page-header text-center pt-5 pb-4">
       <div class="container">
-        <span class="section-sub"><i class="bi bi-flower1"></i> Nourishing Food. Thoughtful Experiences.</span>
+        <span class="section-sub services-header-badge"><span class="badge-part-main"><i class="bi bi-flower1"></i> Nourishing Food.</span> <span class="badge-part-sub">Thoughtful Experiences.</span></span>
         <h1 class="display-4 fw-bold font-serif mb-3">Our Services</h1>
         <p class="lead text-muted mx-auto mb-3" style="max-width: 760px; font-size: 1.15rem; line-height: 1.7;">
           At Green Haven, we bring fresh, plant-based goodness beyond the plate. From everyday dining to special celebrations, every experience is crafted with wholesome ingredients, mindful preparation, and a love for nature.
