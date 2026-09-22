@@ -58,8 +58,14 @@ const THEME = {
   borderHairline: '#DDD6C9', // Inner frame hairline
   slate: '#47423B',          // Editorial descriptions (darkened slightly for clarity)
   tagGreen: '#1B5236',       // Botanical sage for dietary pills
-  boxBg: '#F5F0E6'           // Soft champagne container fill
+  creamGold: '#F3ECE0',      // Soft tinted card background
+  creamGoldBorder: '#D8CBB6' // Card border
 };
+
+// Font selection with Unicode Indian Rupee (₹) support
+const FONT_SERIF_BOLD = fs.existsSync('C:/Windows/Fonts/timesbd.ttf')
+  ? 'C:/Windows/Fonts/timesbd.ttf'
+  : (fs.existsSync('C:/Windows/Fonts/georgiab.ttf') ? 'C:/Windows/Fonts/georgiab.ttf' : 'Times-Bold');
 
 // Helper: Paint full page cream background and luxury double borders
 function drawPageBackgroundAndFrame(doc, pageNum) {
@@ -187,8 +193,8 @@ function renderMenuItem(doc, x, y, width, item) {
   const nameStr = item.name;
   const nameWidth = doc.widthOfString(nameStr);
 
-  // Price font & size (16pt Times-Bold)
-  doc.font('Times-Bold').fontSize(16).fillColor(THEME.heading);
+  // Price font & size (16pt FONT_SERIF_BOLD)
+  doc.font(FONT_SERIF_BOLD).fontSize(16).fillColor(THEME.heading);
   const priceStr = item.price;
   const priceWidth = doc.widthOfString(priceStr);
 
@@ -372,19 +378,19 @@ p2Y = renderSectionHeader(
 const startersList = [
   {
     name: 'Heirloom Avocado Tartine',
-    price: '$14.00',
+    price: '₹499',
     desc: 'Grilled artisanal sourdough, whipped Meyer lemon avocado mousse, shaved watermelon radishes, pickled shallots, and hemp dukkah spice.',
     dietary: '100% Vegan • Nut-Free Option • Organic'
   },
   {
     name: 'Wood-Fired Wild Herb Flatbread',
-    price: '$15.50',
+    price: '₹549',
     desc: 'Heritage spelt dough, roasted garlic puree, slow-braised sweet leeks, cultured pine nut ricotta, and garden-picked rosemary oil.',
     dietary: '100% Vegan • Heritage Spelt • Organic'
   },
   {
     name: 'Crispy Truffled Polenta Bites',
-    price: '$13.50',
+    price: '₹449',
     desc: 'Golden pan-seared organic polenta cubes infused with black summer truffle, garlic aioli emulsion, micro chives, and 12-year aged balsamic glaze.',
     dietary: 'Gluten-Free • 100% Vegan'
   }
@@ -406,19 +412,19 @@ p2Y = renderSectionHeader(
 const mainsList = [
   {
     name: 'Wild Truffle & Forest Risotto',
-    price: '$26.00',
+    price: '₹899',
     desc: 'Acquerello carnaroli rice slow-simmered in porcini stock, foraged chanterelles, fresh black summer truffle carpaccio, and cashew parmesan silk.',
     dietary: 'Gluten-Free • 100% Organic • Vegan'
   },
   {
     name: 'Smoked Cauliflower Rib Steak',
-    price: '$24.00',
+    price: '₹799',
     desc: 'Applewood-smoked organic cauliflower steak glazed in herb chimichurri, served over smooth parsnip velvet purée with pomegranate reduction.',
     dietary: '100% Vegan • Gluten-Free • Nut-Free'
   },
   {
     name: 'Pan-Seared King Oyster Scallops',
-    price: '$28.00',
+    price: '₹949',
     desc: 'Thick diamond-scored Sonoma King Oyster medallions poached in kombu broth, seared in garlic herb butter over sweet garden pea velvet.',
     dietary: 'Gluten-Free • Chef\'s Signature • Vegan'
   }
@@ -447,19 +453,19 @@ p3Y = renderSectionHeader(
 const bowlsList = [
   {
     name: 'Botanical Harvest Bowl',
-    price: '$18.50',
+    price: '₹599',
     desc: 'Tri-color quinoa, crispy turmeric chickpeas, roasted kabocha squash, avocado rose, massaged kale, and green tahini sauce.',
     dietary: 'Raw & Organic • 100% Vegan'
   },
   {
     name: 'Golden Beet & Arugula Salad',
-    price: '$16.50',
+    price: '₹549',
     desc: 'Roasted yellow beets, baby arugula, sprouted candied walnuts, house cultured almond chevre, and blood orange reduction.',
     dietary: 'Gluten-Free • Cultured Almond Chevre'
   },
   {
     name: 'Amazonian Acai Power Bowl',
-    price: '$15.00',
+    price: '₹499',
     desc: 'Thick organic wild acai puree, grain-free coconut almond granola, sliced bananas, dragonfruit, and chia hemp clusters.',
     dietary: '100% Vegan • Antioxidant Rich'
   }
@@ -481,19 +487,19 @@ p3Y = renderSectionHeader(
 const dessertsList = [
   {
     name: 'Uji Matcha Silk Tart',
-    price: '$14.00',
+    price: '₹449',
     desc: 'Raw date-almond crust, ceremonial matcha cashew cream, candied Sicilian pistachios, and raspberry coulis drizzle.',
     dietary: 'Raw & Organic • Ceremonial Matcha'
   },
   {
     name: 'Raw Dark Cacao & Espresso Torte',
-    price: '$13.00',
+    price: '₹429',
     desc: 'Single-origin Ecuadorian heirloom raw cacao, espresso bean infusion, hazelnut praline crust, and vanilla sea salt.',
     dietary: '100% Vegan • Gluten-Free'
   },
   {
     name: 'Meyer Lemon Verbena Panna Cotta',
-    price: '$12.50',
+    price: '₹399',
     desc: 'Silky coconut cream panna cotta infused with lemon verbena, Meyer lemon curd glaze, and candied lavender petals.',
     dietary: 'Gluten-Free • 100% Vegan'
   }
@@ -522,19 +528,19 @@ p4Y = renderSectionHeader(
 const drinksList = [
   {
     name: 'Emerald Chlorophyll Elixir',
-    price: '$9.50',
+    price: '₹299',
     desc: 'Cold-pressed crisp celery, Japanese cucumber, Granny Smith apple, spirulina, ginger, and organic holy basil.',
     dietary: 'Raw & Organic • Fresh Pressed'
   },
   {
     name: 'Golden Turmeric Adaptogen Tonic',
-    price: '$8.50',
+    price: '₹249',
     desc: 'Fresh Hawaiian wild turmeric root, Ceylon cinnamon, Madagascar vanilla, ashwagandha, oat milk, and cold-pressed ginger.',
     dietary: '100% Vegan • Adaptogen Powered'
   },
   {
     name: 'Wild Hibiscus Rose Kombucha',
-    price: '$9.00',
+    price: '₹279',
     desc: 'In-house fermented live sparkling kombucha infused with organic Sudanese hibiscus calyces, Bulgarian rose water, and fresh lime.',
     dietary: 'Raw & Organic • Live Probiotic'
   }

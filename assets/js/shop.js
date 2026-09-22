@@ -327,13 +327,21 @@
         if (loggedIn && user) {
           const firstName = (user.name || 'Member').split(' ')[0];
           return `
-            <div class="dropdown d-inline-block">
-              <button class="btn btn-outline-primary btn-sm dropdown-toggle d-inline-flex align-items-center gap-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-person-circle fs-6 text-success"></i>
-                <span>Hi, <strong>${escapeHtml(firstName)}</strong></span>
+            <div class="dropdown d-inline-block gh-nav-auth-dropdown">
+              <button class="btn btn-outline-primary btn-sm dropdown-toggle d-inline-flex align-items-center gap-1 gh-nav-auth-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Account menu">
+                <i class="bi bi-person-circle fs-6 text-success gh-nav-auth-icon"></i>
+                <span class="gh-nav-auth-greeting d-none d-md-inline">Hi, <strong>${escapeHtml(firstName)}</strong></span>
               </button>
               <ul class="dropdown-menu dropdown-menu-end gh-dropdown-menu shadow-lg">
-                <li><h6 class="dropdown-header small text-muted">${escapeHtml(user.email || 'Member')}</h6></li>
+                <li class="px-3 pt-3 pb-2 text-center border-bottom mb-2">
+                  <div class="d-flex justify-content-center mb-1">
+                    <div class="d-inline-flex align-items-center justify-content-center rounded-circle" style="width: 46px; height: 46px; background-color: rgba(46, 125, 50, 0.08);">
+                      <i class="bi bi-person-circle text-success" style="font-size: 1.85rem; line-height: 1;"></i>
+                    </div>
+                  </div>
+                  <div class="fw-bold text-truncate" style="color: var(--gh-heading-color, #1A3018); font-size: 0.96rem;">${escapeHtml(user.name || 'Member')}</div>
+                  <div class="small text-muted text-truncate" style="font-size: 0.8rem;">${escapeHtml(user.email || '')}</div>
+                </li>
                 <li><a class="dropdown-item gh-dropdown-item" href="my-account.html"><i class="bi bi-person-vcard me-2 text-primary"></i> My Profile</a></li>
                 <li><a class="dropdown-item gh-dropdown-item" href="orders.html"><i class="bi bi-bag-check me-2 text-success"></i> My Orders</a></li>
                 <li><a class="dropdown-item gh-dropdown-item" href="cart.html"><i class="bi bi-cart3 me-2 text-warning"></i> My Cart</a></li>
@@ -356,13 +364,13 @@
       const getMobileHtml = () => {
         if (loggedIn && user) {
           return `
-            <div class="p-3 bg-light rounded-3 mb-3 border">
-              <div class="d-flex align-items-center gap-2 mb-2">
-                <i class="bi bi-person-circle fs-4 text-success"></i>
-                <div>
-                  <div class="fw-bold">${escapeHtml(user.name || 'Member')}</div>
-                  <div class="small text-muted">${escapeHtml(user.email || '')}</div>
+            <div class="p-3 bg-light rounded-3 mb-3 border text-center gh-mobile-user-card">
+              <div class="d-flex flex-column align-items-center justify-content-center mb-3">
+                <div class="gh-mobile-user-icon-wrap mb-2">
+                  <i class="bi bi-person-circle text-success" style="font-size: 2.35rem; line-height: 1; display: inline-block;"></i>
                 </div>
+                <div class="fw-bold fs-5 text-center text-truncate w-100" style="color: var(--gh-heading-color, #1A3018);">${escapeHtml(user.name || 'Member')}</div>
+                <div class="small text-muted text-center text-truncate w-100">${escapeHtml(user.email || '')}</div>
               </div>
               <div class="d-grid gap-2">
                 <a href="my-account.html" class="btn btn-sm btn-outline-primary text-start"><i class="bi bi-person-vcard me-2"></i> My Account</a>
@@ -416,9 +424,9 @@
      2. CART MODULE & SIDE DRAWER ENGINE
      ========================================================================== */
   const Cart = {
-    DELIVERY_FEE: 5.00,
-    FREE_DELIVERY_THRESHOLD: 50.00,
-    TAX_RATE: 0.08, // 8% tax
+    DELIVERY_FEE: 99.00,
+    FREE_DELIVERY_THRESHOLD: 999.00,
+    TAX_RATE: 0.05, // 5% GST
 
     getCart() {
       try {
@@ -587,7 +595,7 @@
         <div class="gh-cart-delivery-banner" id="ghCartDeliveryBanner">
           <div class="gh-cart-delivery-msg" id="ghCartDeliveryMsg">
             <span>Free Delivery:</span>
-            <strong id="ghCartDeliveryRemaining">$50.00 away</strong>
+            <strong id="ghCartDeliveryRemaining">₹999 away</strong>
           </div>
           <div class="gh-cart-delivery-track">
             <div class="gh-cart-delivery-fill" id="ghCartDeliveryFill" style="width: 0%;"></div>
@@ -602,19 +610,19 @@
           <div class="gh-cart-summary-list">
             <div class="gh-cart-summary-row">
               <span>Dishes Subtotal</span>
-              <span class="fw-semibold text-dark-emphasis" id="ghCartSubtotalText">$0.00</span>
+              <span class="fw-semibold text-dark-emphasis" id="ghCartSubtotalText">₹0</span>
             </div>
             <div class="gh-cart-summary-row">
               <span>Delivery Fee</span>
-              <span class="fw-semibold" id="ghCartDeliveryText">$5.00</span>
+              <span class="fw-semibold" id="ghCartDeliveryText">₹99</span>
             </div>
             <div class="gh-cart-summary-row">
-              <span>Estimated Tax (8%)</span>
-              <span class="fw-semibold" id="ghCartTaxText">$0.00</span>
+              <span>Estimated Tax (5%)</span>
+              <span class="fw-semibold" id="ghCartTaxText">₹0</span>
             </div>
             <div class="gh-cart-summary-row total-row">
               <span>Estimated Total</span>
-              <span class="total-amount" id="ghCartGrandTotalText">$0.00</span>
+              <span class="total-amount" id="ghCartGrandTotalText">₹0</span>
             </div>
           </div>
 
@@ -758,9 +766,9 @@
           deliveryMsg.innerHTML = '<span><i class="bi bi-gift-fill text-success me-1"></i> You unlocked <strong>FREE Delivery!</strong></span>';
           deliveryFill.style.width = '100%';
         } else {
-          const diff = (this.FREE_DELIVERY_THRESHOLD - subtotal).toFixed(2);
+          const diff = Math.round(this.FREE_DELIVERY_THRESHOLD - subtotal).toLocaleString('en-IN');
           const pct = Math.min(100, Math.round((subtotal / this.FREE_DELIVERY_THRESHOLD) * 100));
-          deliveryMsg.innerHTML = `<span>Add <strong>$${diff}</strong> more for <strong>FREE Delivery</strong></span>`;
+          deliveryMsg.innerHTML = `<span>Add <strong>₹${diff}</strong> more for <strong>FREE Delivery</strong></span>`;
           deliveryFill.style.width = `${pct}%`;
         }
       }
@@ -773,7 +781,7 @@
               <div class="gh-cart-item-info">
                 <span class="gh-cart-item-name" title="${escapeHtml(item.name)}">${escapeHtml(item.name)}</span>
                 <div class="gh-cart-item-meta">
-                  <span class="gh-cart-item-price">$${item.price.toFixed(2)} each</span>
+                  <span class="gh-cart-item-price">₹${Math.round(item.price).toLocaleString('en-IN')} each</span>
                   <span class="gh-cart-item-category">${escapeHtml(item.category || 'Mains')}</span>
                 </div>
                 <div class="gh-cart-item-actions">
@@ -782,7 +790,7 @@
                     <span class="gh-cart-stepper-val">${item.qty}</span>
                     <button type="button" class="gh-cart-stepper-btn" data-action="plus" data-id="${item.id}" aria-label="Increase quantity">+</button>
                   </div>
-                  <span class="gh-cart-item-total">$${(item.price * item.qty).toFixed(2)}</span>
+                  <span class="gh-cart-item-total">₹${Math.round(item.price * item.qty).toLocaleString('en-IN')}</span>
                 </div>
               </div>
               <button type="button" class="gh-cart-item-remove" data-action="remove" data-id="${item.id}" aria-label="Remove ${escapeHtml(item.name)}" title="Remove item">
@@ -798,17 +806,17 @@
       const taxEl = document.getElementById('ghCartTaxText');
       const grandTotalEl = document.getElementById('ghCartGrandTotalText');
 
-      if (subtotalEl) subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+      if (subtotalEl) subtotalEl.textContent = `₹${Math.round(subtotal).toLocaleString('en-IN')}`;
       if (deliveryEl) {
-        deliveryEl.textContent = deliveryFee === 0 ? 'FREE' : `$${deliveryFee.toFixed(2)}`;
+        deliveryEl.textContent = deliveryFee === 0 ? 'FREE' : `₹${Math.round(deliveryFee).toLocaleString('en-IN')}`;
         if (deliveryFee === 0) {
           deliveryEl.className = 'fw-bold text-success';
         } else {
           deliveryEl.className = 'fw-semibold';
         }
       }
-      if (taxEl) taxEl.textContent = `$${tax.toFixed(2)}`;
-      if (grandTotalEl) grandTotalEl.textContent = `$${total.toFixed(2)}`;
+      if (taxEl) taxEl.textContent = `₹${Math.round(tax).toLocaleString('en-IN')}`;
+      if (grandTotalEl) grandTotalEl.textContent = `₹${Math.round(total).toLocaleString('en-IN')}`;
     },
 
     bindNavCartButtons() {
@@ -935,7 +943,7 @@
           e.preventDefault();
           const id = this.getAttribute('data-id') || 'dish-' + Date.now();
           const name = this.getAttribute('data-name') || this.closest('.dish-card')?.querySelector('.dish-title')?.textContent.trim() || 'Botanical Dish';
-          const priceStr = this.getAttribute('data-price') || this.closest('.dish-card')?.querySelector('.dish-card-price')?.textContent.replace(/[^0-9.]/g, '') || '18.00';
+          const priceStr = this.getAttribute('data-price') || this.closest('.dish-card')?.querySelector('.dish-card-price')?.textContent.replace(/[^0-9.]/g, '') || '499';
           const image = this.getAttribute('data-image') || this.closest('.dish-card')?.querySelector('img')?.getAttribute('src') || '';
           const category = this.getAttribute('data-category') || 'Mains';
           

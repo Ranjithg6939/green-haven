@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
 <head>
   <meta charset="UTF-8">
@@ -703,11 +703,13 @@
     }
 
     .catering-price-val {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       font-size: 1.85rem;
       font-weight: 800;
       color: #1b4d13;
       line-height: 1;
+      letter-spacing: -0.03em;
+      font-feature-settings: "tnum" 1, "lnum" 1;
     }
 
     [data-bs-theme="dark"] .catering-price-val {
@@ -715,7 +717,8 @@
     }
 
     .catering-price-unit {
-      font-size: 0.78rem;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      font-size: 0.8rem;
       color: #3b503e;
       font-weight: 600;
     }
@@ -725,13 +728,16 @@
     }
 
     .catering-total-estimate {
-      font-size: 0.72rem;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      font-size: 0.74rem;
       font-weight: 700;
       color: #2e6518;
-      background: rgba(255, 255, 255, 0.9);
-      padding: 3px 8px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 4px 9px;
       border-radius: 50px;
       border: 1px solid rgba(46, 101, 24, 0.2);
+      font-feature-settings: "tnum" 1;
+      letter-spacing: 0.01em;
     }
 
     [data-bs-theme="dark"] .catering-total-estimate {
@@ -881,8 +887,8 @@
               Home
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item " href="index.html"><i class="bi bi-house me-2"></i> Home 1 (Gourmet Landing)</a></li>
-              <li><a class="gh-dropdown-item " href="home-2.html"><i class="bi bi-flower1 me-2"></i> Home 2 (Farm to Plate)</a></li>
+              <li><a class="gh-dropdown-item " href="index.html">Home 1 (Gourmet Landing)</a></li>
+              <li><a class="gh-dropdown-item " href="home-2.html">Home 2 (Farm to Plate)</a></li>
             </ul>
           </div>
           <a class="gh-nav-link " href="about.html">About</a>
@@ -1163,11 +1169,11 @@
           <div class="col-lg-4 col-md-6">
             <div class="luxury-catering-card">
               <div class="catering-card-img-wrap">
-                <img src="https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=800&auto=format&fit=crop" alt="Garden Grazing Catering" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=800&auto=format&fit=crop" alt="Garden Grazing Catering" loading="eager">
                 <div class="catering-floating-icon">
                   <span>🍸</span>
                 </div>
-                <span class="catering-category-pill">Cocktail & Receptions</span>
+                <span class="catering-category-pill">Cocktail & High Tea Receptions</span>
               </div>
               <div class="catering-card-body">
                 <h3 class="catering-tier-title">Garden Grazing</h3>
@@ -1175,11 +1181,11 @@
                 
                 <div class="catering-price-box">
                   <div>
-                    <span class="catering-price-val" data-rate="45">$45</span>
+                    <span class="catering-price-val" data-rate="1299">₹1,299</span>
                     <span class="catering-price-unit">/ guest</span>
                   </div>
                   <div class="catering-total-estimate">
-                    Est: <span class="calc-total" data-tier-rate="45">$2,250</span>
+                    Est: <span class="calc-total" data-tier-rate="1299">₹64,950</span>
                   </div>
                 </div>
 
@@ -1192,7 +1198,7 @@
                 </ul>
 
                 <div class="mt-auto pt-2">
-                  <a href="#inquiryFormSection" class="btn-package-action" data-package="Garden Grazing" data-rate="45">
+                  <a href="#inquiryFormSection" class="btn-package-action" data-package="Garden Grazing" data-rate="1299">
                     <span>Select Garden Grazing</span> <i class="bi bi-arrow-right"></i>
                   </a>
                 </div>
@@ -1205,7 +1211,7 @@
             <div class="luxury-catering-card featured-tier">
               <div class="catering-crown-badge">★ Most Popular · Signature</div>
               <div class="catering-card-img-wrap">
-                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop" alt="Botanical Harvest Catering" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop" alt="Botanical Harvest Catering" loading="eager">
                 <div class="catering-floating-icon">
                   <span>🌿</span>
                 </div>
@@ -1217,11 +1223,11 @@
                 
                 <div class="catering-price-box">
                   <div>
-                    <span class="catering-price-val" data-rate="75">$75</span>
+                    <span class="catering-price-val" data-rate="1899">₹1,899</span>
                     <span class="catering-price-unit">/ guest</span>
                   </div>
                   <div class="catering-total-estimate">
-                    Est: <span class="calc-total" data-tier-rate="75">$3,750</span>
+                    Est: <span class="calc-total" data-tier-rate="1899">₹94,950</span>
                   </div>
                 </div>
 
@@ -1234,7 +1240,7 @@
                 </ul>
 
                 <div class="mt-auto pt-2">
-                  <a href="#inquiryFormSection" class="btn-package-action featured-action" data-package="Botanical Harvest" data-rate="75">
+                  <a href="#inquiryFormSection" class="btn-package-action featured-action" data-package="Botanical Harvest" data-rate="1899">
                     <span>Select Botanical Harvest</span> <i class="bi bi-arrow-right"></i>
                   </a>
                 </div>
@@ -1247,7 +1253,7 @@
             <div class="luxury-catering-card">
               <div class="catering-crown-badge vip-badge">👑 VIP Haute Gastronomy</div>
               <div class="catering-card-img-wrap">
-                <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=800&auto=format&fit=crop" alt="Grand Degustation Catering" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=800&auto=format&fit=crop" alt="Grand Degustation Catering" loading="eager">
                 <div class="catering-floating-icon">
                   <span>👑</span>
                 </div>
@@ -1259,11 +1265,11 @@
                 
                 <div class="catering-price-box">
                   <div>
-                    <span class="catering-price-val" data-rate="110">$110</span>
+                    <span class="catering-price-val" data-rate="2899">₹2,899</span>
                     <span class="catering-price-unit">/ guest</span>
                   </div>
                   <div class="catering-total-estimate">
-                    Est: <span class="calc-total" data-tier-rate="110">$5,500</span>
+                    Est: <span class="calc-total" data-tier-rate="2899">₹1,44,950</span>
                   </div>
                 </div>
 
@@ -1276,7 +1282,7 @@
                 </ul>
 
                 <div class="mt-auto pt-2">
-                  <a href="#inquiryFormSection" class="btn-package-action" data-package="Grand Degustation" data-rate="110">
+                  <a href="#inquiryFormSection" class="btn-package-action" data-package="Grand Degustation" data-rate="2899">
                     <span>Select Grand Degustation</span> <i class="bi bi-arrow-right"></i>
                   </a>
                 </div>
@@ -1304,20 +1310,20 @@
                 <div class="row g-3">
                   <div class="col-md-6">
                     <label class="form-label" for="cateringName">Full Name *</label>
-                    <input type="text" class="form-control" id="cateringName" placeholder="e.g. Eleanor Vance" required>
-                    <div class="invalid-feedback">Please enter your name.</div>
+                    <input type="text" class="form-control" id="cateringName" placeholder="e.g. Eleanor Vance" pattern="^[A-Za-z]+(?:\s[A-Za-z]+)*$" minlength="2" required title="Please enter a valid name (letters and spaces only, at least 2 characters)">
+                    <div class="invalid-feedback" id="cateringNameFeedback">Please enter your name.</div>
                   </div>
 
                   <div class="col-md-6">
                     <label class="form-label" for="cateringEmail">Email Address *</label>
-                    <input type="email" class="form-control" id="cateringEmail" placeholder="e.g. eleanor@example.com" required>
-                    <div class="invalid-feedback">Please enter a valid email.</div>
+                    <input type="email" class="form-control" id="cateringEmail" placeholder="e.g. eleanor@example.com" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" required title="Please enter a valid email address (e.g. name@example.com)">
+                    <div class="invalid-feedback" id="cateringEmailFeedback">Please enter a valid email.</div>
                   </div>
 
                   <div class="col-md-6">
                     <label class="form-label" for="cateringPhone">Phone Number *</label>
-                    <input type="tel" class="form-control" id="cateringPhone" placeholder="e.g. 5035550199" inputmode="numeric" pattern="[0-9]{10,15}" minlength="10" maxlength="15" required autocomplete="tel" title="Please enter numbers only (10 to 15 digits)">
-                    <div class="invalid-feedback" id="cateringPhoneFeedback">Please enter a valid phone number (10 to 15 digits, numbers only).</div>
+                    <input type="tel" class="form-control" id="cateringPhone" placeholder="e.g. 9876543210" inputmode="numeric" pattern="[0-9]{10}" minlength="10" maxlength="10" required autocomplete="tel" title="Please enter numbers only (exactly 10 digits)">
+                    <div class="invalid-feedback" id="cateringPhoneFeedback">Please enter a valid 10-digit phone number.</div>
                   </div>
 
                   <div class="col-md-6">
@@ -1408,7 +1414,7 @@
           <h4 class="footer-col-title">Hours & Location</h4>
           <p class="text-white-50 small mb-2"><i class="bi bi-geo-alt text-warning me-2"></i> 742 Evergreen Botanical Way, Portland</p>
           <p class="text-white-50 small mb-2"><i class="bi bi-clock text-warning me-2"></i> Mon - Sun: 8:00 AM - 10:00 PM</p>
-          <p class="text-white-50 small mb-0"><i class="bi bi-telephone text-warning me-2"></i> <a href="tel:+15035550192" class="text-white text-decoration-none" style="color: #FFFFFF !important;">+1 (503) 555-0192</a></p>
+          <p class="text-white-50 small mb-0"><i class="bi bi-telephone text-warning me-2"></i> <a href="tel:+15035550192" class="text-white text-decoration-none" >+1 (503) 555-0192</a></p>
         </div>
 
         <!-- Column 4: Botanical Digest -->
@@ -1416,7 +1422,7 @@
           <h4 class="footer-col-title">Botanical Digest</h4>
           <p class="text-white-50 small mb-3">Join our newsletter for seasonal menu previews and chef recipes.</p>
           <form class="newsletter-form d-flex gap-2">
-            <input type="email" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Your email" required>
+            <input type="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Your email" required>
             <button type="submit" class="btn btn-accent btn-sm px-3">Join</button>
           </form>
         </div>
@@ -1480,7 +1486,7 @@
         calcTotals.forEach((el) => {
           const rate = parseInt(el.getAttribute('data-tier-rate'), 10) || 0;
           const total = rate * guestCount;
-          el.textContent = '$' + total.toLocaleString();
+          el.textContent = '₹' + total.toLocaleString('en-IN');
         });
 
         if (guestInput) {

@@ -13,7 +13,7 @@
       id: 'dish-1',
       name: 'Heirloom Avocado Tartine',
       category: 'Starters',
-      price: 14.00,
+      price: 499,
       image: 'assets/img/dishes/heirloom-avocado-tartine.jpg',
       rating: 4.95,
       reviewsCount: 142,
@@ -46,7 +46,7 @@
       id: 'dish-6',
       name: 'Wood-Fired Wild Herb Flatbread',
       category: 'Starters',
-      price: 15.50,
+      price: 549,
       image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=800&auto=format&fit=crop',
       rating: 4.92,
       reviewsCount: 118,
@@ -78,7 +78,7 @@
       id: 'dish-10',
       name: 'Crispy Truffled Polenta Bites',
       category: 'Starters',
-      price: 13.50,
+      price: 449,
       image: 'assets/img/dishes/crispy-truffled-polenta-bites.jpg',
       rating: 4.88,
       reviewsCount: 96,
@@ -109,7 +109,7 @@
       id: 'dish-2',
       name: 'Wild Truffle & Forest Risotto',
       category: 'Main Courses',
-      price: 26.00,
+      price: 899,
       image: 'assets/img/dishes/wild-truffle-forest-risotto.jpg',
       rating: 4.98,
       reviewsCount: 320,
@@ -141,7 +141,7 @@
       id: 'dish-4',
       name: 'Smoked Cauliflower Rib Steak',
       category: 'Main Courses',
-      price: 24.00,
+      price: 799,
       image: 'assets/img/dishes/smoked-cauliflower-rib-steak.jpg',
       rating: 4.90,
       reviewsCount: 175,
@@ -172,7 +172,7 @@
       id: 'dish-11',
       name: 'Pan-Seared King Oyster Scallops',
       category: 'Main Courses',
-      price: 28.00,
+      price: 949,
       image: 'assets/img/dishes/pan-seared-king-oyster-scallops.jpg',
       rating: 4.95,
       reviewsCount: 210,
@@ -203,7 +203,7 @@
       id: 'dish-3',
       name: 'Botanical Harvest Bowl',
       category: 'Bowls & Salads',
-      price: 18.50,
+      price: 599,
       image: 'assets/img/dishes/botanical-harvest-bowl.jpg',
       rating: 4.94,
       reviewsCount: 245,
@@ -235,7 +235,7 @@
       id: 'dish-5',
       name: 'Golden Beet & Arugula Salad',
       category: 'Bowls & Salads',
-      price: 16.50,
+      price: 549,
       image: 'assets/img/dishes/golden-beet-arugula-salad.jpg',
       rating: 4.89,
       reviewsCount: 132,
@@ -266,7 +266,7 @@
       id: 'dish-8',
       name: 'Amazonian Acai Power Bowl',
       category: 'Bowls & Salads',
-      price: 15.00,
+      price: 499,
       image: 'assets/img/dishes/amazonian-acai-power-bowl.jpg',
       rating: 4.91,
       reviewsCount: 164,
@@ -298,7 +298,7 @@
       id: 'dish-7',
       name: 'Uji Matcha Silk Tart',
       category: 'Desserts',
-      price: 14.00,
+      price: 449,
       image: 'assets/img/dishes/uji-matcha-silk-tart.jpg',
       rating: 4.97,
       reviewsCount: 188,
@@ -329,7 +329,7 @@
       id: 'dish-15',
       name: 'Raw Dark Cacao & Espresso Torte',
       category: 'Desserts',
-      price: 13.00,
+      price: 429,
       image: 'assets/img/dishes/raw-dark-cacao-espresso-torte.jpg',
       rating: 4.93,
       reviewsCount: 152,
@@ -360,7 +360,7 @@
       id: 'dish-16',
       name: 'Meyer Lemon Verbena Panna Cotta',
       category: 'Desserts',
-      price: 12.50,
+      price: 399,
       image: 'assets/img/dishes/meyer-lemon-verbena-panna-cotta.jpg',
       rating: 4.89,
       reviewsCount: 104,
@@ -391,7 +391,7 @@
       id: 'dish-17',
       name: 'Emerald Chlorophyll Elixir',
       category: 'Drinks',
-      price: 9.50,
+      price: 299,
       image: 'assets/img/dishes/emerald-chlorophyll-elixir.jpg',
       rating: 4.96,
       reviewsCount: 178,
@@ -422,7 +422,7 @@
       id: 'dish-18',
       name: 'Golden Turmeric Adaptogen Tonic',
       category: 'Drinks',
-      price: 8.50,
+      price: 249,
       image: 'assets/img/dishes/golden-turmeric-adaptogen-tonic.jpg',
       rating: 4.92,
       reviewsCount: 140,
@@ -453,7 +453,7 @@
       id: 'dish-19',
       name: 'Wild Hibiscus Rose Kombucha',
       category: 'Drinks',
-      price: 9.00,
+      price: 279,
       image: 'assets/img/dishes/wild-hibiscus-rose-kombucha.jpg',
       rating: 4.94,
       reviewsCount: 165,
@@ -600,7 +600,7 @@
 
     // Price
     const priceEl = document.getElementById('dishModalPrice');
-    if (priceEl) priceEl.textContent = `$${parseFloat(dish.price).toFixed(2)}`;
+    if (priceEl) priceEl.textContent = `₹${Math.round(dish.price).toLocaleString('en-IN')}`;
 
     // Prep time
     const prepEl = document.getElementById('dishModalPrepTime');
@@ -619,9 +619,16 @@
         { label: 'Organic', icon: '✨', class: 'pill-organic' }
       ]).map(d => `
         <span class="dietary-pill ${d.class || 'pill-vegan'}">
-          <span class="pill-icon">${d.icon || '🌱'}</span> ${escapeHtml(d.label)}
+          <span class="pill-icon">${d.icon || '🌱'}</span>
+          <span class="pill-label">${escapeHtml(d.label)}</span>
         </span>
       `).join('');
+    }
+
+    // Chef's Culinary Note
+    const chefEl = document.getElementById('dishModalChefNote');
+    if (chefEl) {
+      chefEl.textContent = dish.chefNote || 'Crafted fresh to order with 100% regeneratively grown organic botanicals.';
     }
 
     // Image overlay badges
@@ -685,7 +692,7 @@
   function updateBtnPrice() {
     const btnPriceEl = document.getElementById('dishModalBtnPrice');
     if (!btnPriceEl || !currentModalDish) return;
-    const total = (parseFloat(currentModalDish.price) * currentModalQty).toFixed(2);
+    const total = Math.round(parseFloat(currentModalDish.price) * currentModalQty).toLocaleString('en-IN');
     btnPriceEl.textContent = total;
   }
 
@@ -720,30 +727,30 @@
         <div class="modal-dialog modal-dialog-centered modal-lg dish-modal-dialog">
           <div class="modal-content border-0 rounded-4 shadow-2xl overflow-hidden">
             <!-- Modal Header with Category and Back -->
-            <div class="modal-header border-0 pb-0 pt-3 px-3.5 px-md-4 d-flex align-items-center justify-content-between">
+            <div class="modal-header border-0 pb-0 pt-3 px-3 px-md-4 d-flex align-items-center justify-content-between">
               <div class="d-flex align-items-center gap-2">
-                <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-2.5 py-1 d-inline-flex align-items-center gap-1 extra-small fw-semibold" data-bs-dismiss="modal">
+                <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3 py-1 d-inline-flex align-items-center gap-1 extra-small fw-semibold" data-bs-dismiss="modal">
                   <i class="bi bi-arrow-left"></i> Back to Menu
                 </button>
-                <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-2.5 py-1 extra-small fw-semibold" id="dishModalCategory">Starters</span>
+                <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3 py-1 extra-small fw-semibold" id="dishModalCategory">Starters</span>
               </div>
               <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <div class="modal-body p-3 p-md-4 pt-2">
-              <div class="row g-3 g-md-4 align-items-start">
+              <div class="row g-3 g-md-4 align-items-stretch">
                 
-                <!-- Left Column: Compact Image & Badges -->
-                <div class="col-md-5">
+                <!-- Left Column: Compact Image, Badges & Chef Sourcing Note -->
+                <div class="col-md-5 d-flex flex-column">
                   <div class="dish-modal-gallery position-relative rounded-3 overflow-hidden shadow-xs">
                     <img src="" alt="" id="dishModalImage" class="img-fluid w-100 dish-modal-hero-img">
                     
                     <!-- Overlay Badges -->
-                    <div class="position-absolute top-0 start-0 m-2.5 d-flex flex-column gap-1" id="dishModalImageBadges">
+                    <div class="position-absolute top-0 start-0 m-2 d-flex flex-column gap-1" id="dishModalImageBadges">
                     </div>
                     
                     <!-- Prep Time Overlay Badge -->
-                    <div class="position-absolute bottom-0 start-0 m-2.5">
+                    <div class="position-absolute bottom-0 start-0 m-2">
                       <span class="badge bg-dark bg-opacity-75 text-white backdrop-blur rounded-pill px-2.5 py-1 d-inline-flex align-items-center gap-1 extra-small shadow-sm">
                         <i class="bi bi-clock-history text-warning"></i> <span id="dishModalPrepTime">15-20 mins</span>
                       </span>
@@ -751,24 +758,34 @@
                   </div>
 
                   <!-- Dietary Badges Container -->
-                  <div class="mt-2.5">
-                    <h6 class="text-uppercase extra-small text-muted fw-bold mb-1.5 letter-spacing-1">
+                  <div class="dish-modal-dietary-wrap mt-3">
+                    <h6 class="dish-modal-section-title text-uppercase extra-small text-muted fw-bold mb-2 letter-spacing-1">
                       <i class="bi bi-shield-check text-success me-1"></i> Dietary Badges
                     </h6>
-                    <div class="d-flex flex-wrap gap-1.5 dish-modal-dietary-pills" id="dishModalDietaryBadges">
+                    <div class="d-flex flex-wrap gap-2 dish-modal-dietary-pills" id="dishModalDietaryBadges">
                     </div>
+                  </div>
+
+                  <!-- Chef's Culinary & Sourcing Note -->
+                  <div class="dish-modal-chef-card p-3 rounded-3 mt-3 border" id="dishModalChefCard">
+                    <div class="d-flex align-items-center gap-1.5 text-success extra-small fw-bold text-uppercase letter-spacing-1 mb-1">
+                      <i class="bi bi-stars"></i> Chef's Culinary Note
+                    </div>
+                    <p class="dish-modal-chef-text extra-small text-muted mb-0 fst-italic" id="dishModalChefNote">
+                      Crafted fresh to order with 100% regeneratively grown organic botanicals.
+                    </p>
                   </div>
                 </div>
 
                 <!-- Right Column: Details, Nutrition, Instructions & Cart -->
-                <div class="col-md-7">
+                <div class="col-md-7 d-flex flex-column">
                   
                   <!-- Title, Rating, Price -->
-                  <div class="d-flex align-items-start justify-content-between flex-wrap gap-2 mb-2 pb-1 border-bottom">
+                  <div class="d-flex align-items-baseline justify-content-between flex-wrap gap-2 mb-2 pb-1">
                     <div>
                       <h3 class="dish-modal-title font-serif fw-bold text-dark mb-1" id="dishModalTitle">Dish Name</h3>
-                      <div class="d-flex align-items-center gap-1.5">
-                        <div class="text-warning extra-small d-flex align-items-center" id="dishModalStars">
+                      <div class="d-flex align-items-center gap-2 mt-1">
+                        <div class="text-warning extra-small d-flex align-items-center gap-0.5" id="dishModalStars">
                           <i class="bi bi-star-fill"></i>
                           <i class="bi bi-star-fill"></i>
                           <i class="bi bi-star-fill"></i>
@@ -776,56 +793,56 @@
                           <i class="bi bi-star-fill"></i>
                         </div>
                         <span class="text-dark fw-bold extra-small" id="dishModalRatingNum">4.95</span>
-                        <span class="text-muted extra-small">(<span id="dishModalReviewsCount">142</span> reviews)</span>
+                        <span class="text-muted extra-small ms-1">(<span id="dishModalReviewsCount">142</span> reviews)</span>
                       </div>
                     </div>
-                    <div class="dish-modal-price text-success fw-bold font-serif fs-3" id="dishModalPrice">$0.00</div>
+                    <div class="dish-modal-price text-success fw-bold font-serif" id="dishModalPrice">₹0</div>
                   </div>
 
                   <!-- Short Premium Description -->
-                  <p class="dish-modal-desc text-muted mb-2.5" id="dishModalDesc">
+                  <p class="dish-modal-desc text-muted mb-3" id="dishModalDesc">
                     Short premium description goes here.
                   </p>
 
                   <!-- Botanical Ingredients List -->
-                  <div class="mb-2.5">
-                    <h6 class="text-uppercase extra-small text-muted fw-bold mb-1.5 letter-spacing-1">
+                  <div class="dish-modal-ingredients-section mb-3">
+                    <h6 class="dish-modal-section-title text-uppercase extra-small text-muted fw-bold mb-2 letter-spacing-1">
                       <i class="bi bi-flower1 text-success me-1"></i> Ingredients List
                     </h6>
-                    <div class="dish-ingredients-wrap d-flex flex-wrap gap-1" id="dishModalIngredients">
+                    <div class="dish-ingredients-wrap d-flex flex-wrap gap-2" id="dishModalIngredients">
                     </div>
                   </div>
 
                   <!-- Nutrition Grid -->
-                  <div class="dish-nutrition-block p-2.5 rounded-3 bg-light mb-2.5 border">
-                    <div class="d-flex align-items-center justify-content-between mb-1.5">
-                      <span class="extra-small fw-bold text-uppercase text-muted letter-spacing-1" style="font-size: 0.72rem;">
+                  <div class="dish-nutrition-block p-3 rounded-3 mb-3 border">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                      <span class="extra-small fw-bold text-uppercase text-muted letter-spacing-1">
                         <i class="bi bi-activity text-primary me-1"></i> Nutrition Information
                       </span>
-                      <span class="extra-small text-muted fw-semibold" style="font-size: 0.72rem;">Clean Organic Profile</span>
+                      <span class="extra-small text-muted fw-semibold">Clean Organic Profile</span>
                     </div>
-                    <div class="row g-1.5 text-center" id="dishModalNutritionGrid">
+                    <div class="row g-2 text-center" id="dishModalNutritionGrid">
                       <div class="col-3">
-                        <div class="p-1.5 bg-white rounded-2 border shadow-xs">
-                          <span class="d-block text-muted" style="font-size: 0.68rem;">Calories</span>
+                        <div class="dish-nutrition-cell p-2 bg-white rounded-2 border shadow-xs">
+                          <span class="d-block text-muted dish-nutri-label">Calories</span>
                           <strong class="text-dark fs-6" id="dishNutriCalories">380</strong>
                         </div>
                       </div>
                       <div class="col-3">
-                        <div class="p-1.5 bg-white rounded-2 border shadow-xs">
-                          <span class="d-block text-muted" style="font-size: 0.68rem;">Protein</span>
+                        <div class="dish-nutrition-cell p-2 bg-white rounded-2 border shadow-xs">
+                          <span class="d-block text-muted dish-nutri-label">Protein</span>
                           <strong class="text-success fs-6" id="dishNutriProtein">14g</strong>
                         </div>
                       </div>
                       <div class="col-3">
-                        <div class="p-1.5 bg-white rounded-2 border shadow-xs">
-                          <span class="d-block text-muted" style="font-size: 0.68rem;">Carbs</span>
+                        <div class="dish-nutrition-cell p-2 bg-white rounded-2 border shadow-xs">
+                          <span class="d-block text-muted dish-nutri-label">Carbs</span>
                           <strong class="text-dark fs-6" id="dishNutriCarbs">42g</strong>
                         </div>
                       </div>
                       <div class="col-3">
-                        <div class="p-1.5 bg-white rounded-2 border shadow-xs">
-                          <span class="d-block text-muted" style="font-size: 0.68rem;">Fat</span>
+                        <div class="dish-nutrition-cell p-2 bg-white rounded-2 border shadow-xs">
+                          <span class="d-block text-muted dish-nutri-label">Fat</span>
                           <strong class="text-dark fs-6" id="dishNutriFat">18g</strong>
                         </div>
                       </div>
@@ -833,30 +850,30 @@
                   </div>
 
                   <!-- Special Instructions Textarea -->
-                  <div class="mb-2.5">
-                    <label for="dishModalInstructions" class="form-label extra-small text-muted fw-bold text-uppercase letter-spacing-1 mb-1" style="font-size: 0.72rem;">
+                  <div class="dish-modal-instructions-wrap mb-3">
+                    <label for="dishModalInstructions" class="dish-modal-section-title form-label extra-small text-muted fw-bold text-uppercase letter-spacing-1 mb-1.5">
                       <i class="bi bi-pencil-square text-success me-1"></i> Special Instructions
                     </label>
-                    <textarea class="form-control form-control-sm rounded-3 py-1.5 px-2.5" id="dishModalInstructions" rows="1" placeholder="e.g., Dressing on side, extra herbs...\u200E" style="font-size: 0.82rem; min-height: 38px;"></textarea>
+                    <textarea class="form-control form-control-sm rounded-3 py-2 px-3" id="dishModalInstructions" rows="1" placeholder="e.g., Dressing on side, extra herbs...\u200E" style="font-size: 0.84rem; min-height: 40px; resize: vertical;"></textarea>
                   </div>
 
                   <!-- Quantity Selector & Primary Add to Cart -->
-                  <div class="d-flex align-items-center gap-2 pt-2 border-top">
+                  <div class="dish-modal-action-bar d-flex align-items-center gap-2.5 pt-3 border-top mt-auto">
                     <!-- Quantity Stepper -->
-                    <div class="d-inline-flex align-items-center justify-content-between p-1 border rounded-pill bg-light" style="min-width: 105px;">
-                      <button type="button" class="btn btn-sm btn-light rounded-circle shadow-xs" id="dishModalQtyMinus" aria-label="Decrease quantity" style="width: 28px; height: 28px; padding: 0;">
+                    <div class="dish-modal-qty-box d-inline-flex align-items-center justify-content-between p-1 border rounded-pill bg-light" style="min-width: 110px; height: 44px;">
+                      <button type="button" class="btn btn-sm btn-light rounded-circle shadow-xs" id="dishModalQtyMinus" aria-label="Decrease quantity" style="width: 32px; height: 32px; padding: 0;">
                         <i class="bi bi-dash"></i>
                       </button>
-                      <input type="number" id="dishModalQtyInput" value="1" min="1" max="99" class="form-control form-control-sm border-0 bg-transparent text-center fw-bold shadow-none p-0" style="width: 34px; font-size: 0.88rem;" readonly>
-                      <button type="button" class="btn btn-sm btn-light rounded-circle shadow-xs" id="dishModalQtyPlus" aria-label="Increase quantity" style="width: 28px; height: 28px; padding: 0;">
+                      <input type="number" id="dishModalQtyInput" value="1" min="1" max="99" class="form-control form-control-sm border-0 bg-transparent text-center fw-bold shadow-none p-0" style="width: 36px; font-size: 0.92rem;" readonly>
+                      <button type="button" class="btn btn-sm btn-light rounded-circle shadow-xs" id="dishModalQtyPlus" aria-label="Increase quantity" style="width: 32px; height: 32px; padding: 0;">
                         <i class="bi bi-plus"></i>
                       </button>
                     </div>
 
                     <!-- Primary Add to Cart Button -->
-                    <button type="button" class="btn btn-primary btn-md rounded-pill flex-grow-1 d-inline-flex align-items-center justify-content-center gap-2 shadow-sm py-2 fw-semibold" id="dishModalAddToCartBtn" style="font-size: 0.92rem;">
+                    <button type="button" class="btn btn-primary btn-md rounded-pill flex-grow-1 d-inline-flex align-items-center justify-content-center gap-2 shadow-sm fw-semibold" id="dishModalAddToCartBtn" style="height: 44px; font-size: 0.95rem;">
                       <i class="bi bi-bag-plus-fill fs-6"></i>
-                      <span>Add to Cart &bull; $<span id="dishModalBtnPrice">0.00</span></span>
+                      <span>Add to Cart &bull; ₹<span id="dishModalBtnPrice">0</span></span>
                     </button>
                   </div>
 
@@ -1045,7 +1062,7 @@
     }
 
     const priceEl = document.querySelector('.dish-price-large');
-    if (priceEl) priceEl.textContent = `$${parseFloat(dish.price).toFixed(2)}`;
+    if (priceEl) priceEl.textContent = `₹${Math.round(dish.price).toLocaleString('en-IN')}`;
 
     const descEl = document.querySelector('.dish-lead-desc');
     if (descEl) descEl.textContent = dish.description;
@@ -1125,6 +1142,7 @@
     toggleFavorite,
     bindTriggers: bindDishTriggers
   };
+  window.openDishDetails = openDishDetails;
 
   // Auto-init on load
   function init() {

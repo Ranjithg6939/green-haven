@@ -620,7 +620,11 @@ document.addEventListener('DOMContentLoaded', () => {
           luxurySearchInput.value = '';
           if (btnClearMenuSearch) btnClearMenuSearch.classList.add('d-none');
           if (menuNoResults) menuNoResults.style.display = 'none';
-          document.querySelectorAll('.menu-item-card').forEach(c => c.style.display = 'block');
+          document.querySelectorAll('.menu-item-card').forEach(c => {
+            c.classList.remove('search-hidden', 'd-none');
+            c.removeAttribute('data-search-hidden');
+            c.style.removeProperty('display');
+          });
         }
 
         // Update active navigation pill
@@ -633,8 +637,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Show only targeted category section, hide all other containers
         categorySections.forEach(sec => {
           sec.classList.remove('active', 'search-active');
+          sec.style.removeProperty('display');
         });
         targetSection.classList.add('active');
+        targetSection.style.removeProperty('display');
 
         // Smooth scroll to position section perfectly below navbar
         const navbar = document.querySelector('.gh-navbar, .nx-navbar');
@@ -654,6 +660,41 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Helper to accurately match menu item cards against search query
+  function cardMatchesQuery(card, query) {
+    if (!query) return true;
+
+    // 1. Dish Title
+    const titleEl = card.querySelector('.dish-card-title, .dish-title, h3, h4');
+    const title = (titleEl ? titleEl.textContent : '').toLowerCase();
+    if (title.includes(query)) return true;
+
+    // 2. Dish Description / Ingredients
+    const descEl = card.querySelector('.dish-card-description, .dish-desc, p');
+    const desc = (descEl ? descEl.textContent : '').toLowerCase();
+    if (desc.includes(query)) return true;
+
+    // 3. Dietary pill / badge
+    const badgeEl = card.querySelector('.dish-card-dietary-badge, .dietary-pill, .dish-card-badge');
+    const badge = (badgeEl ? badgeEl.textContent : '').toLowerCase();
+    if (badge.includes(query)) return true;
+
+    // 4. Data-name from add-to-cart button if present
+    const orderBtn = card.querySelector('[data-name]');
+    if (orderBtn) {
+      const orderName = (orderBtn.getAttribute('data-name') || '').toLowerCase();
+      if (orderName.includes(query)) return true;
+    }
+
+    // 5. Category match - exact or prefix only (avoids partial false positives like 'art' in 'starters')
+    const category = (card.getAttribute('data-category') || '').toLowerCase();
+    if (category && (query === category || category.startsWith(query))) {
+      return true;
+    }
+
+    return false;
+  }
+
   // Live Instant Search across all dishes
   function filterLuxuryMenu() {
     const query = (luxurySearchInput ? luxurySearchInput.value : '').toLowerCase().trim();
@@ -671,13 +712,16 @@ document.addEventListener('DOMContentLoaded', () => {
         
         categorySections.forEach(section => {
           section.classList.remove('search-active');
+          section.style.removeProperty('display');
           if (section.getAttribute('id') === activeTargetId) {
             section.classList.add('active');
           } else {
             section.classList.remove('active');
           }
           section.querySelectorAll('.menu-item-card').forEach(card => {
-            card.style.display = 'block';
+            card.classList.remove('search-hidden', 'd-none');
+            card.removeAttribute('data-search-hidden');
+            card.style.removeProperty('display');
           });
         });
         if (menuNoResults) menuNoResults.style.display = 'none';
@@ -690,23 +734,26 @@ document.addEventListener('DOMContentLoaded', () => {
         let sectionMatches = 0;
 
         cards.forEach(card => {
-          const title = (card.querySelector('.dish-card-title, .dish-title, h3, h4')?.textContent || '').toLowerCase();
-          const category = (card.getAttribute('data-category') || '').toLowerCase();
-
-          const match = (!query || title.includes(query) || category.includes(query));
+          const match = cardMatchesQuery(card, query);
           if (match) {
-            card.style.display = 'block';
+            card.classList.remove('search-hidden', 'd-none');
+            card.removeAttribute('data-search-hidden');
+            card.style.removeProperty('display');
             sectionMatches++;
             totalVisible++;
           } else {
-            card.style.display = 'none';
+            card.classList.add('search-hidden', 'd-none');
+            card.setAttribute('data-search-hidden', 'true');
+            card.style.setProperty('display', 'none', 'important');
           }
         });
 
         if (sectionMatches > 0) {
           section.classList.add('search-active');
+          section.style.removeProperty('display');
         } else {
           section.classList.remove('search-active', 'active');
+          section.style.setProperty('display', 'none', 'important');
         }
       });
     } else if (menuItemCards.length) {
@@ -715,18 +762,19 @@ document.addEventListener('DOMContentLoaded', () => {
       if (activeBtn) activeCat = activeBtn.getAttribute('data-filter') || 'all';
 
       menuItemCards.forEach(card => {
-        const cat = card.getAttribute('data-category') || '';
-        const title = (card.querySelector('.dish-title, h3, h4')?.textContent || '').toLowerCase();
-        const desc = (card.querySelector('.dish-desc, p')?.textContent || '').toLowerCase();
-
+        const cat = (card.getAttribute('data-category') || '').toLowerCase();
         const matchCat = (activeCat === 'all' || cat === activeCat);
-        const matchQuery = (!query || title.includes(query) || desc.includes(query));
+        const matchQuery = cardMatchesQuery(card, query);
 
         if (matchCat && matchQuery) {
-          card.style.display = 'block';
+          card.classList.remove('search-hidden', 'd-none');
+          card.removeAttribute('data-search-hidden');
+          card.style.removeProperty('display');
           totalVisible++;
         } else {
-          card.style.display = 'none';
+          card.classList.add('search-hidden', 'd-none');
+          card.setAttribute('data-search-hidden', 'true');
+          card.style.setProperty('display', 'none', 'important');
         }
       });
     }
@@ -1077,14 +1125,14 @@ document.addEventListener('DOMContentLoaded', () => {
     billingToggle.addEventListener('change', () => {
       const isAnnual = billingToggle.checked;
       if (isAnnual) {
-        if (priceStarter) priceStarter.textContent = '$29';
-        if (pricePro) pricePro.textContent = '$79';
-        if (priceEnterprise) priceEnterprise.textContent = '$199';
+        if (priceStarter) priceStarter.textContent = '₹899';
+        if (pricePro) pricePro.textContent = '₹1,899';
+        if (priceEnterprise) priceEnterprise.textContent = '₹3,499';
         billingPeriodLabels.forEach(el => el.textContent = '/ month (billed yearly)');
       } else {
-        if (priceStarter) priceStarter.textContent = '$39';
-        if (pricePro) pricePro.textContent = '$99';
-        if (priceEnterprise) priceEnterprise.textContent = '$249';
+        if (priceStarter) priceStarter.textContent = '₹1,099';
+        if (pricePro) pricePro.textContent = '₹2,299';
+        if (priceEnterprise) priceEnterprise.textContent = '₹3,999';
         billingPeriodLabels.forEach(el => el.textContent = '/ month (billed monthly)');
       }
     });
@@ -1125,21 +1173,437 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* --------------------------------------------------
-     9. TABLE RESERVATION FORM & RECEIPT MODAL
+     FORM VALIDATION HELPERS: NAME, EMAIL, AND PHONE
   -------------------------------------------------- */
-  const reservationForm = document.getElementById('reservationForm');
-  if (reservationForm) {
-    reservationForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      if (!this.checkValidity()) {
-        e.stopPropagation();
-        this.classList.add('was-validated');
+
+  /**
+   * Helper: Find the appropriate .invalid-feedback element for an input
+   */
+  function getFeedbackElement(input) {
+    if (!input) return null;
+    const inputGroup = input.closest ? input.closest('.input-group') : null;
+    return document.getElementById(input.id + 'Feedback') ||
+      (input.nextElementSibling && input.nextElementSibling.classList && input.nextElementSibling.classList.contains('invalid-feedback') ? input.nextElementSibling : null) ||
+      (inputGroup && inputGroup.nextElementSibling && inputGroup.nextElementSibling.classList && inputGroup.nextElementSibling.classList.contains('invalid-feedback') ? inputGroup.nextElementSibling : null) ||
+      (input.parentElement && input.parentElement.querySelector ? input.parentElement.querySelector('.invalid-feedback') : null) ||
+      null;
+  }
+
+  /**
+   * 1. Name Field Validation
+   * - Only alphabetic characters and spaces
+   * - No numbers or special characters
+   * - Minimum 2 characters (no single letter)
+   * - Prevents leading spaces and multiple consecutive spaces
+   * - Trims on blur/submit
+   */
+  function setupValidNameInput(input, isRequired = true, fieldLabel = 'Name') {
+    if (!input) return null;
+    const feedback = getFeedbackElement(input);
+
+    const validate = () => {
+      const val = input.value.trim();
+      if (!val) {
+        if (isRequired) {
+          const msg = `Please enter your ${fieldLabel.toLowerCase()}.`;
+          input.setCustomValidity(msg);
+          if (feedback) feedback.textContent = msg;
+          return false;
+        } else {
+          input.setCustomValidity('');
+          return true;
+        }
+      }
+
+      if (val.length < 2) {
+        const msg = `${fieldLabel} must be at least 2 characters long.`;
+        input.setCustomValidity(msg);
+        if (feedback) feedback.textContent = msg;
+        return false;
+      }
+
+      // Must consist of letters and single spaces between words
+      const nameRegex = /^[a-zA-Z]+(?:\s[a-zA-Z]+)*$/;
+      if (!nameRegex.test(val)) {
+        const msg = `${fieldLabel} can only contain letters and spaces (no numbers or special characters).`;
+        input.setCustomValidity(msg);
+        if (feedback) feedback.textContent = msg;
+        return false;
+      }
+
+      input.setCustomValidity('');
+      return true;
+    };
+
+    // Prevent typing numbers, special characters, leading space, and consecutive spaces
+    input.addEventListener('keydown', function(e) {
+      const allowedControlKeys = [
+        'Backspace', 'Delete', 'Tab', 'Escape', 'Enter',
+        'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown',
+        'Home', 'End'
+      ];
+      if (allowedControlKeys.includes(e.key)) return;
+      if (e.ctrlKey || e.metaKey) return;
+      if (e.key.startsWith('F') && e.key.length > 1) return;
+
+      if (e.key === ' ') {
+        const pos = this.selectionStart ?? this.value.length;
+        if (pos === 0 || this.value.charAt(pos - 1) === ' ') {
+          e.preventDefault();
+        }
         return;
       }
 
-      const name = document.getElementById('resName')?.value || 'Guest';
-      const email = document.getElementById('resEmail')?.value || 'N/A';
-      const phone = document.getElementById('resPhone')?.value || 'N/A';
+      // Restrict strictly to alphabetic letters (A-Z, a-z)
+      if (!/^[a-zA-Z]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    });
+
+    input.addEventListener('beforeinput', function(e) {
+      if (!e.data) return;
+      if (/[^a-zA-Z\s]/.test(e.data)) {
+        e.preventDefault();
+      }
+    });
+
+    input.addEventListener('paste', function(e) {
+      e.preventDefault();
+      const pasteText = (e.clipboardData || window.clipboardData)?.getData('text') || '';
+      let cleaned = pasteText.replace(/[^a-zA-Z\s]/g, '').replace(/\s{2,}/g, ' ');
+      if (!cleaned) return;
+
+      const start = this.selectionStart ?? this.value.length;
+      const end = this.selectionEnd ?? this.value.length;
+      const currentVal = this.value;
+
+      if (start === 0 && cleaned.startsWith(' ')) {
+        cleaned = cleaned.trimStart();
+      }
+      if (!cleaned) return;
+
+      this.value = currentVal.slice(0, start) + cleaned + currentVal.slice(end);
+      const newCursor = start + cleaned.length;
+      this.setSelectionRange(newCursor, newCursor);
+      this.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+
+    input.addEventListener('input', function() {
+      const start = this.selectionStart;
+      let cleaned = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s{2,}/g, ' ');
+      if (cleaned.startsWith(' ')) {
+        cleaned = cleaned.trimStart();
+      }
+      if (this.value !== cleaned) {
+        this.value = cleaned;
+        if (start !== null) {
+          const newPos = Math.min(start, cleaned.length);
+          this.setSelectionRange(newPos, newPos);
+        }
+      }
+      const isValid = validate();
+      if (this.classList.contains('is-invalid') || this.form?.classList.contains('was-validated')) {
+        this.classList.toggle('is-invalid', !isValid);
+        this.classList.toggle('is-valid', isValid);
+      }
+    });
+
+    input.addEventListener('blur', function() {
+      const trimmed = this.value.trim();
+      if (this.value !== trimmed) {
+        this.value = trimmed;
+      }
+      const isValid = validate();
+      if (this.form?.classList.contains('was-validated')) {
+        this.classList.toggle('is-invalid', !isValid);
+        this.classList.toggle('is-valid', isValid);
+      }
+    });
+
+    return validate;
+  }
+
+  /**
+   * 2. Email Field Validation
+   * - Valid local part, @ symbol, domain, and valid domain extension (.com, .in, .org, etc.)
+   * - Rejects invalid formats like ice@g
+   * - Rejects spaces inside email
+   * - Trims leading/trailing spaces
+   */
+  function setupValidEmailInput(input, isRequired = true) {
+    if (!input) return null;
+    const feedback = getFeedbackElement(input);
+
+    const validate = () => {
+      const val = input.value.trim();
+      if (!val) {
+        if (isRequired) {
+          const msg = 'Please enter your email address.';
+          input.setCustomValidity(msg);
+          if (feedback) feedback.textContent = msg;
+          return false;
+        } else {
+          input.setCustomValidity('');
+          return true;
+        }
+      }
+
+      if (/\s/.test(val)) {
+        const msg = 'Email address cannot contain spaces.';
+        input.setCustomValidity(msg);
+        if (feedback) feedback.textContent = msg;
+        return false;
+      }
+
+      // Valid format: localPart @ domain . extension (min 2 letters)
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailRegex.test(val)) {
+        let msg = 'Please enter a valid email address (e.g. name@example.com or name@example.in).';
+        if (!val.includes('@')) {
+          msg = "Email address must contain an '@' symbol.";
+        } else {
+          const parts = val.split('@');
+          if (!parts[1] || !parts[1].includes('.')) {
+            msg = 'Please include a valid domain extension like .com or .in.';
+          } else {
+            const ext = parts[1].split('.').pop();
+            if (ext.length < 2) {
+              msg = 'Domain extension must be at least 2 characters (e.g. .com, .in).';
+            }
+          }
+        }
+        input.setCustomValidity(msg);
+        if (feedback) feedback.textContent = msg;
+        return false;
+      }
+
+      input.setCustomValidity('');
+      return true;
+    };
+
+    // Reject space characters
+    input.addEventListener('keydown', function(e) {
+      if (e.key === ' ') {
+        e.preventDefault();
+      }
+    });
+
+    input.addEventListener('beforeinput', function(e) {
+      if (e.data && /\s/.test(e.data)) {
+        e.preventDefault();
+      }
+    });
+
+    input.addEventListener('paste', function(e) {
+      e.preventDefault();
+      const pasteText = (e.clipboardData || window.clipboardData)?.getData('text') || '';
+      const cleaned = pasteText.replace(/\s/g, '');
+      if (!cleaned) return;
+
+      const start = this.selectionStart ?? this.value.length;
+      const end = this.selectionEnd ?? this.value.length;
+      const currentVal = this.value;
+
+      this.value = currentVal.slice(0, start) + cleaned + currentVal.slice(end);
+      const newCursor = start + cleaned.length;
+      this.setSelectionRange(newCursor, newCursor);
+      this.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+
+    input.addEventListener('input', function() {
+      const start = this.selectionStart;
+      const cleaned = this.value.replace(/\s/g, '');
+      if (this.value !== cleaned) {
+        this.value = cleaned;
+        if (start !== null) {
+          const newPos = Math.min(start, cleaned.length);
+          this.setSelectionRange(newPos, newPos);
+        }
+      }
+      const isValid = validate();
+      if (this.classList.contains('is-invalid') || this.form?.classList.contains('was-validated')) {
+        this.classList.toggle('is-invalid', !isValid);
+        this.classList.toggle('is-valid', isValid);
+      }
+    });
+
+    input.addEventListener('blur', function() {
+      this.value = this.value.trim();
+      const isValid = validate();
+      if (this.form?.classList.contains('was-validated')) {
+        this.classList.toggle('is-invalid', !isValid);
+        this.classList.toggle('is-valid', isValid);
+      }
+    });
+
+    return validate;
+  }
+
+  /**
+   * 3. Phone Number Field Validation
+   * - Restricts to valid 10-digit Indian phone numbers
+   * - Strictly blocks alphabetic characters and symbols
+   * - Validates exactly 10 numeric digits before submission
+   */
+  function setupNumericPhoneInput(input, isRequired = false) {
+    if (!input) return null;
+    const feedback = getFeedbackElement(input);
+
+    const validate = () => {
+      const val = input.value.trim();
+      if (!val) {
+        if (isRequired) {
+          const msg = 'Please enter your 10-digit phone number.';
+          input.setCustomValidity(msg);
+          if (feedback) feedback.textContent = msg;
+          return false;
+        } else {
+          input.setCustomValidity('');
+          return true;
+        }
+      }
+
+      if (!/^\d+$/.test(val)) {
+        const msg = 'Phone number can only contain numbers.';
+        input.setCustomValidity(msg);
+        if (feedback) feedback.textContent = msg;
+        return false;
+      }
+
+      if (val.length !== 10) {
+        const msg = 'Phone number must be exactly 10 digits.';
+        input.setCustomValidity(msg);
+        if (feedback) feedback.textContent = msg;
+        return false;
+      }
+
+      input.setCustomValidity('');
+      return true;
+    };
+
+    // 1. Prevent typing of non-numeric characters and restrict to 10 digits
+    input.addEventListener('keydown', function(e) {
+      const allowedControlKeys = [
+        'Backspace', 'Delete', 'Tab', 'Escape', 'Enter',
+        'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown',
+        'Home', 'End'
+      ];
+      if (allowedControlKeys.includes(e.key)) return;
+      if (e.ctrlKey || e.metaKey) return;
+      if (e.key.startsWith('F') && e.key.length > 1) return;
+
+      // Disallow non-digits
+      if (!/^[0-9]$/.test(e.key) || e.shiftKey) {
+        e.preventDefault();
+        return;
+      }
+
+      // Restrict to max 10 digits
+      const selLen = (this.selectionEnd ?? 0) - (this.selectionStart ?? 0);
+      if (this.value.length >= 10 && selLen === 0) {
+        e.preventDefault();
+      }
+    });
+
+    // 2. beforeinput for modern desktop & mobile browsers
+    input.addEventListener('beforeinput', function(e) {
+      if (e.data && !/^\d+$/.test(e.data)) {
+        e.preventDefault();
+      }
+    });
+
+    // 3. Paste event: extract digits only up to 10 digits
+    input.addEventListener('paste', function(e) {
+      e.preventDefault();
+      const pasteText = (e.clipboardData || window.clipboardData)?.getData('text') || '';
+      const numbersOnly = pasteText.replace(/\D/g, '');
+      if (!numbersOnly) return;
+
+      const start = this.selectionStart ?? this.value.length;
+      const end = this.selectionEnd ?? this.value.length;
+      const currentVal = this.value;
+      const maxLen = 10;
+      const availableSpace = maxLen - (currentVal.length - (end - start));
+      if (availableSpace <= 0) return;
+
+      const toInsert = numbersOnly.slice(0, availableSpace);
+      this.value = currentVal.slice(0, start) + toInsert + currentVal.slice(end);
+      const newCursor = start + toInsert.length;
+      this.setSelectionRange(newCursor, newCursor);
+      this.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+
+    // 4. Input fallback: strip non-numeric characters and clamp to 10 digits
+    input.addEventListener('input', function() {
+      const start = this.selectionStart;
+      const cleaned = this.value.replace(/\D/g, '').slice(0, 10);
+      if (this.value !== cleaned) {
+        this.value = cleaned;
+        if (start !== null) {
+          const newPos = Math.min(start, cleaned.length);
+          this.setSelectionRange(newPos, newPos);
+        }
+      }
+      const isValid = validate();
+      if (this.classList.contains('is-invalid') || this.form?.classList.contains('was-validated')) {
+        this.classList.toggle('is-invalid', !isValid);
+        this.classList.toggle('is-valid', isValid);
+      }
+    });
+
+    // 5. Blur event: revalidate
+    input.addEventListener('blur', function() {
+      const isValid = validate();
+      if (this.form?.classList.contains('was-validated')) {
+        this.classList.toggle('is-invalid', !isValid);
+        this.classList.toggle('is-valid', isValid);
+      }
+    });
+
+    return validate;
+  }
+
+  // Expose validation helpers globally
+  window.setupValidNameInput = setupValidNameInput;
+  window.setupValidEmailInput = setupValidEmailInput;
+  window.setupNumericPhoneInput = setupNumericPhoneInput;
+
+  /* --------------------------------------------------
+     9. TABLE RESERVATION FORM & RECEIPT MODAL
+  -------------------------------------------------- */
+  const reservationForm = document.getElementById('reservationForm');
+  const resName = document.getElementById('resName');
+  const resEmail = document.getElementById('resEmail');
+  const resPhone = document.getElementById('resPhone');
+
+  const validateResName = setupValidNameInput(resName, true, 'Full Name');
+  const validateResEmail = setupValidEmailInput(resEmail, true);
+  const validateResPhone = setupNumericPhoneInput(resPhone, true);
+
+  if (reservationForm) {
+    reservationForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const isNameValid = validateResName ? validateResName() : true;
+      const isEmailValid = validateResEmail ? validateResEmail() : true;
+      const isPhoneValid = validateResPhone ? validateResPhone() : true;
+
+      if (!isNameValid || !isEmailValid || !isPhoneValid || !this.checkValidity()) {
+        e.stopPropagation();
+        this.classList.add('was-validated');
+        if (resName && !isNameValid) resName.classList.add('is-invalid');
+        if (resEmail && !isEmailValid) resEmail.classList.add('is-invalid');
+        if (resPhone && !isPhoneValid) resPhone.classList.add('is-invalid');
+
+        // Focus first invalid field
+        const firstInvalid = this.querySelector('.is-invalid, :invalid');
+        if (firstInvalid) firstInvalid.focus();
+        return;
+      }
+
+      const name = resName?.value.trim() || 'Guest';
+      const email = resEmail?.value.trim() || 'N/A';
+      const phone = resPhone?.value.trim() || 'N/A';
       const date = document.getElementById('resDate')?.value || 'Selected Date';
       const time = document.getElementById('resTime')?.value || 'Selected Time';
       const guests = document.getElementById('resGuests')?.value || '2';
@@ -1197,138 +1661,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
       reservationForm.reset();
       reservationForm.classList.remove('was-validated');
-    });
-  }
-
-  /* --------------------------------------------------
-     HELPER: NUMERIC-ONLY PHONE INPUT RESTRICTION & VALIDATION
-  -------------------------------------------------- */
-  function setupNumericPhoneInput(input, isRequired = false) {
-    if (!input) return null;
-    const feedback = document.getElementById(input.id + 'Feedback') || input.nextElementSibling;
-
-    const validate = () => {
-      const val = input.value.trim();
-      if (!val) {
-        if (isRequired) {
-          input.setCustomValidity('Please provide your phone number.');
-          if (feedback && feedback.classList.contains('invalid-feedback')) {
-            feedback.textContent = 'Please provide your phone number.';
-          }
-          return false;
-        } else {
-          input.setCustomValidity('');
-          return true;
+      [resName, resEmail, resPhone].forEach(inp => {
+        if (inp) {
+          inp.classList.remove('is-invalid', 'is-valid');
+          inp.setCustomValidity('');
         }
-      }
-      if (!/^\d+$/.test(val)) {
-        input.setCustomValidity('Only numbers are allowed.');
-        if (feedback && feedback.classList.contains('invalid-feedback')) {
-          feedback.textContent = 'Please enter numbers only (no letters, spaces, or symbols).';
-        }
-        return false;
-      }
-      if (val.length < 10) {
-        input.setCustomValidity('Phone number must be at least 10 digits.');
-        if (feedback && feedback.classList.contains('invalid-feedback')) {
-          feedback.textContent = 'Please enter a valid phone number (at least 10 digits, numbers only).';
-        }
-        return false;
-      }
-      if (val.length > 15) {
-        input.setCustomValidity('Phone number cannot exceed 15 digits.');
-        if (feedback && feedback.classList.contains('invalid-feedback')) {
-          feedback.textContent = 'Phone number cannot exceed 15 digits.';
-        }
-        return false;
-      }
-      input.setCustomValidity('');
-      return true;
-    };
-
-    // 1. Prevent typing of non-numeric characters (letters, spaces, special symbols)
-    input.addEventListener('keydown', function(e) {
-      const allowedControlKeys = [
-        'Backspace', 'Delete', 'Tab', 'Escape', 'Enter',
-        'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown',
-        'Home', 'End'
-      ];
-      if (allowedControlKeys.includes(e.key)) return;
-      if (e.ctrlKey || e.metaKey) return;
-      if (e.key.startsWith('F') && e.key.length > 1) return;
-      if (!/^[0-9]$/.test(e.key) || e.shiftKey) {
-        e.preventDefault();
-      }
+      });
     });
 
-    // 2. beforeinput event for modern desktop & mobile browsers
-    input.addEventListener('beforeinput', function(e) {
-      if (e.data && !/^\d+$/.test(e.data)) {
-        e.preventDefault();
-      }
-    });
-
-    // 3. Paste event: strip non-numeric characters and insert only numbers up to 15 digits
-    input.addEventListener('paste', function(e) {
-      e.preventDefault();
-      const pasteText = (e.clipboardData || window.clipboardData)?.getData('text') || '';
-      const numbersOnly = pasteText.replace(/\D/g, '');
-      if (!numbersOnly) return;
-
-      const start = this.selectionStart ?? this.value.length;
-      const end = this.selectionEnd ?? this.value.length;
-      const currentVal = this.value;
-      const maxLen = 15;
-      const availableSpace = maxLen - (currentVal.length - (end - start));
-      if (availableSpace <= 0) return;
-
-      const toInsert = numbersOnly.slice(0, availableSpace);
-      this.value = currentVal.slice(0, start) + toInsert + currentVal.slice(end);
-      const newCursor = start + toInsert.length;
-      this.setSelectionRange(newCursor, newCursor);
-      this.dispatchEvent(new Event('input', { bubbles: true }));
-    });
-
-    // 4. Input event fallback: strip any non-numeric characters and revalidate
-    input.addEventListener('input', function() {
-      const start = this.selectionStart;
-      const cleaned = this.value.replace(/\D/g, '').slice(0, 15);
-      if (this.value !== cleaned) {
-        this.value = cleaned;
-        if (start !== null) {
-          const newPos = Math.min(start, cleaned.length);
-          this.setSelectionRange(newPos, newPos);
+    reservationForm.addEventListener('reset', function() {
+      reservationForm.classList.remove('was-validated');
+      [resName, resEmail, resPhone].forEach(inp => {
+        if (inp) {
+          inp.classList.remove('is-invalid', 'is-valid');
+          inp.setCustomValidity('');
         }
-      }
-      validate();
+      });
     });
-
-    input.addEventListener('blur', validate);
-
-    return validate;
   }
 
   /* --------------------------------------------------
      10. CATERING INQUIRY FORM
   -------------------------------------------------- */
   const cateringForm = document.getElementById('cateringForm');
+  const cateringName = document.getElementById('cateringName');
+  const cateringEmail = document.getElementById('cateringEmail');
   const cateringPhone = document.getElementById('cateringPhone');
+
+  const validateCateringName = setupValidNameInput(cateringName, true, 'Full Name');
+  const validateCateringEmail = setupValidEmailInput(cateringEmail, true);
   const validateCateringPhone = setupNumericPhoneInput(cateringPhone, true);
 
   if (cateringForm) {
     cateringForm.addEventListener('submit', function(e) {
       e.preventDefault();
 
-      if (validateCateringPhone) {
-        validateCateringPhone();
-      }
+      const isNameValid = validateCateringName ? validateCateringName() : true;
+      const isEmailValid = validateCateringEmail ? validateCateringEmail() : true;
+      const isPhoneValid = validateCateringPhone ? validateCateringPhone() : true;
 
-      if (!this.checkValidity()) {
+      if (!isNameValid || !isEmailValid || !isPhoneValid || !this.checkValidity()) {
         e.stopPropagation();
         this.classList.add('was-validated');
+        if (cateringName && !isNameValid) cateringName.classList.add('is-invalid');
+        if (cateringEmail && !isEmailValid) cateringEmail.classList.add('is-invalid');
+        if (cateringPhone && !isPhoneValid) cateringPhone.classList.add('is-invalid');
+
+        const firstInvalid = this.querySelector('.is-invalid, :invalid');
+        if (firstInvalid) firstInvalid.focus();
         return;
       }
-      const name = document.getElementById('cateringName')?.value || document.getElementById('catName')?.value || 'Valued Client';
+
+      const name = cateringName?.value.trim() || document.getElementById('catName')?.value.trim() || 'Valued Client';
       const feedback = document.getElementById('cateringFeedback');
       if (feedback) {
         feedback.innerHTML = `
@@ -1341,16 +1725,22 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       cateringForm.reset();
       cateringForm.classList.remove('was-validated');
-      if (cateringPhone) {
-        cateringPhone.setCustomValidity('');
-      }
+      [cateringName, cateringEmail, cateringPhone].forEach(inp => {
+        if (inp) {
+          inp.classList.remove('is-invalid', 'is-valid');
+          inp.setCustomValidity('');
+        }
+      });
     });
 
     cateringForm.addEventListener('reset', function() {
-      if (cateringPhone) {
-        cateringPhone.setCustomValidity('');
-      }
       cateringForm.classList.remove('was-validated');
+      [cateringName, cateringEmail, cateringPhone].forEach(inp => {
+        if (inp) {
+          inp.classList.remove('is-invalid', 'is-valid');
+          inp.setCustomValidity('');
+        }
+      });
     });
   }
 
@@ -1358,23 +1748,35 @@ document.addEventListener('DOMContentLoaded', () => {
      11. CONTACT FORM
   -------------------------------------------------- */
   const contactForm = document.getElementById('contactForm');
+  const contactName = document.getElementById('contactName');
+  const contactEmail = document.getElementById('contactEmail');
   const contactPhone = document.getElementById('contactPhone');
+
+  const validateContactName = setupValidNameInput(contactName, true, 'Full Name');
+  const validateContactEmail = setupValidEmailInput(contactEmail, true);
   const validateContactPhone = setupNumericPhoneInput(contactPhone, false);
 
   if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
       e.preventDefault();
 
-      if (validateContactPhone) {
-        validateContactPhone();
-      }
+      const isNameValid = validateContactName ? validateContactName() : true;
+      const isEmailValid = validateContactEmail ? validateContactEmail() : true;
+      const isPhoneValid = validateContactPhone ? validateContactPhone() : true;
 
-      if (!this.checkValidity()) {
+      if (!isNameValid || !isEmailValid || !isPhoneValid || !this.checkValidity()) {
         e.stopPropagation();
         this.classList.add('was-validated');
+        if (contactName && !isNameValid) contactName.classList.add('is-invalid');
+        if (contactEmail && !isEmailValid) contactEmail.classList.add('is-invalid');
+        if (contactPhone && !isPhoneValid) contactPhone.classList.add('is-invalid');
+
+        const firstInvalid = this.querySelector('.is-invalid, :invalid');
+        if (firstInvalid) firstInvalid.focus();
         return;
       }
-      const name = document.getElementById('contactName')?.value || 'Valued Client';
+
+      const name = contactName?.value.trim() || 'Valued Client';
       const feedback = document.getElementById('contactFeedback');
       if (feedback) {
         feedback.innerHTML = `
@@ -1390,16 +1792,22 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       contactForm.reset();
       contactForm.classList.remove('was-validated');
-      if (contactPhone) {
-        contactPhone.setCustomValidity('');
-      }
+      [contactName, contactEmail, contactPhone].forEach(inp => {
+        if (inp) {
+          inp.classList.remove('is-invalid', 'is-valid');
+          inp.setCustomValidity('');
+        }
+      });
     });
 
     contactForm.addEventListener('reset', function() {
-      if (contactPhone) {
-        contactPhone.setCustomValidity('');
-      }
       contactForm.classList.remove('was-validated');
+      [contactName, contactEmail, contactPhone].forEach(inp => {
+        if (inp) {
+          inp.classList.remove('is-invalid', 'is-valid');
+          inp.setCustomValidity('');
+        }
+      });
     });
   }
 
@@ -1440,24 +1848,51 @@ document.addEventListener('DOMContentLoaded', () => {
   -------------------------------------------------- */
   const newsletterForms = document.querySelectorAll('.newsletter-form');
   newsletterForms.forEach(form => {
+    const emailInput = form.querySelector('input[type="email"]');
+    if (emailInput) {
+      setupValidEmailInput(emailInput, true);
+    }
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-      const email = this.querySelector('input[type="email"]');
-      if (email && email.value.includes('@')) {
-        const btn = this.querySelector('button[type="submit"]');
-        const orig = btn ? btn.innerHTML : 'Subscribe';
-        if (btn) {
-          btn.innerHTML = '<i class="bi bi-check2"></i> Subscribed!';
-          btn.classList.add('btn-success');
-        }
-        setTimeout(() => {
-          if (btn) {
-            btn.innerHTML = orig;
-            btn.classList.remove('btn-success');
+      const input = this.querySelector('input[type="email"]');
+      const val = input ? input.value.trim() : '';
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+      if (!val || !emailRegex.test(val)) {
+        if (input) {
+          let msg = 'Please enter a valid email address (e.g. name@example.com).';
+          if (!val.includes('@')) {
+            msg = "Email address must contain an '@' symbol.";
+          } else if (!val.split('@')[1] || !val.split('@')[1].includes('.')) {
+            msg = 'Please include a valid domain extension like .com or .in.';
           }
-          email.value = '';
-        }, 2500);
+          input.setCustomValidity(msg);
+          input.classList.add('is-invalid');
+          if (typeof input.reportValidity === 'function') {
+            input.reportValidity();
+          }
+        }
+        return;
       }
+
+      if (input) {
+        input.setCustomValidity('');
+        input.classList.remove('is-invalid');
+      }
+
+      const btn = this.querySelector('button[type="submit"]');
+      const orig = btn ? btn.innerHTML : 'Subscribe';
+      if (btn) {
+        btn.innerHTML = '<i class="bi bi-check2"></i> Subscribed!';
+        btn.classList.add('btn-success');
+      }
+      setTimeout(() => {
+        if (btn) {
+          btn.innerHTML = orig;
+          btn.classList.remove('btn-success');
+        }
+        if (input) input.value = '';
+      }, 2500);
     });
   });
 
@@ -1758,6 +2193,244 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* --------------------------------------------------
+     20B. SUSTAINABLE GROWERS INTERACTIVE MODAL ENGINE
+  -------------------------------------------------- */
+  const GROWERS_DATA = {
+    'cascade-valley': {
+      title: 'Cascade Valley Farms',
+      location: 'Hood River, Oregon • Mt. Hood Valley Foothills',
+      category: 'Micro-Greens',
+      iconClass: 'bi-flower2',
+      practice: 'Biodynamic',
+      practiceBadgeClass: 'text-success',
+      methodTitle: '100% Closed-Loop Biodynamic Greenhouse Ecology',
+      summary: 'Cascade Valley Farms operates a zero-synthetic greenhouse bio-dome nestled at the base of Mt. Hood. Guided by Steiner biodynamic rhythms, they nurture living soils enriched with glacial volcanic mineral water, botanical compost teas, and celestial lunar cycles.',
+      story: 'Every morning at 5:30 AM, freshly harvested living micro-herbs, crimson borage blossoms, and petite heirloom greens are packed in reusable cedar crates and driven direct to Green Haven. Chef Elena uses their fiery radish cress and velvety pea tendrils to garnish our signature dishes and infuse raw elixirs.',
+      harvests: [
+        'Living Purple Radish Cress',
+        'Heirloom Borage Blossoms',
+        'Bronze Mountain Fennel',
+        'Lemon Sorrel Shoots',
+        'Micro-Arugula Sprouted Greens'
+      ],
+      certifications: [
+        'Demeter Biodynamic Certified',
+        'Salmon-Safe Agriculture',
+        'Zero Chemical Residue'
+      ]
+    },
+    'willamette-forest': {
+      title: 'Willamette Forest Truffles',
+      location: 'Eugene, Oregon • Willamette National Forest Foothills',
+      category: 'Wild Fungi',
+      iconClass: 'bi-tree',
+      practice: 'Wild Foraged',
+      practiceBadgeClass: 'text-success',
+      methodTitle: 'Ethical Wild Woodland Foraging & Trained Truffle Canines',
+      summary: 'Led by master mycologist Tyler Vance and his trained lagotto truffle hounds, Willamette Forest Truffles practices mindful, low-impact foraging across generational Douglas fir and old-growth hazelnut groves.',
+      story: 'Never using invasive soil rakes, Tyler delicately excavates truffles only when subterranean aroma peaks indicate mature spore readiness. Our kitchen receives white winter truffles within 12 hours of forest harvesting, imparting an earthy fragrance that defines our artisanal risotto and slow-simmered mushroom broths.',
+      harvests: [
+        'Oregon White Winter Truffles',
+        'Golden Forest Chanterelles',
+        'Wild Lion\'s Mane Clusters',
+        'Wild Matsutake (Pine Mushrooms)',
+        'Black Trumpet Fungi'
+      ],
+      certifications: [
+        'Certified Wild Forest Harvest',
+        '100% Sustainable Mycology Standard',
+        'Cruelty-Free Canine Foraged'
+      ]
+    },
+    'highland-heritage': {
+      title: 'Highland Heritage Mill',
+      location: 'Walla Walla, Washington • Columbia Plateau Basin',
+      category: 'Ancient Grains',
+      iconClass: 'bi-boxes',
+      practice: 'Stone-Milled',
+      practiceBadgeClass: 'text-success',
+      methodTitle: 'Slow Granite Stone-Milling Under 28°C',
+      summary: 'Generational farmers dedicated to reviving ancient landrace grains dating back 8,000 years. Highland Heritage grows rare emmer farro, purple barley, and einkorn using regenerative dryland cropping that revitalizes depleted soil microbiomes.',
+      story: 'Whole grains are milled weekly between French granite millstones at ultra-low speeds to preserve the living grain germ, native vitamin E, and aromatic oils. Our baker uses their stone-milled einkorn flour for Green Haven\'s signature sourdough and whole-grain dessert crusts.',
+      harvests: [
+        'Heritage Purple Barley',
+        'Cold-Pressed Sunflower Seed Oil',
+        'Stone-Ground Einkorn Flour',
+        'Organic Emmer Farro Kernels',
+        'Spelt Sourdough Grain Base'
+      ],
+      certifications: [
+        'Non-GMO Project Verified',
+        'Regenerative Organic Certified (ROC)',
+        'Unbleached & Additive Free'
+      ]
+    },
+    'pacific-adaptogen': {
+      title: 'Pacific Adaptogen Botanics',
+      location: 'Olympia, Washington • Puget Sound Maritime Basin',
+      category: 'Adaptogens',
+      iconClass: 'bi-cup-hot',
+      practice: '100% Organic',
+      practiceBadgeClass: 'text-success',
+      methodTitle: 'Regenerative Solar Extraction & Organic Cultivation',
+      summary: 'Dedicated to cultivating medicinal botanicals and adaptogens using chemical-free polyculture. Their coastal microclimate produces high-density therapeutic saponins, volatile terpenes, and antioxidant polyphenol yields.',
+      story: 'Partnering with Green Haven\'s sommelier, Pacific Adaptogen produces bespoke botanical reductions, steam-distilled floral waters, and adaptogenic syrups that elevate our mocktails and house kombuchas into revitalizing wellness experiences.',
+      harvests: [
+        'Organically Grown Ashwagandha Root',
+        'Pacific Blue Lavender Hydrosol',
+        'Holy Basil (Krishna Tulsi)',
+        'Cold-Extracted Elderberry Nectar',
+        'Fresh Lemon Verbena Leaves'
+      ],
+      certifications: [
+        'USDA Certified Organic',
+        'Certified Botanical GMP Standard',
+        'Zero Synthetic Solvents'
+      ]
+    }
+  };
+
+  function openGrowerDetails(growerId) {
+    const data = GROWERS_DATA[growerId] || GROWERS_DATA['cascade-valley'];
+    let modalEl = document.getElementById('growerDetailsModal');
+    
+    if (!modalEl) {
+      modalEl = document.createElement('div');
+      modalEl.id = 'growerDetailsModal';
+      modalEl.className = 'modal fade';
+      modalEl.setAttribute('tabindex', '-1');
+      modalEl.setAttribute('aria-labelledby', 'growerDetailsModalLabel');
+      modalEl.setAttribute('aria-hidden', 'true');
+      modalEl.innerHTML = `
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content rounded-4 border-0 shadow-lg overflow-hidden" style="background: var(--gh-surface, #ffffff); backdrop-filter: blur(20px);">
+            <div class="modal-header border-bottom py-3 px-4 d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center gap-2 flex-wrap">
+                <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3 py-1.5 fw-bold" id="growerModalCategory"></span>
+                <span class="badge rounded-pill px-3 py-1.5 fw-bold" id="growerModalPracticeBadge" style="background: rgba(46, 125, 50, 0.12); color: #2E7D32;">
+                  <i class="bi bi-patch-check-fill me-1"></i> <span id="growerModalPractice"></span>
+                </span>
+              </div>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4 p-md-5">
+              <div class="d-flex align-items-center gap-3 mb-4 flex-wrap">
+                <div class="grower-modal-icon-wrapper rounded-circle d-inline-flex align-items-center justify-content-center" id="growerModalIconWrap" style="width: 62px; height: 62px; background: rgba(46, 125, 50, 0.1); color: #2E7D32; font-size: 2rem; flex-shrink: 0;">
+                  <i class="bi" id="growerModalIcon"></i>
+                </div>
+                <div>
+                  <h3 class="fw-bold font-serif mb-1" id="growerModalTitle" style="color: var(--gh-heading-color, #1A3018);"></h3>
+                  <div class="small text-muted d-flex align-items-center gap-1" id="growerModalLocation"></div>
+                </div>
+              </div>
+              <div class="p-3 p-md-4 rounded-3 bg-light border mb-4 grower-modal-highlight-box">
+                <h6 class="fw-bold mb-2 text-success d-flex align-items-center gap-2">
+                  <i class="bi bi-flower1"></i> Sustainable Practice: <span id="growerModalMethodTitle"></span>
+                </h6>
+                <p class="mb-0 small text-muted leading-relaxed" id="growerModalSummary"></p>
+              </div>
+              <div class="mb-4">
+                <h5 class="fw-bold font-serif mb-2" style="color: var(--gh-heading-color, #1A3018);">Partnership with Green Haven</h5>
+                <p class="text-muted leading-relaxed small" id="growerModalStory"></p>
+              </div>
+              <div class="mb-4">
+                <h6 class="text-uppercase small fw-bold letter-spacing-1 text-success mb-2.5">
+                  <i class="bi bi-basket2 me-1"></i> Daily Kitchen Harvests
+                </h6>
+                <div class="d-flex flex-wrap gap-2" id="growerModalHarvests"></div>
+              </div>
+              <div class="p-3 rounded-3 border d-flex align-items-center justify-content-between flex-wrap gap-2 grower-modal-certs-box">
+                <div class="d-flex align-items-center gap-2 small text-muted">
+                  <i class="bi bi-shield-check text-success fs-5"></i>
+                  <span class="fw-semibold">Verified Regeneration Standards</span>
+                </div>
+                <div class="d-flex align-items-center gap-2 flex-wrap" id="growerModalCerts"></div>
+              </div>
+            </div>
+            <div class="modal-footer border-top py-3 px-4 d-flex justify-content-between align-items-center flex-wrap gap-2">
+              <span class="small text-muted"><i class="bi bi-arrow-repeat text-success me-1"></i> Direct Farm-to-Table Supply Chain</span>
+              <div class="d-flex gap-2">
+                <a href="menu.html" class="btn btn-sm btn-primary px-3 rounded-pill">
+                  <i class="bi bi-book-half me-1"></i> View Dishes Featuring This Farm
+                </a>
+                <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modalEl);
+    }
+
+    const catEl = document.getElementById('growerModalCategory');
+    const practiceEl = document.getElementById('growerModalPractice');
+    const titleEl = document.getElementById('growerModalTitle');
+    const locEl = document.getElementById('growerModalLocation');
+    const iconEl = document.getElementById('growerModalIcon');
+    const methodTitleEl = document.getElementById('growerModalMethodTitle');
+    const summaryEl = document.getElementById('growerModalSummary');
+    const storyEl = document.getElementById('growerModalStory');
+    const harvestsEl = document.getElementById('growerModalHarvests');
+    const certsEl = document.getElementById('growerModalCerts');
+
+    if (catEl) catEl.textContent = data.category;
+    if (practiceEl) practiceEl.textContent = data.practice;
+    if (titleEl) titleEl.textContent = data.title;
+    if (locEl) locEl.innerHTML = `<i class="bi bi-pin-map-fill text-success"></i> ${data.location}`;
+    if (iconEl) iconEl.className = `bi ${data.iconClass}`;
+    if (methodTitleEl) methodTitleEl.textContent = data.methodTitle;
+    if (summaryEl) summaryEl.textContent = data.summary;
+    if (storyEl) storyEl.textContent = data.story;
+
+    if (harvestsEl) {
+      harvestsEl.innerHTML = (data.harvests || []).map(h => 
+        `<span class="badge bg-light text-dark border rounded-pill px-3 py-1.5 fw-semibold small">${h}</span>`
+      ).join('');
+    }
+
+    if (certsEl) {
+      certsEl.innerHTML = (data.certifications || []).map(c => 
+        `<span class="badge bg-success bg-opacity-10 text-success rounded-pill px-2.5 py-1 extra-small"><i class="bi bi-check2 me-1"></i>${c}</span>`
+      ).join('');
+    }
+
+    if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+      const bsModal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+      bsModal.show();
+    }
+  }
+
+  // Bind click & keyboard handlers for all partner cards, pill tags, and arrows
+  if (partnerCards.length > 0) {
+    partnerCards.forEach(card => {
+      const growerId = card.getAttribute('data-grower-id') || 'cascade-valley';
+
+      card.addEventListener('click', (e) => {
+        e.preventDefault();
+        openGrowerDetails(growerId);
+      });
+
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ' || e.keyCode === 13 || e.keyCode === 32) {
+          e.preventDefault();
+          openGrowerDetails(growerId);
+        }
+      });
+    });
+  }
+
+  // Also bind any direct clicks to .partner-pill-tag or .partner-hover-arrow
+  document.querySelectorAll('.partner-pill-tag, .partner-hover-arrow').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      const parentCard = el.closest('.partner-farm-card');
+      const growerId = el.getAttribute('data-grower-id') || (parentCard ? parentCard.getAttribute('data-grower-id') : 'cascade-valley');
+      openGrowerDetails(growerId);
+    });
+  });
+
+  /* --------------------------------------------------
      28. HERO DISH INTERACTIVE GLITTER TRAIL
   -------------------------------------------------- */
   const heroDishWraps = document.querySelectorAll('.hero-dish-img-wrap');
@@ -2001,6 +2674,43 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(function() {
           if (typeof btn.blur === 'function') btn.blur();
         }, 200);
+      }
+    });
+  })();
+
+  /* ==========================================================================
+     19. HERO SECTION CTA & SMOOTH SCROLL HANDLER (HOME 2 FARM-TO-PLATE)
+     ========================================================================== */
+  (function() {
+    document.addEventListener('click', function(e) {
+      const eyebrowCta = e.target.closest('a.h2-eyebrow[href^="#"], a.h2-eyebrow-cta, a[href="#process"], a[href="#farmToPlate"]');
+      if (!eyebrowCta) return;
+
+      const targetId = eyebrowCta.getAttribute('href');
+      if (!targetId || targetId === '#') return;
+
+      const targetEl = document.querySelector(targetId) || document.getElementById('process');
+      if (targetEl) {
+        e.preventDefault();
+        
+        const navbar = document.querySelector('.gh-navbar, .nx-navbar');
+        const navHeight = navbar ? navbar.offsetHeight : 80;
+        const targetTop = targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight - 16;
+
+        // Execute smooth scroll without scroll interruption
+        window.scrollTo({
+          top: Math.max(0, targetTop),
+          behavior: 'smooth'
+        });
+
+        // Delay URL hash update so smooth-scroll animation is never aborted mid-flight by the browser
+        setTimeout(function() {
+          try {
+            if (window.history && window.history.replaceState) {
+              window.history.replaceState(null, '', targetId);
+            }
+          } catch (err) {}
+        }, 750);
       }
     });
   })();

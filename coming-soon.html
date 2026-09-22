@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 <head>
   <meta charset="UTF-8">
@@ -56,8 +56,8 @@
               Home
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item " href="index.html"><i class="bi bi-house me-2"></i> Home 1 (Gourmet Landing)</a></li>
-              <li><a class="gh-dropdown-item " href="home-2.html"><i class="bi bi-flower1 me-2"></i> Home 2 (Farm to Plate)</a></li>
+              <li><a class="gh-dropdown-item " href="index.html">Home 1 (Gourmet Landing)</a></li>
+              <li><a class="gh-dropdown-item " href="home-2.html">Home 2 (Farm to Plate)</a></li>
             </ul>
           </div>
           <a class="gh-nav-link " href="about.html">About</a>
@@ -221,10 +221,11 @@
             <h3 class="font-heading fw-bold mb-2">Join the VIP Tasting List</h3>
             <p class="text-muted small mb-0">Subscribers gain 48-hour advance booking access before public reservation release.</p>
           </div>
-          <form onsubmit="event.preventDefault(); alert('You are on the VIP tasting guestlist! We will email your priority booking link 48 hours prior to launch.'); this.reset();">
+          <form onsubmit="event.preventDefault(); if (this.checkValidity()) { alert('You are on the VIP tasting guestlist! We will email your priority booking link 48 hours prior to launch.'); this.reset(); this.classList.remove('was-validated'); } else { this.classList.add('was-validated'); }">
             <div class="row g-2">
               <div class="col-md-8">
-                <input type="email" class="form-control form-control-lg gh-vip-input" required placeholder="Enter your email address">
+                <input type="email" class="form-control form-control-lg gh-vip-input" required placeholder="Enter your email address" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)">
+                <div class="invalid-feedback text-start">Please enter a valid email address (e.g. name@example.com).</div>
               </div>
               <div class="col-md-4">
                 <button type="submit" class="btn btn-warning text-dark fw-bold btn-lg w-100">
@@ -280,7 +281,7 @@
           <h4 class="footer-col-title">Hours & Location</h4>
           <p class="text-white-50 small mb-2"><i class="bi bi-geo-alt text-warning me-2"></i> 742 Evergreen Botanical Way, Portland</p>
           <p class="text-white-50 small mb-2"><i class="bi bi-clock text-warning me-2"></i> Mon - Sun: 8:00 AM - 10:00 PM</p>
-          <p class="text-white-50 small mb-0"><i class="bi bi-telephone text-warning me-2"></i> <a href="tel:+15035550192" class="text-white text-decoration-none" style="color: #FFFFFF !important;">+1 (503) 555-0192</a></p>
+          <p class="text-white-50 small mb-0"><i class="bi bi-telephone text-warning me-2"></i> <a href="tel:+15035550192" class="text-white text-decoration-none" >+1 (503) 555-0192</a></p>
         </div>
 
         <!-- Column 4: Botanical Digest -->
@@ -288,7 +289,7 @@
           <h4 class="footer-col-title">Botanical Digest</h4>
           <p class="text-white-50 small mb-3">Join our newsletter for seasonal menu previews and chef recipes.</p>
           <form class="newsletter-form d-flex gap-2">
-            <input type="email" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Your email" required>
+            <input type="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Your email" required>
             <button type="submit" class="btn btn-accent btn-sm px-3">Join</button>
           </form>
         </div>

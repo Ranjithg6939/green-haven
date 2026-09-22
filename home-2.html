@@ -105,8 +105,8 @@
               Home
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item " href="index.html"><i class="bi bi-house me-2"></i> Home 1 (Gourmet Landing)</a></li>
-              <li><a class="gh-dropdown-item active" href="home-2.html"><i class="bi bi-flower1 me-2"></i> Home 2 (Farm to Plate)</a></li>
+              <li><a class="gh-dropdown-item " href="index.html">Home 1 (Gourmet Landing)</a></li>
+              <li><a class="gh-dropdown-item active" href="home-2.html">Home 2 (Farm to Plate)</a></li>
             </ul>
           </div>
           <a class="gh-nav-link " href="about.html">About</a>
@@ -232,9 +232,9 @@
           <!-- Left Editorial Narrative -->
           <div class="col-lg-6 col-xl-6 h2-reveal">
             <div class="mb-2">
-              <span class="h2-eyebrow">
-                <i class="bi bi-flower1 text-success"></i> FROM FARM TO PLATE
-              </span>
+              <a href="#process" class="h2-eyebrow h2-eyebrow-cta" role="button" aria-label="From Farm to Plate - View Our Process">
+                <i class="bi bi-flower1 text-success"></i> FROM FARM TO PLATE <i class="bi bi-arrow-down-short text-success fs-5 ms-1"></i>
+              </a>
             </div>
             
             <h1 class="h2-hero-title mb-2">
@@ -245,12 +245,6 @@
             <p class="h2-hero-desc mb-3">
               Discover thoughtfully crafted vegan cuisine inspired by nature, where seasonal harvests and culinary passion come together to create unforgettable dining experiences.
             </p>
-
-            <div class="d-flex flex-wrap gap-2 mb-3">
-              <span class="h2-badge-local"><i class="bi bi-geo-alt-fill"></i> Locally Sourced</span>
-              <span class="h2-badge-seasonal"><i class="bi bi-calendar2-week"></i> Seasonal Menu</span>
-              <span class="h2-badge-conscious"><i class="bi bi-heart-pulse-fill"></i> Conscious Dining</span>
-            </div>
 
             <div class="d-flex flex-wrap align-items-center gap-2 gap-sm-3 mb-2">
               <a href="#experience" class="btn btn-primary px-3 px-sm-4">
@@ -510,8 +504,8 @@
 
         <div class="h2-experience-grid">
           
-          <!-- Card 1 (Span 7) -->
-          <div class="h2-exp-card h2-exp-col-7 h2-reveal">
+          <!-- Card 1 -->
+          <div class="h2-exp-card h2-reveal">
             <div class="h2-exp-icon h2-exp-icon-home">
               <i class="bi bi-house-heart-fill"></i>
             </div>
@@ -521,8 +515,8 @@
             </p>
           </div>
 
-          <!-- Card 2 (Span 5) -->
-          <div class="h2-exp-card h2-exp-col-5 h2-reveal">
+          <!-- Card 2 -->
+          <div class="h2-exp-card h2-reveal">
             <div class="h2-exp-icon h2-exp-icon-droplet">
               <i class="bi bi-droplet-half"></i>
             </div>
@@ -532,8 +526,8 @@
             </p>
           </div>
 
-          <!-- Card 3 (Span 5) -->
-          <div class="h2-exp-card h2-exp-col-5-alt h2-reveal">
+          <!-- Card 3 -->
+          <div class="h2-exp-card h2-reveal">
             <div class="h2-exp-icon h2-exp-icon-stars">
               <i class="bi bi-stars"></i>
             </div>
@@ -543,8 +537,8 @@
             </p>
           </div>
 
-          <!-- Card 4 (Span 7) -->
-          <div class="h2-exp-card h2-exp-col-7-alt h2-reveal">
+          <!-- Card 4 -->
+          <div class="h2-exp-card h2-reveal">
             <div class="h2-exp-icon h2-exp-icon-globe">
               <i class="bi bi-globe-americas"></i>
             </div>
@@ -564,7 +558,7 @@
       <div class="container">
         
         <div class="text-center max-w-700 mx-auto mb-4 h2-reveal">
-          <span class="h2-eyebrow mb-2">OUR PROCESS</span>
+          <span class="h2-eyebrow mb-2"><i class="bi bi-flower1 text-success"></i> FROM FARM TO PLATE &bull; OUR PROCESS</span>
           <h2 class="section-title mt-2">From Earth to Your Table</h2>
           <p class="h2-section-desc">
             A transparent culinary lifecycle from fertile soils to your dinner plate.
@@ -577,6 +571,7 @@
           <div class="h2-process-step h2-reveal">
             <div class="h2-process-node">
               <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=300&auto=format&fit=crop" alt="Regenerative Organic Farm">
+              <span class="h2-step-number-badge" aria-label="Step 1">01</span>
             </div>
             <span class="h2-step-pill">FARM</span>
             <h5 class="font-serif fw-bold mb-2">Regenerative Soil</h5>
@@ -585,10 +580,14 @@
             </p>
           </div>
 
+          <!-- Connector 1 (---) -->
+          <div class="h2-process-connector h2-connector-1" aria-hidden="true"></div>
+
           <!-- Step 2: HARVEST -->
           <div class="h2-process-step h2-reveal">
             <div class="h2-process-node">
               <img src="assets/images/freshly-harvested.jpg" alt="Morning Botanical Harvest">
+              <span class="h2-step-number-badge" aria-label="Step 2">02</span>
             </div>
             <span class="h2-step-pill">HARVEST</span>
             <h5 class="font-serif fw-bold mb-2">Morning Harvest</h5>
@@ -597,10 +596,14 @@
             </p>
           </div>
 
+          <!-- Connector 2 Center (---) -->
+          <div class="h2-process-connector h2-connector-2" aria-hidden="true"></div>
+
           <!-- Step 3: KITCHEN -->
           <div class="h2-process-step h2-reveal">
             <div class="h2-process-node">
               <img src="assets/images/chef-crafted.png" alt="Artisanal Kitchen Crafting">
+              <span class="h2-step-number-badge" aria-label="Step 3">03</span>
             </div>
             <span class="h2-step-pill">KITCHEN</span>
             <h5 class="font-serif fw-bold mb-2">Artisanal Craft</h5>
@@ -609,10 +612,14 @@
             </p>
           </div>
 
+          <!-- Connector 3 (---) -->
+          <div class="h2-process-connector h2-connector-3" aria-hidden="true"></div>
+
           <!-- Step 4: YOUR TABLE -->
           <div class="h2-process-step h2-reveal">
             <div class="h2-process-node">
               <img src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?q=80&w=300&auto=format&fit=crop" alt="Mindful Dining at Table">
+              <span class="h2-step-number-badge" aria-label="Step 4">04</span>
             </div>
             <span class="h2-step-pill">YOUR TABLE</span>
             <h5 class="font-serif fw-bold mb-2">Mindful Dining</h5>
@@ -763,7 +770,7 @@
           <h4 class="footer-col-title">Hours & Location</h4>
           <p class="text-white-50 small mb-2"><i class="bi bi-geo-alt text-warning me-2"></i> 742 Evergreen Botanical Way, Portland</p>
           <p class="text-white-50 small mb-2"><i class="bi bi-clock text-warning me-2"></i> Mon - Sun: 8:00 AM - 10:00 PM</p>
-          <p class="text-white-50 small mb-0"><i class="bi bi-telephone text-warning me-2"></i> <a href="tel:+15035550192" class="text-white text-decoration-none" style="color: #FFFFFF !important;">+1 (503) 555-0192</a></p>
+          <p class="text-white-50 small mb-0"><i class="bi bi-telephone text-warning me-2"></i> <a href="tel:+15035550192" class="text-white text-decoration-none" >+1 (503) 555-0192</a></p>
         </div>
 
         <!-- Column 4: Botanical Digest -->
@@ -771,7 +778,7 @@
           <h4 class="footer-col-title">Botanical Digest</h4>
           <p class="text-white-50 small mb-3">Join our newsletter for seasonal menu previews and chef recipes.</p>
           <form class="newsletter-form d-flex gap-2">
-            <input type="email" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Your email" required>
+            <input type="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Your email" required>
             <button type="submit" class="btn btn-accent btn-sm px-3">Join</button>
           </form>
         </div>

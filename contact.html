@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
 <head>
   <meta charset="UTF-8">
@@ -58,8 +58,8 @@
               Home
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item " href="index.html"><i class="bi bi-house me-2"></i> Home 1 (Gourmet Landing)</a></li>
-              <li><a class="gh-dropdown-item " href="home-2.html"><i class="bi bi-flower1 me-2"></i> Home 2 (Farm to Plate)</a></li>
+              <li><a class="gh-dropdown-item " href="index.html">Home 1 (Gourmet Landing)</a></li>
+              <li><a class="gh-dropdown-item " href="home-2.html">Home 2 (Farm to Plate)</a></li>
             </ul>
           </div>
           <a class="gh-nav-link " href="about.html">About</a>
@@ -292,18 +292,18 @@
                   <div class="row g-3">
                     <div class="col-md-6">
                       <label class="form-label small fw-semibold" for="contactName">Full Name *</label>
-                      <input type="text" class="form-control" id="contactName" required placeholder="e.g. Eleanor Vance">
-                      <div class="invalid-feedback">Please enter your full name.</div>
+                      <input type="text" class="form-control" id="contactName" required placeholder="e.g. Eleanor Vance" pattern="^[A-Za-z]+(?:\s[A-Za-z]+)*$" minlength="2" title="Please enter a valid name (letters and spaces only, at least 2 characters)">
+                      <div class="invalid-feedback" id="contactNameFeedback">Please enter your full name.</div>
                     </div>
                     <div class="col-md-6">
                       <label class="form-label small fw-semibold" for="contactEmail">Email Address *</label>
-                      <input type="email" class="form-control" id="contactEmail" required placeholder="eleanor@example.com">
-                      <div class="invalid-feedback">Please enter a valid email address.</div>
+                      <input type="email" class="form-control" id="contactEmail" required placeholder="eleanor@example.com" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)">
+                      <div class="invalid-feedback" id="contactEmailFeedback">Please enter a valid email address.</div>
                     </div>
                     <div class="col-md-6">
                       <label class="form-label small fw-semibold" for="contactPhone">Phone Number</label>
-                      <input type="tel" class="form-control" id="contactPhone" placeholder="e.g. 5030000000" inputmode="numeric" pattern="[0-9]{10,15}" minlength="10" maxlength="15" autocomplete="tel" title="Please enter numbers only (10 to 15 digits)">
-                      <div class="invalid-feedback" id="contactPhoneFeedback">Please enter a valid phone number (10 to 15 digits, numbers only).</div>
+                      <input type="tel" class="form-control" id="contactPhone" placeholder="e.g. 9876543210" inputmode="numeric" pattern="[0-9]{10}" minlength="10" maxlength="10" autocomplete="tel" title="Please enter numbers only (exactly 10 digits)">
+                      <div class="invalid-feedback" id="contactPhoneFeedback">Please enter a valid 10-digit phone number.</div>
                     </div>
                     <div class="col-md-6">
                       <label class="form-label small fw-semibold" for="contactSubject">Inquiry Subject *</label>
@@ -439,7 +439,7 @@
           <h4 class="footer-col-title">Hours & Location</h4>
           <p class="text-white-50 small mb-2"><i class="bi bi-geo-alt text-warning me-2"></i> 742 Evergreen Botanical Way, Portland</p>
           <p class="text-white-50 small mb-2"><i class="bi bi-clock text-warning me-2"></i> Mon - Sun: 8:00 AM - 10:00 PM</p>
-          <p class="text-white-50 small mb-0"><i class="bi bi-telephone text-warning me-2"></i> <a href="tel:+15035550192" class="text-white text-decoration-none" style="color: #FFFFFF !important;">+1 (503) 555-0192</a></p>
+          <p class="text-white-50 small mb-0"><i class="bi bi-telephone text-warning me-2"></i> <a href="tel:+15035550192" class="text-white text-decoration-none" >+1 (503) 555-0192</a></p>
         </div>
 
         <!-- Column 4: Botanical Digest -->
@@ -447,7 +447,7 @@
           <h4 class="footer-col-title">Botanical Digest</h4>
           <p class="text-white-50 small mb-3">Join our newsletter for seasonal menu previews and chef recipes.</p>
           <form class="newsletter-form d-flex gap-2">
-            <input type="email" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Your email" required>
+            <input type="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Your email" required>
             <button type="submit" class="btn btn-accent btn-sm px-3">Join</button>
           </form>
         </div>

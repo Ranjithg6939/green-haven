@@ -54,8 +54,8 @@
               Home
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item " href="index.html"><i class="bi bi-house me-2"></i> Home 1 (Gourmet Landing)</a></li>
-              <li><a class="gh-dropdown-item " href="home-2.html"><i class="bi bi-flower1 me-2"></i> Home 2 (Farm to Plate)</a></li>
+              <li><a class="gh-dropdown-item " href="index.html">Home 1 (Gourmet Landing)</a></li>
+              <li><a class="gh-dropdown-item " href="home-2.html">Home 2 (Farm to Plate)</a></li>
             </ul>
           </div>
           <a class="gh-nav-link " href="about.html">About</a>
@@ -227,7 +227,7 @@
                 <label class="form-label fw-semibold" for="loginEmail">Email Address</label>
                 <div class="input-group">
                   <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                  <input type="email" class="form-control" id="loginEmail" placeholder="e.g. guest@greenhaven.com" required autocomplete="email">
+                  <input type="email" class="form-control" id="loginEmail" placeholder="e.g. guest@greenhaven.com" required autocomplete="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)">
                 </div>
                 <div class="invalid-feedback" id="loginEmailFeedback">Please enter a valid email address.</div>
               </div>
@@ -480,10 +480,19 @@
           if (!email) {
             setInputError(emailInput, emailFeedback, 'Email address is required.');
             hasError = true;
+          } else if (/\s/.test(email)) {
+            setInputError(emailInput, emailFeedback, 'Email address cannot contain spaces.');
+            hasError = true;
           } else {
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             if (!emailPattern.test(email)) {
-              setInputError(emailInput, emailFeedback, 'Please enter a valid email address.');
+              let msg = 'Please enter a valid email address (e.g. name@example.com or name@example.in).';
+              if (!email.includes('@')) {
+                msg = "Email address must contain an '@' symbol.";
+              } else if (!email.split('@')[1] || !email.split('@')[1].includes('.')) {
+                msg = 'Please include a valid domain extension like .com or .in.';
+              }
+              setInputError(emailInput, emailFeedback, msg);
               hasError = true;
             }
           }

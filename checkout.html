@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
 <head>
   <meta charset="UTF-8">
@@ -54,8 +54,8 @@
               Home
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item " href="index.html"><i class="bi bi-house me-2"></i> Home 1 (Gourmet Landing)</a></li>
-              <li><a class="gh-dropdown-item " href="home-2.html"><i class="bi bi-flower1 me-2"></i> Home 2 (Farm to Plate)</a></li>
+              <li><a class="gh-dropdown-item " href="index.html">Home 1 (Gourmet Landing)</a></li>
+              <li><a class="gh-dropdown-item " href="home-2.html">Home 2 (Farm to Plate)</a></li>
             </ul>
           </div>
           <a class="gh-nav-link " href="about.html">About</a>
@@ -198,18 +198,18 @@
               <div class="row g-3">
                 <div class="col-md-6">
                   <label class="form-label" for="custName">Full Name *</label>
-                  <input type="text" class="form-control" id="custName" required placeholder="e.g. Maya Lin">
-                  <div class="invalid-feedback">Please enter your name.</div>
+                  <input type="text" class="form-control" id="custName" required placeholder="e.g. Maya Lin" pattern="^[A-Za-z]+(?:\s[A-Za-z]+)*$" minlength="2" title="Please enter a valid name (letters and spaces only, at least 2 characters)">
+                  <div class="invalid-feedback" id="custNameFeedback">Please enter your name.</div>
                 </div>
                 <div class="col-md-6">
                   <label class="form-label" for="custPhone">Phone Number *</label>
-                  <input type="tel" class="form-control" id="custPhone" required placeholder="e.g. (503) 555-0182">
-                  <div class="invalid-feedback">Please enter contact phone.</div>
+                  <input type="tel" class="form-control" id="custPhone" required placeholder="e.g. 9876543210" inputmode="numeric" pattern="[0-9]{10}" minlength="10" maxlength="10" title="Please enter numbers only (exactly 10 digits)">
+                  <div class="invalid-feedback" id="custPhoneFeedback">Please enter your 10-digit phone number.</div>
                 </div>
                 <div class="col-12">
                   <label class="form-label" for="custEmail">Email Address (Order Confirmation) *</label>
-                  <input type="email" class="form-control" id="custEmail" required placeholder="e.g. maya@example.com">
-                  <div class="invalid-feedback">Please enter a valid email address.</div>
+                  <input type="email" class="form-control" id="custEmail" required placeholder="e.g. maya@example.com" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)">
+                  <div class="invalid-feedback" id="custEmailFeedback">Please enter a valid email address.</div>
                 </div>
               </div>
             </div>
@@ -334,22 +334,22 @@
 
               <div class="summary-row">
                 <span class="text-muted">Subtotal</span>
-                <span class="fw-semibold" id="checkoutSubtotalText">$0.00</span>
+                <span class="fw-semibold" id="checkoutSubtotalText">₹0</span>
               </div>
 
               <div class="summary-row">
-                <span class="text-muted">Tax (8%)</span>
-                <span class="fw-semibold" id="checkoutTaxText">$0.00</span>
+                <span class="text-muted">Tax (5%)</span>
+                <span class="fw-semibold" id="checkoutTaxText">₹0</span>
               </div>
 
               <div class="summary-row">
                 <span class="text-muted">Delivery Fee</span>
-                <span class="fw-semibold" id="checkoutDeliveryText">$5.00</span>
+                <span class="fw-semibold" id="checkoutDeliveryText">₹99</span>
               </div>
 
               <div class="summary-row total">
                 <span>Total Due</span>
-                <span class="text-success" id="checkoutTotalText">$0.00</span>
+                <span class="text-success" id="checkoutTotalText">₹0</span>
               </div>
 
               <button type="submit" class="btn btn-primary w-100 py-3 fs-6 mt-4 shadow-md" id="btnPlaceOrder">
@@ -412,7 +412,7 @@
           <h4 class="footer-col-title">Hours & Location</h4>
           <p class="text-white-50 small mb-2"><i class="bi bi-geo-alt text-warning me-2"></i> 742 Evergreen Botanical Way, Portland</p>
           <p class="text-white-50 small mb-2"><i class="bi bi-clock text-warning me-2"></i> Mon - Sun: 8:00 AM - 10:00 PM</p>
-          <p class="text-white-50 small mb-0"><i class="bi bi-telephone text-warning me-2"></i> <a href="tel:+15035550192" class="text-white text-decoration-none" style="color: #FFFFFF !important;">+1 (503) 555-0192</a></p>
+          <p class="text-white-50 small mb-0"><i class="bi bi-telephone text-warning me-2"></i> <a href="tel:+15035550192" class="text-white text-decoration-none" >+1 (503) 555-0192</a></p>
         </div>
 
         <!-- Column 4: Botanical Digest -->
@@ -420,7 +420,7 @@
           <h4 class="footer-col-title">Botanical Digest</h4>
           <p class="text-white-50 small mb-3">Join our newsletter for seasonal menu previews and chef recipes.</p>
           <form class="newsletter-form d-flex gap-2">
-            <input type="email" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Your email" required>
+            <input type="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Your email" required>
             <button type="submit" class="btn btn-accent btn-sm px-3">Join</button>
           </form>
         </div>
@@ -489,10 +489,10 @@
               <img src="${item.image}" alt="${item.name}" class="rounded-2" style="width: 44px; height: 44px; object-fit: cover;">
               <div>
                 <div class="fw-bold small text-truncate" style="max-width: 170px;">${item.name}</div>
-                <div class="extra-small text-muted">Qty: ${item.qty} &times; $${item.price.toFixed(2)}</div>
+                <div class="extra-small text-muted">Qty: ${item.qty} &times; ₹${Math.round(item.price).toLocaleString('en-IN')}</div>
               </div>
             </div>
-            <div class="fw-bold text-success small">$${(item.price * item.qty).toFixed(2)}</div>
+            <div class="fw-bold text-success small">₹${Math.round(item.price * item.qty).toLocaleString('en-IN')}</div>
           </div>
         `).join('');
       }
@@ -502,10 +502,10 @@
       const delivery = GH_Cart.getDeliveryFee();
       const total = GH_Cart.getTotal();
 
-      document.getElementById('checkoutSubtotalText').textContent = `$${subtotal.toFixed(2)}`;
-      document.getElementById('checkoutTaxText').textContent = `$${tax.toFixed(2)}`;
-      document.getElementById('checkoutDeliveryText').textContent = delivery === 0 ? 'FREE' : `$${delivery.toFixed(2)}`;
-      document.getElementById('checkoutTotalText').textContent = `$${total.toFixed(2)}`;
+      document.getElementById('checkoutSubtotalText').textContent = `₹${Math.round(subtotal).toLocaleString('en-IN')}`;
+      document.getElementById('checkoutTaxText').textContent = `₹${Math.round(tax).toLocaleString('en-IN')}`;
+      document.getElementById('checkoutDeliveryText').textContent = delivery === 0 ? 'FREE' : `₹${Math.round(delivery).toLocaleString('en-IN')}`;
+      document.getElementById('checkoutTotalText').textContent = `₹${Math.round(total).toLocaleString('en-IN')}`;
 
       // 5. Handle Payment Option Card Toggles
       const paymentCards = document.querySelectorAll('.payment-option-card');
@@ -527,12 +527,30 @@
 
       // 6. Handle Order Placement
       const checkoutForm = document.getElementById('checkoutForm');
+      const custName = document.getElementById('custName');
+      const custPhone = document.getElementById('custPhone');
+      const custEmail = document.getElementById('custEmail');
+
+      const validateCustName = window.setupValidNameInput ? window.setupValidNameInput(custName, true, 'Full Name') : null;
+      const validateCustEmail = window.setupValidEmailInput ? window.setupValidEmailInput(custEmail, true) : null;
+      const validateCustPhone = window.setupNumericPhoneInput ? window.setupNumericPhoneInput(custPhone, true) : null;
+
       checkoutForm.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        if (!this.checkValidity()) {
+        const isNameValid = validateCustName ? validateCustName() : true;
+        const isEmailValid = validateCustEmail ? validateCustEmail() : true;
+        const isPhoneValid = validateCustPhone ? validateCustPhone() : true;
+
+        if (!isNameValid || !isEmailValid || !isPhoneValid || !this.checkValidity()) {
           e.stopPropagation();
           this.classList.add('was-validated');
+          if (custName && !isNameValid) custName.classList.add('is-invalid');
+          if (custEmail && !isEmailValid) custEmail.classList.add('is-invalid');
+          if (custPhone && !isPhoneValid) custPhone.classList.add('is-invalid');
+
+          const firstInvalid = this.querySelector('.is-invalid, :invalid');
+          if (firstInvalid) firstInvalid.focus();
           return;
         }
 

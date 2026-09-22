@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
 <head>
   <meta charset="UTF-8">
@@ -54,8 +54,8 @@
               Home
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item " href="index.html"><i class="bi bi-house me-2"></i> Home 1 (Gourmet Landing)</a></li>
-              <li><a class="gh-dropdown-item " href="home-2.html"><i class="bi bi-flower1 me-2"></i> Home 2 (Farm to Plate)</a></li>
+              <li><a class="gh-dropdown-item " href="index.html">Home 1 (Gourmet Landing)</a></li>
+              <li><a class="gh-dropdown-item " href="home-2.html">Home 2 (Farm to Plate)</a></li>
             </ul>
           </div>
           <a class="gh-nav-link " href="about.html">About</a>
@@ -201,7 +201,7 @@
                   <label class="form-label fw-semibold" for="regFirstName">First Name *</label>
                   <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-person"></i></span>
-                    <input type="text" class="form-control" id="regFirstName" placeholder="e.g. Liam" required autocomplete="given-name">
+                    <input type="text" class="form-control" id="regFirstName" placeholder="e.g. Liam" required autocomplete="given-name" pattern="^[A-Za-z]+(?:\s[A-Za-z]+)*$" minlength="2" title="Please enter your first name (letters and spaces only, at least 2 characters)">
                   </div>
                   <div class="invalid-feedback" id="regFirstNameFeedback">Please enter your first name.</div>
                 </div>
@@ -211,7 +211,7 @@
                   <label class="form-label fw-semibold" for="regLastName">Last Name *</label>
                   <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-person"></i></span>
-                    <input type="text" class="form-control" id="regLastName" placeholder="e.g. Montgomery" required autocomplete="family-name">
+                    <input type="text" class="form-control" id="regLastName" placeholder="e.g. Montgomery" required autocomplete="family-name" pattern="^[A-Za-z]+(?:\s[A-Za-z]+)*$" minlength="2" title="Please enter your last name (letters and spaces only, at least 2 characters)">
                   </div>
                   <div class="invalid-feedback" id="regLastNameFeedback">Please enter your last name.</div>
                 </div>
@@ -221,7 +221,7 @@
                   <label class="form-label fw-semibold" for="regEmail">Email Address *</label>
                   <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                    <input type="email" class="form-control" id="regEmail" placeholder="e.g. liam@example.com" required autocomplete="email">
+                    <input type="email" class="form-control" id="regEmail" placeholder="e.g. liam@example.com" required autocomplete="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)">
                   </div>
                   <div class="invalid-feedback" id="regEmailFeedback">This field is required.</div>
                 </div>
@@ -314,7 +314,7 @@
           <h4 class="footer-col-title">The Sanctuary</h4>
           <p class="text-white-50 small mb-2"><i class="bi bi-geo-alt text-warning me-2"></i> 742 Evergreen Botanical Way, Portland</p>
           <p class="text-white-50 small mb-2"><i class="bi bi-clock text-warning me-2"></i> Mon - Sun: 8:00 AM - 10:00 PM</p>
-          <p class="text-white-50 small mb-0"><i class="bi bi-telephone text-warning me-2"></i> <a href="tel:+15035550192" class="text-white text-decoration-none" style="color: #FFFFFF !important;">+1 (503) 555-0192</a></p>
+          <p class="text-white-50 small mb-0"><i class="bi bi-telephone text-warning me-2"></i> <a href="tel:+15035550192" class="text-white text-decoration-none" >+1 (503) 555-0192</a></p>
         </div>
 
         <!-- Column 4: Botanical Digest -->
@@ -322,7 +322,7 @@
           <h4 class="footer-col-title">Botanical Digest</h4>
           <p class="text-white-50 small mb-3">Join our newsletter for seasonal menu previews and chef recipes.</p>
           <form class="newsletter-form d-flex gap-2">
-            <input type="email" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Your email" required>
+            <input type="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Your email" required>
             <button type="submit" class="btn btn-accent btn-sm px-3">Join</button>
           </form>
         </div>
@@ -406,7 +406,17 @@
         }
       });
 
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      const nameRegex = /^[a-zA-Z]+(?:\s[a-zA-Z]+)*$/;
+
+      // Attach global validation helpers if available
+      if (window.setupValidNameInput) {
+        window.setupValidNameInput(firstNameInput, true, 'First name');
+        window.setupValidNameInput(lastNameInput, true, 'Last name');
+      }
+      if (window.setupValidEmailInput) {
+        window.setupValidEmailInput(emailInput, true);
+      }
 
       if (registerForm) {
         registerForm.addEventListener('submit', function (e) {
@@ -424,6 +434,12 @@
           if (!firstNameVal) {
             setError(firstNameInput, firstNameFeedback, 'Please enter your first name.');
             hasError = true;
+          } else if (firstNameVal.length < 2) {
+            setError(firstNameInput, firstNameFeedback, 'First name must be at least 2 characters long.');
+            hasError = true;
+          } else if (!nameRegex.test(firstNameVal)) {
+            setError(firstNameInput, firstNameFeedback, 'First name can only contain letters and spaces (no numbers or special characters).');
+            hasError = true;
           } else {
             clearError(firstNameInput, firstNameFeedback);
           }
@@ -431,6 +447,12 @@
           // 2. Last Name check
           if (!lastNameVal) {
             setError(lastNameInput, lastNameFeedback, 'Please enter your last name.');
+            hasError = true;
+          } else if (lastNameVal.length < 2) {
+            setError(lastNameInput, lastNameFeedback, 'Last name must be at least 2 characters long.');
+            hasError = true;
+          } else if (!nameRegex.test(lastNameVal)) {
+            setError(lastNameInput, lastNameFeedback, 'Last name can only contain letters and spaces (no numbers or special characters).');
             hasError = true;
           } else {
             clearError(lastNameInput, lastNameFeedback);
@@ -440,8 +462,17 @@
           if (!emailVal) {
             setError(emailInput, emailFeedback, 'This field is required.');
             hasError = true;
+          } else if (/\s/.test(emailVal)) {
+            setError(emailInput, emailFeedback, 'Email address cannot contain spaces.');
+            hasError = true;
           } else if (!emailRegex.test(emailVal)) {
-            setError(emailInput, emailFeedback, 'Please enter a valid email address.');
+            let msg = 'Please enter a valid email address (e.g. name@example.com or name@example.in).';
+            if (!emailVal.includes('@')) {
+              msg = "Email address must contain an '@' symbol.";
+            } else if (!emailVal.split('@')[1] || !emailVal.split('@')[1].includes('.')) {
+              msg = 'Please include a valid domain extension like .com or .in.';
+            }
+            setError(emailInput, emailFeedback, msg);
             hasError = true;
           } else if (window.GH_Auth && window.GH_Auth.findUserByEmail(emailVal)) {
             setError(emailInput, emailFeedback, 'An account with this email already exists.');

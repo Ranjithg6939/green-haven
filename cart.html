@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
 <head>
   <meta charset="UTF-8">
@@ -56,8 +56,8 @@
               Home
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item " href="index.html"><i class="bi bi-house me-2"></i> Home 1 (Gourmet Landing)</a></li>
-              <li><a class="gh-dropdown-item " href="home-2.html"><i class="bi bi-flower1 me-2"></i> Home 2 (Farm to Plate)</a></li>
+              <li><a class="gh-dropdown-item " href="index.html">Home 1 (Gourmet Landing)</a></li>
+              <li><a class="gh-dropdown-item " href="home-2.html">Home 2 (Farm to Plate)</a></li>
             </ul>
           </div>
           <a class="gh-nav-link " href="about.html">About</a>
@@ -254,20 +254,20 @@
 
               <div class="summary-row">
                 <span class="text-muted">Dishes Subtotal</span>
-                <span class="fw-bold" id="cartSubtotalText">$0.00</span>
+                <span class="fw-bold" id="cartSubtotalText">₹0</span>
               </div>
 
               <div class="summary-row">
-                <span class="text-muted">Estimated Tax (8%)</span>
-                <span class="fw-semibold" id="cartTaxText">$0.00</span>
+                <span class="text-muted">Estimated Tax (5%)</span>
+                <span class="fw-semibold" id="cartTaxText">₹0</span>
               </div>
 
               <div class="summary-row">
                 <div class="d-flex align-items-center gap-1">
                   <span class="text-muted">Delivery Fee</span>
-                  <i class="bi bi-info-circle text-muted" title="Free delivery on orders over $50" style="font-size: 0.8rem; cursor: pointer;"></i>
+                  <i class="bi bi-info-circle text-muted" title="Free delivery on orders over ₹999" style="font-size: 0.8rem; cursor: pointer;"></i>
                 </div>
-                <span class="fw-semibold" id="cartDeliveryText">$5.00</span>
+                <span class="fw-semibold" id="cartDeliveryText">₹99</span>
               </div>
 
               <div id="freeDeliveryNotice" class="p-2 rounded-3 bg-success-subtle text-success small mb-3 text-center" style="display: none;">
@@ -276,7 +276,7 @@
 
               <div class="summary-row total">
                 <span>Grand Total</span>
-                <span class="text-success" id="cartGrandTotalText">$0.00</span>
+                <span class="text-success" id="cartGrandTotalText">₹0</span>
               </div>
 
               <!-- Promo Code Demo Box -->
@@ -349,7 +349,7 @@
           <h4 class="footer-col-title">Hours & Location</h4>
           <p class="text-white-50 small mb-2"><i class="bi bi-geo-alt text-warning me-2"></i> 742 Evergreen Botanical Way, Portland</p>
           <p class="text-white-50 small mb-2"><i class="bi bi-clock text-warning me-2"></i> Mon - Sun: 8:00 AM - 10:00 PM</p>
-          <p class="text-white-50 small mb-0"><i class="bi bi-telephone text-warning me-2"></i> <a href="tel:+15035550192" class="text-white text-decoration-none" style="color: #FFFFFF !important;">+1 (503) 555-0192</a></p>
+          <p class="text-white-50 small mb-0"><i class="bi bi-telephone text-warning me-2"></i> <a href="tel:+15035550192" class="text-white text-decoration-none" >+1 (503) 555-0192</a></p>
         </div>
 
         <!-- Column 4: Botanical Digest -->
@@ -357,7 +357,7 @@
           <h4 class="footer-col-title">Botanical Digest</h4>
           <p class="text-white-50 small mb-3">Join our newsletter for seasonal menu previews and chef recipes.</p>
           <form class="newsletter-form d-flex gap-2">
-            <input type="email" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Your email" required>
+            <input type="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Your email" required>
             <button type="submit" class="btn btn-accent btn-sm px-3">Join</button>
           </form>
         </div>
@@ -429,7 +429,7 @@
                   </div>
                 </div>
               </td>
-              <td class="fw-semibold">$${item.price.toFixed(2)}</td>
+              <td class="fw-semibold">₹${Math.round(item.price).toLocaleString('en-IN')}</td>
               <td class="text-center">
                 <div class="qty-stepper mx-auto">
                   <button type="button" class="qty-btn" onclick="handleQtyChange('${item.id}', -1)">-</button>
@@ -437,7 +437,7 @@
                   <button type="button" class="qty-btn" onclick="handleQtyChange('${item.id}', 1)">+</button>
                 </div>
               </td>
-              <td class="text-end fw-bold text-success">$${(item.price * item.qty).toFixed(2)}</td>
+              <td class="text-end fw-bold text-success">₹${Math.round(item.price * item.qty).toLocaleString('en-IN')}</td>
               <td class="text-end">
                 <button type="button" class="btn-remove-item" onclick="handleRemoveItem('${item.id}')" title="Remove item">
                   <i class="bi bi-trash3"></i>
@@ -453,10 +453,10 @@
         let total = (subtotal + tax + deliveryFee) - discountAmount;
         if (total < 0) total = 0;
 
-        if (cartSubtotalText) cartSubtotalText.textContent = `$${subtotal.toFixed(2)}`;
-        if (cartTaxText) cartTaxText.textContent = `$${tax.toFixed(2)}`;
+        if (cartSubtotalText) cartSubtotalText.textContent = `₹${Math.round(subtotal).toLocaleString('en-IN')}`;
+        if (cartTaxText) cartTaxText.textContent = `₹${Math.round(tax).toLocaleString('en-IN')}`;
         if (cartDeliveryText) {
-          cartDeliveryText.textContent = deliveryFee === 0 ? 'FREE' : `$${deliveryFee.toFixed(2)}`;
+          cartDeliveryText.textContent = deliveryFee === 0 ? 'FREE' : `₹${Math.round(deliveryFee).toLocaleString('en-IN')}`;
           if (deliveryFee === 0) {
             cartDeliveryText.classList.add('text-success', 'fw-bold');
           } else {
@@ -466,7 +466,7 @@
         if (freeDeliveryNotice) {
           freeDeliveryNotice.style.display = (subtotal >= GH_Cart.FREE_DELIVERY_THRESHOLD) ? 'block' : 'none';
         }
-        if (cartGrandTotalText) cartGrandTotalText.textContent = `$${total.toFixed(2)}`;
+        if (cartGrandTotalText) cartGrandTotalText.textContent = `₹${Math.round(total).toLocaleString('en-IN')}`;
       }
 
       window.renderCartPage = renderCartPage;
@@ -500,8 +500,8 @@
         btnApplyCoupon.addEventListener('click', () => {
           const code = couponCode.value.trim().toUpperCase();
           if (code === 'VEGAN10' || code === 'GREENHAVEN') {
-            discountAmount = 5.00;
-            couponFeedback.innerHTML = '<span class="text-success"><i class="bi bi-check-circle"></i> $5.00 discount applied!</span>';
+            discountAmount = 100.00;
+            couponFeedback.innerHTML = '<span class="text-success"><i class="bi bi-check-circle"></i> ₹100 discount applied!</span>';
             renderCartPage();
           } else if (code) {
             couponFeedback.innerHTML = '<span class="text-danger"><i class="bi bi-x-circle"></i> Invalid promo code. Try <strong>VEGAN10</strong></span>';

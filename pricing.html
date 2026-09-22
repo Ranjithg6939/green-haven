@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
 <head>
   <meta charset="UTF-8">
@@ -58,12 +58,13 @@
       background: rgba(255, 255, 255, 0.97) !important;
       backdrop-filter: blur(20px) !important;
       -webkit-backdrop-filter: blur(20px) !important;
-      border: 1.5px solid rgba(46, 101, 24, 0.2) !important;
+      border: 2px solid rgba(46, 101, 24, 0.2) !important;
       border-radius: 26px !important;
       overflow: hidden !important;
       display: flex !important;
       flex-direction: column !important;
       height: 100% !important;
+      min-height: 680px;
       position: relative !important;
       box-shadow: 0 14px 40px rgba(18, 48, 20, 0.08) !important;
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
@@ -134,8 +135,11 @@
       position: relative;
       width: 100%;
       height: 200px;
+      min-height: 200px;
+      max-height: 200px;
       overflow: hidden;
       border-bottom: 1px solid rgba(46, 101, 24, 0.12);
+      flex-shrink: 0;
     }
 
     .pricing-card-img-wrap img {
@@ -192,6 +196,163 @@
       display: flex;
       flex-direction: column;
       flex-grow: 1;
+      justify-content: space-between;
+    }
+
+    /* Packages Header & Consistent Price Alignment */
+    .pricing-card-header {
+      min-height: 104px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      margin-bottom: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .pricing-card-header h3 {
+      font-size: 1.5rem;
+      line-height: 1.25;
+      margin-bottom: 0.25rem;
+      min-height: 58px;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .pricing-card-header p {
+      margin-bottom: 0;
+      font-size: 0.85rem;
+      line-height: 1.35;
+      min-height: 38px;
+    }
+
+    @media (max-width: 991.98px) and (min-width: 768px) {
+      .pricing-card-header {
+        min-height: 112px;
+      }
+      .pricing-card-header h3 {
+        min-height: 62px;
+      }
+    }
+
+    .pricing-price-box {
+      display: flex;
+      align-items: baseline;
+      justify-content: flex-start;
+      gap: 0.45rem;
+      margin-bottom: 1.15rem;
+      min-height: 48px;
+      flex-shrink: 0;
+    }
+
+    .pricing-price-val {
+      display: inline-flex;
+      align-items: baseline;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      font-size: 2.85rem;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: #143e11;
+      font-feature-settings: "tnum" 1, "lnum" 1;
+    }
+
+    .pricing-currency {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      font-size: 1.65rem;
+      font-weight: 600;
+      line-height: 1;
+      margin-right: 3px;
+      color: #245c1d;
+      vertical-align: baseline;
+      user-select: none;
+    }
+
+    .pricing-amount {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      font-size: 2.85rem;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      display: inline-block;
+      font-feature-settings: "tnum" 1, "lnum" 1;
+    }
+
+    .pricing-period {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      font-size: 0.88rem;
+      color: #556852;
+      align-self: baseline;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      margin-left: 2px;
+    }
+
+    [data-bs-theme="dark"] .pricing-price-val,
+    html.dark .pricing-price-val {
+      color: #00FF7F !important;
+    }
+
+    [data-bs-theme="dark"] .pricing-currency,
+    html.dark .pricing-currency {
+      color: #52e698 !important;
+    }
+
+    [data-bs-theme="dark"] .pricing-period,
+    html.dark .pricing-period {
+      color: #A8D5BA !important;
+    }
+
+    /* Fixed/Consistent Feature List Area */
+    .pricing-features-list {
+      min-height: 180px;
+      margin-bottom: 1.25rem;
+      padding-left: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      flex-grow: 1;
+    }
+
+    .pricing-features-list li {
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.92rem;
+      line-height: 1.4;
+    }
+
+    .pricing-features-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Standardized CTA Wrap and Button Alignment */
+    .pricing-cta-wrap {
+      margin-top: auto;
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    .pricing-cta-wrap .btn {
+      height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 0 1.5rem;
+    }
+
+    [data-bs-theme="dark"] .pricing-price-val,
+    html.dark .pricing-price-val {
+      color: #00FF7F !important;
+    }
+
+    [data-bs-theme="dark"] .pricing-period,
+    html.dark .pricing-period {
+      color: #A8D5BA !important;
     }
 
     .pricing-crown-badge {
@@ -245,8 +406,8 @@
               Home
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item " href="index.html"><i class="bi bi-house me-2"></i> Home 1 (Gourmet Landing)</a></li>
-              <li><a class="gh-dropdown-item " href="home-2.html"><i class="bi bi-flower1 me-2"></i> Home 2 (Farm to Plate)</a></li>
+              <li><a class="gh-dropdown-item " href="index.html">Home 1 (Gourmet Landing)</a></li>
+              <li><a class="gh-dropdown-item " href="home-2.html">Home 2 (Farm to Plate)</a></li>
             </ul>
           </div>
           <a class="gh-nav-link " href="about.html">About</a>
@@ -388,24 +549,29 @@
           <div class="col-lg-4 col-md-6">
             <div class="luxury-pricing-card">
               <div class="pricing-card-img-wrap">
-                <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?q=80&w=800&auto=format&fit=crop" alt="Botanical Express Lunch" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?q=80&w=800&auto=format&fit=crop" alt="Botanical Express Lunch" loading="eager">
                 <div class="pricing-floating-icon"><span>🥗</span></div>
                 <span class="pricing-category-pill">Midday Dining</span>
               </div>
               <div class="pricing-card-body">
-                <h3 class="fw-bold font-serif mb-1">Botanical Express Lunch</h3>
-                <p class="text-success fw-semibold small mb-3">Quick, energizing organic lunch course</p>
-                <div class="d-flex align-items-baseline gap-2 mb-3">
-                  <span class="fs-1 fw-bold font-serif" style="color: #1b4d13;">$28</span>
-                  <span class="text-muted small">/ person</span>
+                <div class="pricing-card-header">
+                  <h3 class="fw-bold font-serif mb-1">Botanical Express Lunch</h3>
+                  <p class="text-success fw-semibold small mb-0">Quick, energizing organic lunch course</p>
                 </div>
-                <ul class="list-unstyled mb-4">
-                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>Choice of Superfood Grain Bowl</span></li>
-                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>House Fermented Kimchi or Soup</span></li>
-                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>Cold-Pressed Elixir of the Day</span></li>
-                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>Raw Cacao Truffle Bite</span></li>
+                <div class="pricing-price-box">
+                  <span class="pricing-price-val">
+                    <span class="pricing-currency">₹</span><span class="pricing-amount">899</span>
+                  </span>
+                  <span class="pricing-period">/ person</span>
+                </div>
+                <ul class="pricing-features-list">
+                  <li><i class="bi bi-check-circle-fill text-success"></i> <span>Choice of Superfood Grain Bowl</span></li>
+                  <li><i class="bi bi-check-circle-fill text-success"></i> <span>House Fermented Kimchi or Soup</span></li>
+                  <li><i class="bi bi-check-circle-fill text-success"></i> <span>Cold-Pressed Elixir of the Day</span></li>
+                  <li><i class="bi bi-check-circle-fill text-success"></i> <span>Raw Cacao Truffle Bite</span></li>
+                  <li><i class="bi bi-check-circle-fill text-success"></i> <span>Botanical Herb Infused Tea</span></li>
                 </ul>
-                <div class="mt-auto">
+                <div class="pricing-cta-wrap">
                   <a href="reservation.html" class="btn btn-white-cta btn-lg w-100 rounded-pill shadow-sm">Reserve Express Lunch →</a>
                 </div>
               </div>
@@ -417,25 +583,29 @@
             <div class="luxury-pricing-card featured-tier">
               <div class="pricing-crown-badge">★ Most Popular · Signature</div>
               <div class="pricing-card-img-wrap">
-                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop" alt="Seasonal Degustation" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop" alt="Seasonal Degustation" loading="eager">
                 <div class="pricing-floating-icon"><span>🌿</span></div>
                 <span class="pricing-category-pill">Chef's Tasting</span>
               </div>
               <div class="pricing-card-body">
-                <h3 class="fw-bold font-serif mb-1">5-Course Seasonal Degustation</h3>
-                <p class="text-success fw-semibold small mb-3">Our signature chef culinary journey</p>
-                <div class="d-flex align-items-baseline gap-2 mb-3">
-                  <span class="fs-1 fw-bold font-serif" style="color: #1b4d13;">$68</span>
-                  <span class="text-muted small">/ person</span>
+                <div class="pricing-card-header">
+                  <h3 class="fw-bold font-serif mb-1">5-Course Seasonal Degustation</h3>
+                  <p class="text-success fw-semibold small mb-0">Our signature chef culinary journey</p>
                 </div>
-                <ul class="list-unstyled mb-4">
-                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>Amuse-bouche & Botanical Shot</span></li>
-                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>Heirloom Avocado & Tartine Course</span></li>
-                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>Wild Truffle Risotto or Rib Steak</span></li>
-                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>Cultured Cashew Cheese Plate</span></li>
-                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>Uji Matcha Silk Tart Dessert</span></li>
+                <div class="pricing-price-box">
+                  <span class="pricing-price-val">
+                    <span class="pricing-currency">₹</span><span class="pricing-amount">2,499</span>
+                  </span>
+                  <span class="pricing-period">/ person</span>
+                </div>
+                <ul class="pricing-features-list">
+                  <li><i class="bi bi-check-circle-fill text-success"></i> <span>Amuse-bouche & Botanical Shot</span></li>
+                  <li><i class="bi bi-check-circle-fill text-success"></i> <span>Heirloom Avocado & Tartine Course</span></li>
+                  <li><i class="bi bi-check-circle-fill text-success"></i> <span>Wild Truffle Risotto or Rib Steak</span></li>
+                  <li><i class="bi bi-check-circle-fill text-success"></i> <span>Cultured Cashew Cheese Plate</span></li>
+                  <li><i class="bi bi-check-circle-fill text-success"></i> <span>Uji Matcha Silk Tart Dessert</span></li>
                 </ul>
-                <div class="mt-auto">
+                <div class="pricing-cta-wrap">
                   <a href="reservation.html" class="btn btn-primary btn-lg w-100 rounded-pill shadow-sm">Book Tasting Experience →</a>
                 </div>
               </div>
@@ -446,25 +616,29 @@
           <div class="col-lg-4 col-md-6">
             <div class="luxury-pricing-card">
               <div class="pricing-card-img-wrap">
-                <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=800&auto=format&fit=crop" alt="Family & Group Feast" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=800&auto=format&fit=crop" alt="Family & Group Feast" loading="eager">
                 <div class="pricing-floating-icon"><span>👑</span></div>
                 <span class="pricing-category-pill">Group Banquets</span>
               </div>
               <div class="pricing-card-body">
-                <h3 class="fw-bold font-serif mb-1">Family & Group Feast</h3>
-                <p class="text-success fw-semibold small mb-3">Shared banquet for 4 to 6 guests</p>
-                <div class="d-flex align-items-baseline gap-2 mb-3">
-                  <span class="fs-1 fw-bold font-serif" style="color: #1b4d13;">$180</span>
-                  <span class="text-muted small">/ group (4p)</span>
+                <div class="pricing-card-header">
+                  <h3 class="fw-bold font-serif mb-1">Family & Group Feast</h3>
+                  <p class="text-success fw-semibold small mb-0">Shared banquet for 4 to 6 guests</p>
                 </div>
-                <ul class="list-unstyled mb-4">
-                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>2 Large Wood-Fired Flatbreads</span></li>
-                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>Large Golden Beet & Arugula Salad</span></li>
-                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>4 Full Sized Entrees of Choice</span></li>
-                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>Shared Grand Dessert Sampler</span></li>
-                  <li class="mb-2 d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i> <span>4 Cold-Pressed Botanical Elixirs</span></li>
+                <div class="pricing-price-box">
+                  <span class="pricing-price-val">
+                    <span class="pricing-currency">₹</span><span class="pricing-amount">3,999</span>
+                  </span>
+                  <span class="pricing-period">/ group (4p)</span>
+                </div>
+                <ul class="pricing-features-list">
+                  <li><i class="bi bi-check-circle-fill text-success"></i> <span>2 Large Wood-Fired Flatbreads</span></li>
+                  <li><i class="bi bi-check-circle-fill text-success"></i> <span>Large Golden Beet & Arugula Salad</span></li>
+                  <li><i class="bi bi-check-circle-fill text-success"></i> <span>4 Full Sized Entrees of Choice</span></li>
+                  <li><i class="bi bi-check-circle-fill text-success"></i> <span>Shared Grand Dessert Sampler</span></li>
+                  <li><i class="bi bi-check-circle-fill text-success"></i> <span>4 Cold-Pressed Botanical Elixirs</span></li>
                 </ul>
-                <div class="mt-auto">
+                <div class="pricing-cta-wrap">
                   <a href="reservation.html" class="btn btn-white-cta btn-lg w-100 rounded-pill shadow-sm">Reserve Group Feast →</a>
                 </div>
               </div>
@@ -518,7 +692,7 @@
           <h4 class="footer-col-title">Hours & Location</h4>
           <p class="text-white-50 small mb-2"><i class="bi bi-geo-alt text-warning me-2"></i> 742 Evergreen Botanical Way, Portland</p>
           <p class="text-white-50 small mb-2"><i class="bi bi-clock text-warning me-2"></i> Mon - Sun: 8:00 AM - 10:00 PM</p>
-          <p class="text-white-50 small mb-0"><i class="bi bi-telephone text-warning me-2"></i> <a href="tel:+15035550192" class="text-white text-decoration-none" style="color: #FFFFFF !important;">+1 (503) 555-0192</a></p>
+          <p class="text-white-50 small mb-0"><i class="bi bi-telephone text-warning me-2"></i> <a href="tel:+15035550192" class="text-white text-decoration-none" >+1 (503) 555-0192</a></p>
         </div>
 
         <!-- Column 4: Botanical Digest -->
@@ -526,7 +700,7 @@
           <h4 class="footer-col-title">Botanical Digest</h4>
           <p class="text-white-50 small mb-3">Join our newsletter for seasonal menu previews and chef recipes.</p>
           <form class="newsletter-form d-flex gap-2">
-            <input type="email" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Your email" required>
+            <input type="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Your email" required>
             <button type="submit" class="btn btn-accent btn-sm px-3">Join</button>
           </form>
         </div>
