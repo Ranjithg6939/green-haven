@@ -1174,6 +1174,26 @@ html.dark .gh-brand-auth .gh-auth-brand-name {
   fill: currentColor;
 }
 
+/* Email Sign-In Option Button */
+.gh-btn-email {
+  color: var(--gh-heading, #1A3E1F);
+}
+
+.gh-btn-email i {
+  color: var(--gh-accent, #2E6518);
+  font-size: 1.15rem;
+}
+
+/* Mobile View: Hide "Sign in with Email" option/button on Mobile Screen Sizes (< 768px) */
+@media (max-width: 767.98px) {
+  .gh-btn-email,
+  #btnEmailSignIn,
+  .gh-signin-email-btn,
+  [data-auth-option="email"] {
+    display: none !important;
+  }
+}
+
 /* Dark Theme Support */
 [data-bs-theme="dark"] .gh-btn-social,
 html.dark .gh-btn-social {
@@ -1211,10 +1231,18 @@ html.dark .gh-btn-apple .gh-apple-icon {
   fill: #FFFFFF !important;
 }
 
+[data-bs-theme="dark"] .gh-btn-email i,
+html.dark .gh-btn-email i {
+  color: #00FF7F !important;
+}
+
 /* RTL Support */
 [dir="rtl"] .gh-btn-social .gh-social-icon,
 html.rtl .gh-btn-social .gh-social-icon,
-html[dir="rtl"] .gh-btn-social .gh-social-icon {
+html[dir="rtl"] .gh-btn-social .gh-social-icon,
+[dir="rtl"] .gh-btn-email i,
+html.rtl .gh-btn-email i,
+html[dir="rtl"] .gh-btn-email i {
   margin-right: 0 !important;
   margin-left: 0.5rem !important;
 }

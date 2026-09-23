@@ -214,11 +214,10 @@
                 </svg>
                 <span class="gh-social-btn-text">Continue with Apple</span>
               </button>
-            </div>
-
-            <div class="position-relative text-center my-3">
-              <hr class="text-muted">
-              <span class="position-absolute top-50 start-50 translate-middle bg-card px-3 text-muted small">or sign in with email</span>
+              <button class="btn gh-btn-social gh-btn-email py-2.5 d-flex align-items-center justify-content-center gh-signin-email-btn" type="button" id="btnEmailSignIn" data-auth-option="email" aria-label="Sign in with Email">
+                <i class="bi bi-envelope-fill me-2 flex-shrink-0"></i>
+                <span class="gh-social-btn-text">Sign in with Email</span>
+              </button>
             </div>
 
             <!-- Form with Client Validation -->
@@ -431,6 +430,18 @@
         btnApple.addEventListener('click', (e) => {
           e.preventDefault();
           GH_SocialAuth.handleAppleSignIn();
+        });
+      }
+
+      const btnEmail = document.getElementById('btnEmailSignIn');
+      if (btnEmail) {
+        btnEmail.addEventListener('click', (e) => {
+          e.preventDefault();
+          const emailInput = document.getElementById('loginEmail');
+          if (emailInput) {
+            emailInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            emailInput.focus();
+          }
         });
       }
 
