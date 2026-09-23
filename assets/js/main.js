@@ -564,26 +564,61 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
-  /* Responsive Mobile Offcanvas Toggle Enforcer */
+  /* Responsive Mobile Offcanvas Toggle Enforcer & Interactive Manager */
+  const mobileMenuOffcanvasEl = document.getElementById('mobileMenuOffcanvas');
+  const mobileToggles = document.querySelectorAll('.gh-mobile-toggle, [data-bs-target="#mobileMenuOffcanvas"]');
+
   function enforceResponsiveMobileToggle() {
     const isDesktop = window.innerWidth >= 992;
-    const toggles = document.querySelectorAll('.gh-mobile-toggle, [data-bs-target="#mobileMenuOffcanvas"]');
-    toggles.forEach(t => {
+    mobileToggles.forEach(t => {
       if (isDesktop) {
         t.style.setProperty('display', 'none', 'important');
         t.style.setProperty('visibility', 'hidden', 'important');
         t.style.setProperty('opacity', '0', 'important');
         t.style.setProperty('pointer-events', 'none', 'important');
+        t.setAttribute('aria-hidden', 'true');
       } else {
         t.style.setProperty('display', 'inline-flex', 'important');
         t.style.setProperty('visibility', 'visible', 'important');
         t.style.setProperty('opacity', '1', 'important');
         t.style.setProperty('pointer-events', 'auto', 'important');
+        t.removeAttribute('aria-hidden');
       }
     });
   }
+
   enforceResponsiveMobileToggle();
-  window.addEventListener('resize', enforceResponsiveMobileToggle);
+  window.addEventListener('resize', enforceResponsiveMobileToggle, { passive: true });
+  window.addEventListener('orientationchange', enforceResponsiveMobileToggle, { passive: true });
+
+  if (mobileMenuOffcanvasEl) {
+    // Synchronize ARIA state on offcanvas lifecycle
+    mobileMenuOffcanvasEl.addEventListener('show.bs.offcanvas', () => {
+      mobileToggles.forEach(t => {
+        t.setAttribute('aria-expanded', 'true');
+        t.setAttribute('aria-label', 'Close navigation menu');
+      });
+    });
+
+    mobileMenuOffcanvasEl.addEventListener('hide.bs.offcanvas', () => {
+      mobileToggles.forEach(t => {
+        t.setAttribute('aria-expanded', 'false');
+        t.setAttribute('aria-label', 'Open navigation menu');
+      });
+    });
+
+    // Dismiss offcanvas when tapping any navigation link inside the drawer
+    mobileMenuOffcanvasEl.querySelectorAll('a:not([data-bs-toggle="dropdown"])').forEach(link => {
+      link.addEventListener('click', () => {
+        if (typeof bootstrap !== 'undefined' && bootstrap.Offcanvas) {
+          const bsOffcanvas = bootstrap.Offcanvas.getInstance(mobileMenuOffcanvasEl);
+          if (bsOffcanvas) {
+            bsOffcanvas.hide();
+          }
+        }
+      });
+    });
+  }
 
   /* --------------------------------------------------
       4. LUXURY RESTAURANT MENU DEDICATED CATEGORY TAB SWITCHER & LIVE SEARCH

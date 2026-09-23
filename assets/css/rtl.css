@@ -237,6 +237,27 @@ html[dir="rtl"] {
   margin-left: 0.65rem !important;
 }
 
+[dir="rtl"] .gh-brand .gh-brand-title-img {
+  margin-left: 0 !important;
+  margin-right: 0.35rem !important;
+}
+
+@media (max-width: 767.98px) {
+  [dir="rtl"] .gh-brand {
+    margin-left: 0.25rem !important;
+    margin-right: 0 !important;
+  }
+  [dir="rtl"] .gh-navbar .d-flex.align-items-center.gap-2,
+  [dir="rtl"] .nx-navbar .d-flex.align-items-center.gap-2 {
+    margin-right: auto !important;
+    margin-left: 0 !important;
+  }
+  [dir="rtl"] #navAuthContainer {
+    margin-left: 0.15rem !important;
+    margin-right: 0 !important;
+  }
+}
+
 [dir="rtl"] .gh-brand.gh-brand-auth {
   margin: 0 auto 1rem auto !important;
 }
@@ -275,6 +296,20 @@ html[dir="rtl"] {
 }
 
 /* Offcanvas Mobile Navigation Menu */
+[dir="rtl"] .offcanvas-start,
+[dir="rtl"] .offcanvas#mobileMenuOffcanvas {
+  right: 0 !important;
+  left: auto !important;
+  transform: translateX(100%) !important;
+  border-right: none !important;
+  border-left: 1px solid var(--gh-nav-border, rgba(46, 101, 24, 0.12)) !important;
+}
+
+[dir="rtl"] .offcanvas-start.show,
+[dir="rtl"] .offcanvas#mobileMenuOffcanvas.show {
+  transform: translateX(0) !important;
+}
+
 [dir="rtl"] .offcanvas-end {
   right: auto !important;
   left: 0 !important;
@@ -288,10 +323,10 @@ html[dir="rtl"] {
 }
 
 [dir="rtl"] .offcanvas-header .btn-close {
-  margin-inline-start: 0 !important;
-  margin-inline-end: auto !important;
-  margin-left: 0 !important;
-  margin-right: auto !important;
+  margin-inline-start: auto !important;
+  margin-inline-end: 0 !important;
+  margin-left: auto !important;
+  margin-right: 0 !important;
 }
 
 /* --------------------------------------------------

@@ -353,8 +353,8 @@
         } else {
           return `
             <div class="d-inline-flex align-items-center gap-2 flex-nowrap">
-              <a href="login.html" class="btn btn-outline-primary btn-sm">
-                <i class="bi bi-box-arrow-in-right me-1"></i> Sign In
+              <a href="login.html" class="btn btn-outline-primary btn-sm gh-nav-auth-login-btn" title="Sign In" aria-label="Sign In">
+                <i class="bi bi-box-arrow-in-right me-1"></i><span class="gh-nav-auth-label">Sign In</span>
               </a>
             </div>
           `;
