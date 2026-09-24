@@ -297,6 +297,29 @@ document.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
   /* --------------------------------------------------
+     0. BOOTSTRAP TOOLTIPS INITIALIZATION (DESKTOP)
+  -------------------------------------------------- */
+  try {
+    if (typeof bootstrap !== 'undefined' && bootstrap.Tooltip) {
+      const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+      tooltipTriggerList.forEach(function(tooltipTriggerEl) {
+        new bootstrap.Tooltip(tooltipTriggerEl, {
+          trigger: 'hover',
+          boundary: 'clippingParents'
+        });
+      });
+
+      document.addEventListener('click', function(e) {
+        const tipEl = e.target.closest('[data-bs-toggle="tooltip"]');
+        if (tipEl) {
+          const instance = bootstrap.Tooltip.getInstance(tipEl);
+          if (instance) instance.hide();
+        }
+      });
+    }
+  } catch (err) {}
+
+  /* --------------------------------------------------
      1. THEME TOGGLE (LIGHT / DARK MODE)
   -------------------------------------------------- */
   const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn');

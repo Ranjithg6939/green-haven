@@ -56,8 +56,8 @@ function buildNavbarSnippet(activeKey) {
               Home
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item ${activeKey === 'home1' ? 'active' : ''}" href="index.html"><i class="bi bi-house me-2"></i> Home 1 (Gourmet Landing)</a></li>
-              <li><a class="gh-dropdown-item ${activeKey === 'home2' ? 'active' : ''}" href="home-2.html"><i class="bi bi-flower1 me-2"></i> Home 2 (Farm to Plate)</a></li>
+              <li><a class="gh-dropdown-item ${activeKey === 'home1' ? 'active' : ''}" href="index.html">Home 1 (Gourmet Landing)</a></li>
+              <li><a class="gh-dropdown-item ${activeKey === 'home2' ? 'active' : ''}" href="home-2.html">Home 2 (Farm to Plate)</a></li>
             </ul>
           </div>
           <a class="gh-nav-link ${activeKey === 'about' ? 'active' : ''}" href="about.html">About</a>
@@ -97,16 +97,16 @@ function buildNavbarSnippet(activeKey) {
             <span id="navCartCount" class="cart-badge-count" style="display: none;">0</span>
           </a>
 
-          <!-- Reserve Table -->
-          <a href="reservation.html" class="btn btn-primary d-none d-lg-inline-flex btn-sm">
-            <i class="bi bi-calendar2-check"></i> Reserve Table
+          <!-- Reserve Table Icon (Desktop & Tablet only) -->
+          <a href="reservation.html" class="reserve-nav-btn d-none d-md-inline-flex" title="Reserve Table" aria-label="Reserve Table" data-bs-toggle="tooltip" data-bs-placement="bottom">
+            <i class="bi bi-calendar2-check"></i>
           </a>
 
           <!-- Standard Desktop Auth (Sign In) -->
           <div id="navAuthContainer" class="d-none d-md-block">
             <div class="d-inline-flex align-items-center gap-2 flex-nowrap">
-              <a href="login.html" class="btn btn-outline-primary btn-sm">
-                <i class="bi bi-box-arrow-in-right me-1"></i> Sign In
+              <a href="login.html" class="btn btn-outline-primary btn-sm gh-nav-auth-login-btn" title="Sign In" aria-label="Sign In">
+                <i class="bi bi-box-arrow-in-right me-1"></i><span class="gh-nav-auth-label">Sign In</span>
               </a>
             </div>
           </div>

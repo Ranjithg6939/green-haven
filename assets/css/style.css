@@ -1738,8 +1738,8 @@ nav a:hover, nav a.active {
   white-space: nowrap !important;
 }
 
-/* Theme, RTL & Cart Toggles */
-.theme-toggle-btn, .rtl-toggle-btn, .cart-nav-btn, .search-modal-trigger {
+/* Theme, RTL, Cart & Reserve Toggles */
+.theme-toggle-btn, .rtl-toggle-btn, .cart-nav-btn, .reserve-nav-btn, .search-modal-trigger {
   width: 36px !important;
   height: 36px !important;
   min-width: 36px !important;
@@ -1758,6 +1758,22 @@ nav a:hover, nav a.active {
   font-size: 0.95rem;
 }
 
+.reserve-nav-btn {
+  position: relative;
+}
+
+.reserve-nav-btn i {
+  font-size: 1.05rem !important;
+  line-height: 1 !important;
+  display: inline-block;
+  margin: 0 !important;
+  transition: transform 0.2s ease;
+}
+
+.reserve-nav-btn:hover i {
+  transform: scale(1.08);
+}
+
 .rtl-toggle-btn span {
   font-size: 0.74rem !important;
   font-weight: 800 !important;
@@ -1765,7 +1781,7 @@ nav a:hover, nav a.active {
   line-height: 1;
 }
 
-.theme-toggle-btn:hover, .rtl-toggle-btn:hover, .cart-nav-btn:hover, .search-modal-trigger:hover {
+.theme-toggle-btn:hover, .rtl-toggle-btn:hover, .cart-nav-btn:hover, .reserve-nav-btn:hover, .search-modal-trigger:hover {
   background-color: var(--gh-nav-btn-icon-hover-bg) !important;
   color: var(--gh-nav-btn-icon-hover-color) !important;
   border-color: var(--gh-nav-btn-icon-hover-border) !important;
@@ -1958,6 +1974,13 @@ button.btn-icon.d-lg-none {
 }
 
 @media (max-width: 767.98px) {
+  /* Hide Reserve Table Icon completely on Mobile */
+  .reserve-nav-btn,
+  .gh-navbar .reserve-nav-btn,
+  .nx-navbar .reserve-nav-btn {
+    display: none !important;
+  }
+
   .gh-navbar #navAuthContainer,
   .nx-navbar #navAuthContainer {
     display: inline-flex !important;
@@ -2442,7 +2465,7 @@ html.dark .offcanvas nav .dropdown-menu .gh-dropdown-item.active {
     flex-shrink: 0 !important;
     margin-right: 0.25rem !important;
   }
-  .theme-toggle-btn, .rtl-toggle-btn, .cart-nav-btn {
+  .theme-toggle-btn, .rtl-toggle-btn, .cart-nav-btn, .reserve-nav-btn {
     width: 34px !important;
     height: 34px !important;
     min-width: 34px !important;
@@ -2503,7 +2526,7 @@ html.dark .offcanvas nav .dropdown-menu .gh-dropdown-item.active {
     flex-shrink: 0 !important;
     margin-right: 0.25rem !important;
   }
-  .theme-toggle-btn, .rtl-toggle-btn, .cart-nav-btn {
+  .theme-toggle-btn, .rtl-toggle-btn, .cart-nav-btn, .reserve-nav-btn {
     width: 30px !important;
     height: 30px !important;
     min-width: 30px !important;
@@ -8452,7 +8475,8 @@ a.btn,
 .form-check-input,
 .theme-toggle-btn,
 .rtl-toggle-btn,
-.cart-nav-btn {
+.cart-nav-btn,
+.reserve-nav-btn {
   touch-action: manipulation;
 }
 
@@ -16913,7 +16937,7 @@ html.dark .receipt-modal-card {
   display: block;
 }
 
-/* Auth Modal Styling */
+/* Auth Modal Styling & Sign In Overlay */
 .gh-auth-modal-card {
   border-radius: 24px;
   overflow: hidden;
@@ -16925,6 +16949,44 @@ html.dark .receipt-modal-card {
 [data-bs-theme="dark"] .gh-auth-modal-card {
   background: #013220;
   border-color: rgba(0, 255, 127, 0.28);
+}
+
+.gh-signin-modal-dialog {
+  max-width: 480px;
+  width: 100%;
+  margin: 1.75rem auto;
+}
+
+.gh-modal-close-btn {
+  opacity: 0.7;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 0.65rem;
+}
+
+.gh-modal-close-btn:hover {
+  opacity: 1;
+  transform: rotate(90deg);
+}
+
+.gh-modal-close-btn:focus-visible {
+  outline: 2px solid var(--gh-accent, #2E6518);
+  box-shadow: none;
+}
+
+[data-bs-theme="dark"] .gh-modal-close-btn {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+@media (max-width: 576px) {
+  .gh-signin-modal-dialog {
+    max-width: calc(100% - 1.25rem);
+    margin: 0.625rem auto;
+  }
+  .gh-signin-modal-dialog .modal-body {
+    padding: 1.5rem 1.15rem !important;
+  }
 }
 
 /* ==========================================================================

@@ -130,7 +130,7 @@
       };
     },
 
-    loginUser(userData, redirectUrl = 'index.html') {
+    loginUser(userData, redirectUrl = null) {
       localStorage.setItem(AUTH_KEY, 'true');
 
       // Do not store raw password in active session
@@ -163,8 +163,6 @@
           if (window.showToast) {
             window.showToast.success('Order Resumed', `Added ${pendingAction.qty || 1}x ${pendingAction.item.name} to your dining cart.`);
           }
-          const target = pendingAction.returnUrl || 'menu.html';
-          setTimeout(() => { window.location.href = target; }, 600);
           return;
         } else if (pendingAction.type === 'checkout') {
           setTimeout(() => { window.location.href = 'checkout.html'; }, 600);
@@ -226,7 +224,7 @@
         modalEl.setAttribute('aria-hidden', 'true');
         modalEl.innerHTML = `
           <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content gh-auth-modal-card border-0">
+            <div class="modal-content gh-auth-modal-card border-0 shadow-lg">
               <div class="p-4 p-md-5 text-center position-relative">
                 <button type="button" class="btn-close position-absolute top-0 end-0 m-4" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="mx-auto mb-3 d-flex align-items-center justify-content-center rounded-circle bg-success bg-opacity-10 text-success" style="width: 64px; height: 64px;">
@@ -264,8 +262,6 @@
       } else {
         const msgEl = modalEl.querySelector('#ghAuthPromptMsgText');
         if (msgEl) msgEl.textContent = message;
-        const signInBtn = modalEl.querySelector('#btnAuthPromptSignIn');
-        if (signInBtn) signInBtn.href = `login.html?redirect=${encodeURIComponent(returnUrl)}`;
         const regBtn = modalEl.querySelector('#btnAuthPromptRegister');
         if (regBtn) regBtn.href = `register.html?redirect=${encodeURIComponent(returnUrl)}`;
       }
@@ -287,8 +283,8 @@
       }
     },
 
-    initPasswordToggles() {
-      document.querySelectorAll('.gh-password-toggle').forEach(btn => {
+    initPasswordToggles(container = document) {
+      container.querySelectorAll('.gh-password-toggle').forEach(btn => {
         if (btn.dataset.bound) return;
         btn.dataset.bound = 'true';
         btn.addEventListener('click', function (e) {
@@ -315,6 +311,359 @@
           }
         });
       });
+    },
+
+    setInputError(input, feedbackEl, message) {
+      if (!input) return;
+      input.classList.add('is-invalid');
+      if (feedbackEl) {
+        feedbackEl.textContent = message;
+        feedbackEl.style.display = 'block';
+      }
+    },
+
+    clearInputError(input, feedbackEl) {
+      if (!input) return;
+      input.classList.remove('is-invalid');
+      if (feedbackEl) {
+        feedbackEl.style.display = '';
+      }
+    },
+
+    initSignInModal() {
+      let modalEl = document.getElementById('ghSignInModal');
+      if (modalEl) return modalEl;
+
+      modalEl = document.createElement('div');
+      modalEl.id = 'ghSignInModal';
+      modalEl.className = 'modal fade';
+      modalEl.setAttribute('tabindex', '-1');
+      modalEl.setAttribute('aria-labelledby', 'ghSignInModalLabel');
+      modalEl.setAttribute('aria-hidden', 'true');
+      modalEl.setAttribute('data-bs-backdrop', 'true');
+      modalEl.setAttribute('data-bs-keyboard', 'true');
+
+      modalEl.innerHTML = `
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable gh-signin-modal-dialog">
+          <div class="modal-content gh-auth-modal-card border-0 shadow-lg position-relative">
+            
+            <!-- Clear Close (×) Button -->
+            <button type="button" class="btn-close position-absolute top-0 end-0 m-3 m-sm-4 z-3 gh-modal-close-btn" data-bs-dismiss="modal" aria-label="Close"></button>
+
+            <div class="modal-body p-4 p-sm-5">
+              <div class="text-center mb-4">
+                <a class="gh-brand gh-brand-auth d-inline-flex align-items-center justify-content-center text-decoration-none mb-2" href="index.html" aria-label="Green Haven Restaurant">
+                  <span class="gh-logo-wrapper" style="width: 44px; height: 44px;">
+                    <img src="assets/images/logo-g.png" alt="Green Haven Logo" class="gh-logo-icon gh-logo-static" style="width: 100%; height: 100%; object-fit: contain;">
+                  </span>
+                  <span class="gh-auth-brand-name ms-2 fw-bold font-serif" style="font-size: 1.35rem; color: var(--gh-heading-color, #1A3018);">Green Haven</span>
+                </a>
+                <h3 class="fw-bold font-serif mb-1" id="ghSignInModalLabel" style="color: var(--gh-heading-color, #1A3018);">Welcome Back</h3>
+                <p class="text-muted small mb-0">Sign in to track orders, manage reservations &amp; checkout</p>
+              </div>
+
+              <!-- Social / Quick Sign In -->
+              <div class="d-grid gap-2 mb-3 gh-social-auth-group">
+                <button class="btn gh-btn-social gh-btn-google py-2.5 d-flex align-items-center justify-content-center" type="button" id="modalBtnGoogleSignIn" aria-label="Continue with Google">
+                  <svg class="gh-social-icon gh-google-icon me-2 flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                  </svg>
+                  <span class="gh-social-btn-text">Continue with Google</span>
+                </button>
+                <button class="btn gh-btn-social gh-btn-apple py-2.5 d-flex align-items-center justify-content-center" type="button" id="modalBtnAppleSignIn" aria-label="Continue with Apple">
+                  <svg class="gh-social-icon gh-apple-icon me-2 flex-shrink-0" width="18" height="18" viewBox="0 0 170 170" fill="currentColor" aria-hidden="true" focusable="false">
+                    <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.59-7.71-11.66-14.01-6.19-9.56-11.05-20.73-14.59-33.51-3.53-12.77-5.3-24.89-5.3-36.35 0-14.88 3.8-27.18 11.4-36.89 7.6-9.72 17.06-14.65 28.38-14.8 4.8 0 10.23 1.25 16.29 3.75 6.06 2.5 10.15 3.79 12.28 3.86 1.74 0 5.92-1.32 12.54-3.97 6.63-2.65 12.19-3.83 16.69-3.53 12.53.64 22.37 5.25 29.52 13.82-10.92 6.64-16.28 15.82-16.08 27.53.2 9.53 3.97 17.51 11.31 23.95 7.34 6.43 16.09 10.05 26.25 10.85-2.28 7.16-4.87 14.19-7.77 21.07zM119.22 31.84c0-7.39 2.65-14.4 7.95-21.03 5.3-6.63 11.89-10.66 19.77-12.09.11 1.09.16 2.07.16 2.94 0 7.39-2.83 14.61-8.5 21.66-5.67 7.05-12.44 11.07-20.31 12.06-.22-1.08-.34-2.14-.34-3.17z"/>
+                  </svg>
+                  <span class="gh-social-btn-text">Continue with Apple</span>
+                </button>
+              </div>
+
+              <div class="d-flex align-items-center my-3 text-muted small">
+                <hr class="flex-grow-1 my-0">
+                <span class="px-2" style="font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.5px;">or sign in with email</span>
+                <hr class="flex-grow-1 my-0">
+              </div>
+
+              <!-- Form with Client Validation -->
+              <form id="modalLoginForm" novalidate>
+                <div class="mb-3 text-start">
+                  <label class="form-label fw-semibold" for="modalLoginEmail">Email Address</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                    <input type="email" class="form-control" id="modalLoginEmail" placeholder="e.g. guest@greenhaven.com" required autocomplete="email" pattern="[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)">
+                  </div>
+                  <div class="invalid-feedback" id="modalLoginEmailFeedback">Please enter a valid email address.</div>
+                </div>
+
+                <div class="mb-3 text-start">
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <label class="form-label fw-semibold mb-0" for="modalLoginPassword">Password</label>
+                    <a href="#" class="small text-success fw-semibold" id="modalForgotPassLink">Forgot password?</a>
+                  </div>
+                  <div class="input-group gh-password-group">
+                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                    <input type="password" class="form-control gh-password-input" id="modalLoginPassword" placeholder="Enter your password" required autocomplete="current-password">
+                    <button type="button" class="gh-password-toggle" data-target="modalLoginPassword" aria-label="Toggle password visibility" tabindex="-1">
+                      <i class="bi bi-eye"></i>
+                    </button>
+                  </div>
+                  <div class="invalid-feedback" id="modalLoginPasswordFeedback">Please enter your password.</div>
+                </div>
+
+                <div class="form-check mb-3 text-start">
+                  <input class="form-check-input" type="checkbox" id="modalRememberMe" checked>
+                  <label class="form-check-label text-muted small" for="modalRememberMe">
+                    Remember me on this browser
+                  </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 py-2.5 fs-6 fw-bold mb-3" id="modalBtnLoginSubmit">
+                  <i class="bi bi-box-arrow-in-right me-1"></i> Sign In
+                </button>
+              </form>
+
+              <div id="modalLoginFeedback"></div>
+
+              <!-- One-Click Demo Access Box -->
+              <div class="p-3 rounded-3 gh-demo-box mt-3 text-center">
+                <div class="small fw-bold gh-demo-title mb-1"><i class="bi bi-lightning-charge-fill me-1"></i> Quick Test Account</div>
+                <button type="button" class="btn btn-sm btn-demo-action w-100" id="modalBtnFillDemoUser">
+                  <i class="bi bi-person-check me-1"></i> Fill Demo Guest Details
+                </button>
+              </div>
+
+              <div class="text-center mt-3 pt-3 border-top">
+                <small class="text-muted">Don't have an account?</small>
+                <a href="register.html" class="text-success fw-bold ms-1 small" id="modalRegisterLink">Create Account</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(modalEl);
+
+      // Bind Password Toggles inside modal
+      this.initPasswordToggles(modalEl);
+
+      // Bind Demo User Autofill
+      const btnFillDemo = modalEl.querySelector('#modalBtnFillDemoUser');
+      const emailInput = modalEl.querySelector('#modalLoginEmail');
+      const passwordInput = modalEl.querySelector('#modalLoginPassword');
+      const emailFeedback = modalEl.querySelector('#modalLoginEmailFeedback');
+      const passwordFeedback = modalEl.querySelector('#modalLoginPasswordFeedback');
+      const feedback = modalEl.querySelector('#modalLoginFeedback');
+
+      if (btnFillDemo) {
+        btnFillDemo.addEventListener('click', () => {
+          if (emailInput) {
+            emailInput.value = 'maya@greenhaven.com';
+            this.clearInputError(emailInput, emailFeedback);
+          }
+          if (passwordInput) {
+            passwordInput.value = 'vegan2026';
+            this.clearInputError(passwordInput, passwordFeedback);
+          }
+          if (feedback) feedback.innerHTML = '';
+        });
+      }
+
+      // Input event error clearing
+      if (emailInput) {
+        emailInput.addEventListener('input', () => this.clearInputError(emailInput, emailFeedback));
+      }
+      if (passwordInput) {
+        passwordInput.addEventListener('input', () => this.clearInputError(passwordInput, passwordFeedback));
+      }
+
+      // Forgot Password Handler
+      const forgotPassLink = modalEl.querySelector('#modalForgotPassLink');
+      if (forgotPassLink) {
+        forgotPassLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (window.showToast) {
+            window.showToast.info('Password Reset', 'Password reset instructions have been sent to your email.');
+          } else {
+            alert('Password reset instructions have been sent to your email.');
+          }
+        });
+      }
+
+      // Social Auth Buttons
+      const btnGoogle = modalEl.querySelector('#modalBtnGoogleSignIn');
+      if (btnGoogle) {
+        btnGoogle.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (window.GH_SocialAuth) {
+            window.GH_SocialAuth.handleGoogleSignIn();
+          }
+        });
+      }
+
+      const btnApple = modalEl.querySelector('#modalBtnAppleSignIn');
+      if (btnApple) {
+        btnApple.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (window.GH_SocialAuth) {
+            window.GH_SocialAuth.handleAppleSignIn();
+          }
+        });
+      }
+
+      // Form submission validation & login
+      const form = modalEl.querySelector('#modalLoginForm');
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          this.clearInputError(emailInput, emailFeedback);
+          this.clearInputError(passwordInput, passwordFeedback);
+
+          const email = (emailInput ? emailInput.value : '').trim();
+          const password = passwordInput ? passwordInput.value : '';
+
+          let hasError = false;
+
+          // Required & email format validation
+          if (!email) {
+            this.setInputError(emailInput, emailFeedback, 'Email address is required.');
+            hasError = true;
+          } else if (/\s/.test(email)) {
+            this.setInputError(emailInput, emailFeedback, 'Email address cannot contain spaces.');
+            hasError = true;
+          } else {
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(email)) {
+              let msg = 'Please enter a valid email address (e.g. name@example.com or name@example.in).';
+              if (!email.includes('@')) {
+                msg = "Email address must contain an '@' symbol.";
+              } else if (!email.split('@')[1] || !email.split('@')[1].includes('.')) {
+                msg = 'Please include a valid domain extension like .com or .in.';
+              }
+              this.setInputError(emailInput, emailFeedback, msg);
+              hasError = true;
+            }
+          }
+
+          if (!password) {
+            this.setInputError(passwordInput, passwordFeedback, 'Password is required.');
+            hasError = true;
+          }
+
+          if (hasError) return;
+
+          // Validate credentials
+          const result = this.validateCredentials(email, password);
+          if (!result.success) {
+            if (result.error === 'not_found') {
+              this.setInputError(emailInput, emailFeedback, 'Account not found. Please create an account first.');
+              if (window.showToast) {
+                window.showToast.error('Account Not Found', 'Account not found. Please create an account first.');
+              }
+            } else if (result.error === 'wrong_password') {
+              this.setInputError(passwordInput, passwordFeedback, 'Incorrect password. Please try again.');
+              if (window.showToast) {
+                window.showToast.error('Invalid Password', 'Incorrect password. Please try again.');
+              }
+            }
+            return;
+          }
+
+          // Successful login
+          const user = result.user;
+          if (feedback) {
+            feedback.innerHTML = `
+              <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                <i class="bi bi-check-circle-fill me-2"></i>
+                Signed in successfully as <strong>${escapeHtml(user.name)}</strong>. Welcome back!
+              </div>
+            `;
+          }
+
+          // Disable button briefly
+          const submitBtn = modalEl.querySelector('#modalBtnLoginSubmit');
+          if (submitBtn) submitBtn.disabled = true;
+
+          // Login user and stay on current page
+          this.loginUser(user, null);
+
+          // Close modal after short visual feedback, user stays on the same page!
+          setTimeout(() => {
+            this.closeSignInModal();
+            if (submitBtn) submitBtn.disabled = false;
+            if (feedback) feedback.innerHTML = '';
+            form.reset();
+          }, 500);
+        });
+      }
+
+      // Preserve exact scroll position on modal hide
+      let savedScroll = 0;
+      modalEl.addEventListener('show.bs.modal', () => {
+        savedScroll = window.pageYOffset || document.documentElement.scrollTop || 0;
+      });
+      modalEl.addEventListener('hidden.bs.modal', () => {
+        this.clearInputError(emailInput, emailFeedback);
+        this.clearInputError(passwordInput, passwordFeedback);
+        if (feedback) feedback.innerHTML = '';
+        if (form) form.reset();
+        window.scrollTo({ top: savedScroll, behavior: 'instant' });
+      });
+
+      return modalEl;
+    },
+
+    openSignInModal(options = {}) {
+      const modalEl = this.initSignInModal();
+      if (!modalEl) return;
+
+      const savedScroll = window.pageYOffset || document.documentElement.scrollTop || 0;
+
+      // Close mobile offcanvas if open
+      const mobileMenuEl = document.getElementById('mobileMenuOffcanvas');
+      if (mobileMenuEl && typeof bootstrap !== 'undefined' && bootstrap.Offcanvas) {
+        const offcanvasInstance = bootstrap.Offcanvas.getInstance(mobileMenuEl);
+        if (offcanvasInstance) {
+          offcanvasInstance.hide();
+        }
+      }
+
+      // Close auth prompt modal if open
+      const promptModalEl = document.getElementById('ghAuthPromptModal');
+      if (promptModalEl && typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+        const promptModalInstance = bootstrap.Modal.getInstance(promptModalEl);
+        if (promptModalInstance) {
+          promptModalInstance.hide();
+        }
+      }
+
+      // Pre-fill email if passed
+      if (options.email) {
+        const emailInput = modalEl.querySelector('#modalLoginEmail');
+        if (emailInput) {
+          emailInput.value = options.email;
+        }
+      }
+
+      if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+        const bsModal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+        bsModal.show();
+        requestAnimationFrame(() => {
+          window.scrollTo({ top: savedScroll, behavior: 'instant' });
+        });
+      }
+    },
+
+    closeSignInModal() {
+      const modalEl = document.getElementById('ghSignInModal');
+      if (modalEl && typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+        const bsModal = bootstrap.Modal.getInstance(modalEl);
+        if (bsModal) {
+          bsModal.hide();
+        }
+      }
     },
 
     updateNavbar() {
@@ -382,7 +731,7 @@
         } else {
           return `
             <div class="d-grid gap-2 mb-3">
-              <a href="login.html" class="btn btn-outline-primary w-100"><i class="bi bi-box-arrow-in-right me-1"></i> Sign In</a>
+              <a href="login.html" class="btn btn-outline-primary w-100 gh-signin-btn-mobile"><i class="bi bi-box-arrow-in-right me-1"></i> Sign In</a>
             </div>
           `;
         }
@@ -969,7 +1318,66 @@
     }
   };
 
-  // Expose to window
+  // Social Sign-In Handler (Google & Apple OAuth Ready)
+  const GH_SocialAuth = {
+    config: {
+      googleClientId: window.GH_GOOGLE_CLIENT_ID || null,
+      appleClientId: window.GH_APPLE_CLIENT_ID || null
+    },
+
+    showIntegrationNotice(providerName, configKey) {
+      const friendlyMsg = `${providerName} Sign-In is ready for OAuth integration. Configure your ${configKey} to enable live authentication.`;
+
+      if (window.showToast) {
+        if (typeof window.showToast.info === 'function') {
+          window.showToast.info(`${providerName} Sign-In`, friendlyMsg);
+        } else if (typeof window.showToast === 'function') {
+          window.showToast({ type: 'info', title: `${providerName} Sign-In`, message: friendlyMsg });
+        }
+      }
+
+      const feedback = document.getElementById('modalLoginFeedback') || document.getElementById('loginFeedback');
+      if (feedback) {
+        feedback.innerHTML = `
+          <div class="alert alert-info alert-dismissible fade show mt-3 d-flex align-items-start gap-2 shadow-sm" role="alert">
+            <i class="bi bi-info-circle-fill fs-5 text-info flex-shrink-0 mt-0.5"></i>
+            <div class="small flex-grow-1">
+              <strong>${escapeHtml(providerName)} Sign-In:</strong> OAuth integration is ready. Configure <code>${escapeHtml(configKey)}</code> to enable live authentication without demo credentials.
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        `;
+      }
+
+      console.info(`[Green Haven Auth] ${providerName} Sign-In initialized. Live OAuth requires ${configKey}. UI remains ready for production integration.`);
+    },
+
+    handleGoogleSignIn() {
+      if (window.google && window.google.accounts && this.config.googleClientId) {
+        try {
+          window.google.accounts.id.prompt();
+        } catch (err) {
+          console.error('[Google OAuth Error]', err);
+        }
+      } else {
+        this.showIntegrationNotice('Google', 'GH_GOOGLE_CLIENT_ID');
+      }
+    },
+
+    handleAppleSignIn() {
+      if (window.AppleID && window.AppleID.auth && this.config.appleClientId) {
+        try {
+          window.AppleID.auth.signIn();
+        } catch (err) {
+          console.error('[Apple OAuth Error]', err);
+        }
+      } else {
+        this.showIntegrationNotice('Apple', 'GH_APPLE_CLIENT_ID');
+      }
+    }
+  };
+
+  window.GH_SocialAuth = window.GH_SocialAuth || GH_SocialAuth;
   window.GH_Auth = Auth;
   window.GH_Cart = Cart;
   window.GH_Orders = Orders;
@@ -993,3 +1401,4 @@
   }
 
 })();
+
