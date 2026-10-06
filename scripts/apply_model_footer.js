@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const rootDir = path.resolve(__dirname, '..');
-const htmlFiles = fs.readdirSync(rootDir).filter(f => f.endsWith('.html'));
+const htmlFiles = fs.readdirSync(rootDir).filter(f => f.endsWith('.html') && !['login.html', 'register.html'].includes(f));
 
 const canonicalFooter = `  <!-- Universal 4-Column Luxury Footer -->
   <footer class="gh-footer">
