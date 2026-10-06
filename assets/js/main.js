@@ -656,12 +656,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize Default Active Category Tab
   if (categorySections.length && catNavLinks.length) {
-    let hasActiveSection = false;
-    categorySections.forEach(section => {
-      if (section.classList.contains('active')) hasActiveSection = true;
-    });
-    if (!hasActiveSection && categorySections[0]) {
-      categorySections[0].classList.add('active');
+    const activeLink = document.querySelector('.cat-nav-link.active');
+    const activeTarget = activeLink ? (activeLink.getAttribute('data-target') || (activeLink.getAttribute('href') || '').replace('#', '')) : '';
+    if (activeTarget === 'category-all' || activeTarget === 'all') {
+      categorySections.forEach(section => {
+        section.classList.add('active');
+        section.style.removeProperty('display');
+      });
+    } else {
+      let hasActiveSection = false;
+      categorySections.forEach(section => {
+        if (section.classList.contains('active')) hasActiveSection = true;
+      });
+      if (!hasActiveSection && categorySections[0]) {
+        categorySections[0].classList.add('active');
+      }
     }
   }
 
@@ -670,28 +679,56 @@ document.addEventListener('DOMContentLoaded', () => {
     link.addEventListener('click', function(e) {
       e.preventDefault();
       const targetId = this.getAttribute('data-target') || (this.getAttribute('href') || '').replace('#', '');
-      const targetSection = document.getElementById(targetId);
       
-      if (targetSection) {
-        // Clear search input if switching category tabs
-        if (luxurySearchInput && luxurySearchInput.value.trim().length > 0) {
-          luxurySearchInput.value = '';
-          if (btnClearMenuSearch) btnClearMenuSearch.classList.add('d-none');
-          if (menuNoResults) menuNoResults.style.display = 'none';
-          document.querySelectorAll('.menu-item-card').forEach(c => {
+      // Clear search input if switching category tabs
+      if (luxurySearchInput && luxurySearchInput.value.trim().length > 0) {
+        luxurySearchInput.value = '';
+        if (btnClearMenuSearch) btnClearMenuSearch.classList.add('d-none');
+        if (menuNoResults) menuNoResults.style.display = 'none';
+        document.querySelectorAll('.menu-item-card').forEach(c => {
+          c.classList.remove('search-hidden', 'd-none');
+          c.removeAttribute('data-search-hidden');
+          c.style.removeProperty('display');
+        });
+      }
+
+      // Update active navigation pill
+      catNavLinks.forEach(l => l.classList.remove('active'));
+      this.classList.add('active');
+      if (typeof this.scrollIntoView === 'function') {
+        this.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+
+      // Handle 'All' Category Tab: reveal all category sections
+      if (targetId === 'category-all' || targetId === 'all') {
+        categorySections.forEach(sec => {
+          sec.classList.add('active');
+          sec.classList.remove('search-active');
+          sec.style.removeProperty('display');
+          sec.querySelectorAll('.menu-item-card').forEach(c => {
             c.classList.remove('search-hidden', 'd-none');
             c.removeAttribute('data-search-hidden');
             c.style.removeProperty('display');
           });
-        }
+        });
+        if (menuNoResults) menuNoResults.style.display = 'none';
 
-        // Update active navigation pill
-        catNavLinks.forEach(l => l.classList.remove('active'));
-        this.classList.add('active');
-        if (typeof this.scrollIntoView === 'function') {
-          this.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        const firstSection = categorySections[0];
+        if (firstSection) {
+          const navbar = document.querySelector('.gh-navbar, .nx-navbar');
+          const navHeight = navbar ? navbar.offsetHeight : 70;
+          const targetTop = firstSection.getBoundingClientRect().top + window.pageYOffset;
+          const currentScroll = window.pageYOffset;
+          const targetScroll = targetTop - navHeight - 16;
+          if (Math.abs(currentScroll - targetScroll) > 30) {
+            window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+          }
         }
+        return;
+      }
 
+      const targetSection = document.getElementById(targetId);
+      if (targetSection) {
         // Show only targeted category section, hide all other containers
         categorySections.forEach(sec => {
           sec.classList.remove('active', 'search-active');
@@ -766,8 +803,23 @@ document.addEventListener('DOMContentLoaded', () => {
       if (query.length === 0) {
         // Return to active category tab view
         const activeLink = document.querySelector('.cat-nav-link.active');
-        const activeTargetId = activeLink ? (activeLink.getAttribute('data-target') || (activeLink.getAttribute('href') || '').replace('#', '')) : 'category-starters';
+        const activeTargetId = activeLink ? (activeLink.getAttribute('data-target') || (activeLink.getAttribute('href') || '').replace('#', '')) : 'category-all';
         
+        if (activeTargetId === 'category-all' || activeTargetId === 'all') {
+          categorySections.forEach(section => {
+            section.classList.add('active');
+            section.classList.remove('search-active');
+            section.style.removeProperty('display');
+            section.querySelectorAll('.menu-item-card').forEach(card => {
+              card.classList.remove('search-hidden', 'd-none');
+              card.removeAttribute('data-search-hidden');
+              card.style.removeProperty('display');
+            });
+          });
+          if (menuNoResults) menuNoResults.style.display = 'none';
+          return;
+        }
+
         categorySections.forEach(section => {
           section.classList.remove('search-active');
           section.style.removeProperty('display');
@@ -1280,6 +1332,20 @@ document.addEventListener('DOMContentLoaded', () => {
         return false;
       }
 
+      if (/[0-9]/.test(val)) {
+        const msg = `${fieldLabel} must not contain numbers. Letters only.`;
+        input.setCustomValidity(msg);
+        if (feedback) feedback.textContent = msg;
+        return false;
+      }
+
+      if (/[^a-zA-Z\s]/.test(val)) {
+        const msg = `${fieldLabel} cannot contain special characters. Letters only.`;
+        input.setCustomValidity(msg);
+        if (feedback) feedback.textContent = msg;
+        return false;
+      }
+
       // Must consist of letters and single spaces between words
       const nameRegex = /^[a-zA-Z]+(?:\s[a-zA-Z]+)*$/;
       if (!nameRegex.test(val)) {
@@ -1621,10 +1687,160 @@ document.addEventListener('DOMContentLoaded', () => {
     return validate;
   }
 
+  /**
+   * 4. Numeric Quantity / Count Field Validation
+   * - Restricts strictly to numbers (0-9)
+   * - Blocks alphabets and symbols
+   * - Supports min and max limits
+   */
+  function setupNumericQuantityInput(input, min = null, max = null, isRequired = true, fieldLabel = 'Number') {
+    if (!input) return null;
+    const feedback = getFeedbackElement(input);
+
+    const validate = () => {
+      const val = input.value.trim();
+      if (!val) {
+        if (isRequired) {
+          const msg = `Please enter ${fieldLabel.toLowerCase()}.`;
+          input.setCustomValidity(msg);
+          if (feedback) feedback.textContent = msg;
+          return false;
+        } else {
+          input.setCustomValidity('');
+          return true;
+        }
+      }
+
+      if (!/^\d+$/.test(val)) {
+        const msg = `${fieldLabel} must contain numbers only.`;
+        input.setCustomValidity(msg);
+        if (feedback) feedback.textContent = msg;
+        return false;
+      }
+
+      const num = parseInt(val, 10);
+      if (min !== null && num < min) {
+        const msg = `${fieldLabel} must be at least ${min}.`;
+        input.setCustomValidity(msg);
+        if (feedback) feedback.textContent = msg;
+        return false;
+      }
+
+      if (max !== null && num > max) {
+        const msg = `${fieldLabel} cannot exceed ${max}.`;
+        input.setCustomValidity(msg);
+        if (feedback) feedback.textContent = msg;
+        return false;
+      }
+
+      input.setCustomValidity('');
+      return true;
+    };
+
+    input.addEventListener('keydown', function(e) {
+      const allowedControlKeys = [
+        'Backspace', 'Delete', 'Tab', 'Escape', 'Enter',
+        'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown',
+        'Home', 'End'
+      ];
+      if (allowedControlKeys.includes(e.key)) return;
+      if (e.ctrlKey || e.metaKey) return;
+      if (e.key.startsWith('F') && e.key.length > 1) return;
+
+      if (!/^[0-9]$/.test(e.key) || e.shiftKey) {
+        e.preventDefault();
+      }
+    });
+
+    input.addEventListener('beforeinput', function(e) {
+      if (e.data && !/^\d+$/.test(e.data)) {
+        e.preventDefault();
+      }
+    });
+
+    input.addEventListener('paste', function(e) {
+      e.preventDefault();
+      const pasteText = (e.clipboardData || window.clipboardData)?.getData('text') || '';
+      const numbersOnly = pasteText.replace(/\D/g, '');
+      if (!numbersOnly) return;
+      const start = this.selectionStart ?? this.value.length;
+      const end = this.selectionEnd ?? this.value.length;
+      this.value = this.value.slice(0, start) + numbersOnly + this.value.slice(end);
+      this.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+
+    input.addEventListener('input', function() {
+      const cleaned = this.value.replace(/\D/g, '');
+      if (this.value !== cleaned) {
+        this.value = cleaned;
+      }
+      const isValid = validate();
+      if (this.classList.contains('is-invalid') || this.form?.classList.contains('was-validated')) {
+        this.classList.toggle('is-invalid', !isValid);
+        this.classList.toggle('is-valid', isValid);
+      }
+    });
+
+    input.addEventListener('blur', function() {
+      const isValid = validate();
+      if (this.form?.classList.contains('was-validated')) {
+        this.classList.toggle('is-invalid', !isValid);
+        this.classList.toggle('is-valid', isValid);
+      }
+    });
+
+    return validate;
+  }
+
   // Expose validation helpers globally
   window.setupValidNameInput = setupValidNameInput;
   window.setupValidEmailInput = setupValidEmailInput;
   window.setupNumericPhoneInput = setupNumericPhoneInput;
+  window.setupNumericQuantityInput = setupNumericQuantityInput;
+
+  const GH_ValEngine = window.GreenHavenValidator || {
+    validateName: (val, isReq = true, label = 'Full Name') => {
+      const v = String(val || '').trim();
+      if (!v) return isReq ? { isValid: false, message: `Please enter your ${label.toLowerCase()}.` } : { isValid: true, message: '' };
+      if (v.length < 2) return { isValid: false, message: `${label} must be at least 2 characters long.` };
+      if (/[0-9]/.test(v)) return { isValid: false, message: `${label} must not contain numbers. Letters only.` };
+      if (/[^a-zA-Z\s]/.test(v)) return { isValid: false, message: `${label} cannot contain special characters. Letters only.` };
+      if (!/^[A-Za-z]+(?:\s[A-Za-z]+)*$/.test(v)) return { isValid: false, message: `${label} can only contain letters and spaces.` };
+      return { isValid: true, message: '' };
+    },
+    validatePhone: (val, isReq = true, label = 'Phone Number') => {
+      const v = String(val || '').trim();
+      if (!v) return isReq ? { isValid: false, message: `Please enter your ${label.toLowerCase()}.` } : { isValid: true, message: '' };
+      if (!/^\d+$/.test(v)) return { isValid: false, message: `${label} must contain numbers only.` };
+      if (v.length !== 10) return { isValid: false, message: `${label} must contain exactly 10 digits.` };
+      return { isValid: true, message: '' };
+    },
+    validateEmail: (val, isReq = true, label = 'Email Address') => {
+      const v = String(val || '').trim();
+      if (!v) return isReq ? { isValid: false, message: `Please enter your ${label.toLowerCase()}.` } : { isValid: true, message: '' };
+      if (/\s/.test(v)) return { isValid: false, message: `${label} cannot contain spaces.` };
+      if (!v.includes('@')) return { isValid: false, message: `${label} must contain an '@' symbol.` };
+      const parts = v.split('@');
+      if (!parts[1] || !parts[1].includes('.')) return { isValid: false, message: 'Please include a valid domain extension like .com or .in.' };
+      const ext = parts[1].split('.').pop();
+      if (ext.length < 2) return { isValid: false, message: 'Domain extension must be at least 2 characters.' };
+      if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(v)) return { isValid: false, message: 'Please enter a valid email address.' };
+      return { isValid: true, message: '' };
+    },
+    restrictNameInput: setupValidNameInput,
+    restrictDigitsInput: setupNumericPhoneInput,
+    restrictEmailInput: setupValidEmailInput,
+    init: () => {
+      if (window.GreenHavenValidator && typeof window.GreenHavenValidator.autoBindInputs === 'function') {
+        window.GreenHavenValidator.autoBindInputs(document);
+      }
+    }
+  };
+  window.GreenHavenValidator = window.GreenHavenValidator || GH_ValEngine;
+  window.GH_Validator = window.GH_Validator || GH_ValEngine;
+  if (typeof window.GreenHavenValidator.autoBindInputs === 'function') {
+    window.GreenHavenValidator.autoBindInputs(document);
+  }
 
   /* --------------------------------------------------
      9. TABLE RESERVATION FORM & RECEIPT MODAL
@@ -1652,6 +1868,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (resName && !isNameValid) resName.classList.add('is-invalid');
         if (resEmail && !isEmailValid) resEmail.classList.add('is-invalid');
         if (resPhone && !isPhoneValid) resPhone.classList.add('is-invalid');
+        this.querySelectorAll(':invalid').forEach(el => el.classList.add('is-invalid'));
 
         // Focus first invalid field
         const firstInvalid = this.querySelector('.is-invalid, :invalid');
@@ -1745,10 +1962,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const cateringName = document.getElementById('cateringName');
   const cateringEmail = document.getElementById('cateringEmail');
   const cateringPhone = document.getElementById('cateringPhone');
+  const cateringGuests = document.getElementById('cateringGuests');
 
   const validateCateringName = setupValidNameInput(cateringName, true, 'Full Name');
   const validateCateringEmail = setupValidEmailInput(cateringEmail, true);
   const validateCateringPhone = setupNumericPhoneInput(cateringPhone, true);
+  const validateCateringGuests = setupNumericQuantityInput(cateringGuests, 5, 500, true, 'Estimated Guest Count');
 
   if (cateringForm) {
     cateringForm.addEventListener('submit', function(e) {
@@ -1757,13 +1976,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const isNameValid = validateCateringName ? validateCateringName() : true;
       const isEmailValid = validateCateringEmail ? validateCateringEmail() : true;
       const isPhoneValid = validateCateringPhone ? validateCateringPhone() : true;
+      const isGuestsValid = validateCateringGuests ? validateCateringGuests() : true;
 
-      if (!isNameValid || !isEmailValid || !isPhoneValid || !this.checkValidity()) {
+      if (!isNameValid || !isEmailValid || !isPhoneValid || !isGuestsValid || !this.checkValidity()) {
         e.stopPropagation();
         this.classList.add('was-validated');
         if (cateringName && !isNameValid) cateringName.classList.add('is-invalid');
         if (cateringEmail && !isEmailValid) cateringEmail.classList.add('is-invalid');
         if (cateringPhone && !isPhoneValid) cateringPhone.classList.add('is-invalid');
+        if (cateringGuests && !isGuestsValid) cateringGuests.classList.add('is-invalid');
+        this.querySelectorAll(':invalid').forEach(el => el.classList.add('is-invalid'));
 
         const firstInvalid = this.querySelector('.is-invalid, :invalid');
         if (firstInvalid) firstInvalid.focus();
@@ -1783,7 +2005,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       cateringForm.reset();
       cateringForm.classList.remove('was-validated');
-      [cateringName, cateringEmail, cateringPhone].forEach(inp => {
+      [cateringName, cateringEmail, cateringPhone, cateringGuests].forEach(inp => {
         if (inp) {
           inp.classList.remove('is-invalid', 'is-valid');
           inp.setCustomValidity('');
@@ -1793,7 +2015,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     cateringForm.addEventListener('reset', function() {
       cateringForm.classList.remove('was-validated');
-      [cateringName, cateringEmail, cateringPhone].forEach(inp => {
+      [cateringName, cateringEmail, cateringPhone, cateringGuests].forEach(inp => {
         if (inp) {
           inp.classList.remove('is-invalid', 'is-valid');
           inp.setCustomValidity('');
@@ -1828,6 +2050,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (contactName && !isNameValid) contactName.classList.add('is-invalid');
         if (contactEmail && !isEmailValid) contactEmail.classList.add('is-invalid');
         if (contactPhone && !isPhoneValid) contactPhone.classList.add('is-invalid');
+        this.querySelectorAll(':invalid').forEach(el => el.classList.add('is-invalid'));
 
         const firstInvalid = this.querySelector('.is-invalid, :invalid');
         if (firstInvalid) firstInvalid.focus();
@@ -2771,8 +2994,130 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 750);
       }
     });
-  })();
+  /* ==========================================================================
+     20. REUSABLE LUXURY FOOTER COMPONENT & SYNCHRONIZATION SYSTEM
+     ========================================================================== */
+  const FOOTER_TEMPLATE = `
+    <!-- Universal 4-Column Luxury Footer -->
+  <footer class="gh-footer">
+    <div class="container">
+      <div class="row g-4 g-lg-5 mb-5 align-items-start">
+        
+        <!-- Column 1: Brand & Tagline -->
+        <div class="col-lg-3 col-md-6 footer-col">
+          <a class="gh-brand mb-3 d-inline-flex align-items-center" href="index.html" aria-label="Green Haven Restaurant">
+            <img src="assets/images/logo-g.png" alt="Green Haven Logo" class="gh-brand-logo-img me-2">
+            <span class="gh-brand-text">Green Haven</span>
+          </a>
+          <p class="footer-bio mb-4">
+            An organic plant-based restaurant sanctuary celebrating vibrant seasonal gastronomy, regenerative agriculture, and holistic well-being.
+          </p>
+          <div class="footer-social-group d-flex gap-2 flex-wrap">
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+            <a href="https://pinterest.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Pinterest"><i class="bi bi-pinterest"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+          </div>
+        </div>
 
+        <!-- Column 2: Navigation -->
+        <div class="col-lg-3 col-md-6 footer-col">
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-0 footer-nav-list">
+            <li><a href="index.html" class="footer-link"><i class="bi bi-chevron-right"></i> Home</a></li>
+            <li><a href="about.html" class="footer-link"><i class="bi bi-chevron-right"></i> About Us</a></li>
+            <li><a href="menu.html" class="footer-link"><i class="bi bi-chevron-right"></i> Our Menu</a></li>
+            <li><a href="cart.html" class="footer-link"><i class="bi bi-chevron-right"></i> Food Cart</a></li>
+            <li><a href="catering.html" class="footer-link"><i class="bi bi-chevron-right"></i> Catering</a></li>
+            <li><a href="contact.html" class="footer-link"><i class="bi bi-chevron-right"></i> Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Hours & Location -->
+        <div class="col-lg-3 col-md-6 footer-col">
+          <h4 class="footer-col-title">Hours &amp; Location</h4>
+          <div class="footer-contact-info d-flex flex-column gap-2 mb-0">
+            <p class="text-white-50 small mb-0 d-flex align-items-start gap-2">
+              <i class="bi bi-geo-alt text-warning mt-1 flex-shrink-0"></i>
+              <span>742 Evergreen Botanical Way, Portland</span>
+            </p>
+            <p class="text-white-50 small mb-0 d-flex align-items-center gap-2">
+              <i class="bi bi-clock text-warning flex-shrink-0"></i>
+              <span>Mon - Sun: 8:00 AM - 10:00 PM</span>
+            </p>
+            <p class="text-white-50 small mb-0 d-flex align-items-center gap-2">
+              <i class="bi bi-telephone text-warning flex-shrink-0"></i>
+              <a href="tel:+15035550192" class="text-decoration-none">+1 (503) 555-0192</a>
+            </p>
+          </div>
+        </div>
+
+        <!-- Column 4: Botanical Digest -->
+        <div class="col-lg-3 col-md-6 footer-col">
+          <h4 class="footer-col-title">Botanical Digest</h4>
+          <p class="text-white-50 small mb-3">Join our newsletter for seasonal menu previews and chef recipes.</p>
+          <form class="newsletter-form d-flex gap-2">
+            <input type="email" pattern="[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)" class="form-control form-control-sm" placeholder="Your email" required>
+            <button type="submit" class="btn btn-accent btn-sm px-3">Join</button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Bottom Line -->
+      <div class="footer-bottom border-top pt-4 mt-4 text-white-50 small">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+          <div>&copy; 2026 Green Haven Restaurant. All Rights Reserved.</div>
+          <div class="d-flex gap-3">
+            <a href="#privacyPolicy" class="text-decoration-none gh-legal-link" data-legal="privacy" role="button">Privacy Policy</a>
+            <span>&bull;</span>
+            <a href="#termsConditions" class="text-decoration-none gh-legal-link" data-legal="terms" role="button">Terms &amp; Conditions</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  `.trim();
+
+  window.GH_Footer = {
+    template: FOOTER_TEMPLATE,
+    render: function(target) {
+      const container = typeof target === 'string' ? document.querySelector(target) : target;
+      if (!container) return;
+      container.innerHTML = FOOTER_TEMPLATE;
+      this.bindHandlers(container);
+    },
+    sync: function() {
+      const existingFooter = document.querySelector('footer.gh-footer, footer.nx-footer');
+      if (existingFooter) {
+        this.bindHandlers(existingFooter);
+      }
+    },
+    bindHandlers: function(scope) {
+      if (!scope) scope = document;
+      const form = scope.querySelector('.newsletter-form');
+      if (form && !form.dataset.bound) {
+        form.dataset.bound = 'true';
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const input = form.querySelector('input[type="email"]');
+          if (input && input.value) {
+            if (window.showToast) {
+              window.showToast.success('Subscribed!', 'Thank you for joining our Botanical Digest newsletter.');
+            } else {
+              alert('Thank you for joining our Botanical Digest newsletter!');
+            }
+            input.value = '';
+          }
+        });
+      }
+    }
+  };
+
+  window.GH_Footer.sync();
+
+});
 });
 
 

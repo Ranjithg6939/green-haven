@@ -29,9 +29,101 @@ const MIME_TYPES = {
   '.mp4': 'video/mp4'
 };
 
+const VALIDATION_RULES = {
+  NAME: /^[A-Za-z]+(?:\s[A-Za-z]+)*$/,
+  PHONE: /^\d{10}$/,
+  EMAIL: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+  DIGITS: /^\d+$/
+};
+
+function validateBackendPayload(payload) {
+  const errors = [];
+  
+  if (payload.name !== undefined) {
+    const val = String(payload.name).trim();
+    if (!val) {
+      errors.push({ field: 'name', message: 'Name is required.' });
+    } else if (val.length < 2) {
+      errors.push({ field: 'name', message: 'Name must be at least 2 characters.' });
+    } else if (/[0-9]/.test(val)) {
+      errors.push({ field: 'name', message: 'Name must not contain numbers. Letters only.' });
+    } else if (/[^a-zA-Z\s]/.test(val)) {
+      errors.push({ field: 'name', message: 'Name cannot contain special characters. Letters only.' });
+    } else if (!VALIDATION_RULES.NAME.test(val)) {
+      errors.push({ field: 'name', message: 'Name can only contain letters and spaces.' });
+    }
+  }
+
+  if (payload.phone !== undefined) {
+    const val = String(payload.phone).trim();
+    if (val) {
+      if (!VALIDATION_RULES.DIGITS.test(val)) {
+        errors.push({ field: 'phone', message: 'Phone number must contain numbers only.' });
+      } else if (val.length !== 10) {
+        errors.push({ field: 'phone', message: 'Phone number must be exactly 10 digits.' });
+      }
+    }
+  }
+
+  if (payload.email !== undefined) {
+    const val = String(payload.email).trim();
+    if (!val) {
+      errors.push({ field: 'email', message: 'Email address is required.' });
+    } else if (/\s/.test(val)) {
+      errors.push({ field: 'email', message: 'Email address cannot contain spaces.' });
+    } else if (!VALIDATION_RULES.EMAIL.test(val)) {
+      errors.push({ field: 'email', message: 'Please enter a valid email address.' });
+    }
+  }
+
+  if (payload.guests !== undefined) {
+    const val = String(payload.guests).trim();
+    if (!VALIDATION_RULES.DIGITS.test(val)) {
+      errors.push({ field: 'guests', message: 'Guests must contain numbers only.' });
+    }
+  }
+
+  return errors;
+}
+
 const server = http.createServer((req, res) => {
   const parsedUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
   let pathname = decodeURIComponent(parsedUrl.pathname);
+
+  // Set CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    res.writeHead(204);
+    res.end();
+    return;
+  }
+
+  // Backend Validation API Endpoints
+  if (req.method === 'POST' && pathname.startsWith('/api/')) {
+    let body = '';
+    req.on('data', chunk => { body += chunk; });
+    req.on('end', () => {
+      try {
+        const payload = JSON.parse(body || '{}');
+        const errors = validateBackendPayload(payload);
+
+        res.writeHead(errors.length ? 400 : 200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({
+          success: errors.length === 0,
+          endpoint: pathname,
+          errors: errors.length ? errors : undefined,
+          message: errors.length ? 'Validation failed.' : 'Validation successful.'
+        }));
+      } catch (e) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, error: 'Invalid JSON body' }));
+      }
+    });
+    return;
+  }
 
   if (pathname === '/') {
     pathname = '/index.html';

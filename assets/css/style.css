@@ -491,6 +491,10 @@ html.dark .catering-intro-body {
   color: var(--gh-text) !important;
 }
 
+.catering-intro-body {
+  font-weight: 700 !important;
+}
+
 [data-bs-theme="dark"] .catering-nature-page h1[style*="color: #113813"],
 html.dark .catering-nature-page h1[style*="color: #113813"] {
   color: #FFFFFF !important;
@@ -517,7 +521,9 @@ body {
   background: var(--gh-bg-gradient) !important;
   background-attachment: fixed !important;
   background-color: var(--gh-bg) !important;
-  min-height: 100vh;
+  min-height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
   color: var(--gh-text);
   line-height: 1.7;
   margin: 0;
@@ -526,6 +532,22 @@ body {
   width: 100%;
   max-width: 100%;
   transition: color 0.3s ease, background 0.3s ease;
+}
+
+main,
+.main-content,
+#main-content {
+  flex: 1 0 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+}
+
+.gh-footer,
+.nx-footer {
+  margin-top: auto !important;
+  width: 100% !important;
+  flex-shrink: 0 !important;
 }
 
 [id] {
@@ -6035,6 +6057,7 @@ html.dark .about-narrative-section .ethos-img-wrapper {
   font-size: 0.92rem !important;
   line-height: 1.45 !important;
   margin-bottom: 0 !important;
+  font-weight: 700 !important;
 }
 
 .pulse-dot {
@@ -7095,31 +7118,7 @@ html.dark .nx-footer {
 
 .gh-footer::before,
 .nx-footer::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    radial-gradient(circle 3px at 3.5% 32%, rgba(180, 245, 215, 0.9) 0%, rgba(180, 245, 215, 0) 100%),
-    radial-gradient(circle 9px at 3.5% 32%, rgba(130, 230, 185, 0.35) 0%, rgba(130, 230, 185, 0) 100%),
-    radial-gradient(circle 3px at 15.2% 85.5%, rgba(180, 245, 215, 0.9) 0%, rgba(180, 245, 215, 0) 100%),
-    radial-gradient(circle 9px at 15.2% 85.5%, rgba(130, 230, 185, 0.35) 0%, rgba(130, 230, 185, 0) 100%),
-    radial-gradient(circle 2.5px at 84.5% 62%, rgba(180, 245, 215, 0.85) 0%, rgba(180, 245, 215, 0) 100%),
-    radial-gradient(circle 8px at 84.5% 62%, rgba(130, 230, 185, 0.35) 0%, rgba(130, 230, 185, 0) 100%),
-    radial-gradient(circle 2.5px at 94.8% 34%, rgba(180, 245, 215, 0.85) 0%, rgba(180, 245, 215, 0) 100%),
-    radial-gradient(circle 8px at 94.8% 34%, rgba(130, 230, 185, 0.3) 0%, rgba(130, 230, 185, 0) 100%),
-    radial-gradient(circle 2px at 58% 22%, rgba(180, 245, 215, 0.6) 0%, rgba(180, 245, 215, 0) 100%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 1;
-}
-
-[data-bs-theme="dark"] .gh-footer::before,
-[data-bs-theme="dark"] .nx-footer::before,
-html.dark .gh-footer::before,
-html.dark .nx-footer::before {
   display: none !important;
-  opacity: 0 !important;
 }
 
 .gh-footer > .container,
@@ -7128,12 +7127,20 @@ html.dark .nx-footer::before {
   z-index: 2;
 }
 
+.gh-footer .footer-col {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
 .gh-footer .gh-brand,
 .nx-footer .gh-brand,
 .gh-footer a.gh-brand {
   display: inline-flex !important;
   align-items: center !important;
   gap: 0.75rem !important;
+  height: 46px !important;
+  margin-top: 0 !important;
+  margin-bottom: 1.35rem !important;
   text-decoration: none !important;
   color: var(--gh-footer-heading) !important;
   text-shadow: none !important;
@@ -7147,12 +7154,12 @@ html.dark .nx-footer::before {
 
 .gh-footer .gh-brand-logo-img,
 .nx-footer .gh-brand-logo-img {
-  width: 46px !important;
-  height: 46px !important;
+  width: 44px !important;
+  height: 44px !important;
   object-fit: contain !important;
   border-radius: 50% !important;
   border: 1.5px solid var(--gh-footer-border) !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08) !important;
   flex-shrink: 0 !important;
   margin: 0 !important;
 }
@@ -7163,39 +7170,44 @@ html.dark .nx-footer::before {
 .gh-footer .gh-brand.text-white,
 .gh-footer .gh-brand .text-white {
   font-family: var(--font-heading) !important;
-  font-size: 1.75rem !important;
-  font-weight: 800 !important;
+  font-size: 1.65rem !important;
+  font-weight: 700 !important;
   color: var(--gh-footer-heading) !important;
   letter-spacing: 0.3px !important;
   line-height: 1 !important;
+  margin: 0 !important;
   text-shadow: none !important;
 }
 
 .gh-footer .footer-bio {
   color: var(--gh-footer-text) !important;
-  line-height: 1.7;
-  font-size: 0.98rem !important;
-  font-weight: 550 !important;
+  line-height: 1.65;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  margin-bottom: 1.5rem !important;
 }
 
 .gh-footer .footer-col-title,
-.gh-footer h4,
-.gh-footer h1, .gh-footer h2, .gh-footer h3, .gh-footer h5, .gh-footer h6 {
+.gh-footer h4.footer-col-title {
   font-family: var(--font-heading) !important;
   color: var(--gh-footer-heading) !important;
   text-shadow: none !important;
-  font-size: 1.3rem !important;
-  font-weight: 800 !important;
-  margin-bottom: 1.35rem;
-  letter-spacing: 0.3px;
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  height: 46px !important;
+  display: flex !important;
+  align-items: center !important;
+  margin-top: 0 !important;
+  margin-bottom: 1.35rem !important;
+  line-height: 1.2 !important;
 }
 
 .gh-footer .footer-link {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.35rem 0;
-  font-size: 0.98rem !important;
+  padding: 0.3rem 0;
+  font-size: 0.95rem !important;
   font-weight: 600 !important;
   color: var(--gh-footer-link) !important;
   text-decoration: none;
@@ -7203,7 +7215,8 @@ html.dark .nx-footer::before {
 }
 
 .gh-footer .footer-link i {
-  font-size: 0.85rem;
+  display: inline-block !important;
+  font-size: 0.82rem;
   font-weight: 700;
   color: var(--gh-footer-link-hover);
   transition: transform 0.2s ease;
@@ -7218,9 +7231,17 @@ html.dark .nx-footer::before {
   color: var(--gh-footer-link-hover) !important;
 }
 
+.gh-footer .footer-nav-list {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.5rem !important;
+}
+
 .gh-footer a {
   color: var(--gh-footer-link);
   font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .gh-footer a:hover {
@@ -7232,9 +7253,22 @@ html.dark .nx-footer::before {
 .gh-footer p.text-white-50,
 .gh-footer p.small {
   color: var(--gh-footer-text-muted) !important;
-  font-size: 0.96rem !important;
-  font-weight: 550 !important;
-  line-height: 1.65;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  line-height: 1.6;
+}
+
+.gh-footer .footer-contact-info {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+}
+
+.gh-footer .footer-contact-info p {
+  margin-bottom: 0 !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 0.5rem !important;
 }
 
 .gh-footer a[href^="tel:"],
@@ -7242,8 +7276,8 @@ html.dark .nx-footer::before {
 .gh-footer a[href^="tel:"].text-decoration-none,
 footer a[href^="tel:"] {
   color: var(--gh-footer-heading) !important;
-  font-weight: 550 !important;
-  font-size: 0.96rem !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
   letter-spacing: 0.2px !important;
   text-decoration: none !important;
   display: inline-block;
@@ -7262,31 +7296,32 @@ footer a[href^="tel:"]:active {
 
 .gh-footer .bi.text-warning {
   color: #B25E00 !important;
-  font-size: 1.1rem !important;
+  font-size: 1.05rem !important;
   font-weight: 700 !important;
+  flex-shrink: 0 !important;
 }
 
 [data-bs-theme="dark"] .gh-footer .bi.text-warning,
 html.dark .gh-footer .bi.text-warning {
   color: #FFC107 !important;
-  font-size: 1.1rem !important;
+  font-size: 1.05rem !important;
 }
 
 .footer-social-btn,
 .gh-footer .footer-social-btn,
 .gh-footer .footer-social-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
   background-color: var(--gh-footer-social-bg) !important;
   border: 1.5px solid var(--gh-footer-social-border) !important;
   color: var(--gh-footer-social-color) !important;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.12rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.05rem !important;
   text-decoration: none !important;
-  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, color 0.2s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, color 0.2s ease !important;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   -webkit-tap-highlight-color: transparent;
@@ -7306,7 +7341,6 @@ html.dark .gh-footer .bi.text-warning {
   padding: 0;
 }
 
-/* Desktop/laptop hover: keep existing hover effect on devices with fine pointer & hover */
 @media (hover: hover) and (pointer: fine) {
   .footer-social-btn:hover,
   .gh-footer .footer-social-btn:hover,
@@ -7314,12 +7348,11 @@ html.dark .gh-footer .bi.text-warning {
     background-color: var(--gh-footer-social-bg-hover) !important;
     border-color: var(--gh-footer-social-bg-hover) !important;
     color: var(--gh-footer-social-color-hover) !important;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 14px rgba(46, 101, 24, 0.3);
+    transform: translateY(-3px) !important;
+    box-shadow: 0 6px 14px rgba(46, 101, 24, 0.3) !important;
   }
 }
 
-/* Mobile/touch active & tap state: instant color feedback without layout shift */
 .footer-social-btn:active,
 .gh-footer .footer-social-btn:active,
 .gh-footer .footer-social-icon:active,
@@ -7334,7 +7367,6 @@ html.dark .gh-footer .bi.text-warning {
   transition: none !important;
 }
 
-/* Prevent unwanted sticky hover or displacement on mobile / touch devices */
 @media (hover: none), (pointer: coarse) {
   .footer-social-btn:hover,
   .gh-footer .footer-social-btn:hover,
@@ -7367,9 +7399,9 @@ html.dark .gh-footer .bi.text-warning {
 }
 
 .gh-footer .newsletter-form {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
 }
 
 .gh-footer .newsletter-form input {
@@ -7382,6 +7414,7 @@ html.dark .gh-footer .bi.text-warning {
   font-weight: 600 !important;
   border-radius: 8px !important;
   padding: 0.6rem 1rem !important;
+  height: 42px !important;
 }
 
 .gh-footer .newsletter-form input:focus {
@@ -7400,11 +7433,12 @@ html.dark .gh-footer .bi.text-warning {
   background: var(--gh-footer-btn-bg) !important;
   border: 1.5px solid var(--gh-footer-btn-border) !important;
   color: var(--gh-footer-btn-color) !important;
-  font-weight: 750 !important;
-  font-size: 0.96rem !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
   letter-spacing: 0.3px;
   border-radius: 50px !important;
-  padding: 0.6rem 1.45rem !important;
+  padding: 0.6rem 1.4rem !important;
+  height: 42px !important;
   transition: all 0.25s ease;
   box-shadow: 0 4px 14px rgba(27, 94, 32, 0.28);
 }
@@ -7422,6 +7456,8 @@ html.dark .gh-footer .bi.text-warning {
   color: var(--gh-footer-bottom-text) !important;
   font-size: 0.92rem !important;
   font-weight: 550 !important;
+  padding-top: 1.75rem !important;
+  margin-top: 3.5rem !important;
 }
 
 .gh-footer .footer-bottom a,
@@ -9693,7 +9729,7 @@ html.dark .h2-hero-title {
   font-size: clamp(1rem, 1.12vw, 1.15rem);
   line-height: 1.7;
   color: #243526 !important;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 [data-bs-theme="dark"] .h2-hero-desc,
@@ -10018,22 +10054,35 @@ html.dark .h2-floating-leaf-node {
 
 /* SECTION 3 — CHEF STORY */
 .h2-chef-section {
-  padding: clamp(3rem, 5vh, 4.5rem) 0;
+  padding: clamp(2rem, 3.5vh, 3rem) 0;
 }
 
 .h2-chef-img-wrapper {
   position: relative;
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-xl, 24px);
   overflow: hidden;
   box-shadow: var(--shadow-lg);
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .h2-chef-img-wrapper img {
   width: 100%;
-  height: clamp(400px, 52vh, 500px);
+  height: 100%;
+  min-height: 100%;
   object-fit: cover;
   transition: transform 0.6s ease;
   display: block;
+  flex-grow: 1;
+}
+
+@media (max-width: 991.98px) {
+  .h2-chef-img-wrapper img {
+    height: clamp(380px, 48vh, 460px);
+    min-height: auto;
+  }
 }
 
 .h2-chef-img-wrapper:hover img {
@@ -10042,17 +10091,17 @@ html.dark .h2-floating-leaf-node {
 
 .h2-chef-tag-card {
   position: absolute;
-  bottom: 22px;
-  right: 22px;
+  bottom: 16px;
+  right: 16px;
   background: linear-gradient(135deg, rgba(20, 56, 26, 0.94) 0%, rgba(12, 38, 18, 0.97) 100%);
   color: #FAF8F5;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border: 1.5px solid rgba(168, 230, 207, 0.4);
-  padding: 0.9rem 1.35rem;
-  border-radius: var(--radius-lg);
+  padding: 0.65rem 1.15rem;
+  border-radius: var(--radius-md, 16px);
   box-shadow: 0 10px 28px rgba(10, 45, 18, 0.38);
-  max-width: 290px;
+  max-width: 275px;
   animation: h2ChefBadgeFloat 5s ease-in-out infinite;
   z-index: 5;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -10708,26 +10757,149 @@ html.dark .home-2-page div.text-muted {
   letter-spacing: 1.2px;
 }
 
-/* Section 3 Chef Story Pillars */
-.home-2-page .h2-pillar-title {
-  font-size: 1.05rem !important;
-  color: #163618 !important;
-  font-weight: 700;
+/* Section 3 Chef Story Container - Wide 100% Responsive Viewport Fill */
+.home-2-page #chef-story .h2-chef-container {
+  width: 100% !important;
+  max-width: min(1560px, 95vw) !important;
+  padding-left: clamp(1rem, 2.5vw, 2.5rem) !important;
+  padding-right: clamp(1rem, 2.5vw, 2.5rem) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
-[data-bs-theme="dark"] .home-2-page .h2-pillar-title {
+/* Section 3 Chef Story Narrative Frosted Card - High Contrast & Visibility */
+.home-2-page .h2-chef-narrative-card {
+  background: rgba(255, 255, 255, 0.94) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(46, 101, 24, 0.18) !important;
+  border-radius: var(--radius-xl, 24px) !important;
+  padding: clamp(1.25rem, 2.2vw, 2rem) clamp(1.4rem, 2.5vw, 2.25rem) !important;
+  box-shadow: 0 12px 38px rgba(10, 45, 18, 0.09) !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+[data-bs-theme="dark"] .home-2-page .h2-chef-narrative-card,
+html.dark .home-2-page .h2-chef-narrative-card {
+  background: rgba(2, 38, 22, 0.94) !important;
+  border: 1px solid rgba(0, 255, 127, 0.22) !important;
+  box-shadow: 0 12px 38px rgba(0, 0, 0, 0.5) !important;
+}
+
+.home-2-page .h2-chef-narrative-card .section-title {
+  color: #0B2912 !important;
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-weight: 700 !important;
+  font-size: clamp(1.85rem, 2.2vw, 2.25rem) !important;
+  line-height: 1.22 !important;
+}
+
+[data-bs-theme="dark"] .home-2-page .h2-chef-narrative-card .section-title,
+html.dark .home-2-page .h2-chef-narrative-card .section-title {
   color: #FFFFFF !important;
 }
 
-.home-2-page .h2-pillar-desc {
-  font-size: 0.92rem !important;
-  line-height: 1.6 !important;
-  color: #354737 !important;
-  font-weight: 500;
+.home-2-page .h2-chef-narrative-card .h2-section-desc {
+  color: #243827 !important;
+  font-size: 0.98rem !important;
+  line-height: 1.58 !important;
+  font-weight: 500 !important;
 }
 
-[data-bs-theme="dark"] .home-2-page .h2-pillar-desc {
+[data-bs-theme="dark"] .home-2-page .h2-chef-narrative-card .h2-section-desc,
+html.dark .home-2-page .h2-chef-narrative-card .h2-section-desc {
   color: #D6EAD3 !important;
+}
+
+.home-2-page .h2-pillar-title,
+.home-2-page .h2-chef-narrative-card .h2-pillar-title {
+  font-size: 1rem !important;
+  color: #0E2E16 !important;
+  font-weight: 700 !important;
+  margin-bottom: 2px !important;
+}
+
+[data-bs-theme="dark"] .home-2-page .h2-pillar-title,
+[data-bs-theme="dark"] .home-2-page .h2-chef-narrative-card .h2-pillar-title {
+  color: #FFFFFF !important;
+}
+
+.home-2-page .h2-pillar-desc,
+.home-2-page .h2-chef-narrative-card .h2-pillar-desc {
+  font-size: 0.88rem !important;
+  line-height: 1.48 !important;
+  color: #314634 !important;
+  font-weight: 500 !important;
+}
+
+[data-bs-theme="dark"] .home-2-page .h2-pillar-desc,
+[data-bs-theme="dark"] .home-2-page .h2-chef-narrative-card .h2-pillar-desc {
+  color: #D0E6CD !important;
+}
+
+.home-2-page .h2-chef-narrative-card .h2-chef-pillar-icon {
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px !important;
+  border-radius: 10px !important;
+  background: #E8F5E9 !important;
+  color: #1E6023 !important;
+  border: 1px solid rgba(46, 101, 24, 0.16) !important;
+  font-size: 1.05rem !important;
+  box-shadow: 0 4px 12px rgba(30, 96, 35, 0.08) !important;
+}
+
+[data-bs-theme="dark"] .home-2-page .h2-chef-narrative-card .h2-chef-pillar-icon,
+html.dark .home-2-page .h2-chef-narrative-card .h2-chef-pillar-icon {
+  background: rgba(168, 230, 207, 0.18) !important;
+  color: #69F0AE !important;
+  border-color: rgba(105, 240, 174, 0.3) !important;
+}
+
+/* Section 3 Equal Height Container Symmetry */
+.home-2-page #chef-story .row {
+  display: flex !important;
+  align-items: stretch !important;
+}
+
+@media (min-width: 992px) {
+  .home-2-page #chef-story .col-lg-6 {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .home-2-page #chef-story .h2-chef-img-wrapper {
+    position: relative !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    flex: 1 1 100% !important;
+    border-radius: var(--radius-xl, 24px) !important;
+    overflow: hidden !important;
+  }
+
+  .home-2-page #chef-story .h2-chef-img-wrapper img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    border-radius: inherit !important;
+  }
+
+  .home-2-page #chef-story .h2-chef-narrative-card {
+    height: 100% !important;
+    min-height: 100% !important;
+    flex: 1 1 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+  }
 }
 
 /* Section 4 Experience Cards */
@@ -12284,6 +12456,14 @@ html.dark .gh-farm-video-section {
   text-shadow: 0 1px 3px rgba(255, 255, 255, 0.85);
 }
 
+.about-nature-page .about-pillars-section .section-desc,
+.about-nature-page .about-timeline-section .section-desc,
+.about-nature-page .about-chefs-section .section-desc,
+.about-nature-page .about-partners-section .section-desc,
+.about-nature-page p.section-desc.fw-bold {
+  font-weight: 700 !important;
+}
+
 [data-bs-theme="dark"] .about-nature-page .section-desc,
 [data-bs-theme="dark"] .about-nature-page p.section-desc {
   color: #E0F5DE !important;
@@ -12508,6 +12688,7 @@ html.dark .gh-farm-video-section {
 
 .about-chefs-section .section-desc {
   font-size: 0.95rem !important;
+  font-weight: 700 !important;
 }
 
 .chef-profile-card h5 {
@@ -17261,6 +17442,69 @@ html.dark .pricing-period {
   -webkit-line-clamp: 3 !important;
   -webkit-box-orient: vertical !important;
   overflow: hidden !important;
+}
+
+/* ==========================================================================
+   11. UNIVERSAL WEBSITE-WIDE CONTENT & FOOTER LAYOUT CONSISTENCY
+   ========================================================================== */
+
+/* 11.1 Consistent Pre-Footer Spacing Across All Pages */
+main > section:last-of-type,
+main > .section-padding:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Standardize content distance above the luxury footer across all content pages */
+main > section:last-of-type:not(.gh-events-nature-section):not(.h2-final-cta-section):not(.about-cta-section) {
+  padding-bottom: clamp(3.5rem, 5vw, 5rem);
+}
+
+main > .container:last-child,
+main > .container-fluid:last-child,
+main > div:last-child {
+  padding-bottom: clamp(3.5rem, 5vw, 5rem);
+  margin-bottom: 0 !important;
+}
+
+/* 11.2 Universal Botanical Footer Header & Link Metrics */
+.gh-footer .footer-col-title,
+.gh-footer h4.footer-col-title {
+  font-family: var(--font-heading) !important;
+  color: var(--gh-footer-heading) !important;
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+  letter-spacing: 0.2px !important;
+  height: 46px !important;
+  display: flex !important;
+  align-items: center !important;
+  margin-top: 0 !important;
+  margin-bottom: 1.35rem !important;
+  line-height: 1.2 !important;
+}
+
+.gh-footer a[href^="tel:"] {
+  color: var(--gh-footer-heading) !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  text-decoration: none !important;
+  letter-spacing: 0.2px !important;
+  transition: color 0.2s ease !important;
+}
+
+.gh-footer a[href^="tel:"]:hover {
+  color: var(--gh-footer-link-hover) !important;
+}
+
+/* 11.3 Uniform Section Container & Heading Metrics */
+.section-header {
+  margin-bottom: clamp(2.5rem, 4vw, 3.5rem) !important;
+}
+
+.section-header h2,
+.section-title,
+h2.display-5 {
+  letter-spacing: -0.02em;
 }
 
 

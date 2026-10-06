@@ -308,21 +308,21 @@
     </section>
   </main>
 
-      <!-- Universal 4-Column Luxury Footer -->
+          <!-- Universal 4-Column Luxury Footer -->
   <footer class="gh-footer">
     <div class="container">
-      <div class="row g-4 g-lg-5 mb-5">
+      <div class="row g-4 g-lg-5 mb-5 align-items-start">
         
         <!-- Column 1: Brand & Tagline -->
-        <div class="col-lg-4 col-md-6">
-          <a class="gh-brand text-white mb-3 d-inline-flex align-items-center" href="index.html" aria-label="Green Haven Restaurant">
+        <div class="col-lg-3 col-md-6 footer-col">
+          <a class="gh-brand mb-3 d-inline-flex align-items-center" href="index.html" aria-label="Green Haven Restaurant">
             <img src="assets/images/logo-g.png" alt="Green Haven Logo" class="gh-brand-logo-img me-2">
-            <span class="gh-brand-text text-white">Green Haven</span>
+            <span class="gh-brand-text">Green Haven</span>
           </a>
           <p class="footer-bio mb-4">
             An organic plant-based restaurant sanctuary celebrating vibrant seasonal gastronomy, regenerative agriculture, and holistic well-being.
           </p>
-          <div class="d-flex gap-2 flex-wrap">
+          <div class="footer-social-group d-flex gap-2 flex-wrap">
             <a href="https://instagram.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
             <a href="https://facebook.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
             <a href="https://youtube.com" target="_blank" rel="noopener" class="footer-social-btn" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
@@ -332,9 +332,9 @@
         </div>
 
         <!-- Column 2: Navigation -->
-        <div class="col-6 col-md-4 col-lg-2">
+        <div class="col-lg-3 col-md-6 footer-col">
           <h4 class="footer-col-title">Navigation</h4>
-          <ul class="list-unstyled d-flex flex-column gap-2 mb-0">
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-0 footer-nav-list">
             <li><a href="index.html" class="footer-link"><i class="bi bi-chevron-right"></i> Home</a></li>
             <li><a href="about.html" class="footer-link"><i class="bi bi-chevron-right"></i> About Us</a></li>
             <li><a href="menu.html" class="footer-link"><i class="bi bi-chevron-right"></i> Our Menu</a></li>
@@ -345,19 +345,30 @@
         </div>
 
         <!-- Column 3: Hours & Location -->
-        <div class="col-6 col-md-4 col-lg-3">
-          <h4 class="footer-col-title">Hours & Location</h4>
-          <p class="text-white-50 small mb-2"><i class="bi bi-geo-alt text-warning me-2"></i> 742 Evergreen Botanical Way, Portland</p>
-          <p class="text-white-50 small mb-2"><i class="bi bi-clock text-warning me-2"></i> Mon - Sun: 8:00 AM - 10:00 PM</p>
-          <p class="text-white-50 small mb-0"><i class="bi bi-telephone text-warning me-2"></i> <a href="tel:+15035550192" class="text-white text-decoration-none" >+1 (503) 555-0192</a></p>
+        <div class="col-lg-3 col-md-6 footer-col">
+          <h4 class="footer-col-title">Hours &amp; Location</h4>
+          <div class="footer-contact-info d-flex flex-column gap-2 mb-0">
+            <p class="text-white-50 small mb-0 d-flex align-items-start gap-2">
+              <i class="bi bi-geo-alt text-warning mt-1 flex-shrink-0"></i>
+              <span>742 Evergreen Botanical Way, Portland</span>
+            </p>
+            <p class="text-white-50 small mb-0 d-flex align-items-center gap-2">
+              <i class="bi bi-clock text-warning flex-shrink-0"></i>
+              <span>Mon - Sun: 8:00 AM - 10:00 PM</span>
+            </p>
+            <p class="text-white-50 small mb-0 d-flex align-items-center gap-2">
+              <i class="bi bi-telephone text-warning flex-shrink-0"></i>
+              <a href="tel:+15035550192" class="text-decoration-none">+1 (503) 555-0192</a>
+            </p>
+          </div>
         </div>
 
         <!-- Column 4: Botanical Digest -->
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-3 col-md-6 footer-col">
           <h4 class="footer-col-title">Botanical Digest</h4>
           <p class="text-white-50 small mb-3">Join our newsletter for seasonal menu previews and chef recipes.</p>
           <form class="newsletter-form d-flex gap-2">
-            <input type="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Your email" required>
+            <input type="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)" class="form-control form-control-sm" placeholder="Your email" required>
             <button type="submit" class="btn btn-accent btn-sm px-3">Join</button>
           </form>
         </div>
@@ -365,13 +376,13 @@
       </div>
 
       <!-- Bottom Line -->
-      <div class="footer-bottom border-top border-secondary border-opacity-25 pt-4 mt-4 text-white-50 small">
+      <div class="footer-bottom border-top pt-4 mt-4 text-white-50 small">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
           <div>&copy; 2026 Green Haven Restaurant. All Rights Reserved.</div>
           <div class="d-flex gap-3">
-            <a href="#privacyPolicy" class="text-white-50 text-decoration-none hover-white gh-legal-link" data-legal="privacy" role="button">Privacy Policy</a>
+            <a href="#privacyPolicy" class="text-decoration-none gh-legal-link" data-legal="privacy" role="button">Privacy Policy</a>
             <span>&bull;</span>
-            <a href="#termsConditions" class="text-white-50 text-decoration-none hover-white gh-legal-link" data-legal="terms" role="button">Terms &amp; Conditions</a>
+            <a href="#termsConditions" class="text-decoration-none gh-legal-link" data-legal="terms" role="button">Terms &amp; Conditions</a>
           </div>
         </div>
       </div>

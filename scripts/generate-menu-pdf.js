@@ -59,13 +59,26 @@ const THEME = {
   slate: '#47423B',          // Editorial descriptions (darkened slightly for clarity)
   tagGreen: '#1B5236',       // Botanical sage for dietary pills
   creamGold: '#F3ECE0',      // Soft tinted card background
-  creamGoldBorder: '#D8CBB6' // Card border
+  creamGoldBorder: '#D8CBB6', // Card border
+  boxDarkBg: '#113622',      // Deep imperial botanical forest green
+  boxDarkGold: '#E8C882',    // Gleaming champagne gold
+  boxDarkWhite: '#FFFFFF',   // Pure high-contrast white
+  boxDarkLinen: '#EAE5DC',   // Warm soft linen ivory
+  boxDarkAmber: '#F3D288'    // Luminous amber-gold for advisory
 };
 
-// Font selection with Unicode Indian Rupee (₹) support
+// Font selection with Unicode Indian Rupee (₹) support & Luxury Fine-Dining Book Serif
 const FONT_SERIF_BOLD = fs.existsSync('C:/Windows/Fonts/timesbd.ttf')
   ? 'C:/Windows/Fonts/timesbd.ttf'
   : (fs.existsSync('C:/Windows/Fonts/georgiab.ttf') ? 'C:/Windows/Fonts/georgiab.ttf' : 'Times-Bold');
+
+const FONT_PALA_ROMAN = fs.existsSync('C:/Windows/Fonts/pala.ttf') ? 'C:/Windows/Fonts/pala.ttf' : (fs.existsSync('C:/Windows/Fonts/georgia.ttf') ? 'C:/Windows/Fonts/georgia.ttf' : 'Times-Roman');
+const FONT_PALA_BOLD = fs.existsSync('C:/Windows/Fonts/palab.ttf') ? 'C:/Windows/Fonts/palab.ttf' : (fs.existsSync('C:/Windows/Fonts/georgiab.ttf') ? 'C:/Windows/Fonts/georgiab.ttf' : 'Times-Bold');
+const FONT_PALA_ITALIC = fs.existsSync('C:/Windows/Fonts/palai.ttf') ? 'C:/Windows/Fonts/palai.ttf' : (fs.existsSync('C:/Windows/Fonts/georgiai.ttf') ? 'C:/Windows/Fonts/georgiai.ttf' : 'Times-Italic');
+
+doc.registerFont('Menu-Roman', FONT_PALA_ROMAN);
+doc.registerFont('Menu-Bold', FONT_PALA_BOLD);
+doc.registerFont('Menu-Italic', FONT_PALA_ITALIC);
 
 // Helper: Paint full page cream background and luxury double borders
 function drawPageBackgroundAndFrame(doc, pageNum) {
@@ -552,86 +565,132 @@ drinksList.forEach(item => {
 
 p4Y += 24;
 
-// Sommelier Pairing Note Box (Enlarged & Prominent)
-const sommelierBoxH = 70;
-doc.rect(CONTENT_X + 15, p4Y, CONTENT_W - 30, sommelierBoxH)
-   .lineWidth(0.6)
-   .strokeColor(THEME.goldMuted)
-   .fillColor(THEME.boxBg)
-   .fillAndStroke();
+// Helper: Paint Authentic Luxury Restaurant Card (Double Gold Border & Corner Diamonds)
+function drawLuxuryMenuCard(doc, x, y, w, h) {
+  // 1. Primary Card Background with Outer Gold Border
+  doc.rect(x, y, w, h)
+     .lineWidth(1.2)
+     .strokeColor(THEME.gold)
+     .fillColor(THEME.boxDarkBg)
+     .fillAndStroke();
 
-doc.font('Helvetica-Bold')
-   .fontSize(11)
-   .fillColor(THEME.gold)
-   .text('SOMMELIER APÉRITIF & BOTANICAL PAIRINGS', CONTENT_X + 25, p4Y + 12, { width: CONTENT_W - 50, align: 'center', characterSpacing: 1.5 });
+  // 2. Inner Delicate Gold Hairline Inset
+  const pad = 4;
+  doc.rect(x + pad, y + pad, w - pad * 2, h - pad * 2)
+     .lineWidth(0.5)
+     .strokeColor('#A08040')
+     .stroke();
 
-doc.font('Times-Italic')
-   .fontSize(12)
-   .fillColor(THEME.slate)
-   .text('Our culinary plates pair exquisitely with our House Wild Hibiscus Kombucha or a crisp glass of Biodynamic Willamette Valley Pét-Nat.', CONTENT_X + 25, p4Y + 28, { width: CONTENT_W - 50, align: 'center', lineGap: 3 });
+  // 3. Four Corner Diamond Florets
+  const cDots = [
+    [x + pad + 3.5, y + pad + 3.5],
+    [x + w - pad - 3.5, y + pad + 3.5],
+    [x + pad + 3.5, y + h - pad - 3.5],
+    [x + w - pad - 3.5, y + h - pad - 3.5]
+  ];
+  cDots.forEach(([cx, cy]) => {
+    doc.save()
+       .translate(cx, cy)
+       .rotate(45)
+       .rect(-1.5, -1.5, 3, 3)
+       .fillColor(THEME.gold)
+       .fill()
+       .restore();
+  });
+}
 
-p4Y += sommelierBoxH + 24;
+const cardX = CONTENT_X + 15;
+const cardW = CONTENT_W - 30;
 
-// Final Restaurant Contact, Address & Reservation Panel (Enlarged, Clear & Formatted)
-const finalBoxH = 155;
+// ==========================================
+// CARD 1: SOMMELIER BOTANICAL PAIRINGS
+// ==========================================
+const sommelierBoxH = 86;
+drawLuxuryMenuCard(doc, cardX, p4Y, cardW, sommelierBoxH);
 
-doc.rect(CONTENT_X + 15, p4Y, CONTENT_W - 30, finalBoxH)
-   .lineWidth(0.8)
-   .strokeColor(THEME.gold)
-   .fillColor(THEME.boxBg)
-   .fillAndStroke();
-
-let fbY = p4Y + 14;
-
-// 1. Sub-brand Header
-doc.font('Helvetica-Bold')
-   .fontSize(11)
-   .fillColor(THEME.gold)
-   .text('GREEN  HAVEN  SANCTUARY  &  RESTAURANT', CONTENT_X + 25, fbY, {
-     width: CONTENT_W - 50,
+let curY = p4Y + 16;
+doc.font('Menu-Bold')
+   .fontSize(11.5)
+   .fillColor(THEME.boxDarkGold)
+   .text('SOMMELIER APERITIF & BOTANICAL PAIRINGS', cardX + 20, curY, {
+     width: cardW - 40,
      align: 'center',
      characterSpacing: 2
+   });
+curY += 20;
+
+doc.font('Menu-Italic')
+   .fontSize(13.5)
+   .fillColor(THEME.boxDarkWhite)
+   .text('Our culinary plates pair exquisitely with our House Wild Hibiscus Kombucha or a crisp glass of Biodynamic Willamette Valley Pet-Nat.', cardX + 20, curY, {
+     width: cardW - 40,
+     align: 'center',
+     lineGap: 3.5
+   });
+
+p4Y += sommelierBoxH + 20;
+
+// ==========================================
+// CARD 2: RESERVATIONS & HOSPITALITY
+// ==========================================
+const finalBoxH = 142;
+drawLuxuryMenuCard(doc, cardX, p4Y, cardW, finalBoxH);
+
+let fbY = p4Y + 16;
+
+// 1. Sub-brand Header
+doc.font('Menu-Bold')
+   .fontSize(11.5)
+   .fillColor(THEME.boxDarkGold)
+   .text('GREEN  HAVEN  SANCTUARY  &  RESTAURANT', cardX + 20, fbY, {
+     width: cardW - 40,
+     align: 'center',
+     characterSpacing: 2.2
    });
 fbY += 20;
 
 // 2. Main Title
-doc.font('Times-Bold')
-   .fontSize(14)
-   .fillColor(THEME.heading)
-   .text('Table Reservations, Private Dining & Plant Catering', CONTENT_X + 25, fbY, {
-     width: CONTENT_W - 50,
+doc.font('Menu-Bold')
+   .fontSize(16.5)
+   .fillColor(THEME.boxDarkWhite)
+   .text('Table Reservations  ·  Private Dining  ·  Plant Catering', cardX + 20, fbY, {
+     width: cardW - 40,
      align: 'center'
    });
 fbY += 22;
 
-// 3. Address & Telephone
-doc.font('Helvetica')
+// 3. Experience Pillars
+const pillarsText = 'Curated Tasting Menus   ·   Garden Banquets   ·   Private Events';
+doc.font('Menu-Bold')
    .fontSize(10.5)
-   .fillColor(THEME.slate)
-   .text('742 Evergreen Botanical Way · Portland, Oregon 97201 · Tel: +1 (503) 555-0192', CONTENT_X + 25, fbY, {
-     width: CONTENT_W - 50,
-     align: 'center'
-   });
-fbY += 16;
-
-// 4. Online Booking & Hours
-doc.font('Helvetica')
-   .fontSize(10.5)
-   .fillColor(THEME.slate)
-   .text('Online Reservations: www.greenhaven-restaurant.com · Hours: Mon–Sun 11:30 AM – 10:00 PM', CONTENT_X + 25, fbY, {
-     width: CONTENT_W - 50,
-     align: 'center'
-   });
-fbY += 24;
-
-// 5. Allergen Advisory Note
-doc.font('Times-Italic')
-   .fontSize(9.5)
-   .fillColor(THEME.gold)
-   .text('Allergen Advisory: Our kitchen is 100% plant-based. Please notify your server of severe nut or seed allergies before dining.', CONTENT_X + 25, fbY, {
-     width: CONTENT_W - 50,
+   .fillColor(THEME.boxDarkGold)
+   .text(pillarsText, cardX + 20, fbY, {
+     width: cardW - 40,
      align: 'center',
-     lineGap: 2.5
+     characterSpacing: 1
+   });
+fbY += 17;
+
+// 5. Hospitality Philosophy
+const philText = 'Dedicated to regenerative organic harvests and mindful botanical gastronomy.';
+doc.font('Menu-Italic')
+   .fontSize(12.5)
+   .fillColor(THEME.boxDarkLinen)
+   .text(philText, cardX + 20, fbY, {
+     width: cardW - 40,
+     align: 'center'
+   });
+fbY += 18;
+
+// 6. Concierge & Direct Inquiries
+const contactText = 'Bespoke Reservations & Concierge: reservations@greenhaven-restaurant.com';
+doc.font('Menu-Roman')
+   .fontSize(10.5)
+   .fillColor(THEME.boxDarkWhite)
+   .text(contactText, cardX + 20, fbY, {
+     width: cardW - 40,
+     align: 'center',
+     characterSpacing: 0.5
    });
 
 

@@ -75,6 +75,37 @@
       const cleanEmail = String(userData.email || '').trim().toLowerCase();
       const users = this.getUsers();
 
+      // Strict Name validation: letters and spaces only
+      const fullName = (userData.name || `${userData.firstName || ''} ${userData.lastName || ''}`).trim();
+      const nameRegex = /^[A-Za-z]+(?:\s[A-Za-z]+)*$/;
+      if (!fullName || fullName.length < 2 || !nameRegex.test(fullName)) {
+        return {
+          success: false,
+          error: 'invalid_name',
+          message: 'Name can only contain letters and spaces (no numbers or special characters).'
+        };
+      }
+
+      // Strict Email validation
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!cleanEmail || !emailRegex.test(cleanEmail) || /\s/.test(cleanEmail)) {
+        return {
+          success: false,
+          error: 'invalid_email',
+          message: 'Please provide a valid email address (e.g. name@example.com).'
+        };
+      }
+
+      // Strict Phone validation if provided
+      const cleanPhone = String(userData.phone || '').trim();
+      if (cleanPhone && !/^\d{10}$/.test(cleanPhone)) {
+        return {
+          success: false,
+          error: 'invalid_phone',
+          message: 'Phone number must contain numbers only (exactly 10 digits).'
+        };
+      }
+
       if (users.some(u => u.email.trim().toLowerCase() === cleanEmail)) {
         return {
           success: false,
@@ -83,14 +114,13 @@
         };
       }
 
-      const fullName = (userData.name || `${userData.firstName || ''} ${userData.lastName || ''}`).trim();
       const newUser = {
         name: fullName,
         firstName: String(userData.firstName || (fullName.split(' ')[0] || '')).trim(),
         lastName: String(userData.lastName || (fullName.split(' ').slice(1).join(' ') || '')).trim(),
         email: cleanEmail,
         password: String(userData.password || ''),
-        phone: String(userData.phone || '').trim(),
+        phone: cleanPhone,
         diet: String(userData.diet || '100% Plant-Based / Vegan'),
         createdAt: new Date().toISOString()
       };
@@ -1203,6 +1233,25 @@
     },
 
     placeOrder(orderDetails) {
+      const cust = orderDetails.customer || {};
+      const name = String(cust.name || '').trim();
+      const phone = String(cust.phone || '').trim();
+      const email = String(cust.email || '').trim();
+
+      const nameRegex = /^[A-Za-z]+(?:\s[A-Za-z]+)*$/;
+      const phoneRegex = /^\d{10}$/;
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+      if (!name || name.length < 2 || !nameRegex.test(name)) {
+        throw new Error('Invalid customer name. Name must contain letters and spaces only.');
+      }
+      if (!phone || !phoneRegex.test(phone)) {
+        throw new Error('Invalid customer phone number. Must contain numbers only (exactly 10 digits).');
+      }
+      if (!email || !emailRegex.test(email) || /\s/.test(email)) {
+        throw new Error('Invalid customer email address.');
+      }
+
       const orders = this.getOrders();
       const orderId = this.generateOrderId();
       const now = new Date();
@@ -1216,7 +1265,11 @@
         deliveryFee: parseFloat(orderDetails.deliveryFee) || 0,
         tax: parseFloat(orderDetails.tax) || 0,
         total: parseFloat(orderDetails.total) || 0,
-        customer: orderDetails.customer || {},
+        customer: {
+          name: name,
+          phone: phone,
+          email: email
+        },
         deliveryAddress: orderDetails.deliveryAddress || {},
         paymentMethod: orderDetails.paymentMethod || 'Credit Card',
         status: 'Confirmed', // Confirmed, Preparing, Out for Delivery, Delivered
