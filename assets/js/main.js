@@ -894,8 +894,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Responsive Placeholder for Menu Search Input (removes Truffle, Avocado, Acai, etc. in mobile view only)
+  function updateMenuSearchPlaceholder() {
+    if (!luxurySearchInput) return;
+    if (window.innerWidth <= 767.98) {
+      luxurySearchInput.placeholder = 'Search dishes...\u200E';
+    } else {
+      luxurySearchInput.placeholder = 'Search dishes (e.g., Truffle, Avocado, Acai, Matcha, Elixir, Scallops)...\u200E';
+    }
+  }
+
   if (luxurySearchInput) {
     luxurySearchInput.addEventListener('input', filterLuxuryMenu);
+    updateMenuSearchPlaceholder();
+    window.addEventListener('resize', updateMenuSearchPlaceholder);
   }
 
   if (btnClearMenuSearch) {
@@ -2630,11 +2642,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="modal-footer border-top py-3 px-4 d-flex justify-content-between align-items-center flex-wrap gap-2">
               <span class="small text-muted"><i class="bi bi-arrow-repeat text-success me-1"></i> Direct Farm-to-Table Supply Chain</span>
-              <div class="d-flex gap-2">
-                <a href="menu.html" class="btn btn-sm btn-primary px-3 rounded-pill">
-                  <i class="bi bi-book-half me-1"></i> View Dishes Featuring This Farm
+              <div class="d-flex flex-column flex-sm-row gap-2 w-100 w-sm-auto align-items-stretch align-items-sm-center">
+                <a href="menu.html" class="btn btn-sm btn-primary px-3 rounded-pill text-center">
+                  <i class="bi bi-book-half me-1 d-none d-md-inline-block"></i> View Dishes Featuring This Farm
                 </a>
-                <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3 text-center" data-bs-dismiss="modal">Close</button>
               </div>
             </div>
           </div>
@@ -2799,7 +2811,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-4" id="ghLegalModalBody"></div>
-            <div class="modal-footer border-top py-2.5 px-4 d-flex justify-content-between">
+            <div class="modal-footer border-top py-2.5 px-4 d-flex justify-content-between align-items-center flex-wrap gap-2">
               <span class="small text-muted">Green Haven Hospitality Desk</span>
               <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3" data-bs-dismiss="modal">Close</button>
             </div>

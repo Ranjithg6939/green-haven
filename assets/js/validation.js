@@ -122,6 +122,16 @@
   function setFieldValid(input) {
     if (!input) return;
     clearFieldError(input);
+    // Suppress is-valid class on password fields and login form inputs to avoid tick icons
+    if (
+      input.type === 'password' ||
+      input.classList.contains('gh-password-input') ||
+      (input.form && input.form.id === 'loginForm') ||
+      (typeof input.closest === 'function' && (input.closest('#loginForm') || input.closest('.gh-password-group')))
+    ) {
+      input.classList.remove('is-valid');
+      return;
+    }
     // Only show green is-valid if form has been interacted with
     if (input.form && (input.form.classList.contains('was-validated') || input.value.trim().length > 0)) {
       input.classList.add('is-valid');

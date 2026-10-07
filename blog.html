@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
 <head>
   <meta charset="UTF-8">
@@ -230,16 +230,17 @@
                 <p class="text-muted mb-4 lead fs-6 fw-bold">
                   <strong>Explore how live active cultures and cold-pressed lactic fermentation transform raw organic cashews into artisanal cave-ripened cheese.</strong>
                 </p>
-                <div class="d-flex align-items-center justify-content-between pt-3 border-top">
-                  <div class="d-flex align-items-center gap-2">
-                    <img src="assets/images/elena-rostova.jpg" alt="Chef Elena Rostova" class="rounded-circle shadow-sm" style="width: 44px; height: 44px; object-fit: cover;">
-                    <div>
-                      <span class="fw-bold small d-block">Chef Elena Rostova</span>
-                      <span class="text-muted extra-small">Head of Pastry &amp; Fermentation</span>
+                <div class="featured-card-footer d-flex align-items-center justify-content-between pt-3 border-top gap-3 flex-wrap flex-sm-nowrap">
+                  <div class="d-flex align-items-center gap-3 min-w-0">
+                    <img src="assets/images/elena-rostova.jpg" alt="Chef Elena Rostova" class="rounded-circle shadow-sm flex-shrink-0" style="width: 44px; height: 44px; object-fit: cover;">
+                    <div class="lh-sm">
+                      <span class="fw-bold small d-block text-dark text-nowrap">Chef Elena Rostova</span>
+                      <span class="text-muted extra-small text-nowrap">Head of Pastry &amp; Fermentation</span>
                     </div>
                   </div>
-                  <a href="#article=cashew-cheese" data-article-key="cashew-cheese" class="btn btn-primary rounded-pill px-4 btn-open-article">
-                    Read Article <i class="bi bi-arrow-right ms-1"></i>
+                  <a href="#article=cashew-cheese" data-article-key="cashew-cheese" class="btn btn-primary btn-sm rounded-pill px-3 py-2 text-nowrap flex-shrink-0 btn-open-article shadow-none d-inline-flex align-items-center gap-2">
+                    <span>Read Article</span>
+                    <i class="bi bi-arrow-right"></i>
                   </a>
                 </div>
               </div>
@@ -745,8 +746,8 @@
 
             <!-- Pull Quote -->
             <div class="p-4 p-md-5 my-4 rounded-4 border-start border-4 border-success bg-light bg-opacity-75">
-              <blockquote class="blockquote mb-2 fst-italic font-serif fs-5 text-dark" id="modalArticleQuote">"..."</blockquote>
-              <figcaption class="blockquote-footer text-success fw-bold mb-0" id="modalArticleQuoteAuthor">Chef Elena Rostova</figcaption>
+              <blockquote class="blockquote mb-0 pb-3 fst-italic font-serif fs-5 text-dark" id="modalArticleQuote">"..."</blockquote>
+              <figcaption class="blockquote-footer text-success fw-bold pt-3 mb-0 border-top border-success-subtle" id="modalArticleQuoteAuthor">Chef Elena Rostova</figcaption>
             </div>
 
             <!-- Author Bio Plinth -->
@@ -760,12 +761,7 @@
             </div>
           </div>
         </div>
-        <div class="modal-footer border-top py-3 px-4 d-flex justify-content-between">
-          <div class="d-flex gap-2">
-            <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill" onclick="if(navigator.clipboard){navigator.clipboard.writeText(window.location.href); this.innerHTML='<i class=\'bi bi-check2\'></i> Copied!'; setTimeout(()=>this.innerHTML='<i class=\'bi bi-share\'></i> Share Article', 2000);}">
-              <i class="bi bi-share"></i> Share Article
-            </button>
-          </div>
+        <div class="modal-footer border-top py-3 px-4 d-flex justify-content-end">
           <button type="button" class="btn btn-primary btn-sm rounded-pill px-4" data-bs-dismiss="modal">Close Reading</button>
         </div>
       </div>

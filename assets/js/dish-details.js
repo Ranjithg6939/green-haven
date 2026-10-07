@@ -600,7 +600,10 @@
 
     // Price
     const priceEl = document.getElementById('dishModalPrice');
-    if (priceEl) priceEl.textContent = `₹${Math.round(dish.price).toLocaleString('en-IN')}`;
+    if (priceEl) {
+      const formattedPrice = Math.round(dish.price).toLocaleString('en-IN');
+      priceEl.innerHTML = `<span class="dish-price-currency">₹</span><span class="dish-price-val">${formattedPrice}</span>`;
+    }
 
     // Prep time
     const prepEl = document.getElementById('dishModalPrepTime');
@@ -670,6 +673,7 @@
     // Reset special instructions
     const instEl = document.getElementById('dishModalInstructions');
     if (instEl) instEl.value = '';
+    updateInstructionsPlaceholder();
 
     // Update Favorite Button State
     updateFavButtonState(dish.id);
@@ -796,7 +800,7 @@
                         <span class="text-muted extra-small ms-1">(<span id="dishModalReviewsCount">142</span> reviews)</span>
                       </div>
                     </div>
-                    <div class="dish-modal-price text-success fw-bold font-serif" id="dishModalPrice">₹0</div>
+                    <div class="dish-modal-price text-success fw-bold font-sans" id="dishModalPrice">₹0</div>
                   </div>
 
                   <!-- Short Premium Description -->
@@ -890,9 +894,30 @@
   }
 
   /**
+   * Dynamically updates instructions placeholder according to viewport:
+   * Removes "extra herbs" on mobile view only (<= 767.98px)
+   */
+  function updateInstructionsPlaceholder() {
+    const instEl = document.getElementById('dishModalInstructions');
+    if (!instEl) return;
+    if (window.innerWidth <= 767.98) {
+      instEl.placeholder = 'e.g., Dressing on side...';
+    } else {
+      instEl.placeholder = 'e.g., Dressing on side, extra herbs...';
+    }
+  }
+
+  /**
    * Bind event handlers inside the modal (Quantity, Favorite, Add to Cart)
    */
   function bindModalInternalEvents() {
+    updateInstructionsPlaceholder();
+    window.addEventListener('resize', updateInstructionsPlaceholder);
+    const modalEl = document.getElementById('dishDetailsModal');
+    if (modalEl) {
+      modalEl.addEventListener('show.bs.modal', updateInstructionsPlaceholder);
+    }
+
     const qtyMinus = document.getElementById('dishModalQtyMinus');
     const qtyPlus = document.getElementById('dishModalQtyPlus');
     const qtyInput = document.getElementById('dishModalQtyInput');
@@ -1062,7 +1087,10 @@
     }
 
     const priceEl = document.querySelector('.dish-price-large');
-    if (priceEl) priceEl.textContent = `₹${Math.round(dish.price).toLocaleString('en-IN')}`;
+    if (priceEl) {
+      const formattedPrice = Math.round(dish.price).toLocaleString('en-IN');
+      priceEl.innerHTML = `<span class="dish-price-currency">₹</span><span class="dish-price-val">${formattedPrice}</span>`;
+    }
 
     const descEl = document.querySelector('.dish-lead-desc');
     if (descEl) descEl.textContent = dish.description;

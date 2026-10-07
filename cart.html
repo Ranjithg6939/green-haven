@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
 <head>
   <meta charset="UTF-8">
@@ -212,15 +212,15 @@
         <div id="activeCartView" class="row g-5">
           <!-- Cart Items Table -->
           <div class="col-lg-8">
-            <div class="p-4 rounded-4 bg-card border shadow-sm mb-4">
+            <div class="cart-items-card p-3 p-sm-4 rounded-4 bg-card border shadow-sm mb-4">
               <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
                 <h4 class="fw-bold mb-0">Ordered Items (<span id="cartTotalItemsCount">0</span>)</h4>
-                <button type="button" class="btn btn-sm btn-outline-danger" id="btnClearCart">
-                  <i class="bi bi-trash3 me-1"></i> Clear Cart
+                <button type="button" class="btn btn-sm btn-outline-danger" id="btnClearCart" title="Clear Cart" aria-label="Clear Cart">
+                  <i class="bi bi-trash3 me-0 me-sm-1"></i><span class="d-none d-sm-inline"> Clear Cart</span>
                 </button>
               </div>
 
-              <div class="table-responsive">
+              <div class="table-responsive cart-table-responsive">
                 <table class="cart-table">
                   <thead>
                     <tr>
@@ -236,14 +236,37 @@
                   </tbody>
                 </table>
               </div>
+
+              <!-- View Menu Showcase Banner (Fills content space seamlessly without individual dish suggestions) -->
+              <div class="cart-menu-banner mt-4 p-3 p-sm-4 rounded-4 border">
+                <div class="row align-items-center g-3">
+                  <div class="col-sm-8">
+                    <span class="badge bg-success-subtle text-success fw-bold px-2.5 py-1 rounded-pill extra-small mb-2">
+                      <i class="bi bi-flower1 me-1"></i> Seasonal Botanical Gastronomy
+                    </span>
+                    <h5 class="fw-bold font-serif mb-1.5" style="color: var(--gh-heading-color, #1A3018);">
+                      Explore Our Full Culinary Menu
+                    </h5>
+                    <p class="text-muted small mb-0" style="line-height: 1.55;">
+                      Discover over 20+ organic plant-based creations, artisanal starters, farm-fresh bowls, wood-fired mains, and cold-pressed elixirs.
+                    </p>
+                  </div>
+                  <div class="col-sm-4 text-sm-end">
+                    <a href="menu.html" class="btn btn-primary btn-sm px-3.5 py-2 rounded-pill fw-semibold shadow-sm w-100 w-sm-auto d-inline-flex align-items-center justify-content-center gap-2">
+                      <span>View Menu</span>
+                      <i class="bi bi-arrow-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <!-- Return to Shopping Link -->
-            <div class="d-flex justify-content-between align-items-center">
-              <a href="menu.html" class="btn btn-outline-primary">
+            <div class="cart-bottom-actions d-flex flex-column flex-sm-row justify-content-between align-items-center gap-3 pt-2">
+              <a href="menu.html" class="btn btn-outline-primary btn-add-more-dishes rounded-pill text-center">
                 <i class="bi bi-arrow-left me-1"></i> Add More Dishes
               </a>
-              <span class="small text-muted"><i class="bi bi-shield-check text-success me-1"></i> Organic certified ingredients</span>
+              <span class="small text-muted text-nowrap d-inline-flex align-items-center"><i class="bi bi-shield-check text-success me-1"></i> Organic certified ingredients</span>
             </div>
           </div>
 
@@ -265,18 +288,20 @@
               <div class="summary-row">
                 <div class="d-flex align-items-center gap-1">
                   <span class="text-muted">Delivery Fee</span>
-                  <i class="bi bi-info-circle text-muted" title="Free delivery on orders over ₹999" style="font-size: 0.8rem; cursor: pointer;"></i>
+                  <button type="button" class="btn p-0 border-0 bg-transparent text-muted delivery-info-btn" data-bs-toggle="modal" data-bs-target="#ghDeliveryFeeModal" title="Click to view Delivery Fee details" aria-label="Delivery Fee Details" style="font-size: 0.85rem; line-height: 1;">
+                    <i class="bi bi-info-circle text-success" style="cursor: pointer;"></i>
+                  </button>
                 </div>
-                <span class="fw-semibold" id="cartDeliveryText">₹99</span>
+                <span class="fw-semibold" id="cartDeliveryText">₹ 99</span>
               </div>
 
               <div id="freeDeliveryNotice" class="p-2 rounded-3 bg-success-subtle text-success small mb-3 text-center" style="display: none;">
-                <i class="bi bi-gift-fill me-1"></i> You unlocked <strong>FREE Delivery</strong>!
+                <i class="bi bi-gift-fill me-1.5"></i> You unlocked&nbsp;<strong class="text-success fw-bold">FREE Delivery!</strong>
               </div>
 
               <div class="summary-row total">
                 <span>Grand Total</span>
-                <span class="text-success" id="cartGrandTotalText">₹0</span>
+                <span class="text-success cart-grand-total-amount" id="cartGrandTotalText">₹ 0</span>
               </div>
 
               <!-- Promo Code Demo Box -->
@@ -394,6 +419,72 @@
     <i class="bi bi-arrow-up" aria-hidden="true"></i>
   </button>
 
+  <!-- Luxury Clear Cart Confirmation Modal -->
+  <div class="modal fade" id="ghClearCartModal" tabindex="-1" aria-labelledby="ghClearCartModalLabel" aria-hidden="true" data-bs-backdrop="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 420px;">
+      <div class="modal-content gh-dialog-card border-0 shadow-lg position-relative overflow-hidden" style="border-radius: 24px; background: var(--gh-surface, #FFFFFF);">
+        <button type="button" class="btn-close position-absolute top-0 end-0 m-3 z-3" data-bs-dismiss="modal" aria-label="Close" style="font-size: 0.85rem;"></button>
+        <div class="modal-body text-center p-4 p-sm-4 pt-sm-4">
+          <div class="gh-dialog-icon-wrap mx-auto mb-3 d-inline-flex align-items-center justify-content-center" style="width: 64px; height: 64px; border-radius: 50%; background: rgba(220, 53, 69, 0.1); color: #dc3545; font-size: 1.75rem;">
+            <i class="bi bi-trash3"></i>
+          </div>
+          <h4 class="fw-bold mb-2 font-serif" id="ghClearCartModalLabel" style="color: var(--gh-heading-color, #1A3018); font-size: 1.35rem;">Clear Your Cart?</h4>
+          <p class="text-muted small mb-4 px-2" style="line-height: 1.5;">
+            Are you sure you want to remove all dishes from your dining basket? This action cannot be undone.
+          </p>
+          <div class="d-flex gap-2 justify-content-center">
+            <button type="button" class="btn btn-outline-secondary px-4 py-2 rounded-pill flex-grow-1 fw-semibold" data-bs-dismiss="modal" style="font-size: 0.92rem;">
+              Cancel
+            </button>
+            <button type="button" class="btn btn-danger px-4 py-2 rounded-pill flex-grow-1 fw-semibold shadow-sm" id="btnConfirmClearCart" style="font-size: 0.92rem; background: #dc3545; border-color: #dc3545;">
+              <i class="bi bi-trash3 me-1"></i> Clear Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delivery Fee Breakdown Details Modal -->
+  <div class="modal fade" id="ghDeliveryFeeModal" tabindex="-1" aria-labelledby="ghDeliveryFeeModalLabel" aria-hidden="true" data-bs-backdrop="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 440px;">
+      <div class="modal-content gh-dialog-card border-0 shadow-lg position-relative overflow-hidden" style="border-radius: 24px; background: var(--gh-surface, #FFFFFF);">
+        <button type="button" class="btn-close position-absolute top-0 end-0 m-3 z-3" data-bs-dismiss="modal" aria-label="Close" style="font-size: 0.85rem;"></button>
+        <div class="modal-body p-4 p-sm-4 text-start">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div class="d-inline-flex align-items-center justify-content-center flex-shrink-0" style="width: 52px; height: 52px; border-radius: 50%; background: rgba(46, 101, 24, 0.1); color: var(--gh-primary, #197a48); font-size: 1.5rem;">
+              <i class="bi bi-truck"></i>
+            </div>
+            <div>
+              <h5 class="fw-bold mb-0 font-serif" id="ghDeliveryFeeModalLabel" style="color: var(--gh-heading-color, #1A3018);">Delivery Fee Details</h5>
+              <span class="badge bg-success-subtle text-success extra-small fw-semibold mt-0.5">Eco-Friendly Electric Fleet</span>
+            </div>
+          </div>
+          
+          <div class="p-3 rounded-3 mb-3" style="background: var(--gh-surface-alt, #FAF8F5); border: 1px solid var(--gh-border, rgba(45, 42, 38, 0.08));">
+            <div class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom">
+              <span class="text-muted small">Standard Culinary Delivery</span>
+              <span class="fw-bold text-dark small font-sans">₹ 99</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="text-muted small">Free Delivery Threshold</span>
+              <span class="fw-bold text-success small font-sans">Orders above ₹ 999</span>
+            </div>
+          </div>
+
+          <div class="small text-muted mb-3" style="line-height: 1.55;">
+            <p class="mb-2"><i class="bi bi-check-circle-fill text-success me-1.5"></i> <strong>Zero-Emissions Delivery:</strong> Dispatched in temperature-controlled, reusable thermal containers to preserve peak flavor.</p>
+            <p class="mb-0"><i class="bi bi-gift-fill text-success me-1.5"></i> Add more organic delicacies to unlock <strong>FREE Delivery</strong> once your subtotal exceeds ₹ 999.</p>
+          </div>
+
+          <button type="button" class="btn btn-primary w-100 py-2.5 rounded-pill fw-semibold shadow-sm" data-bs-dismiss="modal">
+            Understood
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="assets/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/shop.js"></script>
@@ -433,24 +524,27 @@
             <tr>
               <td>
                 <div class="d-flex align-items-center gap-3">
-                  <img src="${item.image}" alt="${item.name}" class="cart-item-img shadow-sm">
-                  <div>
-                    <h6 class="fw-bold mb-0">${item.name}</h6>
-                    <span class="badge bg-secondary-subtle text-secondary small">${item.category || 'Mains'}</span>
+                  <img src="${item.image}" alt="${item.name}" class="cart-item-img shadow-sm" onerror="this.src='https://images.unsplash.com/photo-1540420773420-3366772f4999?q=80&w=600&auto=format&fit=crop'">
+                  <div class="cart-item-details">
+                    <h6 class="fw-bold mb-1 cart-item-title">${item.name}</h6>
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="badge bg-secondary-subtle text-secondary small">${item.category || 'Mains'}</span>
+                      <span class="cart-item-unit-price d-md-none text-muted small">₹${Math.round(item.price).toLocaleString('en-IN')} each</span>
+                    </div>
                   </div>
                 </div>
               </td>
-              <td class="fw-semibold">₹${Math.round(item.price).toLocaleString('en-IN')}</td>
-              <td class="text-center">
+              <td class="fw-semibold cart-col-price">₹${Math.round(item.price).toLocaleString('en-IN')}</td>
+              <td class="text-center cart-col-qty">
                 <div class="qty-stepper mx-auto">
-                  <button type="button" class="qty-btn" onclick="handleQtyChange('${item.id}', -1)">-</button>
-                  <input type="text" class="qty-input" value="${item.qty}" readonly>
-                  <button type="button" class="qty-btn" onclick="handleQtyChange('${item.id}', 1)">+</button>
+                  <button type="button" class="qty-btn" onclick="handleQtyChange('${item.id}', -1)" aria-label="Decrease quantity">−</button>
+                  <input type="text" class="qty-input" value="${item.qty}" readonly aria-label="Quantity">
+                  <button type="button" class="qty-btn" onclick="handleQtyChange('${item.id}', 1)" aria-label="Increase quantity">+</button>
                 </div>
               </td>
-              <td class="text-end fw-bold text-success">₹${Math.round(item.price * item.qty).toLocaleString('en-IN')}</td>
-              <td class="text-end">
-                <button type="button" class="btn-remove-item" onclick="handleRemoveItem('${item.id}')" title="Remove item">
+              <td class="text-end fw-bold text-success cart-col-subtotal">₹${Math.round(item.price * item.qty).toLocaleString('en-IN')}</td>
+              <td class="text-end cart-col-remove">
+                <button type="button" class="btn-remove-item" onclick="handleRemoveItem('${item.id}')" title="Remove item" aria-label="Remove ${item.name}">
                   <i class="bi bi-trash3"></i>
                 </button>
               </td>
@@ -464,10 +558,10 @@
         let total = (subtotal + tax + deliveryFee) - discountAmount;
         if (total < 0) total = 0;
 
-        if (cartSubtotalText) cartSubtotalText.textContent = `₹${Math.round(subtotal).toLocaleString('en-IN')}`;
-        if (cartTaxText) cartTaxText.textContent = `₹${Math.round(tax).toLocaleString('en-IN')}`;
+        if (cartSubtotalText) cartSubtotalText.textContent = `₹\u00A0${Math.round(subtotal).toLocaleString('en-IN')}`;
+        if (cartTaxText) cartTaxText.textContent = `₹\u00A0${Math.round(tax).toLocaleString('en-IN')}`;
         if (cartDeliveryText) {
-          cartDeliveryText.textContent = deliveryFee === 0 ? 'FREE' : `₹${Math.round(deliveryFee).toLocaleString('en-IN')}`;
+          cartDeliveryText.textContent = deliveryFee === 0 ? 'FREE' : `₹\u00A0${Math.round(deliveryFee).toLocaleString('en-IN')}`;
           if (deliveryFee === 0) {
             cartDeliveryText.classList.add('text-success', 'fw-bold');
           } else {
@@ -477,7 +571,7 @@
         if (freeDeliveryNotice) {
           freeDeliveryNotice.style.display = (subtotal >= GH_Cart.FREE_DELIVERY_THRESHOLD) ? 'block' : 'none';
         }
-        if (cartGrandTotalText) cartGrandTotalText.textContent = `₹${Math.round(total).toLocaleString('en-IN')}`;
+        if (cartGrandTotalText) cartGrandTotalText.textContent = `₹\u00A0${Math.round(total).toLocaleString('en-IN')}`;
       }
 
       window.renderCartPage = renderCartPage;
@@ -493,11 +587,38 @@
         renderCartPage();
       };
 
-      if (btnClearCart) {
+      // Professional Clear Cart Confirmation Modal & Toast
+      const clearCartModalEl = document.getElementById('ghClearCartModal');
+      const btnConfirmClearCart = document.getElementById('btnConfirmClearCart');
+
+      if (btnClearCart && clearCartModalEl) {
         btnClearCart.addEventListener('click', () => {
-          if (confirm('Are you sure you want to clear your cart?')) {
+          if (GH_Cart.getCart().length === 0) {
+            if (window.showToast) {
+              window.showToast.info('Cart Empty', 'Your dining cart is already empty.');
+            }
+            return;
+          }
+          if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+            const modal = bootstrap.Modal.getInstance(clearCartModalEl) || new bootstrap.Modal(clearCartModalEl);
+            modal.show();
+          } else {
             GH_Cart.clearCart();
             renderCartPage();
+          }
+        });
+      }
+
+      if (btnConfirmClearCart && clearCartModalEl) {
+        btnConfirmClearCart.addEventListener('click', () => {
+          GH_Cart.clearCart();
+          renderCartPage();
+          if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+            const modal = bootstrap.Modal.getInstance(clearCartModalEl);
+            if (modal) modal.hide();
+          }
+          if (window.showToast) {
+            window.showToast.success('Cart Cleared', 'All dishes have been removed from your dining basket.');
           }
         });
       }
@@ -545,6 +666,18 @@
           }
         });
       }
+
+      // Responsive placeholder for mobile view (remove (e.g. VEGAN10) on mobile)
+      function updateCouponPlaceholder() {
+        if (!couponCode) return;
+        if (window.innerWidth <= 767.98) {
+          couponCode.setAttribute('placeholder', 'Promo code');
+        } else {
+          couponCode.setAttribute('placeholder', 'Promo code (e.g. VEGAN10)');
+        }
+      }
+      updateCouponPlaceholder();
+      window.addEventListener('resize', updateCouponPlaceholder);
 
       renderCartPage();
     });

@@ -917,13 +917,22 @@
     },
 
     getTax() {
-      return this.getSubtotal() * this.TAX_RATE;
+      const discountedSubtotal = Math.max(0, this.getSubtotal() - this.getDiscount());
+      return discountedSubtotal * this.TAX_RATE;
+    },
+
+    appliedCoupon: null,
+
+    getDiscount() {
+      if (!this.appliedCoupon) return 0;
+      return Math.round(this.getSubtotal() * (this.appliedCoupon.discountPct / 100));
     },
 
     getTotal() {
       const subtotal = this.getSubtotal();
       if (subtotal === 0) return 0;
-      return subtotal + this.getDeliveryFee() + this.getTax();
+      const discount = this.getDiscount();
+      return Math.max(0, subtotal - discount + this.getDeliveryFee() + this.getTax());
     },
 
     updateBadges() {
@@ -1048,18 +1057,30 @@
       const cartBody = drawer.querySelector('#ghCartBody') || document.getElementById('ghCartBody');
       cartBody?.addEventListener('click', (e) => {
         const btn = e.target.closest('[data-action]');
-        if (!btn) return;
-        const action = btn.getAttribute('data-action');
-        const id = btn.getAttribute('data-id');
+        if (btn) {
+          const action = btn.getAttribute('data-action');
+          const id = btn.getAttribute('data-id');
 
-        if (action === 'plus') {
-          this.updateQuantity(id, 1);
-        } else if (action === 'minus') {
-          this.updateQuantity(id, -1);
-        } else if (action === 'remove') {
-          this.removeFromCart(id);
-        } else if (action === 'continue-shopping') {
-          this.closeDrawer();
+          if (action === 'plus') {
+            this.updateQuantity(id, 1);
+            this.renderDrawer();
+          } else if (action === 'minus') {
+            this.updateQuantity(id, -1);
+            this.renderDrawer();
+          } else if (action === 'remove') {
+            this.removeFromCart(id);
+            this.renderDrawer();
+          } else if (action === 'continue-shopping') {
+            this.closeDrawer();
+          } else if (action === 'quick-add') {
+            const name = btn.getAttribute('data-name');
+            const price = parseFloat(btn.getAttribute('data-price')) || 0;
+            const image = btn.getAttribute('data-image');
+            const category = btn.getAttribute('data-category');
+            this.addToCart({ id, name, price, image, category }, 1, false);
+            this.renderDrawer();
+          }
+          return;
         }
       });
 
@@ -1142,20 +1163,81 @@
       const deliveryFill = document.getElementById('ghCartDeliveryFill');
       if (deliveryMsg && deliveryFill) {
         if (subtotal >= this.FREE_DELIVERY_THRESHOLD) {
-          deliveryMsg.innerHTML = '<span><i class="bi bi-gift-fill text-success me-1"></i> You unlocked <strong>FREE Delivery!</strong></span>';
+          deliveryMsg.innerHTML = '<span class="d-flex align-items-center gap-2"><i class="bi bi-gift-fill text-success fs-6"></i><span>You unlocked&nbsp;<strong class="text-success fw-bold">FREE Delivery!</strong></span></span>';
           deliveryFill.style.width = '100%';
         } else {
           const diff = Math.round(this.FREE_DELIVERY_THRESHOLD - subtotal).toLocaleString('en-IN');
           const pct = Math.min(100, Math.round((subtotal / this.FREE_DELIVERY_THRESHOLD) * 100));
-          deliveryMsg.innerHTML = `<span>Add <strong>₹${diff}</strong> more for <strong>FREE Delivery</strong></span>`;
+          deliveryMsg.innerHTML = `<span class="d-flex align-items-center justify-content-between w-100"><span>Add&nbsp;<strong class="text-success fw-bold">₹${diff}</strong>&nbsp;more for&nbsp;<strong class="text-success fw-bold">FREE Delivery</strong></span><span class="gh-cart-delivery-pct">${pct}%</span></span>`;
           deliveryFill.style.width = `${pct}%`;
         }
       }
+
+      const PAIRINGS = [
+        {
+          id: 'dish-17',
+          name: 'Emerald Chlorophyll Elixir',
+          category: 'Cold-Pressed',
+          price: 299,
+          image: 'assets/img/dishes/emerald-chlorophyll-elixir.jpg'
+        },
+        {
+          id: 'dish-18',
+          name: 'Golden Turmeric Tonic',
+          category: 'Elixir',
+          price: 249,
+          image: 'assets/img/dishes/golden-turmeric-adaptogen-tonic.jpg'
+        },
+        {
+          id: 'dish-15',
+          name: 'Raw Cacao Espresso Torte',
+          category: 'Desserts',
+          price: 429,
+          image: 'assets/img/dishes/raw-dark-cacao-espresso-torte.jpg'
+        },
+        {
+          id: 'dish-6',
+          name: 'Wild Herb Flatbread',
+          category: 'Starters',
+          price: 549,
+          image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=800&auto=format&fit=crop'
+        }
+      ];
+
+      const availablePairings = PAIRINGS.filter(p => !items.some(i => String(i.id) === String(p.id))).slice(0, 3);
+
+      const pairingsHtml = availablePairings.length > 0 ? `
+        <div class="gh-cart-pairings-section mt-3 pt-3">
+          <div class="d-flex align-items-center justify-content-between mb-2">
+            <span class="gh-cart-pairings-title">
+              <i class="bi bi-stars text-warning me-1"></i> Complete Your Meal
+            </span>
+            <span class="text-muted small">Recommended</span>
+          </div>
+          <div class="gh-cart-pairings-list">
+            ${availablePairings.map(pairing => `
+              <div class="gh-cart-pairing-card">
+                <img src="${escapeHtml(pairing.image)}" alt="${escapeHtml(pairing.name)}" class="gh-cart-pairing-img" onerror="this.src='https://images.unsplash.com/photo-1540420773420-3366772f4999?q=80&w=600&auto=format&fit=crop'">
+                <div class="gh-cart-pairing-info">
+                  <div class="gh-cart-pairing-name">${escapeHtml(pairing.name)}</div>
+                  <div class="gh-cart-pairing-price">₹${pairing.price}</div>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-success rounded-pill gh-cart-pairing-btn" data-action="quick-add" data-id="${pairing.id}" data-name="${escapeHtml(pairing.name)}" data-price="${pairing.price}" data-image="${escapeHtml(pairing.image)}" data-category="${pairing.category}">
+                  + Add
+                </button>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      ` : '';
 
       cartBody.innerHTML = `
         <div class="gh-cart-items-list">
           ${items.map(item => `
             <div class="gh-cart-item" data-id="${item.id}">
+              <button type="button" class="gh-cart-item-remove" data-action="remove" data-id="${item.id}" aria-label="Remove ${escapeHtml(item.name)}" title="Remove item">
+                <i class="bi bi-trash3"></i>
+              </button>
               <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}" class="gh-cart-item-img" onerror="this.src='https://images.unsplash.com/photo-1540420773420-3366772f4999?q=80&w=600&auto=format&fit=crop'">
               <div class="gh-cart-item-info">
                 <span class="gh-cart-item-name" title="${escapeHtml(item.name)}">${escapeHtml(item.name)}</span>
@@ -1172,30 +1254,46 @@
                   <span class="gh-cart-item-total">₹${Math.round(item.price * item.qty).toLocaleString('en-IN')}</span>
                 </div>
               </div>
-              <button type="button" class="gh-cart-item-remove" data-action="remove" data-id="${item.id}" aria-label="Remove ${escapeHtml(item.name)}" title="Remove item">
-                <i class="bi bi-trash3"></i>
-              </button>
             </div>
           `).join('')}
         </div>
+        <div class="gh-cart-trust-note mt-3">
+          <i class="bi bi-patch-check-fill text-success flex-shrink-0"></i>
+          <span>100% Plant-Based • Freshly crafted upon confirmation</span>
+        </div>
+        ${pairingsHtml}
       `;
 
-      const subtotalEl = document.getElementById('ghCartSubtotalText');
-      const deliveryEl = document.getElementById('ghCartDeliveryText');
-      const taxEl = document.getElementById('ghCartTaxText');
-      const grandTotalEl = document.getElementById('ghCartGrandTotalText');
+      const discount = this.getDiscount();
+      const discountRow = discount > 0 ? `
+        <div class="gh-cart-summary-row text-success fw-semibold">
+          <span>Discount (${this.appliedCoupon.code})</span>
+          <span>-₹${Math.round(discount).toLocaleString('en-IN')}</span>
+        </div>
+      ` : '';
 
-      if (subtotalEl) subtotalEl.textContent = `₹${Math.round(subtotal).toLocaleString('en-IN')}`;
-      if (deliveryEl) {
-        deliveryEl.textContent = deliveryFee === 0 ? 'FREE' : `₹${Math.round(deliveryFee).toLocaleString('en-IN')}`;
-        if (deliveryFee === 0) {
-          deliveryEl.className = 'fw-bold text-success';
-        } else {
-          deliveryEl.className = 'fw-semibold';
-        }
+      const summaryList = document.querySelector('#ghCartFooter .gh-cart-summary-list');
+      if (summaryList) {
+        summaryList.innerHTML = `
+          <div class="gh-cart-summary-row">
+            <span>Dishes Subtotal</span>
+            <span class="fw-semibold text-dark-emphasis" id="ghCartSubtotalText">₹${Math.round(subtotal).toLocaleString('en-IN')}</span>
+          </div>
+          ${discountRow}
+          <div class="gh-cart-summary-row">
+            <span>Delivery Fee</span>
+            <span class="${deliveryFee === 0 ? 'fw-bold text-success' : 'fw-semibold'}" id="ghCartDeliveryText">${deliveryFee === 0 ? 'FREE' : `₹${Math.round(deliveryFee).toLocaleString('en-IN')}`}</span>
+          </div>
+          <div class="gh-cart-summary-row">
+            <span>Estimated Tax (5%)</span>
+            <span class="fw-semibold" id="ghCartTaxText">₹${Math.round(tax).toLocaleString('en-IN')}</span>
+          </div>
+          <div class="gh-cart-summary-row total-row">
+            <span>Estimated Total</span>
+            <span class="total-amount" id="ghCartGrandTotalText">₹${Math.round(total).toLocaleString('en-IN')}</span>
+          </div>
+        `;
       }
-      if (taxEl) taxEl.textContent = `₹${Math.round(tax).toLocaleString('en-IN')}`;
-      if (grandTotalEl) grandTotalEl.textContent = `₹${Math.round(total).toLocaleString('en-IN')}`;
     },
 
     bindNavCartButtons() {

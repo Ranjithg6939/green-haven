@@ -25,6 +25,21 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <!-- Custom Master Stylesheet -->
   <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Remove validation tick / checkmark symbol on login page inputs */
+    #loginForm .form-control,
+    #loginForm .form-control.is-valid,
+    #loginForm .form-control:valid,
+    .was-validated #loginForm .form-control:valid,
+    .gh-password-group .form-control,
+    .gh-password-group .form-control.is-valid,
+    .gh-password-group .form-control:valid,
+    .gh-password-input,
+    .gh-password-input.is-valid,
+    .gh-password-input:valid {
+      background-image: none !important;
+    }
+  </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
 
@@ -476,17 +491,23 @@
 
       function clearInputError(input, feedbackEl) {
         if (!input) return;
-        input.classList.remove('is-invalid');
+        input.classList.remove('is-invalid', 'is-valid');
         if (feedbackEl) {
           feedbackEl.style.display = '';
         }
       }
 
       if (emailInput) {
-        emailInput.addEventListener('input', () => clearInputError(emailInput, emailFeedback));
+        emailInput.addEventListener('input', () => {
+          clearInputError(emailInput, emailFeedback);
+          emailInput.classList.remove('is-valid');
+        });
       }
       if (passwordInput) {
-        passwordInput.addEventListener('input', () => clearInputError(passwordInput, passwordFeedback));
+        passwordInput.addEventListener('input', () => {
+          clearInputError(passwordInput, passwordFeedback);
+          passwordInput.classList.remove('is-valid');
+        });
       }
 
       // Handle Standard Login Form
