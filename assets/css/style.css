@@ -901,8 +901,6 @@ html.dark .pricing-cta-wrap .btn-primary:hover {
 .btn-secondary,
 .btn-outline-primary,
 .btn-outline-secondary,
-.btn-hero-outline,
-.btn-hero-outline-muted,
 .btn-outline-light,
 .btn-white-cta,
 .btn-ethos-story,
@@ -924,8 +922,6 @@ html.dark .pricing-cta-wrap .btn-primary:hover {
 .btn-secondary:hover,
 .btn-outline-primary:hover,
 .btn-outline-secondary:hover,
-.btn-hero-outline:hover,
-.btn-hero-outline-muted:hover,
 .btn-outline-light:hover,
 .btn-white-cta:hover,
 .btn-ethos-story:hover,
@@ -942,7 +938,6 @@ html.dark .pricing-cta-wrap .btn-primary:hover {
 .btn-secondary:active,
 .btn-outline-primary:active,
 .btn-outline-secondary:active,
-.btn-hero-outline:active,
 .btn-outline-light:active,
 .btn-white-cta:active,
 .pricing-cta-wrap .btn-white-cta:active {
@@ -956,8 +951,6 @@ html.dark .pricing-cta-wrap .btn-primary:hover {
 [data-bs-theme="dark"] .btn-secondary,
 [data-bs-theme="dark"] .btn-outline-primary,
 [data-bs-theme="dark"] .btn-outline-secondary,
-[data-bs-theme="dark"] .btn-hero-outline,
-[data-bs-theme="dark"] .btn-hero-outline-muted,
 [data-bs-theme="dark"] .btn-outline-light,
 [data-bs-theme="dark"] .btn-white-cta,
 [data-bs-theme="dark"] .btn-ethos-story,
@@ -967,8 +960,6 @@ html.dark .pricing-cta-wrap .btn-primary:hover {
 html.dark .btn-secondary,
 html.dark .btn-outline-primary,
 html.dark .btn-outline-secondary,
-html.dark .btn-hero-outline,
-html.dark .btn-hero-outline-muted,
 html.dark .btn-outline-light,
 html.dark .btn-white-cta,
 html.dark .btn-ethos-story,
@@ -987,8 +978,6 @@ html.dark .pricing-cta-wrap .btn-white-cta {
 [data-bs-theme="dark"] .btn-secondary:hover,
 [data-bs-theme="dark"] .btn-outline-primary:hover,
 [data-bs-theme="dark"] .btn-outline-secondary:hover,
-[data-bs-theme="dark"] .btn-hero-outline:hover,
-[data-bs-theme="dark"] .btn-hero-outline-muted:hover,
 [data-bs-theme="dark"] .btn-outline-light:hover,
 [data-bs-theme="dark"] .btn-white-cta:hover,
 [data-bs-theme="dark"] .btn-ethos-story:hover,
@@ -998,8 +987,6 @@ html.dark .pricing-cta-wrap .btn-white-cta {
 html.dark .btn-secondary:hover,
 html.dark .btn-outline-primary:hover,
 html.dark .btn-outline-secondary:hover,
-html.dark .btn-hero-outline:hover,
-html.dark .btn-hero-outline-muted:hover,
 html.dark .btn-outline-light:hover,
 html.dark .btn-white-cta:hover,
 html.dark .btn-ethos-story:hover,
@@ -3381,18 +3368,19 @@ html.dark .offcanvas nav .dropdown-menu .gh-dropdown-item.active {
 }
 
 .gh-hero-nature .btn-hero-outline:hover,
-.btn-hero-outline:hover {
+.btn-hero-outline:hover,
+.gh-hero-nature .btn-hero-outline:focus,
+.btn-hero-outline:focus,
+.gh-hero-nature .btn-hero-outline:focus-visible,
+.btn-hero-outline:focus-visible,
+.gh-hero-nature .btn-hero-outline:active,
+.btn-hero-outline:active {
   background-color: #FFFFFF !important;
   border-color: #1E5016 !important;
   color: #123812 !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12) !important;
-}
-
-.gh-hero-nature .btn-hero-outline:active,
-.btn-hero-outline:active {
-  background-color: rgba(255, 255, 255, 0.95) !important;
-  transform: translateY(0) !important;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.14) !important;
+  outline: none !important;
 }
 
 /* Dark mode override for home hero secondary button */
@@ -3411,12 +3399,25 @@ html.dark .btn-hero-outline {
 
 [data-bs-theme="dark"] .gh-hero-nature .btn-hero-outline:hover,
 [data-bs-theme="dark"] .btn-hero-outline:hover,
+[data-bs-theme="dark"] .gh-hero-nature .btn-hero-outline:focus,
+[data-bs-theme="dark"] .btn-hero-outline:focus,
+[data-bs-theme="dark"] .gh-hero-nature .btn-hero-outline:focus-visible,
+[data-bs-theme="dark"] .btn-hero-outline:focus-visible,
+[data-bs-theme="dark"] .gh-hero-nature .btn-hero-outline:active,
+[data-bs-theme="dark"] .btn-hero-outline:active,
 html.dark .gh-hero-nature .btn-hero-outline:hover,
-html.dark .btn-hero-outline:hover {
+html.dark .btn-hero-outline:hover,
+html.dark .gh-hero-nature .btn-hero-outline:focus,
+html.dark .btn-hero-outline:focus,
+html.dark .gh-hero-nature .btn-hero-outline:focus-visible,
+html.dark .btn-hero-outline:focus-visible,
+html.dark .gh-hero-nature .btn-hero-outline:active,
+html.dark .btn-hero-outline:active {
   background-color: rgba(255, 255, 255, 0.22) !important;
   border-color: #FFFFFF !important;
   color: #FFFFFF !important;
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45) !important;
+  outline: none !important;
 }
 
 /* --------------------------------------------------
