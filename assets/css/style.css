@@ -705,168 +705,602 @@ img {
 /* --------------------------------------------------
    4. BUTTON SYSTEM & BADGES (Botanical Brand Palette)
 -------------------------------------------------- */
+/* --------------------------------------------------
+   4. UNIFIED BUTTON SYSTEM & CTAS (Botanical Brand Palette)
+   Consistency Guarantee: All Primary CTAs use identical styling & color.
+   All Secondary CTAs use identical styling & color.
+   Both types share exact corner radius, height tiers, spacing & hover treatment.
+-------------------------------------------------- */
+
+/* Shared Base Geometry for ALL Buttons */
 .btn {
-  font-family: var(--font-sans);
-  font-weight: 600;
-  border-radius: var(--radius-full);
-  padding: 0.65rem 1.4rem;
-  font-size: 0.95rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  transition: var(--transition);
+  font-family: var(--font-sans) !important;
+  font-weight: 600 !important;
+  border-radius: 50px !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.015em !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.6rem !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  border: 1.5px solid transparent !important;
+  min-height: 48px !important;
+  padding: 0.72rem 1.65rem !important;
+  box-sizing: border-box !important;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
+/* Consistent Height & Spacing Tiers across both CTA types */
+.btn-lg,
+.btn-hero-primary,
+.btn-hero-outline {
+  min-height: 54px !important;
+  padding: 0.88rem 2.25rem !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+}
+
+.btn-sm {
+  min-height: 38px !important;
+  padding: 0.42rem 1.15rem !important;
+  font-size: 0.85rem !important;
+}
+
+/* Icon & Child Text Alignment */
+.btn i,
+.btn svg {
+  font-size: 1.1em;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.btn:hover i {
+  transform: translateX(2px);
+}
+
+[dir="rtl"] .btn:hover i {
+  transform: translateX(-2px);
+}
+
+/* ==================================================
+   PRIMARY CTAs (Master Styling: Solid Forest Green)
+   ================================================== */
 .btn-primary,
-.btn-primary:active,
-.btn-primary:focus {
+.btn-hero-primary,
+.btn-accent,
+.btn-package-action,
+.btn-service-action,
+.gh-farm-cta-btn,
+.catering-submit-btn,
+.btn-modal-close,
+.h2-menu-cta-btn,
+.btn-add-more-dishes,
+.pricing-cta-wrap .btn-primary,
+button[type="submit"].btn:not(.btn-secondary):not(.btn-outline-primary):not(.btn-outline-secondary) {
   --bs-btn-bg: #2E6518 !important;
   --bs-btn-border-color: #2E6518 !important;
-  --bs-btn-hover-bg: #224D12 !important;
-  --bs-btn-hover-border-color: #224D12 !important;
-  --bs-btn-active-bg: #1B3D0E !important;
-  --bs-btn-active-border-color: #1B3D0E !important;
-  --bs-btn-color: #ffffff !important;
-  --bs-btn-hover-color: #ffffff !important;
+  --bs-btn-color: #FFFFFF !important;
+  --bs-btn-hover-bg: #204811 !important;
+  --bs-btn-hover-border-color: #204811 !important;
+  --bs-btn-hover-color: #FFFFFF !important;
+  --bs-btn-active-bg: #17350C !important;
+  --bs-btn-active-border-color: #17350C !important;
   background-color: #2E6518 !important;
   border-color: #2E6518 !important;
-  color: #ffffff !important;
-  box-shadow: 0 4px 14px rgba(46, 101, 24, 0.28);
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 14px rgba(46, 101, 24, 0.25) !important;
 }
 
-.btn-primary:hover {
-  background-color: #224D12 !important;
-  border-color: #224D12 !important;
-  color: #ffffff !important;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(46, 101, 24, 0.38);
+.btn-primary:hover,
+.btn-hero-primary:hover,
+.btn-accent:hover,
+.btn-package-action:hover,
+.btn-service-action:hover,
+.gh-farm-cta-btn:hover,
+.catering-submit-btn:hover,
+.btn-modal-close:hover,
+.h2-menu-cta-btn:hover,
+.btn-add-more-dishes:hover,
+.pricing-cta-wrap .btn-primary:hover,
+button[type="submit"].btn:not(.btn-secondary):not(.btn-outline-primary):not(.btn-outline-secondary):hover {
+  background-color: #204811 !important;
+  border-color: #204811 !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 22px rgba(46, 101, 24, 0.38) !important;
 }
 
+.btn-primary:active,
+.btn-hero-primary:active,
+.btn-accent:active,
+.btn-package-action:active,
+.btn-service-action:active,
+.gh-farm-cta-btn:active,
+.catering-submit-btn:active,
+.btn-modal-close:active,
+.h2-menu-cta-btn:active,
+.pricing-cta-wrap .btn-primary:active {
+  background-color: #17350C !important;
+  border-color: #17350C !important;
+  color: #FFFFFF !important;
+  transform: translateY(0) !important;
+}
+
+/* Dark Mode Primary CTAs (High-Contrast Radiant Emerald on Obsidian) */
+[data-bs-theme="dark"] .btn-primary,
+[data-bs-theme="dark"] .btn-hero-primary,
+[data-bs-theme="dark"] .btn-accent,
+[data-bs-theme="dark"] .btn-package-action,
+[data-bs-theme="dark"] .btn-service-action,
+[data-bs-theme="dark"] .gh-farm-cta-btn,
+[data-bs-theme="dark"] .catering-submit-btn,
+[data-bs-theme="dark"] .btn-modal-close,
+[data-bs-theme="dark"] .h2-menu-cta-btn,
+[data-bs-theme="dark"] .btn-add-more-dishes,
+[data-bs-theme="dark"] .pricing-cta-wrap .btn-primary,
+[data-bs-theme="dark"] button[type="submit"].btn:not(.btn-secondary):not(.btn-outline-primary):not(.btn-outline-secondary),
+html.dark .btn-primary,
+html.dark .btn-hero-primary,
+html.dark .btn-accent,
+html.dark .btn-package-action,
+html.dark .btn-service-action,
+html.dark .gh-farm-cta-btn,
+html.dark .catering-submit-btn,
+html.dark .btn-modal-close,
+html.dark .h2-menu-cta-btn,
+html.dark .btn-add-more-dishes,
+html.dark .pricing-cta-wrap .btn-primary,
+html.dark button[type="submit"].btn:not(.btn-secondary):not(.btn-outline-primary):not(.btn-outline-secondary) {
+  --bs-btn-bg: #00FF7F !important;
+  --bs-btn-border-color: #00FF7F !important;
+  --bs-btn-color: #012417 !important;
+  background-color: #00FF7F !important;
+  border-color: #00FF7F !important;
+  color: #012417 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 16px rgba(0, 255, 127, 0.25) !important;
+}
+
+[data-bs-theme="dark"] .btn-primary:hover,
+[data-bs-theme="dark"] .btn-hero-primary:hover,
+[data-bs-theme="dark"] .btn-accent:hover,
+[data-bs-theme="dark"] .btn-package-action:hover,
+[data-bs-theme="dark"] .btn-service-action:hover,
+[data-bs-theme="dark"] .gh-farm-cta-btn:hover,
+[data-bs-theme="dark"] .catering-submit-btn:hover,
+[data-bs-theme="dark"] .btn-modal-close:hover,
+[data-bs-theme="dark"] .h2-menu-cta-btn:hover,
+[data-bs-theme="dark"] .btn-add-more-dishes:hover,
+[data-bs-theme="dark"] .pricing-cta-wrap .btn-primary:hover,
+html.dark .btn-primary:hover,
+html.dark .btn-hero-primary:hover,
+html.dark .btn-accent:hover,
+html.dark .btn-package-action:hover,
+html.dark .btn-service-action:hover,
+html.dark .gh-farm-cta-btn:hover,
+html.dark .catering-submit-btn:hover,
+html.dark .btn-modal-close:hover,
+html.dark .h2-menu-cta-btn:hover,
+html.dark .btn-add-more-dishes:hover,
+html.dark .pricing-cta-wrap .btn-primary:hover {
+  background-color: #26FF91 !important;
+  border-color: #26FF91 !important;
+  color: #012417 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(0, 255, 127, 0.40) !important;
+}
+
+/* ==================================================
+   SECONDARY CTAs (Master Styling: Crisp Forest Outline)
+   ================================================== */
+.btn-secondary,
 .btn-outline-primary,
-.btn-outline-primary:active,
-.btn-outline-primary:focus {
-  --bs-btn-color: #2E6518 !important;
+.btn-outline-secondary,
+.btn-hero-outline,
+.btn-hero-outline-muted,
+.btn-outline-light,
+.btn-white-cta,
+.btn-ethos-story,
+.btn-download-menu,
+.back-to-journal-btn,
+.pricing-cta-wrap .btn-white-cta {
+  --bs-btn-bg: rgba(46, 101, 24, 0.04) !important;
   --bs-btn-border-color: #2E6518 !important;
+  --bs-btn-color: #2E6518 !important;
   --bs-btn-hover-bg: #2E6518 !important;
   --bs-btn-hover-border-color: #2E6518 !important;
-  --bs-btn-hover-color: #ffffff !important;
-  color: #2E6518 !important;
+  --bs-btn-hover-color: #FFFFFF !important;
+  background-color: rgba(46, 101, 24, 0.04) !important;
   border-color: #2E6518 !important;
-  background-color: transparent !important;
+  color: #2E6518 !important;
+  box-shadow: none !important;
 }
 
-.btn-outline-primary:hover {
+.btn-secondary:hover,
+.btn-outline-primary:hover,
+.btn-outline-secondary:hover,
+.btn-hero-outline:hover,
+.btn-hero-outline-muted:hover,
+.btn-outline-light:hover,
+.btn-white-cta:hover,
+.btn-ethos-story:hover,
+.btn-download-menu:hover,
+.back-to-journal-btn:hover,
+.pricing-cta-wrap .btn-white-cta:hover {
   background-color: #2E6518 !important;
   border-color: #2E6518 !important;
-  color: #ffffff !important;
-  transform: translateY(-2px);
+  color: #FFFFFF !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 18px rgba(46, 101, 24, 0.22) !important;
 }
 
+.btn-secondary:active,
+.btn-outline-primary:active,
+.btn-outline-secondary:active,
+.btn-hero-outline:active,
+.btn-outline-light:active,
+.btn-white-cta:active,
+.pricing-cta-wrap .btn-white-cta:active {
+  background-color: #204811 !important;
+  border-color: #204811 !important;
+  color: #FFFFFF !important;
+  transform: translateY(0) !important;
+}
+
+/* Dark Mode Secondary CTAs (Refined Neon Emerald Outline) */
+[data-bs-theme="dark"] .btn-secondary,
 [data-bs-theme="dark"] .btn-outline-primary,
-[data-bs-theme="dark"] .btn-outline-primary:active,
-[data-bs-theme="dark"] .btn-outline-primary:focus,
+[data-bs-theme="dark"] .btn-outline-secondary,
+[data-bs-theme="dark"] .btn-hero-outline,
+[data-bs-theme="dark"] .btn-hero-outline-muted,
+[data-bs-theme="dark"] .btn-outline-light,
+[data-bs-theme="dark"] .btn-white-cta,
+[data-bs-theme="dark"] .btn-ethos-story,
+[data-bs-theme="dark"] .btn-download-menu,
+[data-bs-theme="dark"] .back-to-journal-btn,
+[data-bs-theme="dark"] .pricing-cta-wrap .btn-white-cta,
+html.dark .btn-secondary,
 html.dark .btn-outline-primary,
-html.dark .btn-outline-primary:active,
-html.dark .btn-outline-primary:focus {
-  --bs-btn-color: #88FFB0 !important;
-  --bs-btn-border-color: rgba(0, 255, 127, 0.45) !important;
-  --bs-btn-hover-bg: #008f4c !important;
-  --bs-btn-hover-border-color: #008f4c !important;
-  --bs-btn-hover-color: #ffffff !important;
-  color: #88FFB0 !important;
+html.dark .btn-outline-secondary,
+html.dark .btn-hero-outline,
+html.dark .btn-hero-outline-muted,
+html.dark .btn-outline-light,
+html.dark .btn-white-cta,
+html.dark .btn-ethos-story,
+html.dark .btn-download-menu,
+html.dark .back-to-journal-btn,
+html.dark .pricing-cta-wrap .btn-white-cta {
+  --bs-btn-bg: rgba(0, 255, 127, 0.06) !important;
+  --bs-btn-border-color: rgba(0, 255, 127, 0.65) !important;
+  --bs-btn-color: #00FF7F !important;
+  background-color: rgba(0, 255, 127, 0.06) !important;
+  border-color: rgba(0, 255, 127, 0.65) !important;
+  color: #00FF7F !important;
+  box-shadow: none !important;
+}
+
+[data-bs-theme="dark"] .btn-secondary:hover,
+[data-bs-theme="dark"] .btn-outline-primary:hover,
+[data-bs-theme="dark"] .btn-outline-secondary:hover,
+[data-bs-theme="dark"] .btn-hero-outline:hover,
+[data-bs-theme="dark"] .btn-hero-outline-muted:hover,
+[data-bs-theme="dark"] .btn-outline-light:hover,
+[data-bs-theme="dark"] .btn-white-cta:hover,
+[data-bs-theme="dark"] .btn-ethos-story:hover,
+[data-bs-theme="dark"] .btn-download-menu:hover,
+[data-bs-theme="dark"] .back-to-journal-btn:hover,
+[data-bs-theme="dark"] .pricing-cta-wrap .btn-white-cta:hover,
+html.dark .btn-secondary:hover,
+html.dark .btn-outline-primary:hover,
+html.dark .btn-outline-secondary:hover,
+html.dark .btn-hero-outline:hover,
+html.dark .btn-hero-outline-muted:hover,
+html.dark .btn-outline-light:hover,
+html.dark .btn-white-cta:hover,
+html.dark .btn-ethos-story:hover,
+html.dark .btn-download-menu:hover,
+html.dark .back-to-journal-btn:hover,
+html.dark .pricing-cta-wrap .btn-white-cta:hover {
+  background-color: #00FF7F !important;
+  border-color: #00FF7F !important;
+  color: #012417 !important;
+  font-weight: 700 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(0, 255, 127, 0.35) !important;
+}
+
+/* --------------------------------------------------
+   4.1 UNIVERSAL CARD ARCHITECTURE & PROPER PADDING/SPACING
+-------------------------------------------------- */
+.card,
+.gh-card,
+.dish-card,
+.service-card,
+.pricing-card,
+.luxury-pricing-card,
+.blog-card,
+.featured-blog-card,
+.testimonial-card,
+.team-card,
+.chef-card,
+.occasion-card,
+.pillar-card,
+.partner-farm-card,
+.timeline-card,
+.auth-card,
+.contact-card,
+.info-card {
+  border-radius: 18px !important;
+  overflow: hidden !important;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.28s ease !important;
+}
+
+/* Light Mode Card Surfaces & Elevated Spacing */
+.card,
+.gh-card,
+.dish-card,
+.service-card,
+.pricing-card,
+.luxury-pricing-card,
+.blog-card,
+.testimonial-card,
+.team-card,
+.chef-card,
+.occasion-card,
+.pillar-card,
+.partner-farm-card,
+.timeline-card,
+.auth-card,
+.contact-card,
+.info-card {
+  background: #FFFFFF !important;
+  border: 1.5px solid rgba(46, 101, 24, 0.12) !important;
+  box-shadow: 0 8px 24px rgba(22, 60, 22, 0.05) !important;
+}
+
+.card:hover,
+.gh-card:hover,
+.dish-card:hover,
+.service-card:hover,
+.pricing-card:hover,
+.luxury-pricing-card:hover,
+.blog-card:hover,
+.testimonial-card:hover,
+.team-card:hover,
+.chef-card:hover,
+.occasion-card:hover,
+.pillar-card:hover,
+.partner-farm-card:hover,
+.timeline-card:hover,
+.contact-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 14px 34px rgba(22, 60, 22, 0.12) !important;
+  border-color: rgba(46, 101, 24, 0.28) !important;
+}
+
+/* Dark Mode Card Surfaces */
+[data-bs-theme="dark"] .card,
+[data-bs-theme="dark"] .gh-card,
+[data-bs-theme="dark"] .dish-card,
+[data-bs-theme="dark"] .service-card,
+[data-bs-theme="dark"] .pricing-card,
+[data-bs-theme="dark"] .luxury-pricing-card,
+[data-bs-theme="dark"] .blog-card,
+[data-bs-theme="dark"] .testimonial-card,
+[data-bs-theme="dark"] .team-card,
+[data-bs-theme="dark"] .chef-card,
+[data-bs-theme="dark"] .occasion-card,
+[data-bs-theme="dark"] .pillar-card,
+[data-bs-theme="dark"] .partner-farm-card,
+[data-bs-theme="dark"] .timeline-card,
+[data-bs-theme="dark"] .auth-card,
+[data-bs-theme="dark"] .contact-card,
+[data-bs-theme="dark"] .info-card,
+html.dark .card,
+html.dark .gh-card,
+html.dark .dish-card,
+html.dark .service-card,
+html.dark .pricing-card,
+html.dark .luxury-pricing-card,
+html.dark .blog-card,
+html.dark .testimonial-card,
+html.dark .team-card,
+html.dark .chef-card,
+html.dark .occasion-card,
+html.dark .pillar-card,
+html.dark .partner-farm-card,
+html.dark .timeline-card,
+html.dark .auth-card,
+html.dark .contact-card,
+html.dark .info-card {
+  background: #0B281A !important;
+  border: 1.5px solid rgba(0, 255, 127, 0.20) !important;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.45) !important;
+}
+
+[data-bs-theme="dark"] .card:hover,
+[data-bs-theme="dark"] .gh-card:hover,
+[data-bs-theme="dark"] .dish-card:hover,
+[data-bs-theme="dark"] .service-card:hover,
+[data-bs-theme="dark"] .pricing-card:hover,
+[data-bs-theme="dark"] .luxury-pricing-card:hover,
+[data-bs-theme="dark"] .blog-card:hover,
+[data-bs-theme="dark"] .testimonial-card:hover,
+[data-bs-theme="dark"] .team-card:hover,
+[data-bs-theme="dark"] .chef-card:hover,
+[data-bs-theme="dark"] .occasion-card:hover,
+[data-bs-theme="dark"] .pillar-card:hover,
+[data-bs-theme="dark"] .partner-farm-card:hover,
+[data-bs-theme="dark"] .timeline-card:hover,
+[data-bs-theme="dark"] .contact-card:hover,
+html.dark .card:hover,
+html.dark .gh-card:hover,
+html.dark .dish-card:hover,
+html.dark .service-card:hover,
+html.dark .pricing-card:hover,
+html.dark .luxury-pricing-card:hover,
+html.dark .blog-card:hover,
+html.dark .testimonial-card:hover,
+html.dark .team-card:hover,
+html.dark .chef-card:hover,
+html.dark .occasion-card:hover,
+html.dark .pillar-card:hover,
+html.dark .partner-farm-card:hover,
+html.dark .timeline-card:hover,
+html.dark .contact-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.65) !important;
   border-color: rgba(0, 255, 127, 0.45) !important;
 }
 
-[data-bs-theme="dark"] .btn-outline-primary:hover,
-html.dark .btn-outline-primary:hover {
-  background-color: #008f4c !important;
-  border-color: #008f4c !important;
-  color: #ffffff !important;
-  transform: translateY(-2px);
+/* Card Body Internal Padding (Generous, breathing room) */
+.card-body,
+.gh-card-body,
+.dish-card .card-body,
+.service-card .card-body,
+.blog-card .card-body,
+.testimonial-card,
+.pricing-card-body,
+.team-card .card-body,
+.chef-card .card-body,
+.occasion-card .card-body,
+.timeline-card {
+  padding: 1.85rem 1.65rem !important;
 }
 
-.btn-outline-secondary {
-  --bs-btn-color: #558742 !important;
-  --bs-btn-border-color: #558742 !important;
-  --bs-btn-hover-bg: #558742 !important;
-  --bs-btn-hover-border-color: #558742 !important;
-  --bs-btn-hover-color: #ffffff !important;
-  color: #558742 !important;
-  border-color: #558742 !important;
-  background-color: transparent !important;
+/* Large Featured & Form Cards */
+.featured-blog-card,
+.luxury-pricing-card,
+.pillar-card,
+.partner-farm-card,
+.auth-card,
+.contact-card,
+.reservation-card {
+  padding: 2.25rem 2rem !important;
 }
 
-.btn-outline-secondary:hover {
-  background-color: #558742 !important;
-  border-color: #558742 !important;
-  color: #ffffff !important;
-  transform: translateY(-2px);
+@media (max-width: 575.98px) {
+  .card-body,
+  .gh-card-body,
+  .dish-card .card-body,
+  .service-card .card-body,
+  .blog-card .card-body,
+  .testimonial-card,
+  .pricing-card-body,
+  .team-card .card-body,
+  .chef-card .card-body,
+  .occasion-card .card-body,
+  .timeline-card {
+    padding: 1.4rem 1.25rem !important;
+  }
+
+  .featured-blog-card,
+  .luxury-pricing-card,
+  .pillar-card,
+  .partner-farm-card,
+  .auth-card,
+  .contact-card,
+  .reservation-card {
+    padding: 1.65rem 1.35rem !important;
+  }
 }
 
-.btn-accent {
-  background-color: var(--gh-accent);
-  border-color: var(--gh-accent);
-  color: #ffffff !important;
+/* Grid & Row Flex Alignment for uniform card heights */
+.row.g-4 > [class*="col-"],
+.row.g-3 > [class*="col-"] {
+  display: flex !important;
+  flex-direction: column !important;
 }
 
-.btn-accent:hover {
-  background-color: var(--gh-accent-hover);
-  border-color: var(--gh-accent-hover);
-  color: #ffffff !important;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(46, 125, 50, 0.35);
+.row.g-4 > [class*="col-"] > .card,
+.row.g-4 > [class*="col-"] > .gh-card,
+.row.g-4 > [class*="col-"] > .dish-card,
+.row.g-4 > [class*="col-"] > .service-card,
+.row.g-4 > [class*="col-"] > .pricing-card,
+.row.g-4 > [class*="col-"] > .blog-card {
+  height: 100% !important;
+  margin-bottom: 0 !important;
 }
 
-.btn-warning {
-  background-color: #E69535 !important;
-  border-color: #E69535 !important;
-  color: #121E13 !important;
-  font-weight: 700 !important;
-  box-shadow: 0 4px 14px rgba(230, 149, 53, 0.28);
+/* --------------------------------------------------
+   4.2 UNIVERSAL IMAGE ARCHITECTURE & PROPER SPACING
+-------------------------------------------------- */
+.card img.card-img-top,
+.gh-card img.card-img-top,
+.dish-card img.card-img-top,
+.service-card img.card-img-top,
+.blog-card img.card-img-top {
+  border-radius: 16px 16px 0 0 !important;
+  width: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
 }
 
-.btn-warning:hover, .btn-warning:focus {
-  background-color: #D48425 !important;
-  border-color: #D48425 !important;
-  color: #121E13 !important;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(230, 149, 53, 0.38);
+.dish-img-wrap,
+.service-img-wrap,
+.blog-img-wrap,
+.card-img-wrap,
+.hero-dish-img-wrap {
+  overflow: hidden !important;
+  border-radius: 16px !important;
+  position: relative !important;
 }
 
-.btn-secondary {
-  background-color: var(--gh-secondary);
-  border-color: var(--gh-secondary);
-  color: #ffffff;
-  font-weight: 700;
+.dish-card .dish-img-wrap img,
+.dish-card img.card-img-top {
+  aspect-ratio: 4 / 3 !important;
+  width: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
 }
 
-.btn-secondary:hover {
-  background-color: var(--gh-secondary-hover);
-  border-color: var(--gh-secondary-hover);
-  color: #ffffff;
+.blog-card .blog-img-wrap img,
+.blog-card img.card-img-top {
+  aspect-ratio: 16 / 10 !important;
+  width: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
 }
 
-/* Modal Close Buttons: Dark Green color only */
-.btn-modal-close,
-.modal-footer .btn-secondary {
-  background-color: #2E6518 !important;
-  border-color: #2E6518 !important;
-  color: #ffffff !important;
-  font-weight: 700 !important;
-  border-radius: var(--radius-full);
-  padding: 0.65rem 1.6rem;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 14px rgba(46, 101, 24, 0.3);
-  cursor: pointer;
+.service-card .service-img-wrap img,
+.service-card img.card-img-top {
+  aspect-ratio: 16 / 10 !important;
+  width: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
 }
 
-.btn-modal-close:hover {
-  background-color: #224D12 !important;
-  border-color: #224D12 !important;
-  color: #ffffff !important;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(46, 101, 24, 0.45) !important;
+/* Standalone Content Images Spacing */
+.card-inner-img,
+.dish-thumb,
+.narrative-img {
+  border-radius: 14px !important;
+  margin-bottom: 1.25rem !important;
+  width: 100% !important;
+  object-fit: cover !important;
+}
+
+/* Chef and Team Portraits */
+.chef-img-wrap,
+.team-img-wrap {
+  aspect-ratio: 1 / 1 !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  margin-bottom: 1.25rem !important;
+}
+
+.chef-img-wrap img,
+.team-img-wrap img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
 }
 
 /* Click / Active / Pressed: Change to RED color */
@@ -2925,69 +3359,11 @@ html.dark .offcanvas nav .dropdown-menu .gh-dropdown-item.active {
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
-.btn-hero-primary {
-  background-color: #1E4E18 !important;
-  border-color: #1E4E18 !important;
-  color: #ffffff !important;
-  border-radius: var(--radius-full);
-  padding: 0.85rem 1.8rem;
-  font-weight: 700;
-  font-size: 1.05rem;
-  box-shadow: 0 6px 20px rgba(30, 78, 24, 0.35);
-  transition: var(--transition);
-  white-space: nowrap;
-}
-
-.btn-hero-primary:hover {
-  background-color: #143810 !important;
-  border-color: #143810 !important;
-  color: #ffffff !important;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(30, 78, 24, 0.45);
-}
-
-.btn-hero-outline {
-  background-color: rgba(255, 255, 255, 0.88) !important;
-  border: 2px solid #1E4E18 !important;
-  color: #1E4E18 !important;
-  border-radius: var(--radius-full);
-  padding: 0.85rem 1.8rem;
-  font-weight: 700;
-  font-size: 1.05rem;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-  transition: var(--transition);
-  white-space: nowrap;
-}
-
-.btn-hero-outline:hover {
-  background-color: #1E4E18 !important;
-  border-color: #1E4E18 !important;
-  color: #ffffff !important;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(30, 78, 24, 0.3);
-}
-
+/* Hero CTA Button Alignment: Inherits Master Unified Button System */
+.btn-hero-primary,
+.btn-hero-outline,
 .btn-hero-outline-muted {
-  background-color: rgba(255, 255, 255, 0.78) !important;
-  border: 2px solid rgba(30, 78, 24, 0.45) !important;
-  color: #274027 !important;
-  border-radius: var(--radius-full);
-  padding: 0.85rem 1.7rem;
-  font-weight: 700;
-  font-size: 1.05rem;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  transition: var(--transition);
   white-space: nowrap;
-}
-
-.btn-hero-outline-muted:hover {
-  background-color: #1E4E18 !important;
-  border-color: #1E4E18 !important;
-  color: #ffffff !important;
-  transform: translateY(-2px);
 }
 
 /* --------------------------------------------------
@@ -4175,20 +4551,6 @@ html.dark .gh-hero-badge {
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
 
-[data-bs-theme="dark"] .btn-hero-outline,
-html.dark .btn-hero-outline {
-  background-color: rgba(1, 50, 32, 0.75) !important;
-  border-color: #00FF7F !important;
-  color: #FFFFFF !important;
-}
-
-[data-bs-theme="dark"] .btn-hero-outline-muted,
-html.dark .btn-hero-outline-muted {
-  background-color: rgba(1, 50, 32, 0.6) !important;
-  border-color: rgba(0, 255, 127, 0.35) !important;
-  color: #DEF5D6 !important;
-}
-
 [data-bs-theme="dark"] .hero-stat-item .stat-value,
 html.dark .hero-stat-item .stat-value {
   color: #00FF7F;
@@ -4226,20 +4588,6 @@ html.dark .hero-floating-badge {
 [data-bs-theme="dark"] .hero-floating-badge .text-muted,
 html.dark .hero-floating-badge .text-muted {
   color: #A8D5BA !important;
-}
-
-[data-bs-theme="dark"] .btn-hero-outline,
-html.dark .btn-hero-outline {
-  background-color: rgba(1, 50, 32, 0.75) !important;
-  border-color: #00FF7F !important;
-  color: #FFFFFF !important;
-}
-
-[data-bs-theme="dark"] .btn-hero-outline-muted,
-html.dark .btn-hero-outline-muted {
-  background-color: rgba(1, 50, 32, 0.6) !important;
-  border-color: rgba(0, 255, 127, 0.35) !important;
-  color: #DEF5D6 !important;
 }
 
 [data-bs-theme="dark"] .hero-stat-item .stat-value,
@@ -4557,10 +4905,9 @@ body.contact-nature-page,
 .nature-bg-page,
 body.nature-bg-page {
   position: relative;
-  background: linear-gradient(180deg, rgba(244, 250, 245, 0.65) 0%, rgba(250, 252, 250, 0.48) 22%, rgba(243, 250, 246, 0.55) 50%, rgba(250, 248, 244, 0.58) 75%, rgba(244, 250, 245, 0.65) 100%),
-              url('../images/home-2-bg.jpg') center center / cover no-repeat fixed !important;
-  background-attachment: fixed !important;
-  background-color: #F4FAF5 !important;
+  background: #FAF8F5 !important;
+  background-color: #FAF8F5 !important;
+  background-image: none !important;
   overflow-x: clip;
 }
 
@@ -4596,10 +4943,9 @@ html.dark .contact-nature-page,
 html.dark body.contact-nature-page,
 html.dark .nature-bg-page,
 html.dark body.nature-bg-page {
-  background: linear-gradient(180deg, rgba(1, 36, 21, 0.78) 0%, rgba(1, 45, 27, 0.70) 25%, rgba(2, 38, 23, 0.74) 50%, rgba(1, 30, 18, 0.76) 75%, rgba(1, 36, 21, 0.80) 100%),
-              url('../images/home-2-bg.jpg') center center / cover no-repeat fixed !important;
-  background-attachment: fixed !important;
-  background-color: #012415 !important;
+  background: #012417 !important;
+  background-color: #012417 !important;
+  background-image: none !important;
 }
 
 .about-page-header,
@@ -4657,10 +5003,9 @@ html.dark .about-nature-page .page-header h1 {
 body.menu-nature-page,
 .menu-nature-page {
   position: relative;
-  background: linear-gradient(180deg, rgba(244, 250, 245, 0.65) 0%, rgba(250, 252, 250, 0.48) 22%, rgba(243, 250, 246, 0.55) 50%, rgba(250, 248, 244, 0.58) 75%, rgba(244, 250, 245, 0.65) 100%),
-              url('../images/home-2-bg.jpg') center center / cover no-repeat fixed !important;
-  background-attachment: fixed !important;
-  background-color: #F4FAF5 !important;
+  background: #FAF8F5 !important;
+  background-color: #FAF8F5 !important;
+  background-image: none !important;
   overflow-x: clip;
 }
 
@@ -4668,10 +5013,9 @@ body.menu-nature-page,
 [data-bs-theme="dark"] .menu-nature-page,
 html.dark body.menu-nature-page,
 html.dark .menu-nature-page {
-  background: linear-gradient(180deg, rgba(1, 36, 21, 0.78) 0%, rgba(1, 45, 27, 0.70) 25%, rgba(2, 38, 23, 0.74) 50%, rgba(1, 30, 18, 0.76) 75%, rgba(1, 36, 21, 0.80) 100%),
-              url('../images/home-2-bg.jpg') center center / cover no-repeat fixed !important;
-  background-attachment: fixed !important;
-  background-color: #012415 !important;
+  background: #012417 !important;
+  background-color: #012417 !important;
+  background-image: none !important;
 }
 
 /* Plant-Based Menu Page Header */
@@ -4695,10 +5039,9 @@ html.dark .menu-nature-page .page-header {
 body.menu-details-nature-page,
 .menu-details-nature-page {
   position: relative;
-  background: linear-gradient(180deg, rgba(244, 250, 245, 0.65) 0%, rgba(250, 252, 250, 0.48) 22%, rgba(243, 250, 246, 0.55) 50%, rgba(250, 248, 244, 0.58) 75%, rgba(244, 250, 245, 0.65) 100%),
-              url('../images/home-2-bg.jpg') center center / cover no-repeat fixed !important;
-  background-attachment: fixed !important;
-  background-color: #F4FAF5 !important;
+  background: #FAF8F5 !important;
+  background-color: #FAF8F5 !important;
+  background-image: none !important;
   overflow-x: clip;
 }
 
@@ -4706,10 +5049,9 @@ body.menu-details-nature-page,
 [data-bs-theme="dark"] .menu-details-nature-page,
 html.dark body.menu-details-nature-page,
 html.dark .menu-details-nature-page {
-  background: linear-gradient(180deg, rgba(1, 36, 21, 0.78) 0%, rgba(1, 45, 27, 0.70) 25%, rgba(2, 38, 23, 0.74) 50%, rgba(1, 30, 18, 0.76) 75%, rgba(1, 36, 21, 0.80) 100%),
-              url('../images/home-2-bg.jpg') center center / cover no-repeat fixed !important;
-  background-attachment: fixed !important;
-  background-color: #012415 !important;
+  background: #012417 !important;
+  background-color: #012417 !important;
+  background-image: none !important;
 }
 
 .menu-details-main-content {
@@ -6779,9 +7121,9 @@ html.dark #growerDetailsModal .badge.bg-light {
   justify-content: center;
   padding: clamp(3.5rem, 8vh, 6.5rem) 0;
   box-sizing: border-box;
-  background: 
-    radial-gradient(ellipse at 50% 40%, rgba(1, 45, 26, 0.88) 0%, rgba(1, 35, 20, 0.94) 60%, rgba(1, 25, 14, 0.97) 100%),
-    url('../images/about-bg.jpg') center center / cover no-repeat;
+  background: #0D2818 !important;
+  background-color: #0D2818 !important;
+  background-image: none !important;
   border-top: 1px solid rgba(85, 135, 66, 0.22);
   text-align: center;
   color: #ffffff;
@@ -9140,9 +9482,9 @@ html.dark .gh-events-nature-section {
 .gh-dishes-nature-section {
   position: relative;
   padding: 6rem 0;
-  background-color: #EAFBD7;
-  background: linear-gradient(180deg, rgba(234, 251, 215, 0.70) 0%, rgba(234, 251, 215, 0.38) 45%, rgba(234, 251, 215, 0.70) 100%),
-              url('../images/culinary-workshops-bg.png') center center / cover no-repeat;
+  background: #F3F8F2 !important;
+  background-color: #F3F8F2 !important;
+  background-image: none !important;
   border-top: 1px solid rgba(85, 135, 66, 0.18);
   border-bottom: 1px solid rgba(85, 135, 66, 0.18);
   overflow: hidden;
@@ -9186,9 +9528,9 @@ html.dark .gh-events-nature-section {
 /* Dark mode for featured dishes */
 [data-bs-theme="dark"] .gh-dishes-nature-section,
 html.dark .gh-dishes-nature-section {
-  background-color: #072314;
-  background: linear-gradient(180deg, rgba(2, 38, 22, 0.90) 0%, rgba(2, 38, 22, 0.82) 50%, rgba(2, 38, 22, 0.90) 100%),
-              url('../images/culinary-workshops-bg.png') center center / cover no-repeat;
+  background: #072314 !important;
+  background-color: #072314 !important;
+  background-image: none !important;
   border-color: rgba(0, 255, 127, 0.18);
 }
 
@@ -11529,8 +11871,9 @@ html.dark .h2-step-pill {
 .h2-philosophy-banner {
   position: relative;
   padding: clamp(4.5rem, 6.5vh, 6.5rem) 0;
-  background: linear-gradient(rgba(28, 25, 23, 0.78), rgba(28, 25, 23, 0.86)),
-              url('https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat fixed;
+  background: #14321E !important;
+  background-color: #14321E !important;
+  background-image: none !important;
   color: #FAF8F5;
   text-align: center;
 }
@@ -12377,10 +12720,7 @@ html.dark .home-2-page .h2-process-step p {
 
 .h2-dish-order-btn {
   margin-top: auto;
-  padding: 0.55rem 1rem;
-  font-weight: 700;
-  font-size: 0.84rem;
-  border-radius: var(--radius-md, 12px);
+  border-radius: 50px !important;
 }
 
 /* Sanctuary Live Metrics — Separated Professional Cards System */
@@ -12520,17 +12860,18 @@ html.dark .home-2-page .h2-process-step p {
 }
 
 /* Standalone Separated Seasonal Menu CTA Button */
+/* Standalone Separated Seasonal Menu CTA Button - Aligned with Unified Button System */
 .h2-menu-cta-btn {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(10px);
-  border: 1.5px solid rgba(46, 101, 24, 0.3);
-  color: #1E6023 !important;
-  border-radius: 9999px;
-  padding: 0.75rem 2.2rem !important;
-  font-size: 0.96rem;
-  font-weight: 700;
-  box-shadow: 0 6px 20px rgba(22, 60, 22, 0.08);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  background: #2E6518 !important;
+  border: 1.5px solid #2E6518 !important;
+  color: #FFFFFF !important;
+  border-radius: 50px !important;
+  min-height: 48px !important;
+  padding: 0.72rem 1.85rem !important;
+  font-size: 0.96rem !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 14px rgba(46, 101, 24, 0.25) !important;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -12553,29 +12894,33 @@ html.dark .home-2-page .h2-process-step p {
 }
 
 .h2-menu-cta-btn:hover {
-  background: #1E6023 !important;
+  background: #204811 !important;
+  border-color: #204811 !important;
   color: #FFFFFF !important;
-  border-color: #1E6023 !important;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(30, 96, 35, 0.3);
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 22px rgba(46, 101, 24, 0.38) !important;
 }
 
 .h2-menu-cta-btn:hover i.bi-arrow-right {
   transform: translateX(4px);
 }
 
-[data-bs-theme="dark"] .h2-menu-cta-btn {
-  background: rgba(2, 38, 22, 0.92);
-  border-color: rgba(0, 255, 127, 0.4);
-  color: #88FFB0 !important;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+[data-bs-theme="dark"] .h2-menu-cta-btn,
+html.dark .h2-menu-cta-btn {
+  background: #00FF7F !important;
+  border-color: #00FF7F !important;
+  color: #012417 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 16px rgba(0, 255, 127, 0.25) !important;
 }
 
-[data-bs-theme="dark"] .h2-menu-cta-btn:hover {
-  background: #00FF7F !important;
+[data-bs-theme="dark"] .h2-menu-cta-btn:hover,
+html.dark .h2-menu-cta-btn:hover {
+  background: #26FF91 !important;
+  border-color: #26FF91 !important;
   color: #012417 !important;
-  border-color: #00FF7F !important;
-  box-shadow: 0 10px 30px rgba(0, 255, 127, 0.45);
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(0, 255, 127, 0.40) !important;
 }
 
 /* Mobile Alignment Fix for Seasonal Menu CTA Button */
