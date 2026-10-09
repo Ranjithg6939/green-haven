@@ -3375,12 +3375,21 @@ html.dark .offcanvas nav .dropdown-menu .gh-dropdown-item.active {
 .btn-hero-outline:focus-visible,
 .gh-hero-nature .btn-hero-outline:active,
 .btn-hero-outline:active {
-  background-color: #FFFFFF !important;
-  border-color: #1E5016 !important;
-  color: #123812 !important;
+  background-color: #2E6518 !important;
+  border-color: #2E6518 !important;
+  color: #FFFFFF !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.14) !important;
+  box-shadow: 0 8px 24px rgba(46, 101, 24, 0.35) !important;
   outline: none !important;
+}
+
+.gh-hero-nature .btn-hero-outline:hover i,
+.btn-hero-outline:hover i,
+.gh-hero-nature .btn-hero-outline:focus i,
+.btn-hero-outline:focus i,
+.gh-hero-nature .btn-hero-outline:active i,
+.btn-hero-outline:active i {
+  color: #FFFFFF !important;
 }
 
 /* Dark mode override for home hero secondary button */
@@ -3413,11 +3422,22 @@ html.dark .gh-hero-nature .btn-hero-outline:focus-visible,
 html.dark .btn-hero-outline:focus-visible,
 html.dark .gh-hero-nature .btn-hero-outline:active,
 html.dark .btn-hero-outline:active {
-  background-color: rgba(255, 255, 255, 0.22) !important;
-  border-color: #FFFFFF !important;
-  color: #FFFFFF !important;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45) !important;
+  background-color: #00FF7F !important;
+  border-color: #00FF7F !important;
+  color: #012417 !important;
+  box-shadow: 0 8px 24px rgba(0, 255, 127, 0.45) !important;
   outline: none !important;
+}
+
+[data-bs-theme="dark"] .gh-hero-nature .btn-hero-outline:hover i,
+[data-bs-theme="dark"] .btn-hero-outline:hover i,
+[data-bs-theme="dark"] .gh-hero-nature .btn-hero-outline:active i,
+[data-bs-theme="dark"] .btn-hero-outline:active i,
+html.dark .gh-hero-nature .btn-hero-outline:hover i,
+html.dark .btn-hero-outline:hover i,
+html.dark .gh-hero-nature .btn-hero-outline:active i,
+html.dark .btn-hero-outline:active i {
+  color: #012417 !important;
 }
 
 /* --------------------------------------------------
