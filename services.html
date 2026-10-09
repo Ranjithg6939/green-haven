@@ -290,66 +290,57 @@
       display: none !important;
     }
 
-    /* Custom Luxury CTA Button aligned with Unified Button System */
+    /* Custom Luxury CTA Button with Arrow Slide Animation */
     .services-nature-page .btn-service-action {
-      background: #2E6518 !important;
-      color: #FFFFFF !important;
-      border: 1.5px solid #2E6518 !important;
+      background: rgba(46, 101, 24, 0.08) !important;
+      color: #153218 !important;
+      border: 1.5px solid rgba(46, 101, 24, 0.3) !important;
       border-radius: 50px !important;
-      font-weight: 600 !important;
-      font-size: 0.95rem !important;
-      min-height: 48px !important;
-      padding: 0.72rem 1.65rem !important;
+      font-weight: 700 !important;
+      font-size: 0.88rem !important;
+      padding: 10px 20px !important;
       display: inline-flex !important;
       align-items: center !important;
       justify-content: center !important;
-      gap: 0.6rem !important;
+      gap: 8px !important;
       width: 100% !important;
       text-decoration: none !important;
       position: relative !important;
       overflow: hidden !important;
-      box-shadow: 0 4px 14px rgba(46, 101, 24, 0.25) !important;
-      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
 
     .services-nature-page .btn-service-action i {
-      transition: transform 0.25s ease !important;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
 
     .services-nature-page .btn-service-action:hover {
-      background: #204811 !important;
-      border-color: #204811 !important;
+      background: #2e6518 !important;
       color: #FFFFFF !important;
+      border-color: #2e6518 !important;
       transform: translateY(-2px) !important;
-      box-shadow: 0 8px 22px rgba(46, 101, 24, 0.38) !important;
+      box-shadow: 0 8px 22px rgba(46, 101, 24, 0.28) !important;
     }
 
     .services-nature-page .btn-service-action:hover i {
-      transform: translateX(4px) !important;
+      transform: translateX(6px) !important;
     }
 
     .services-nature-page .btn-service-action:active {
-      background: #17350C !important;
-      border-color: #17350C !important;
-      transform: translateY(0) !important;
+      transform: scale(0.97) !important;
     }
 
-    [data-bs-theme="dark"] .services-nature-page .btn-service-action,
-    html.dark .services-nature-page .btn-service-action {
+    [data-bs-theme="dark"] .services-nature-page .btn-service-action {
+      background: rgba(0, 255, 127, 0.1) !important;
+      color: #DEF5D6 !important;
+      border-color: rgba(0, 255, 127, 0.3) !important;
+    }
+
+    [data-bs-theme="dark"] .services-nature-page .btn-service-action:hover {
       background: #00FF7F !important;
+      color: #012417 !important;
       border-color: #00FF7F !important;
-      color: #012417 !important;
-      font-weight: 700 !important;
-      box-shadow: 0 4px 16px rgba(0, 255, 127, 0.25) !important;
-    }
-
-    [data-bs-theme="dark"] .services-nature-page .btn-service-action:hover,
-    html.dark .services-nature-page .btn-service-action:hover {
-      background: #26FF91 !important;
-      border-color: #26FF91 !important;
-      color: #012417 !important;
-      transform: translateY(-2px) !important;
-      box-shadow: 0 8px 24px rgba(0, 255, 127, 0.40) !important;
+      box-shadow: 0 8px 22px rgba(0, 255, 127, 0.3) !important;
     }
 
     /* ==========================================================================
