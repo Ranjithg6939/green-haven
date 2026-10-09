@@ -14,7 +14,7 @@
       name: 'Heirloom Avocado Tartine',
       category: 'Starters',
       price: 499,
-      image: 'assets/img/dishes/heirloom-avocado-tartine.jpg',
+      image: 'assets/images/Heirloom_Avocado_Tartine.jpg',
       rating: 4.95,
       reviewsCount: 142,
       prepTime: '10-12 mins',
@@ -47,7 +47,7 @@
       name: 'Wood-Fired Wild Herb Flatbread',
       category: 'Starters',
       price: 549,
-      image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=800&auto=format&fit=crop',
+      image: 'assets/images/Wood_Fired_Wild.jpg',
       rating: 4.92,
       reviewsCount: 118,
       prepTime: '12-14 mins',
@@ -392,9 +392,9 @@
       name: 'Emerald Chlorophyll Elixir',
       category: 'Drinks',
       price: 299,
-      image: 'assets/img/dishes/emerald-chlorophyll-elixir.jpg',
-      rating: 4.96,
-      reviewsCount: 178,
+      image: 'assets/images/Emerald_Chlorophyll_Elixir.png',
+      rating: 4.91,
+      reviewsCount: 112,
       prepTime: '3-5 mins',
       description: 'Cold-pressed holy basil, Klamath Lake blue-green spirulina, English cucumber essence, fresh Meyer lemon, and concentrated botanical liquid chlorophyll. Invigorating and deeply alkalizing.',
       dietary: [
@@ -454,9 +454,9 @@
       name: 'Wild Hibiscus Rose Kombucha',
       category: 'Drinks',
       price: 279,
-      image: 'assets/img/dishes/wild-hibiscus-rose-kombucha.jpg',
-      rating: 4.94,
-      reviewsCount: 165,
+      image: 'assets/images/Wild_Hibiscus_Rose_Kombucha.jpg',
+      rating: 4.97,
+      reviewsCount: 145,
       prepTime: '3-5 mins',
       description: 'Small-batch oak barrel fermented living green tea kombucha infused with wild mountain hibiscus blossoms, crushed Damascus rose petals, and sparkling botanical effervescence.',
       dietary: [
@@ -661,7 +661,11 @@
     const protEl = document.getElementById('dishNutriProtein');
     const carbsEl = document.getElementById('dishNutriCarbs');
     const fatEl = document.getElementById('dishNutriFat');
-    if (calEl) calEl.textContent = nutri.calories;
+    if (calEl) {
+      const calRaw = String(nutri.calories || '400');
+      const calNum = calRaw.replace(/[^\d]/g, '') || '400';
+      calEl.innerHTML = `${calNum}&nbsp;<small class="dish-nutri-unit">kcal</small>`;
+    }
     if (protEl) protEl.textContent = nutri.protein;
     if (carbsEl) carbsEl.textContent = nutri.carbs;
     if (fatEl) fatEl.textContent = nutri.fat;
@@ -819,35 +823,35 @@
 
                   <!-- Nutrition Grid -->
                   <div class="dish-nutrition-block p-3 rounded-3 mb-3 border">
-                    <div class="d-flex align-items-center justify-content-between mb-2">
-                      <span class="extra-small fw-bold text-uppercase text-muted letter-spacing-1">
+                    <div class="dish-nutrition-header d-flex align-items-center justify-content-between mb-2">
+                      <span class="dish-nutrition-title extra-small fw-bold text-uppercase text-muted letter-spacing-1">
                         <i class="bi bi-activity text-primary me-1"></i> Nutrition Information
                       </span>
-                      <span class="extra-small text-muted fw-semibold">Clean Organic Profile</span>
+                      <span class="dish-nutrition-tag extra-small text-muted fw-semibold">Clean Organic Profile</span>
                     </div>
-                    <div class="row g-2 text-center" id="dishModalNutritionGrid">
-                      <div class="col-3">
-                        <div class="dish-nutrition-cell p-2 bg-white rounded-2 border shadow-xs">
+                    <div class="row g-2 text-center align-items-stretch" id="dishModalNutritionGrid">
+                      <div class="col-3 d-flex">
+                        <div class="dish-nutrition-cell p-2 bg-white rounded-2 border shadow-xs w-100 d-flex flex-column justify-content-center">
                           <span class="d-block text-muted dish-nutri-label">Calories</span>
-                          <strong class="text-dark fs-6" id="dishNutriCalories">380</strong>
+                          <strong class="text-dark fs-6 dish-nutri-val" id="dishNutriCalories">380</strong>
                         </div>
                       </div>
-                      <div class="col-3">
-                        <div class="dish-nutrition-cell p-2 bg-white rounded-2 border shadow-xs">
+                      <div class="col-3 d-flex">
+                        <div class="dish-nutrition-cell p-2 bg-white rounded-2 border shadow-xs w-100 d-flex flex-column justify-content-center">
                           <span class="d-block text-muted dish-nutri-label">Protein</span>
-                          <strong class="text-success fs-6" id="dishNutriProtein">14g</strong>
+                          <strong class="text-success fs-6 dish-nutri-val" id="dishNutriProtein">14g</strong>
                         </div>
                       </div>
-                      <div class="col-3">
-                        <div class="dish-nutrition-cell p-2 bg-white rounded-2 border shadow-xs">
+                      <div class="col-3 d-flex">
+                        <div class="dish-nutrition-cell p-2 bg-white rounded-2 border shadow-xs w-100 d-flex flex-column justify-content-center">
                           <span class="d-block text-muted dish-nutri-label">Carbs</span>
-                          <strong class="text-dark fs-6" id="dishNutriCarbs">42g</strong>
+                          <strong class="text-dark fs-6 dish-nutri-val" id="dishNutriCarbs">42g</strong>
                         </div>
                       </div>
-                      <div class="col-3">
-                        <div class="dish-nutrition-cell p-2 bg-white rounded-2 border shadow-xs">
+                      <div class="col-3 d-flex">
+                        <div class="dish-nutrition-cell p-2 bg-white rounded-2 border shadow-xs w-100 d-flex flex-column justify-content-center">
                           <span class="d-block text-muted dish-nutri-label">Fat</span>
-                          <strong class="text-dark fs-6" id="dishNutriFat">18g</strong>
+                          <strong class="text-dark fs-6 dish-nutri-val" id="dishNutriFat">18g</strong>
                         </div>
                       </div>
                     </div>
@@ -862,22 +866,22 @@
                   </div>
 
                   <!-- Quantity Selector & Primary Add to Cart -->
-                  <div class="dish-modal-action-bar d-flex align-items-center gap-2.5 pt-3 border-top mt-auto">
+                  <div class="dish-modal-action-bar d-flex align-items-center gap-2 pt-3 border-top mt-auto">
                     <!-- Quantity Stepper -->
-                    <div class="dish-modal-qty-box d-inline-flex align-items-center justify-content-between p-1 border rounded-pill bg-light" style="min-width: 110px; height: 44px;">
-                      <button type="button" class="btn btn-sm btn-light rounded-circle shadow-xs" id="dishModalQtyMinus" aria-label="Decrease quantity" style="width: 32px; height: 32px; padding: 0;">
+                    <div class="dish-modal-qty-box d-inline-flex align-items-center justify-content-between p-1 border rounded-pill bg-light">
+                      <button type="button" class="btn btn-sm btn-light rounded-circle shadow-xs" id="dishModalQtyMinus" aria-label="Decrease quantity">
                         <i class="bi bi-dash"></i>
                       </button>
-                      <input type="number" id="dishModalQtyInput" value="1" min="1" max="99" class="form-control form-control-sm border-0 bg-transparent text-center fw-bold shadow-none p-0" style="width: 36px; font-size: 0.92rem;" readonly>
-                      <button type="button" class="btn btn-sm btn-light rounded-circle shadow-xs" id="dishModalQtyPlus" aria-label="Increase quantity" style="width: 32px; height: 32px; padding: 0;">
+                      <input type="number" id="dishModalQtyInput" value="1" min="1" max="99" class="form-control form-control-sm border-0 bg-transparent text-center fw-bold shadow-none p-0" readonly>
+                      <button type="button" class="btn btn-sm btn-light rounded-circle shadow-xs" id="dishModalQtyPlus" aria-label="Increase quantity">
                         <i class="bi bi-plus"></i>
                       </button>
                     </div>
 
                     <!-- Primary Add to Cart Button -->
-                    <button type="button" class="btn btn-primary btn-md rounded-pill flex-grow-1 d-inline-flex align-items-center justify-content-center gap-2 shadow-sm fw-semibold" id="dishModalAddToCartBtn" style="height: 44px; font-size: 0.95rem;">
-                      <i class="bi bi-bag-plus-fill fs-6"></i>
-                      <span>Add to Cart &bull; ₹<span id="dishModalBtnPrice">0</span></span>
+                    <button type="button" class="btn btn-primary btn-md rounded-pill flex-grow-1 d-inline-flex align-items-center justify-content-center gap-2 shadow-sm fw-semibold" id="dishModalAddToCartBtn">
+                      <i class="bi bi-bag-plus-fill fs-6 flex-shrink-0"></i>
+                      <span class="dish-modal-btn-text">Add to Cart &nbsp; ₹ <span id="dishModalBtnPrice">0</span></span>
                     </button>
                   </div>
 

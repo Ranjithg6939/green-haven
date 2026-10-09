@@ -222,95 +222,11 @@
     },
 
     requireLogin(targetRedirect = null) {
-      if (!this.isLoggedIn()) {
-        const currentPage = targetRedirect || window.location.pathname.split('/').pop() || 'index.html';
-        this.showAuthPrompt({
-          message: 'Please sign in to continue with your order.',
-          pendingAction: { type: 'checkout' },
-          returnUrl: currentPage
-        });
-        return false;
-      }
       return true;
     },
 
     showAuthPrompt(options = {}) {
-      const message = options.message || 'Please sign in to continue with your order.';
-      const returnUrl = options.returnUrl || window.location.pathname.split('/').pop() || 'index.html';
-
-      if (options.pendingAction) {
-        localStorage.setItem(PENDING_ACTION_KEY, JSON.stringify({
-          ...options.pendingAction,
-          returnUrl
-        }));
-      }
-
-      let modalEl = document.getElementById('ghAuthPromptModal');
-      if (!modalEl) {
-        modalEl = document.createElement('div');
-        modalEl.id = 'ghAuthPromptModal';
-        modalEl.className = 'modal fade';
-        modalEl.setAttribute('tabindex', '-1');
-        modalEl.setAttribute('aria-hidden', 'true');
-        modalEl.innerHTML = `
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content gh-auth-modal-card border-0 shadow-lg">
-              <div class="p-4 p-md-5 text-center position-relative">
-                <button type="button" class="btn-close position-absolute top-0 end-0 m-4" data-bs-dismiss="modal" aria-label="Close"></button>
-                <div class="mx-auto mb-3 d-flex align-items-center justify-content-center rounded-circle bg-success bg-opacity-10 text-success" style="width: 64px; height: 64px;">
-                  <i class="bi bi-bag-heart-fill fs-2"></i>
-                </div>
-                <h4 class="font-serif fw-bold mb-2" style="color: var(--gh-heading-color, #262422);">Authentication Required</h4>
-                <p class="text-muted mb-4 fs-6" id="ghAuthPromptMsgText">${escapeHtml(message)}</p>
-
-                <div id="ghAuthPromptPendingBox" class="p-3 rounded-3 bg-light border mb-4 text-start small d-none">
-                  <div class="d-flex align-items-center gap-2">
-                    <i class="bi bi-flower1 text-success fs-5"></i>
-                    <div>
-                      <span class="text-muted d-block" style="font-size: 0.72rem; letter-spacing: 0.5px; text-transform: uppercase;">Selected Dish:</span>
-                      <strong id="ghAuthPromptPendingName" class="text-dark">Dish Name</strong>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="d-flex flex-column gap-2">
-                  <a href="login.html?redirect=${encodeURIComponent(returnUrl)}" class="btn btn-primary py-2.5 fw-semibold" id="btnAuthPromptSignIn">
-                    <i class="bi bi-box-arrow-in-right me-1"></i> Sign In
-                  </a>
-                  <a href="register.html?redirect=${encodeURIComponent(returnUrl)}" class="btn btn-outline-primary py-2.5 fw-semibold" id="btnAuthPromptRegister">
-                    <i class="bi bi-person-plus me-1"></i> Create Account
-                  </a>
-                  <button type="button" class="btn btn-link text-muted py-2 text-decoration-none small" data-bs-dismiss="modal">
-                    Cancel
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
-        document.body.appendChild(modalEl);
-      } else {
-        const msgEl = modalEl.querySelector('#ghAuthPromptMsgText');
-        if (msgEl) msgEl.textContent = message;
-        const regBtn = modalEl.querySelector('#btnAuthPromptRegister');
-        if (regBtn) regBtn.href = `register.html?redirect=${encodeURIComponent(returnUrl)}`;
-      }
-
-      const pendingBox = modalEl.querySelector('#ghAuthPromptPendingBox');
-      const pendingName = modalEl.querySelector('#ghAuthPromptPendingName');
-      if (options.pendingAction && options.pendingAction.item && options.pendingAction.item.name) {
-        if (pendingBox && pendingName) {
-          pendingName.textContent = options.pendingAction.item.name;
-          pendingBox.classList.remove('d-none');
-        }
-      } else if (pendingBox) {
-        pendingBox.classList.add('d-none');
-      }
-
-      if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
-        const bsModal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
-        bsModal.show();
-      }
+      return;
     },
 
     initPasswordToggles(container = document) {
@@ -730,13 +646,7 @@
             </div>
           `;
         } else {
-          return `
-            <div class="d-inline-flex align-items-center gap-2 flex-nowrap">
-              <a href="login.html" class="btn btn-outline-primary btn-sm gh-nav-auth-login-btn" title="Sign In" aria-label="Sign In">
-                <i class="bi bi-box-arrow-in-right me-1"></i><span class="gh-nav-auth-label">Sign In</span>
-              </a>
-            </div>
-          `;
+          return '';
         }
       };
 
@@ -759,11 +669,7 @@
             </div>
           `;
         } else {
-          return `
-            <div class="d-grid gap-2 mb-3">
-              <a href="login.html" class="btn btn-outline-primary w-100 gh-signin-btn-mobile"><i class="bi bi-box-arrow-in-right me-1"></i> Sign In</a>
-            </div>
-          `;
+          return '';
         }
       };
 
@@ -827,20 +733,6 @@
     },
 
     addToCart(item, qty = 1, openDrawer = true) {
-      if (!Auth.isLoggedIn()) {
-        Auth.showAuthPrompt({
-          message: "Please sign in to continue with your order.",
-          pendingAction: {
-            type: 'add_to_cart',
-            item: item,
-            qty: qty,
-            openDrawer: openDrawer
-          },
-          returnUrl: window.location.pathname.split('/').pop() || 'menu.html'
-        });
-        return;
-      }
-
       const items = this.getCart();
       const existing = items.find(i => String(i.id) === String(item.id));
       
@@ -1036,16 +928,8 @@
       overlay?.addEventListener('click', () => this.closeDrawer());
       drawer.querySelector('#ghCartCloseBtn')?.addEventListener('click', () => this.closeDrawer());
       drawer.querySelector('#ghCartContinueShopping')?.addEventListener('click', () => this.closeDrawer());
-      drawer.querySelector('#ghCartCheckoutBtn')?.addEventListener('click', (e) => {
-        if (!Auth.isLoggedIn()) {
-          e.preventDefault();
-          this.closeDrawer();
-          Auth.showAuthPrompt({
-            message: 'Please sign in to continue with your order.',
-            pendingAction: { type: 'checkout' },
-            returnUrl: 'checkout.html'
-          });
-        }
+      drawer.querySelector('#ghCartCheckoutBtn')?.addEventListener('click', () => {
+        this.closeDrawer();
       });
 
       document.addEventListener('keydown', (e) => {
@@ -1179,7 +1063,7 @@
           name: 'Emerald Chlorophyll Elixir',
           category: 'Cold-Pressed',
           price: 299,
-          image: 'assets/img/dishes/emerald-chlorophyll-elixir.jpg'
+          image: 'assets/images/Emerald_Chlorophyll_Elixir.png'
         },
         {
           id: 'dish-18',
@@ -1200,7 +1084,7 @@
           name: 'Wild Herb Flatbread',
           category: 'Starters',
           price: 549,
-          image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=800&auto=format&fit=crop'
+          image: 'assets/images/Wood_Fired_Wild.jpg'
         }
       ];
 

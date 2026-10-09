@@ -7,11 +7,14 @@
 (function() {
   try {
     var storedDir = localStorage.getItem('site-dir');
+    var storedLang = localStorage.getItem('site-lang') || 'en';
     if (storedDir === 'rtl') {
       document.documentElement.setAttribute('dir', 'rtl');
+      document.documentElement.setAttribute('lang', 'en');
       document.documentElement.classList.add('rtl');
     } else {
       document.documentElement.setAttribute('dir', 'ltr');
+      document.documentElement.setAttribute('lang', 'en');
       document.documentElement.classList.remove('rtl');
     }
     var storedTheme = localStorage.getItem('site-theme');
@@ -444,8 +447,25 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (err) {}
   }
 
+  /* --------------------------------------------------
+     2.1. TEXT DIRECTION & NATURAL READING ORDER
+     Preserves natural English reading order in both LTR & RTL:
+     LTR visual: "Where Nature"
+     RTL visual: "Where Nature" (aligned naturally to RTL start/right)
+  -------------------------------------------------- */
+  function initWordMirror() {
+    // English words maintain natural reading order ("Where Nature")
+    // Layout and container mirroring handled via CSS dir="rtl"
+  }
+
+  window.GreenHavenWordMirror = {
+    init: initWordMirror,
+    process: function(el) {}
+  };
+
   function applyDir(dir) {
     document.documentElement.setAttribute('dir', dir);
+    document.documentElement.setAttribute('lang', 'en');
     if (dir === 'rtl') {
       document.documentElement.classList.add('rtl');
       rtlToggleBtns.forEach(btn => {
@@ -464,10 +484,27 @@ document.addEventListener('DOMContentLoaded', () => {
       fixAllPunctuationBidi(false);
     }
     localStorage.setItem('site-dir', dir);
-    window.dispatchEvent(new CustomEvent('siteDirectionChange', { detail: { dir } }));
+    localStorage.setItem('site-lang', 'en');
+    initWordMirror();
+    window.dispatchEvent(new CustomEvent('siteDirectionChange', { detail: { dir, lang: 'en' } }));
   }
 
   applyDir(storedDir);
+  initWordMirror();
+
+  if (typeof MutationObserver !== 'undefined' && document.body) {
+    const observer = new MutationObserver((mutations) => {
+      let shouldRun = false;
+      for (const m of mutations) {
+        if (m.addedNodes.length > 0) {
+          shouldRun = true;
+          break;
+        }
+      }
+      if (shouldRun) initWordMirror();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
 
   document.addEventListener('click', (e) => {
     const btn = e.target.closest('.rtl-toggle-btn');
@@ -592,7 +629,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileToggles = document.querySelectorAll('.gh-mobile-toggle, [data-bs-target="#mobileMenuOffcanvas"]');
 
   function enforceResponsiveMobileToggle() {
-    const isDesktop = window.innerWidth >= 992;
+    const isDesktop = window.innerWidth >= 769;
     mobileToggles.forEach(t => {
       if (isDesktop) {
         t.style.setProperty('display', 'none', 'important');
@@ -3036,31 +3073,39 @@ document.addEventListener('DOMContentLoaded', () => {
         <!-- Column 2: Navigation -->
         <div class="col-lg-3 col-md-6 footer-col">
           <h4 class="footer-col-title">Navigation</h4>
-          <ul class="list-unstyled d-flex flex-column gap-2 mb-0 footer-nav-list">
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-3 footer-nav-list">
             <li><a href="index.html" class="footer-link"><i class="bi bi-chevron-right"></i> Home</a></li>
-            <li><a href="about.html" class="footer-link"><i class="bi bi-chevron-right"></i> About Us</a></li>
-            <li><a href="menu.html" class="footer-link"><i class="bi bi-chevron-right"></i> Our Menu</a></li>
-            <li><a href="cart.html" class="footer-link"><i class="bi bi-chevron-right"></i> Food Cart</a></li>
+            <li><a href="about.html" class="footer-link"><i class="bi bi-chevron-right"></i> About</a></li>
+            <li><a href="menu.html" class="footer-link"><i class="bi bi-chevron-right"></i> Menu</a></li>
+            <li><a href="services.html" class="footer-link"><i class="bi bi-chevron-right"></i> Services</a></li>
             <li><a href="catering.html" class="footer-link"><i class="bi bi-chevron-right"></i> Catering</a></li>
-            <li><a href="contact.html" class="footer-link"><i class="bi bi-chevron-right"></i> Contact Us</a></li>
+            <li><a href="pricing.html" class="footer-link"><i class="bi bi-chevron-right"></i> Packages</a></li>
           </ul>
         </div>
 
         <!-- Column 3: Hours & Location -->
         <div class="col-lg-3 col-md-6 footer-col">
           <h4 class="footer-col-title">Hours &amp; Location</h4>
-          <div class="footer-contact-info d-flex flex-column gap-2 mb-0">
-            <p class="text-white-50 small mb-0 d-flex align-items-start gap-2">
+          <div class="footer-contact-info d-flex flex-column gap-2 mb-3">
+            <p class="small mb-0 d-flex align-items-start gap-2">
               <i class="bi bi-geo-alt text-warning mt-1 flex-shrink-0"></i>
-              <span>742 Evergreen Botanical Way, Portland</span>
+              <span>742 Evergreen Botanical Way, Portland, OR 97201</span>
             </p>
-            <p class="text-white-50 small mb-0 d-flex align-items-center gap-2">
+            <p class="small mb-0 d-flex align-items-center gap-2">
               <i class="bi bi-clock text-warning flex-shrink-0"></i>
-              <span>Mon - Sun: 8:00 AM - 10:00 PM</span>
+              <span>Mon - Fri: 8:00 AM - 10:00 PM</span>
             </p>
-            <p class="text-white-50 small mb-0 d-flex align-items-center gap-2">
+            <p class="small mb-0 d-flex align-items-center gap-2">
+              <i class="bi bi-clock text-warning flex-shrink-0"></i>
+              <span>Sat - Sun, 9:00 AM - 3:00 PM</span>
+            </p>
+            <p class="small mb-0 d-flex align-items-center gap-2">
               <i class="bi bi-telephone text-warning flex-shrink-0"></i>
               <a href="tel:+15035550192" class="text-decoration-none">+1 (503) 555-0192</a>
+            </p>
+            <p class="small mb-0 d-flex align-items-center gap-2">
+              <i class="bi bi-envelope text-warning flex-shrink-0"></i>
+              <a href="https://mail.google.com/" target="_blank" rel="noopener noreferrer" class="text-decoration-none">hello@greenhaven.com</a>
             </p>
           </div>
         </div>
@@ -3068,9 +3113,9 @@ document.addEventListener('DOMContentLoaded', () => {
         <!-- Column 4: Botanical Digest -->
         <div class="col-lg-3 col-md-6 footer-col">
           <h4 class="footer-col-title">Botanical Digest</h4>
-          <p class="text-white-50 small mb-3">Join our newsletter for seasonal menu previews and chef recipes.</p>
+          <p class="small mb-3">Join our newsletter for seasonal menu previews, wild foraging updates, and chef masterclass recipes.</p>
           <form class="newsletter-form d-flex gap-2">
-            <input type="email" pattern="[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)" class="form-control form-control-sm" placeholder="Your email" required>
+            <input type="email" pattern="[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)" class="form-control form-control-sm" placeholder="Your email address" required>
             <button type="submit" class="btn btn-accent btn-sm px-3">Join</button>
           </form>
         </div>
@@ -3078,15 +3123,8 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
 
       <!-- Bottom Line -->
-      <div class="footer-bottom border-top pt-4 mt-4 text-white-50 small">
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
-          <div>&copy; 2026 Green Haven Restaurant. All Rights Reserved.</div>
-          <div class="d-flex gap-3">
-            <a href="#privacyPolicy" class="text-decoration-none gh-legal-link" data-legal="privacy" role="button">Privacy Policy</a>
-            <span>&bull;</span>
-            <a href="#termsConditions" class="text-decoration-none gh-legal-link" data-legal="terms" role="button">Terms &amp; Conditions</a>
-          </div>
-        </div>
+      <div class="footer-bottom border-top pt-4 mt-4 text-center">
+        <p class="mb-0 text-white-50 small">&copy; 2026 Green Haven Restaurant. All rights reserved.</p>
       </div>
     </div>
   </footer>

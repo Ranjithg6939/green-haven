@@ -23,7 +23,10 @@ const pageActiveMap = {
   'my-account.html': 'none',
   '404.html': '404',
   'coming-soon.html': 'coming-soon',
-  'maintenance.html': 'maintenance'
+  'maintenance.html': 'maintenance',
+  'service-details.html': 'services',
+  'blog-details.html': 'blog',
+  'menu-details.html': 'menu'
 };
 
 function buildNavbarSnippet(activeKey) {
@@ -50,14 +53,14 @@ function buildNavbarSnippet(activeKey) {
         </a>
 
         <!-- Desktop Navigation Links -->
-        <nav class="d-none d-lg-flex align-items-center gap-1">
+        <nav class="gh-nav-desktop align-items-center gap-1">
           <div class="dropdown">
             <a class="gh-nav-link ${isHome ? 'active' : ''} dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Home
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item ${activeKey === 'home1' ? 'active' : ''}" href="index.html">Home 1 (Gourmet Landing)</a></li>
-              <li><a class="gh-dropdown-item ${activeKey === 'home2' ? 'active' : ''}" href="home-2.html">Home 2 (Farm to Plate)</a></li>
+              <li><a class="gh-dropdown-item ${activeKey === 'home1' ? 'active' : ''}" href="index.html">Gourmet Landing</a></li>
+              <li><a class="gh-dropdown-item ${activeKey === 'home2' ? 'active' : ''}" href="home-2.html">Farm Plate</a></li>
             </ul>
           </div>
           <a class="gh-nav-link ${activeKey === 'about' ? 'active' : ''}" href="about.html">About</a>
@@ -97,21 +100,14 @@ function buildNavbarSnippet(activeKey) {
             <span id="navCartCount" class="cart-badge-count" style="display: none;">0</span>
           </a>
 
-          <!-- Reserve Table Icon (Desktop & Tablet only) -->
-          <a href="reservation.html" class="reserve-nav-btn d-none d-md-inline-flex" title="Reserve Table" aria-label="Reserve Table" data-bs-toggle="tooltip" data-bs-placement="bottom">
+          <!-- Reserve Table Icon (Desktop & Tablet only >= 968px) -->
+          <a href="reservation.html" class="reserve-nav-btn" title="Reserve Table" aria-label="Reserve Table" data-bs-toggle="tooltip" data-bs-placement="bottom">
             <i class="bi bi-calendar2-check"></i>
           </a>
 
-          <!-- Standard Desktop Auth (Sign In) -->
-          <div id="navAuthContainer" class="d-none d-md-block">
-            <div class="d-inline-flex align-items-center gap-2 flex-nowrap">
-              <a href="login.html" class="btn btn-outline-primary btn-sm gh-nav-auth-login-btn" title="Sign In" aria-label="Sign In">
-                <i class="bi bi-box-arrow-in-right me-1"></i><span class="gh-nav-auth-label">Sign In</span>
-              </a>
-            </div>
-          </div>
+          <div id="navAuthContainer"></div>
 
-          <button class="btn btn-icon btn-outline-primary d-lg-none gh-mobile-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenuOffcanvas" aria-controls="mobileMenuOffcanvas" aria-label="Open mobile navigation">
+          <button class="btn btn-icon btn-outline-primary gh-mobile-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenuOffcanvas" aria-controls="mobileMenuOffcanvas" aria-label="Open mobile navigation">
             <i class="bi bi-list fs-4"></i>
           </button>
         </div>
@@ -139,14 +135,10 @@ function buildNavbarSnippet(activeKey) {
     </div>
     <div class="offcanvas-body p-4 d-flex flex-column justify-content-between">
       <div>
-        <div id="mobileNavAuthContainer" class="mb-3">
-          <div class="d-flex gap-2">
-            <a href="login.html" class="btn btn-outline-primary btn-sm flex-fill"><i class="bi bi-box-arrow-in-right me-1"></i> Sign In</a>
-          </div>
-        </div>
+        <div id="mobileNavAuthContainer" class="mb-3"></div>
         <nav class="d-flex flex-column gap-2">
-          <a class="gh-nav-link ${activeKey === 'home1' ? 'active' : ''}" href="index.html">Home (Gourmet)</a>
-          <a class="gh-nav-link ${activeKey === 'home2' ? 'active' : ''}" href="home-2.html">Home (Farm to Plate)</a>
+          <a class="gh-nav-link ${activeKey === 'home1' ? 'active' : ''}" href="index.html">Gourmet Landing</a>
+          <a class="gh-nav-link ${activeKey === 'home2' ? 'active' : ''}" href="home-2.html">Farm Plate</a>
           <a class="gh-nav-link ${activeKey === 'about' ? 'active' : ''}" href="about.html">About Us</a>
           <a class="gh-nav-link ${activeKey === 'menu' ? 'active' : ''}" href="menu.html">Full Restaurant Menu</a>
           <a class="gh-nav-link" href="cart.html"><i class="bi bi-bag me-1"></i> My Dining Cart</a>

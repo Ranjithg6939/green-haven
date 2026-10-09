@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
+<html dir="ltr" lang="en" data-bs-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,6 +25,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <!-- Custom Master Stylesheet -->
   <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Master RTL Stylesheet -->
+  <link rel="stylesheet" href="assets/css/rtl.css">
 </head>
 <body class="about-nature-page">
 
@@ -97,14 +99,14 @@
         </a>
 
         <!-- Desktop Navigation Links -->
-        <nav class="d-none d-lg-flex align-items-center gap-1">
+        <nav class="gh-nav-desktop align-items-center gap-1">
           <div class="dropdown">
             <a class="gh-nav-link  dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Home
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item " href="index.html">Home 1 (Gourmet Landing)</a></li>
-              <li><a class="gh-dropdown-item " href="home-2.html">Home 2 (Farm to Plate)</a></li>
+              <li><a class="gh-dropdown-item " href="index.html">Gourmet Landing</a></li>
+              <li><a class="gh-dropdown-item " href="home-2.html">Farm Plate</a></li>
             </ul>
           </div>
           <a class="gh-nav-link active" href="about.html">About</a>
@@ -144,21 +146,14 @@
             <span id="navCartCount" class="cart-badge-count" style="display: none;">0</span>
           </a>
 
-          <!-- Reserve Table Icon (Desktop & Tablet only) -->
-          <a href="reservation.html" class="reserve-nav-btn d-none d-md-inline-flex" title="Reserve Table" aria-label="Reserve Table" data-bs-toggle="tooltip" data-bs-placement="bottom">
+          <!-- Reserve Table Icon (Desktop & Tablet only >= 968px) -->
+          <a href="reservation.html" class="reserve-nav-btn" title="Reserve Table" aria-label="Reserve Table" data-bs-toggle="tooltip" data-bs-placement="bottom">
             <i class="bi bi-calendar2-check"></i>
           </a>
 
-          <!-- Standard Desktop Auth (Sign In) -->
-          <div id="navAuthContainer" class="d-none d-md-block">
-            <div class="d-inline-flex align-items-center gap-2 flex-nowrap">
-              <a href="login.html" class="btn btn-outline-primary btn-sm gh-nav-auth-login-btn" title="Sign In" aria-label="Sign In">
-                <i class="bi bi-box-arrow-in-right me-1"></i><span class="gh-nav-auth-label">Sign In</span>
-              </a>
-            </div>
-          </div>
+          <div id="navAuthContainer"></div>
 
-          <button class="btn btn-icon btn-outline-primary d-lg-none gh-mobile-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenuOffcanvas" aria-controls="mobileMenuOffcanvas" aria-label="Open mobile navigation">
+          <button class="btn btn-icon btn-outline-primary gh-mobile-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenuOffcanvas" aria-controls="mobileMenuOffcanvas" aria-label="Open mobile navigation">
             <i class="bi bi-list fs-4"></i>
           </button>
         </div>
@@ -186,14 +181,10 @@
     </div>
     <div class="offcanvas-body p-4 d-flex flex-column justify-content-between">
       <div>
-        <div id="mobileNavAuthContainer" class="mb-3">
-          <div class="d-flex gap-2">
-            <a href="login.html" class="btn btn-outline-primary btn-sm flex-fill"><i class="bi bi-box-arrow-in-right me-1"></i> Sign In</a>
-          </div>
-        </div>
+        <div id="mobileNavAuthContainer" class="mb-3"></div>
         <nav class="d-flex flex-column gap-2">
-          <a class="gh-nav-link " href="index.html">Home (Gourmet)</a>
-          <a class="gh-nav-link " href="home-2.html">Home (Farm to Plate)</a>
+          <a class="gh-nav-link " href="index.html">Gourmet Landing</a>
+          <a class="gh-nav-link " href="home-2.html">Farm Plate</a>
           <a class="gh-nav-link active" href="about.html">About Us</a>
           <a class="gh-nav-link " href="menu.html">Full Restaurant Menu</a>
           <a class="gh-nav-link" href="cart.html"><i class="bi bi-bag me-1"></i> My Dining Cart</a>
@@ -263,7 +254,7 @@
           </div>
           <div class="col-lg-6 d-flex">
             <div class="ethos-img-wrapper w-100 h-100 position-relative hero-dish-img-wrap">
-              <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=900&auto=format&fit=crop" alt="Green Haven Conservatory Dining Room" class="w-100 h-100">
+              <img src="assets/images/Born_from.jpg" alt="Green Haven Conservatory Dining Room" class="w-100 h-100">
               
               <!-- Luxury Glitter & Sparkle Effects Overlay -->
               <div class="hero-glitter-overlay" aria-hidden="true">
@@ -307,16 +298,6 @@
                 <span class="glitter-dot gd-5" style="top: 52%; right: 18%;"></span>
                 <span class="glitter-dot gd-6" style="bottom: 28%; left: 46%;"></span>
                 <span class="glitter-dot gd-7" style="bottom: 18%; right: 30%;"></span>
-              </div>
-
-              <!-- Floating Story Experience Badge -->
-              <div class="about-story-float-card">
-                <div class="about-story-float-icon">
-                  <i class="bi bi-flower1"></i>
-                </div>
-                <div>
-                  <div class="fw-bold small text-white">100% Farm to Table</div>
-                </div>
               </div>
             </div>
           </div>
@@ -547,7 +528,7 @@
           <div class="col-md-6 col-lg-3 text-center">
             <div class="chef-profile-card p-3 rounded-4 bg-card border shadow-sm h-100 d-flex flex-column align-items-center">
               <div class="chef-avatar-wrap mb-3">
-                <img src="assets/images/elena-rostova.jpg" alt="Chef Elena Rostova" class="rounded-circle shadow-md chef-avatar-img">
+                <img src="assets/images/Elena_Rostova.jpg" alt="Chef Elena Rostova" class="rounded-circle shadow-md chef-avatar-img">
               </div>
               <h5 class="fw-bold mb-1">Elena Rostova</h5>
               <div class="text-success small fw-bold mb-2">Head of Pastry &amp; Fermentation</div>
@@ -579,7 +560,7 @@
           <div class="col-md-6 col-lg-3 text-center">
             <div class="chef-profile-card p-3 rounded-4 bg-card border shadow-sm h-100 d-flex flex-column align-items-center">
               <div class="chef-avatar-wrap mb-3">
-                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400&auto=format&fit=crop" alt="Dr. Maya Chen" class="rounded-circle shadow-md chef-avatar-img">
+                <img src="assets/images/Maya_Chen.jpg" alt="Dr. Maya Chen" class="rounded-circle shadow-md chef-avatar-img">
               </div>
               <h5 class="fw-bold mb-1">Dr. Maya Chen</h5>
               <div class="text-success small fw-bold mb-2">Lead Ethnobotanist</div>
@@ -855,7 +836,7 @@
     </section>
   </main>
 
-        <!-- Universal 4-Column Luxury Footer -->
+                  <!-- Universal 4-Column Luxury Footer -->
   <footer class="gh-footer">
     <div class="container">
       <div class="row g-4 g-lg-5 mb-5 align-items-start">
@@ -866,7 +847,7 @@
             <img src="assets/images/logo-g.png" alt="Green Haven Logo" class="gh-brand-logo-img me-2">
             <span class="gh-brand-text">Green Haven</span>
           </a>
-          <p class="footer-bio mb-4">
+          <p class="footer-bio mb-3">
             An organic plant-based restaurant sanctuary celebrating vibrant seasonal gastronomy, regenerative agriculture, and holistic well-being.
           </p>
           <div class="footer-social-group d-flex gap-2 flex-wrap">
@@ -881,31 +862,39 @@
         <!-- Column 2: Navigation -->
         <div class="col-lg-3 col-md-6 footer-col">
           <h4 class="footer-col-title">Navigation</h4>
-          <ul class="list-unstyled d-flex flex-column gap-2 mb-0 footer-nav-list">
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-3 footer-nav-list">
             <li><a href="index.html" class="footer-link"><i class="bi bi-chevron-right"></i> Home</a></li>
-            <li><a href="about.html" class="footer-link"><i class="bi bi-chevron-right"></i> About Us</a></li>
-            <li><a href="menu.html" class="footer-link"><i class="bi bi-chevron-right"></i> Our Menu</a></li>
-            <li><a href="cart.html" class="footer-link"><i class="bi bi-chevron-right"></i> Food Cart</a></li>
+            <li><a href="about.html" class="footer-link"><i class="bi bi-chevron-right"></i> About</a></li>
+            <li><a href="menu.html" class="footer-link"><i class="bi bi-chevron-right"></i> Menu</a></li>
+            <li><a href="services.html" class="footer-link"><i class="bi bi-chevron-right"></i> Services</a></li>
             <li><a href="catering.html" class="footer-link"><i class="bi bi-chevron-right"></i> Catering</a></li>
-            <li><a href="contact.html" class="footer-link"><i class="bi bi-chevron-right"></i> Contact Us</a></li>
+            <li><a href="pricing.html" class="footer-link"><i class="bi bi-chevron-right"></i> Packages</a></li>
           </ul>
         </div>
 
         <!-- Column 3: Hours & Location -->
         <div class="col-lg-3 col-md-6 footer-col">
           <h4 class="footer-col-title">Hours &amp; Location</h4>
-          <div class="footer-contact-info d-flex flex-column gap-2 mb-0">
-            <p class="text-white-50 small mb-0 d-flex align-items-start gap-2">
+          <div class="footer-contact-info d-flex flex-column gap-2 mb-3">
+            <p class="small mb-0 d-flex align-items-start gap-2">
               <i class="bi bi-geo-alt text-warning mt-1 flex-shrink-0"></i>
-              <span>742 Evergreen Botanical Way, Portland</span>
+              <span>742 Evergreen Botanical Way, Portland, OR 97201</span>
             </p>
-            <p class="text-white-50 small mb-0 d-flex align-items-center gap-2">
+            <p class="small mb-0 d-flex align-items-center gap-2">
               <i class="bi bi-clock text-warning flex-shrink-0"></i>
-              <span>Mon - Sun: 8:00 AM - 10:00 PM</span>
+              <span>Mon - Fri: 8:00 AM - 10:00 PM</span>
             </p>
-            <p class="text-white-50 small mb-0 d-flex align-items-center gap-2">
+            <p class="small mb-0 d-flex align-items-center gap-2">
+              <i class="bi bi-clock text-warning flex-shrink-0"></i>
+              <span>Sat - Sun, 9:00 AM - 3:00 PM</span>
+            </p>
+            <p class="small mb-0 d-flex align-items-center gap-2">
               <i class="bi bi-telephone text-warning flex-shrink-0"></i>
               <a href="tel:+15035550192" class="text-decoration-none">+1 (503) 555-0192</a>
+            </p>
+            <p class="small mb-0 d-flex align-items-center gap-2">
+              <i class="bi bi-envelope text-warning flex-shrink-0"></i>
+              <a href="https://mail.google.com/" target="_blank" rel="noopener noreferrer" class="text-decoration-none">hello@greenhaven.com</a>
             </p>
           </div>
         </div>
@@ -913,9 +902,9 @@
         <!-- Column 4: Botanical Digest -->
         <div class="col-lg-3 col-md-6 footer-col">
           <h4 class="footer-col-title">Botanical Digest</h4>
-          <p class="text-white-50 small mb-3">Join our newsletter for seasonal menu previews and chef recipes.</p>
+          <p class="small mb-3">Join our newsletter for seasonal menu previews, wild foraging updates, and chef masterclass recipes.</p>
           <form class="newsletter-form d-flex gap-2">
-            <input type="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)" class="form-control form-control-sm" placeholder="Your email" required>
+            <input type="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)" class="form-control form-control-sm" placeholder="Your email address" required>
             <button type="submit" class="btn btn-accent btn-sm px-3">Join</button>
           </form>
         </div>
@@ -923,15 +912,8 @@
       </div>
 
       <!-- Bottom Line -->
-      <div class="footer-bottom border-top pt-4 mt-4 text-white-50 small">
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
-          <div>&copy; 2026 Green Haven Restaurant. All Rights Reserved.</div>
-          <div class="d-flex gap-3">
-            <a href="#privacyPolicy" class="text-decoration-none gh-legal-link" data-legal="privacy" role="button">Privacy Policy</a>
-            <span>&bull;</span>
-            <a href="#termsConditions" class="text-decoration-none gh-legal-link" data-legal="terms" role="button">Terms &amp; Conditions</a>
-          </div>
-        </div>
+      <div class="footer-bottom border-top pt-4 mt-4 text-center">
+        <p class="mb-0 text-white-50 small">&copy; 2026 Green Haven Restaurant. All rights reserved.</p>
       </div>
     </div>
   </footer>

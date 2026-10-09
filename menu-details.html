@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
+<html dir="ltr" lang="en" data-bs-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="refresh" content="0; url=menu.html">
@@ -104,46 +104,30 @@
         </a>
 
         <!-- Desktop Navigation Links -->
-        <nav class="d-none d-lg-flex align-items-center gap-1">
+        <nav class="gh-nav-desktop align-items-center gap-1">
           <div class="dropdown">
             <a class="gh-nav-link  dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Home
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item " href="index.html">Home 1 (Gourmet Landing)</a></li>
-              <li><a class="gh-dropdown-item " href="home-2.html">Home 2 (Farm to Plate)</a></li>
+              <li><a class="gh-dropdown-item " href="index.html">Gourmet Landing</a></li>
+              <li><a class="gh-dropdown-item " href="home-2.html">Farm Plate</a></li>
             </ul>
           </div>
           <a class="gh-nav-link " href="about.html">About</a>
           <a class="gh-nav-link active" href="menu.html">Menu</a>
-          <div class="dropdown">
-            <a class="gh-nav-link  dropdown-toggle" href="services.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Services
-            </a>
-            <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item " href="services.html"><i class="bi bi-grid-fill me-2"></i> Our Services</a></li>
-              <li><a class="gh-dropdown-item " href="service-details.html"><i class="bi bi-file-earmark-text me-2"></i> Service Details</a></li>
-            </ul>
-          </div>
+          <a class="gh-nav-link " href="services.html">Services</a>
           <a class="gh-nav-link " href="catering.html">Catering</a>
           <a class="gh-nav-link " href="pricing.html">Packages</a>
+          <a class="gh-nav-link " href="blog.html">Blog</a>
           <div class="dropdown">
-            <a class="gh-nav-link  dropdown-toggle" href="blog.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Blog
-            </a>
-            <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item " href="blog.html"><i class="bi bi-card-text me-2"></i> Food &amp; Wellness Blog</a></li>
-              <li><a class="gh-dropdown-item " href="blog-details.html"><i class="bi bi-layout-text-window me-2"></i> Article Details</a></li>
-            </ul>
-          </div>
-          <div class="dropdown">
-            <a class="gh-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="gh-nav-link  dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Pages
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
-              <li><a class="gh-dropdown-item" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
-              <li><a class="gh-dropdown-item" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
+              <li><a class="gh-dropdown-item " href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
+              <li><a class="gh-dropdown-item " href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
+              <li><a class="gh-dropdown-item " href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
             </ul>
           </div>
           <a class="gh-nav-link " href="contact.html">Contact</a>
@@ -167,21 +151,14 @@
             <span id="navCartCount" class="cart-badge-count" style="display: none;">0</span>
           </a>
 
-          <!-- Reserve Table Icon (Desktop & Tablet only) -->
-          <a href="reservation.html" class="reserve-nav-btn d-none d-md-inline-flex" title="Reserve Table" aria-label="Reserve Table" data-bs-toggle="tooltip" data-bs-placement="bottom">
+          <!-- Reserve Table Icon (Desktop & Tablet only >= 968px) -->
+          <a href="reservation.html" class="reserve-nav-btn" title="Reserve Table" aria-label="Reserve Table" data-bs-toggle="tooltip" data-bs-placement="bottom">
             <i class="bi bi-calendar2-check"></i>
           </a>
 
-          <!-- Standard Desktop Auth (Sign In) -->
-          <div id="navAuthContainer" class="d-none d-md-block">
-            <div class="d-inline-flex align-items-center gap-2 flex-nowrap">
-              <a href="login.html" class="btn btn-outline-primary btn-sm gh-nav-auth-login-btn" title="Sign In" aria-label="Sign In">
-                <i class="bi bi-box-arrow-in-right me-1"></i><span class="gh-nav-auth-label">Sign In</span>
-              </a>
-            </div>
-          </div>
+          <div id="navAuthContainer"></div>
 
-          <button class="btn btn-icon btn-outline-primary d-lg-none gh-mobile-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenuOffcanvas" aria-controls="mobileMenuOffcanvas" aria-label="Open navigation menu" aria-expanded="false">
+          <button class="btn btn-icon btn-outline-primary gh-mobile-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenuOffcanvas" aria-controls="mobileMenuOffcanvas" aria-label="Open mobile navigation">
             <i class="bi bi-list fs-4"></i>
           </button>
         </div>
@@ -209,14 +186,10 @@
     </div>
     <div class="offcanvas-body p-4 d-flex flex-column justify-content-between">
       <div>
-        <div id="mobileNavAuthContainer" class="mb-3">
-          <div class="d-flex gap-2">
-            <a href="login.html" class="btn btn-outline-primary btn-sm flex-fill"><i class="bi bi-box-arrow-in-right me-1"></i> Sign In</a>
-          </div>
-        </div>
+        <div id="mobileNavAuthContainer" class="mb-3"></div>
         <nav class="d-flex flex-column gap-2">
-          <a class="gh-nav-link " href="index.html">Home (Gourmet)</a>
-          <a class="gh-nav-link " href="home-2.html">Home (Farm to Plate)</a>
+          <a class="gh-nav-link " href="index.html">Gourmet Landing</a>
+          <a class="gh-nav-link " href="home-2.html">Farm Plate</a>
           <a class="gh-nav-link " href="about.html">About Us</a>
           <a class="gh-nav-link active" href="menu.html">Full Restaurant Menu</a>
           <a class="gh-nav-link" href="cart.html"><i class="bi bi-bag me-1"></i> My Dining Cart</a>
@@ -229,9 +202,9 @@
               Pages
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
-              <li><a class="gh-dropdown-item" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
-              <li><a class="gh-dropdown-item" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
+              <li><a class="gh-dropdown-item " href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
+              <li><a class="gh-dropdown-item " href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
+              <li><a class="gh-dropdown-item " href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
             </ul>
           </div>
           <a class="gh-nav-link " href="contact.html">Contact Us</a>
@@ -504,7 +477,7 @@
                 <div class="dish-card-badge">
                   <span class="dietary-pill pill-vegan"><span class="pill-icon">🌱</span> 100% Vegan</span>
                 </div>
-                <img src="assets/img/dishes/heirloom-avocado-tartine.jpg" alt="Heirloom Avocado Tartine">
+                <img src="assets/images/Heirloom_Avocado_Tartine.jpg" alt="Heirloom Avocado Tartine">
                 <div class="dish-card-price">₹499</div>
               </div>
               <div class="dish-card-body">
@@ -513,7 +486,7 @@
                 <p class="dish-desc">Grilled artisanal sourdough, whipped Meyer lemon avocado mousse, shaved radishes, pickled shallots, and hemp dukkah spice.</p>
                 <div class="d-flex align-items-center justify-content-between pt-3 border-top mt-auto">
                   <a href="menu-details.html?dish=dish-1" class="btn btn-outline-success rounded-pill px-3 py-1.5 btn-sm btn-dish-details" data-dish-id="dish-1">Details</a>
-                  <button type="button" class="btn btn-primary rounded-pill px-3 py-1.5 btn-sm d-inline-flex align-items-center gap-1" data-add-to-cart data-id="dish-1" data-name="Heirloom Avocado Tartine" data-price="499" data-image="assets/img/dishes/heirloom-avocado-tartine.jpg" data-category="Starters">
+                  <button type="button" class="btn btn-primary rounded-pill px-3 py-1.5 btn-sm d-inline-flex align-items-center gap-1" data-add-to-cart data-id="dish-1" data-name="Heirloom Avocado Tartine" data-price="499" data-image="assets/images/Heirloom_Avocado_Tartine.jpg" data-category="Starters">
                     <i class="bi bi-cart-plus me-1"></i> Add to Cart
                   </button>
                 </div>
@@ -528,16 +501,16 @@
                 <div class="dish-card-badge">
                   <span class="dietary-pill pill-vegan"><span class="pill-icon">🌱</span> 100% Vegan</span>
                 </div>
-                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=800&auto=format&fit=crop" alt="Wood-Fired Wild Herb Flatbread">
+                <img src="assets/images/Wood_Fired_Wild.jpg" alt="Wood-Fired Wild Herb Flatbread">
                 <div class="dish-card-price">₹549</div>
               </div>
               <div class="dish-card-body">
                 <div class="dish-category">Starters</div>
-                <h4 class="dish-title"><a href="menu-details.html">Wood-Fired Wild Herb Flatbread</a></h4>
+                <h4 class="dish-title"><a href="menu-details.html?dish=dish-6">Wood-Fired Wild Herb Flatbread</a></h4>
                 <p class="dish-desc">Heritage spelt dough, roasted garlic puree, slow-braised leeks, pine nut ricotta, and garden-picked rosemary oil.</p>
                 <div class="d-flex align-items-center justify-content-between pt-3 border-top mt-auto">
-                  <a href="menu-details.html" class="btn btn-outline-success rounded-pill px-3 py-1.5 btn-sm">Details</a>
-                  <button type="button" class="btn btn-primary rounded-pill px-3 py-1.5 btn-sm d-inline-flex align-items-center gap-1" data-add-to-cart data-id="dish-6" data-name="Wood-Fired Wild Herb Flatbread" data-price="549" data-image="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=800&auto=format&fit=crop" data-category="Starters">
+                  <a href="menu-details.html?dish=dish-6" class="btn btn-outline-success rounded-pill px-3 py-1.5 btn-sm btn-dish-details" data-dish-id="dish-6">Details</a>
+                  <button type="button" class="btn btn-primary rounded-pill px-3 py-1.5 btn-sm d-inline-flex align-items-center gap-1" data-add-to-cart data-id="dish-6" data-name="Wood-Fired Wild Herb Flatbread" data-price="549" data-image="assets/images/Wood_Fired_Wild.jpg" data-category="Starters">
                     <i class="bi bi-cart-plus me-1"></i> Add to Cart
                   </button>
                 </div>
@@ -796,7 +769,7 @@
                 <div class="dish-card-badge">
                   <span class="dietary-pill pill-organic"><span class="pill-icon">🌿</span> Raw &amp; Organic</span>
                 </div>
-                <img src="assets/img/dishes/emerald-chlorophyll-elixir.jpg" alt="Emerald Chlorophyll Elixir">
+                <img src="assets/images/Emerald_Chlorophyll_Elixir.png" alt="Emerald Chlorophyll Elixir">
                 <div class="dish-card-price">₹299</div>
               </div>
               <div class="dish-card-body">
@@ -805,7 +778,7 @@
                 <p class="dish-desc">Cold-pressed crisp celery, Japanese cucumber, Granny Smith apple, spirulina, ginger, and organic holy basil.</p>
                 <div class="d-flex align-items-center justify-content-between pt-3 border-top mt-auto">
                   <a href="menu-details.html?dish=dish-17" class="btn btn-outline-success rounded-pill px-3 py-1.5 btn-sm btn-dish-details" data-dish-id="dish-17">Details</a>
-                  <button type="button" class="btn btn-primary rounded-pill px-3 py-1.5 btn-sm d-inline-flex align-items-center gap-1" data-add-to-cart data-id="dish-17" data-name="Emerald Chlorophyll Elixir" data-price="299" data-image="assets/img/dishes/emerald-chlorophyll-elixir.jpg" data-category="Drinks">
+                  <button type="button" class="btn btn-primary rounded-pill px-3 py-1.5 btn-sm d-inline-flex align-items-center gap-1" data-add-to-cart data-id="dish-17" data-name="Emerald Chlorophyll Elixir" data-price="299" data-image="assets/images/Emerald_Chlorophyll_Elixir.png" data-category="Drinks">
                     <i class="bi bi-cart-plus me-1"></i> Add to Cart
                   </button>
                 </div>
@@ -844,7 +817,7 @@
                 <div class="dish-card-badge">
                   <span class="dietary-pill pill-organic"><span class="pill-icon">🌿</span> Raw &amp; Organic</span>
                 </div>
-                <img src="assets/img/dishes/wild-hibiscus-rose-kombucha.jpg" alt="Wild Hibiscus Rose Kombucha">
+                <img src="assets/images/Wild_Hibiscus_Rose_Kombucha.jpg" alt="Wild Hibiscus Rose Kombucha">
                 <div class="dish-card-price">₹279</div>
               </div>
               <div class="dish-card-body">
@@ -853,7 +826,7 @@
                 <p class="dish-desc">In-house fermented live sparkling kombucha infused with organic Sudanese hibiscus calyces, Bulgarian rose water, and fresh lime.</p>
                 <div class="d-flex align-items-center justify-content-between pt-3 border-top mt-auto">
                   <a href="menu-details.html?dish=dish-19" class="btn btn-outline-success rounded-pill px-3 py-1.5 btn-sm btn-dish-details" data-dish-id="dish-19">Details</a>
-                  <button type="button" class="btn btn-primary rounded-pill px-3 py-1.5 btn-sm d-inline-flex align-items-center gap-1" data-add-to-cart data-id="dish-19" data-name="Wild Hibiscus Rose Kombucha" data-price="279" data-image="assets/img/dishes/wild-hibiscus-rose-kombucha.jpg" data-category="Drinks">
+                  <button type="button" class="btn btn-primary rounded-pill px-3 py-1.5 btn-sm d-inline-flex align-items-center gap-1" data-add-to-cart data-id="dish-19" data-name="Wild Hibiscus Rose Kombucha" data-price="279" data-image="assets/images/Wild_Hibiscus_Rose_Kombucha.jpg" data-category="Drinks">
                     <i class="bi bi-cart-plus me-1"></i> Add to Cart
                   </button>
                 </div>
@@ -867,7 +840,7 @@
     </section>
   </main>
 
-          <!-- Universal 4-Column Luxury Footer -->
+                    <!-- Universal 4-Column Luxury Footer -->
   <footer class="gh-footer">
     <div class="container">
       <div class="row g-4 g-lg-5 mb-5 align-items-start">
@@ -878,7 +851,7 @@
             <img src="assets/images/logo-g.png" alt="Green Haven Logo" class="gh-brand-logo-img me-2">
             <span class="gh-brand-text">Green Haven</span>
           </a>
-          <p class="footer-bio mb-4">
+          <p class="footer-bio mb-3">
             An organic plant-based restaurant sanctuary celebrating vibrant seasonal gastronomy, regenerative agriculture, and holistic well-being.
           </p>
           <div class="footer-social-group d-flex gap-2 flex-wrap">
@@ -893,31 +866,39 @@
         <!-- Column 2: Navigation -->
         <div class="col-lg-3 col-md-6 footer-col">
           <h4 class="footer-col-title">Navigation</h4>
-          <ul class="list-unstyled d-flex flex-column gap-2 mb-0 footer-nav-list">
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-3 footer-nav-list">
             <li><a href="index.html" class="footer-link"><i class="bi bi-chevron-right"></i> Home</a></li>
-            <li><a href="about.html" class="footer-link"><i class="bi bi-chevron-right"></i> About Us</a></li>
-            <li><a href="menu.html" class="footer-link"><i class="bi bi-chevron-right"></i> Our Menu</a></li>
-            <li><a href="cart.html" class="footer-link"><i class="bi bi-chevron-right"></i> Food Cart</a></li>
+            <li><a href="about.html" class="footer-link"><i class="bi bi-chevron-right"></i> About</a></li>
+            <li><a href="menu.html" class="footer-link"><i class="bi bi-chevron-right"></i> Menu</a></li>
+            <li><a href="services.html" class="footer-link"><i class="bi bi-chevron-right"></i> Services</a></li>
             <li><a href="catering.html" class="footer-link"><i class="bi bi-chevron-right"></i> Catering</a></li>
-            <li><a href="contact.html" class="footer-link"><i class="bi bi-chevron-right"></i> Contact Us</a></li>
+            <li><a href="pricing.html" class="footer-link"><i class="bi bi-chevron-right"></i> Packages</a></li>
           </ul>
         </div>
 
         <!-- Column 3: Hours & Location -->
         <div class="col-lg-3 col-md-6 footer-col">
           <h4 class="footer-col-title">Hours &amp; Location</h4>
-          <div class="footer-contact-info d-flex flex-column gap-2 mb-0">
-            <p class="text-white-50 small mb-0 d-flex align-items-start gap-2">
+          <div class="footer-contact-info d-flex flex-column gap-2 mb-3">
+            <p class="small mb-0 d-flex align-items-start gap-2">
               <i class="bi bi-geo-alt text-warning mt-1 flex-shrink-0"></i>
-              <span>742 Evergreen Botanical Way, Portland</span>
+              <span>742 Evergreen Botanical Way, Portland, OR 97201</span>
             </p>
-            <p class="text-white-50 small mb-0 d-flex align-items-center gap-2">
+            <p class="small mb-0 d-flex align-items-center gap-2">
               <i class="bi bi-clock text-warning flex-shrink-0"></i>
-              <span>Mon - Sun: 8:00 AM - 10:00 PM</span>
+              <span>Mon - Fri: 8:00 AM - 10:00 PM</span>
             </p>
-            <p class="text-white-50 small mb-0 d-flex align-items-center gap-2">
+            <p class="small mb-0 d-flex align-items-center gap-2">
+              <i class="bi bi-clock text-warning flex-shrink-0"></i>
+              <span>Sat - Sun, 9:00 AM - 3:00 PM</span>
+            </p>
+            <p class="small mb-0 d-flex align-items-center gap-2">
               <i class="bi bi-telephone text-warning flex-shrink-0"></i>
               <a href="tel:+15035550192" class="text-decoration-none">+1 (503) 555-0192</a>
+            </p>
+            <p class="small mb-0 d-flex align-items-center gap-2">
+              <i class="bi bi-envelope text-warning flex-shrink-0"></i>
+              <a href="https://mail.google.com/" target="_blank" rel="noopener noreferrer" class="text-decoration-none">hello@greenhaven.com</a>
             </p>
           </div>
         </div>
@@ -925,9 +906,9 @@
         <!-- Column 4: Botanical Digest -->
         <div class="col-lg-3 col-md-6 footer-col">
           <h4 class="footer-col-title">Botanical Digest</h4>
-          <p class="text-white-50 small mb-3">Join our newsletter for seasonal menu previews and chef recipes.</p>
+          <p class="small mb-3">Join our newsletter for seasonal menu previews, wild foraging updates, and chef masterclass recipes.</p>
           <form class="newsletter-form d-flex gap-2">
-            <input type="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)" class="form-control form-control-sm" placeholder="Your email" required>
+            <input type="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)" class="form-control form-control-sm" placeholder="Your email address" required>
             <button type="submit" class="btn btn-accent btn-sm px-3">Join</button>
           </form>
         </div>
@@ -935,15 +916,8 @@
       </div>
 
       <!-- Bottom Line -->
-      <div class="footer-bottom border-top pt-4 mt-4 text-white-50 small">
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
-          <div>&copy; 2026 Green Haven Restaurant. All Rights Reserved.</div>
-          <div class="d-flex gap-3">
-            <a href="#privacyPolicy" class="text-decoration-none gh-legal-link" data-legal="privacy" role="button">Privacy Policy</a>
-            <span>&bull;</span>
-            <a href="#termsConditions" class="text-decoration-none gh-legal-link" data-legal="terms" role="button">Terms &amp; Conditions</a>
-          </div>
-        </div>
+      <div class="footer-bottom border-top pt-4 mt-4 text-center">
+        <p class="mb-0 text-white-50 small">&copy; 2026 Green Haven Restaurant. All rights reserved.</p>
       </div>
     </div>
   </footer>

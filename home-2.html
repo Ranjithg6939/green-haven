@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
+<html dir="ltr" lang="en" data-bs-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,6 +27,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <!-- Custom Master Stylesheet -->
   <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Master RTL Stylesheet -->
+  <link rel="stylesheet" href="assets/css/rtl.css">
 </head>
 <body class="home-2-page">
 
@@ -99,14 +101,14 @@
         </a>
 
         <!-- Desktop Navigation Links -->
-        <nav class="d-none d-lg-flex align-items-center gap-1">
+        <nav class="gh-nav-desktop align-items-center gap-1">
           <div class="dropdown">
             <a class="gh-nav-link active dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Home
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item " href="index.html">Home 1 (Gourmet Landing)</a></li>
-              <li><a class="gh-dropdown-item active" href="home-2.html">Home 2 (Farm to Plate)</a></li>
+              <li><a class="gh-dropdown-item " href="index.html">Gourmet Landing</a></li>
+              <li><a class="gh-dropdown-item active" href="home-2.html">Farm Plate</a></li>
             </ul>
           </div>
           <a class="gh-nav-link " href="about.html">About</a>
@@ -146,21 +148,14 @@
             <span id="navCartCount" class="cart-badge-count" style="display: none;">0</span>
           </a>
 
-          <!-- Reserve Table Icon (Desktop & Tablet only) -->
-          <a href="reservation.html" class="reserve-nav-btn d-none d-md-inline-flex" title="Reserve Table" aria-label="Reserve Table" data-bs-toggle="tooltip" data-bs-placement="bottom">
+          <!-- Reserve Table Icon (Desktop & Tablet only >= 968px) -->
+          <a href="reservation.html" class="reserve-nav-btn" title="Reserve Table" aria-label="Reserve Table" data-bs-toggle="tooltip" data-bs-placement="bottom">
             <i class="bi bi-calendar2-check"></i>
           </a>
 
-          <!-- Standard Desktop Auth (Sign In) -->
-          <div id="navAuthContainer" class="d-none d-md-block">
-            <div class="d-inline-flex align-items-center gap-2 flex-nowrap">
-              <a href="login.html" class="btn btn-outline-primary btn-sm gh-nav-auth-login-btn" title="Sign In" aria-label="Sign In">
-                <i class="bi bi-box-arrow-in-right me-1"></i><span class="gh-nav-auth-label">Sign In</span>
-              </a>
-            </div>
-          </div>
+          <div id="navAuthContainer"></div>
 
-          <button class="btn btn-icon btn-outline-primary d-lg-none gh-mobile-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenuOffcanvas" aria-controls="mobileMenuOffcanvas" aria-label="Open mobile navigation">
+          <button class="btn btn-icon btn-outline-primary gh-mobile-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenuOffcanvas" aria-controls="mobileMenuOffcanvas" aria-label="Open mobile navigation">
             <i class="bi bi-list fs-4"></i>
           </button>
         </div>
@@ -188,14 +183,10 @@
     </div>
     <div class="offcanvas-body p-4 d-flex flex-column justify-content-between">
       <div>
-        <div id="mobileNavAuthContainer" class="mb-3">
-          <div class="d-flex gap-2">
-            <a href="login.html" class="btn btn-outline-primary btn-sm flex-fill"><i class="bi bi-box-arrow-in-right me-1"></i> Sign In</a>
-          </div>
-        </div>
+        <div id="mobileNavAuthContainer" class="mb-3"></div>
         <nav class="d-flex flex-column gap-2">
-          <a class="gh-nav-link " href="index.html">Home (Gourmet)</a>
-          <a class="gh-nav-link active" href="home-2.html">Home (Farm to Plate)</a>
+          <a class="gh-nav-link " href="index.html">Gourmet Landing</a>
+          <a class="gh-nav-link active" href="home-2.html">Farm Plate</a>
           <a class="gh-nav-link " href="about.html">About Us</a>
           <a class="gh-nav-link " href="menu.html">Full Restaurant Menu</a>
           <a class="gh-nav-link" href="cart.html"><i class="bi bi-bag me-1"></i> My Dining Cart</a>
@@ -282,7 +273,7 @@
               
               <!-- Main Salad Bowl Image with Luxury Glitter & Sparkle Effects -->
               <div class="hero-dish-img-wrap h2-hero-dish-wrap">
-                <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?q=80&w=1200&auto=format&fit=crop" class="h2-hero-main-img img-fluid" alt="Fresh Farm-to-Plate Gourmet Plant Cuisine">
+                <img src="assets/images/hero-dish.jpg" class="h2-hero-main-img img-fluid" alt="Fresh Farm-to-Plate Gourmet Plant Cuisine">
                 
                 <!-- Glitter & Sparkle Effects Overlay -->
                 <div class="hero-glitter-overlay" aria-hidden="true">
@@ -358,7 +349,7 @@
           <div class="col-lg-4 col-md-6 h2-reveal">
             <div class="h2-journey-card">
               <div class="h2-journey-img-wrap">
-                <img src="assets/images/freshly-harvested.jpg" alt="Freshly Harvested Organic Carrots and Field Greens">
+                <img src="assets/images/Freshly_Harvested.jpg" alt="Freshly Harvested Organic Carrots and Field Greens">
                 <span class="h2-journey-badge">Daily Harvest</span>
               </div>
               <div class="h2-journey-body">
@@ -398,7 +389,7 @@
           <div class="col-lg-4 col-md-6 h2-reveal">
             <div class="h2-journey-card">
               <div class="h2-journey-img-wrap">
-                <img src="assets/images/chef-crafted.png" alt="Chef Crafted Artisanal Plant Gastronomy and Plating">
+                <img src="assets/images/Chef_Crafted.jpg" class="h2-journey-img-chef" style="object-position: center 10%;" alt="Chef Crafted Artisanal Plant Gastronomy and Plating">
                 <span class="h2-journey-badge">Artisan Technique</span>
               </div>
               <div class="h2-journey-body">
@@ -421,14 +412,14 @@
 
     <!-- SECTION 3: CHEF STORY / CRAFTED WITH PURPOSE -->
     <section id="chef-story" class="h2-chef-section">
-      <div class="container-fluid h2-chef-container">
+      <div class="container h2-chef-container">
         <div class="row align-items-stretch g-3 g-lg-4">
-          <!-- Left Chef Visual Showcase -->
-          <div class="col-lg-6 d-flex flex-column h2-reveal">
+          <!-- Left Chef Visual Showcase (Decreased Width: col-lg-5) -->
+          <div class="col-lg-5 d-flex flex-column h2-reveal">
             <div class="h2-chef-img-wrapper h-100">
-              <img src="assets/images/crafted-with-purpose.jpg" alt="Crafted With Purpose - Green Haven Farm-to-Table Kitchen">
+              <img src="assets/images/Crafted.jpg" alt="Crafted With Purpose - Green Haven Farm-to-Table Kitchen">
               <div class="h2-chef-tag-card">
-                <div class="d-flex align-items-center gap-3">
+                <div class="d-flex align-items-center gap-2 gap-sm-3">
                   <div class="h2-award-icon"><i class="bi bi-award-fill"></i></div>
                   <div>
                     <h6>15+ Years Culinary Craft</h6>
@@ -438,44 +429,44 @@
               </div>
             </div>
           </div>
-          <!-- Right Narrative & Core Values -->
-          <div class="col-lg-6 d-flex flex-column h2-reveal">
+          <!-- Right Narrative & Core Values (Expanded Width: col-lg-7) -->
+          <div class="col-lg-7 d-flex flex-column h2-reveal">
             <div class="h2-chef-narrative-card h-100 d-flex flex-column justify-content-between">
               <div>
-                <span class="h2-eyebrow mb-1">OUR PHILOSOPHY</span>
+                <span class="h2-eyebrow mb-2">OUR PHILOSOPHY</span>
                 <h2 class="section-title mt-1 mb-2">Crafted With Purpose</h2>
                 
-                <p class="h2-section-desc mb-2">
+                <p class="h2-section-desc mb-3">
                   At Green Haven, dining is more than sustenance — it is a conscious dialogue with the earth. We reject shortcuts, artificial additives, and industrial farming in favor of regenerative practices that honor biodiversity and pure vitality.
                 </p>
 
                 <div class="d-flex flex-column gap-2 mb-3 pb-0">
                   
-                  <div class="d-flex align-items-start gap-2 gap-sm-3">
+                  <div class="h2-pillar-item d-flex align-items-start gap-3">
                     <div class="h2-chef-pillar-icon mt-1 flex-shrink-0">
                       <i class="bi bi-geo-alt-fill"></i>
                     </div>
-                    <div>
+                    <div class="h2-pillar-content">
                       <h6 class="fw-bold mb-1 h2-pillar-title">Farm-Direct Partnerships</h6>
                       <p class="h2-pillar-desc mb-0">Direct collaboration with independent growers across the Willamette and Hood River Valleys, ensuring fair wages and living soils.</p>
                     </div>
                   </div>
 
-                  <div class="d-flex align-items-start gap-2 gap-sm-3">
+                  <div class="h2-pillar-item d-flex align-items-start gap-3">
                     <div class="h2-chef-pillar-icon mt-1 flex-shrink-0">
                       <i class="bi bi-shield-check"></i>
                     </div>
-                    <div>
+                    <div class="h2-pillar-content">
                       <h6 class="fw-bold mb-1 h2-pillar-title">Zero Artificial Additives</h6>
                       <p class="h2-pillar-desc mb-0">100% whole-food, unrefined oils, cold-pressed fruit reductions, and wild botanical infusions without chemical enhancers.</p>
                     </div>
                   </div>
 
-                  <div class="d-flex align-items-start gap-2 gap-sm-3">
+                  <div class="h2-pillar-item d-flex align-items-start gap-3">
                     <div class="h2-chef-pillar-icon mt-1 flex-shrink-0">
                       <i class="bi bi-recycle"></i>
                     </div>
-                    <div>
+                    <div class="h2-pillar-content">
                       <h6 class="fw-bold mb-1 h2-pillar-title">Sustainable Craftsmanship</h6>
                       <p class="h2-pillar-desc mb-0">Closed-loop composting, smart energy induction kitchens, and zero single-use plastics across our entire establishment.</p>
                     </div>
@@ -485,7 +476,7 @@
               </div>
 
               <div class="pt-2">
-                <a href="about.html#executive-chefs" class="btn btn-primary px-3 px-sm-4 btn-sm">
+                <a href="about.html#executive-chefs" class="btn btn-primary px-4 py-2 fs-6 fw-semibold">
                   <i class="bi bi-person-badge me-2"></i> Meet Our Chef
                 </a>
               </div>
@@ -639,6 +630,220 @@
       </div>
     </section>
 
+    <!-- SECTION: LIVING BOTANICAL APOTHECARY & SENSORY FLAVOR MATRIX (EXCLUSIVE TO HOME 2) -->
+    <section id="botanical-matrix" class="h2-botanical-matrix-section">
+      <!-- Floating Botanical Micro-Particle Leaves -->
+      <div class="h2-matrix-leaf-particle h2-matrix-particle-1" aria-hidden="true">
+        <svg viewBox="0 0 60 80" fill="none" width="100%" height="100%">
+          <path d="M10,70 C10,35 30,10 50,10 C45,35 35,55 10,70 Z" fill="rgba(74, 222, 128, 0.45)" stroke="rgba(34, 197, 94, 0.6)" stroke-width="1.5"/>
+          <path d="M10,70 Q30,40 50,10" stroke="rgba(22, 101, 52, 0.4)" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="h2-matrix-leaf-particle h2-matrix-particle-2" aria-hidden="true">
+        <svg viewBox="0 0 60 80" fill="none" width="100%" height="100%">
+          <path d="M50,70 C50,35 30,10 10,10 C15,35 25,55 50,70 Z" fill="rgba(52, 211, 153, 0.4)" stroke="rgba(16, 185, 129, 0.6)" stroke-width="1.5"/>
+          <path d="M50,70 Q30,40 10,10" stroke="rgba(6, 78, 38, 0.4)" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="h2-matrix-leaf-particle h2-matrix-particle-3" aria-hidden="true">
+        <svg viewBox="0 0 60 80" fill="none" width="100%" height="100%">
+          <path d="M15,65 C20,30 40,15 55,10 C40,30 25,48 15,65 Z" fill="rgba(167, 243, 208, 0.5)" stroke="rgba(34, 197, 94, 0.6)" stroke-width="1.5"/>
+        </svg>
+      </div>
+
+      <div class="container position-relative z-2">
+        
+        <!-- Section Header -->
+        <div class="text-center max-w-700 mx-auto mb-5 h2-reveal">
+          <span class="h2-eyebrow mb-2">
+            <i class="bi bi-flower1 text-success"></i>FARM TO TABLE &bull; SIGNATURE CREATIONS
+          </span>
+          <h2 class="section-title mt-2">Signature Farm Harvest Dishes</h2>
+          <p class="h2-section-desc">
+            Artfully composed vegan gastronomy sourced directly from Willamette Valley regenerative soils and prepared fresh to order. Explore our chef's celebrated botanical culinary creations.
+          </p>
+        </div>
+
+        <!-- 4 Signature Farm Dishes Grid -->
+        <div class="row g-4 align-items-stretch">
+          
+          <!-- Dish 1: Pan-Seared King Oyster Scallops -->
+          <div class="col-md-6 col-lg-3 h2-reveal">
+            <div class="h2-dish-card">
+              <div class="h2-dish-img-wrap">
+                <img src="assets/img/dishes/pan-seared-king-oyster-scallops.jpg" alt="Pan-Seared King Oyster Scallops">
+                <span class="h2-dish-badge-origin"><i class="bi bi-geo-alt-fill text-warning me-1"></i>Cascadia Forest</span>
+                <span class="h2-dish-price-badge">₹849</span>
+              </div>
+              <div class="h2-dish-body">
+                <span class="h2-dish-dietary"><i class="bi bi-flower1 me-1"></i>100% Plant-Based &bull; GF</span>
+                <h4 class="h2-dish-title">Pan-Seared King Oyster Scallops</h4>
+                <p class="h2-dish-desc">
+                  Thick-cut king oyster medallions caramelized in cold-pressed herb butter, resting on velvety mint-pea purée with pickled shallots and white truffle glaze.
+                </p>
+                <div class="h2-dish-ingredients">
+                  <span class="h2-dish-chip">Cascadia Mint</span>
+                  <span class="h2-dish-chip">King Oyster</span>
+                  <span class="h2-dish-chip">White Truffle</span>
+                  <span class="h2-dish-chip">Sweet Pea</span>
+                </div>
+                <button type="button" class="btn btn-primary w-100 h2-dish-order-btn" data-add-to-cart data-id="dish-king-oyster" data-name="Pan-Seared King Oyster Scallops" data-price="849" data-image="assets/img/dishes/pan-seared-king-oyster-scallops.jpg" data-category="Signatures">
+                  <i class="bi bi-bag-plus me-1"></i> Order for Dining
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dish 2: Wild Truffle & Forest Risotto -->
+          <div class="col-md-6 col-lg-3 h2-reveal">
+            <div class="h2-dish-card">
+              <div class="h2-dish-img-wrap">
+                <img src="assets/img/dishes/wild-truffle-forest-risotto.jpg" alt="Wild Truffle & Forest Risotto">
+                <span class="h2-dish-badge-origin"><i class="bi bi-geo-alt-fill text-warning me-1"></i>Willamette Valley</span>
+                <span class="h2-dish-price-badge">₹899</span>
+              </div>
+              <div class="h2-dish-body">
+                <span class="h2-dish-dietary"><i class="bi bi-flower1 me-1"></i>100% Plant-Based &bull; Nut Cream</span>
+                <h4 class="h2-dish-title">Wild Truffle &amp; Forest Risotto</h4>
+                <p class="h2-dish-desc">
+                  Artisan Carnaroli grain simmered slowly in rich porcini mushroom reduction, pan-toasted forest chanterelles, shaved black summer truffle, and cashew parmesan.
+                </p>
+                <div class="h2-dish-ingredients">
+                  <span class="h2-dish-chip">Carnaroli Rice</span>
+                  <span class="h2-dish-chip">Summer Truffle</span>
+                  <span class="h2-dish-chip">Chanterelles</span>
+                  <span class="h2-dish-chip">Cashew Cream</span>
+                </div>
+                <button type="button" class="btn btn-primary w-100 h2-dish-order-btn" data-add-to-cart data-id="dish-2" data-name="Wild Truffle & Forest Risotto" data-price="899" data-image="assets/img/dishes/wild-truffle-forest-risotto.jpg" data-category="Signatures">
+                  <i class="bi bi-bag-plus me-1"></i> Order for Dining
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dish 3: Smoked Cauliflower Rib Steak -->
+          <div class="col-md-6 col-lg-3 h2-reveal">
+            <div class="h2-dish-card">
+              <div class="h2-dish-img-wrap">
+                <img src="assets/img/dishes/smoked-cauliflower-rib-steak.jpg" alt="Smoked Cauliflower Rib Steak">
+                <span class="h2-dish-badge-origin"><i class="bi bi-geo-alt-fill text-warning me-1"></i>Hood River Fields</span>
+                <span class="h2-dish-price-badge">₹799</span>
+              </div>
+              <div class="h2-dish-body">
+                <span class="h2-dish-dietary"><i class="bi bi-flower1 me-1"></i>100% Plant-Based &bull; Protein</span>
+                <h4 class="h2-dish-title">Smoked Cauliflower Steak</h4>
+                <p class="h2-dish-desc">
+                  Hickory-wood smoked whole-head cauliflower steak basted in wild pomegranate reduction, served with fresh garden herb chimichurri and toasted pine nuts.
+                </p>
+                <div class="h2-dish-ingredients">
+                  <span class="h2-dish-chip">Organic Cauliflower</span>
+                  <span class="h2-dish-chip">Pomegranate Glaze</span>
+                  <span class="h2-dish-chip">Herb Chimichurri</span>
+                  <span class="h2-dish-chip">Pine Nuts</span>
+                </div>
+                <button type="button" class="btn btn-primary w-100 h2-dish-order-btn" data-add-to-cart data-id="dish-cauliflower" data-name="Smoked Cauliflower Rib Steak" data-price="799" data-image="assets/img/dishes/smoked-cauliflower-rib-steak.jpg" data-category="Signatures">
+                  <i class="bi bi-bag-plus me-1"></i> Order for Dining
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dish 4: Living Botanical Harvest Bowl -->
+          <div class="col-md-6 col-lg-3 h2-reveal">
+            <div class="h2-dish-card">
+              <div class="h2-dish-img-wrap">
+                <img src="assets/img/dishes/botanical-harvest-bowl.jpg" alt="Living Botanical Harvest Bowl">
+                <span class="h2-dish-badge-origin"><i class="bi bi-geo-alt-fill text-warning me-1"></i>Greenhouse Tier 1</span>
+                <span class="h2-dish-price-badge">₹749</span>
+              </div>
+              <div class="h2-dish-body">
+                <span class="h2-dish-dietary"><i class="bi bi-flower1 me-1"></i>100% Plant-Based &bull; Raw Vitality</span>
+                <h4 class="h2-dish-title">Living Botanical Harvest Bowl</h4>
+                <p class="h2-dish-desc">
+                  Crisp rainbow chard, golden turmeric-marinated beets, ripe Haas avocado roses, organic edamame, sprouted seeds, and cold-pressed green goddess emulsion.
+                </p>
+                <div class="h2-dish-ingredients">
+                  <span class="h2-dish-chip">Rainbow Chard</span>
+                  <span class="h2-dish-chip">Haas Avocado</span>
+                  <span class="h2-dish-chip">Golden Beets</span>
+                  <span class="h2-dish-chip">Green Goddess</span>
+                </div>
+                <button type="button" class="btn btn-primary w-100 h2-dish-order-btn" data-add-to-cart data-id="dish-harvest-bowl" data-name="Living Botanical Harvest Bowl" data-price="749" data-image="assets/img/dishes/botanical-harvest-bowl.jpg" data-category="Signatures">
+                  <i class="bi bi-bag-plus me-1"></i> Order for Dining
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- In-House Botanical Sanctuary Live Dashboard & Full Menu CTA -->
+        <div class="h2-matrix-metrics-wrapper mt-5 h2-reveal">
+          <div class="row g-3 g-lg-4 text-start">
+            
+            <div class="col-12 col-sm-6 col-lg-3">
+              <div class="h2-metric-card h-100">
+                <div class="h2-metric-icon-wrap">
+                  <i class="bi bi-flower2"></i>
+                </div>
+                <div class="h2-metric-content">
+                  <div class="h2-metric-value">100%</div>
+                  <p class="h2-metric-desc">Certified Organic Valley Produce</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-3">
+              <div class="h2-metric-card h-100">
+                <div class="h2-metric-icon-wrap">
+                  <i class="bi bi-stopwatch"></i>
+                </div>
+                <div class="h2-metric-content">
+                  <div class="h2-metric-value">Fresh</div>
+                  <p class="h2-metric-desc">Cooked to Order Every Service</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-3">
+              <div class="h2-metric-card h-100">
+                <div class="h2-metric-icon-wrap">
+                  <i class="bi bi-shield-check"></i>
+                </div>
+                <div class="h2-metric-content">
+                  <div class="h2-metric-value">0%</div>
+                  <p class="h2-metric-desc">Chemical Additives &amp; Synthetics</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-3">
+              <div class="h2-metric-card h-100">
+                <div class="h2-metric-icon-wrap">
+                  <i class="bi bi-droplet-half"></i>
+                </div>
+                <div class="h2-metric-content">
+                  <div class="h2-metric-value">Direct</div>
+                  <p class="h2-metric-desc">Sourced From Independent Farms</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Separated Full Menu Action -->
+          <div class="text-center mt-4 pt-3">
+            <a href="menu.html" class="btn btn-outline-primary h2-menu-cta-btn px-4 py-2.5 fw-semibold d-inline-flex align-items-center justify-content-center gap-2">
+              <i class="bi bi-book-half flex-shrink-0"></i>
+              <span class="h2-menu-cta-text">Explore Full Seasonal Menu</span>
+              <i class="bi bi-arrow-right flex-shrink-0"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <!-- SECTION 6: CHEF'S PHILOSOPHY (ATMOSPHERIC PARALLAX QUOTE BANNER) -->
     <section class="h2-philosophy-banner">
       <div class="container position-relative z-2 h2-reveal">
@@ -664,10 +869,10 @@
     <section id="private-dining" class="section-padding">
       <div class="container">
         <div class="h2-private-dining-box h2-reveal">
-          <div class="row g-0 align-items-center">
+          <div class="row g-0 align-items-stretch">
             
             <!-- Left Info Content -->
-            <div class="col-lg-6 p-4 p-md-5">
+            <div class="col-lg-6 p-4 p-md-5 d-flex flex-column justify-content-center">
               <span class="h2-eyebrow mb-2">PRIVATE DINING</span>
               <h2 class="section-title mt-2 mb-4">Gather. Celebrate. Nourish.</h2>
               <p class="h2-section-desc mb-4">
@@ -689,14 +894,16 @@
                 </div>
               </div>
 
-              <a href="catering.html" class="btn btn-primary px-4">
-                <i class="bi bi-calendar-event me-2"></i> Plan Your Event
-              </a>
+              <div>
+                <a href="catering.html" class="btn btn-primary px-4">
+                  <i class="bi bi-calendar-event me-2"></i> Plan Your Event
+                </a>
+              </div>
             </div>
 
             <!-- Right Image Showcase -->
-            <div class="col-lg-6">
-              <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=1000&auto=format&fit=crop" class="h2-private-dining-img" alt="Green Haven Private Dining Conservatory">
+            <div class="col-lg-6 d-flex flex-column h2-private-dining-img-col">
+              <img src="assets/images/Gather_Celebrate_Nourish.jpg" class="h2-private-dining-img" alt="Green Haven Private Dining Conservatory">
             </div>
 
           </div>
@@ -724,18 +931,18 @@
           </div>
 
           <div class="d-flex flex-wrap justify-content-center align-items-center gap-3 h2-final-cta-meta pt-2">
-            <span><i class="bi bi-clock text-warning me-1"></i> Open Daily 8:00 AM – 10:00 PM</span>
+            <span><i class="bi bi-clock text-warning me-1"></i> <bdi>Open Daily 8:00 AM – 10:00 PM</bdi></span>
             <span>&bull;</span>
-            <span><i class="bi bi-car-front text-success me-1"></i> Valet Parking Available</span>
+            <span><i class="bi bi-car-front text-success me-1"></i> <bdi>Valet Parking Available</bdi></span>
             <span>&bull;</span>
-            <span><i class="bi bi-flower1 text-primary me-1"></i> 100% Plant-Based</span>
+            <span><i class="bi bi-flower1 text-primary me-1"></i> <bdi>100% Plant-Based</bdi></span>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-        <!-- Universal 4-Column Luxury Footer -->
+                  <!-- Universal 4-Column Luxury Footer -->
   <footer class="gh-footer">
     <div class="container">
       <div class="row g-4 g-lg-5 mb-5 align-items-start">
@@ -746,7 +953,7 @@
             <img src="assets/images/logo-g.png" alt="Green Haven Logo" class="gh-brand-logo-img me-2">
             <span class="gh-brand-text">Green Haven</span>
           </a>
-          <p class="footer-bio mb-4">
+          <p class="footer-bio mb-3">
             An organic plant-based restaurant sanctuary celebrating vibrant seasonal gastronomy, regenerative agriculture, and holistic well-being.
           </p>
           <div class="footer-social-group d-flex gap-2 flex-wrap">
@@ -761,31 +968,39 @@
         <!-- Column 2: Navigation -->
         <div class="col-lg-3 col-md-6 footer-col">
           <h4 class="footer-col-title">Navigation</h4>
-          <ul class="list-unstyled d-flex flex-column gap-2 mb-0 footer-nav-list">
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-3 footer-nav-list">
             <li><a href="index.html" class="footer-link"><i class="bi bi-chevron-right"></i> Home</a></li>
-            <li><a href="about.html" class="footer-link"><i class="bi bi-chevron-right"></i> About Us</a></li>
-            <li><a href="menu.html" class="footer-link"><i class="bi bi-chevron-right"></i> Our Menu</a></li>
-            <li><a href="cart.html" class="footer-link"><i class="bi bi-chevron-right"></i> Food Cart</a></li>
+            <li><a href="about.html" class="footer-link"><i class="bi bi-chevron-right"></i> About</a></li>
+            <li><a href="menu.html" class="footer-link"><i class="bi bi-chevron-right"></i> Menu</a></li>
+            <li><a href="services.html" class="footer-link"><i class="bi bi-chevron-right"></i> Services</a></li>
             <li><a href="catering.html" class="footer-link"><i class="bi bi-chevron-right"></i> Catering</a></li>
-            <li><a href="contact.html" class="footer-link"><i class="bi bi-chevron-right"></i> Contact Us</a></li>
+            <li><a href="pricing.html" class="footer-link"><i class="bi bi-chevron-right"></i> Packages</a></li>
           </ul>
         </div>
 
         <!-- Column 3: Hours & Location -->
         <div class="col-lg-3 col-md-6 footer-col">
           <h4 class="footer-col-title">Hours &amp; Location</h4>
-          <div class="footer-contact-info d-flex flex-column gap-2 mb-0">
-            <p class="text-white-50 small mb-0 d-flex align-items-start gap-2">
+          <div class="footer-contact-info d-flex flex-column gap-2 mb-3">
+            <p class="small mb-0 d-flex align-items-start gap-2">
               <i class="bi bi-geo-alt text-warning mt-1 flex-shrink-0"></i>
-              <span>742 Evergreen Botanical Way, Portland</span>
+              <span>742 Evergreen Botanical Way, Portland, OR 97201</span>
             </p>
-            <p class="text-white-50 small mb-0 d-flex align-items-center gap-2">
+            <p class="small mb-0 d-flex align-items-center gap-2">
               <i class="bi bi-clock text-warning flex-shrink-0"></i>
-              <span>Mon - Sun: 8:00 AM - 10:00 PM</span>
+              <span>Mon - Fri: 8:00 AM - 10:00 PM</span>
             </p>
-            <p class="text-white-50 small mb-0 d-flex align-items-center gap-2">
+            <p class="small mb-0 d-flex align-items-center gap-2">
+              <i class="bi bi-clock text-warning flex-shrink-0"></i>
+              <span>Sat - Sun, 9:00 AM - 3:00 PM</span>
+            </p>
+            <p class="small mb-0 d-flex align-items-center gap-2">
               <i class="bi bi-telephone text-warning flex-shrink-0"></i>
               <a href="tel:+15035550192" class="text-decoration-none">+1 (503) 555-0192</a>
+            </p>
+            <p class="small mb-0 d-flex align-items-center gap-2">
+              <i class="bi bi-envelope text-warning flex-shrink-0"></i>
+              <a href="https://mail.google.com/" target="_blank" rel="noopener noreferrer" class="text-decoration-none">hello@greenhaven.com</a>
             </p>
           </div>
         </div>
@@ -793,9 +1008,9 @@
         <!-- Column 4: Botanical Digest -->
         <div class="col-lg-3 col-md-6 footer-col">
           <h4 class="footer-col-title">Botanical Digest</h4>
-          <p class="text-white-50 small mb-3">Join our newsletter for seasonal menu previews and chef recipes.</p>
+          <p class="small mb-3">Join our newsletter for seasonal menu previews, wild foraging updates, and chef masterclass recipes.</p>
           <form class="newsletter-form d-flex gap-2">
-            <input type="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)" class="form-control form-control-sm" placeholder="Your email" required>
+            <input type="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)" class="form-control form-control-sm" placeholder="Your email address" required>
             <button type="submit" class="btn btn-accent btn-sm px-3">Join</button>
           </form>
         </div>
@@ -803,15 +1018,8 @@
       </div>
 
       <!-- Bottom Line -->
-      <div class="footer-bottom border-top pt-4 mt-4 text-white-50 small">
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
-          <div>&copy; 2026 Green Haven Restaurant. All Rights Reserved.</div>
-          <div class="d-flex gap-3">
-            <a href="#privacyPolicy" class="text-decoration-none gh-legal-link" data-legal="privacy" role="button">Privacy Policy</a>
-            <span>&bull;</span>
-            <a href="#termsConditions" class="text-decoration-none gh-legal-link" data-legal="terms" role="button">Terms &amp; Conditions</a>
-          </div>
-        </div>
+      <div class="footer-bottom border-top pt-4 mt-4 text-center">
+        <p class="mb-0 text-white-50 small">&copy; 2026 Green Haven Restaurant. All rights reserved.</p>
       </div>
     </div>
   </footer>

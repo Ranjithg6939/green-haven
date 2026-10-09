@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
+<html dir="ltr" lang="en" data-bs-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,6 +24,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <!-- Custom Master Stylesheet -->
   <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Master RTL Stylesheet -->
+  <link rel="stylesheet" href="assets/css/rtl.css">
   <script>
     (function() {
       var dir = localStorage.getItem('site-dir') || 'ltr';
@@ -172,11 +174,12 @@
           <button class="theme-toggle-btn" aria-label="Toggle Light/Dark Theme" title="Switch Theme">
             <i class="bi bi-moon-stars-fill"></i>
           </button>
-
-          <!-- RTL Direction Toggle Button -->
+          <!-- RTL / LTR Toggle -->
           <button class="rtl-toggle-btn" aria-label="Toggle text direction" title="Switch text direction (RTL / LTR)">
             <i class="bi bi-arrow-left-right"></i>
           </button>
+
+          <!-- RTL Direction Toggle Button -->
 
           <!-- User Avatar Chip -->
           <div class="d-flex align-items-center gap-2 ps-2 border-start ms-1">

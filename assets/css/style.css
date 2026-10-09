@@ -13,7 +13,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600;1,700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Italiana&family=Outfit:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 @import url('rtl.css');
 html {
+  direction: ltr;
   scroll-behavior: smooth;
+}
+
+body {
+  direction: ltr;
+  text-align: left;
+}
+
+input,
+textarea,
+select {
+  direction: ltr;
+  text-align: left;
 }
 
 section[id] {
@@ -570,6 +583,31 @@ h1, h2, h3, h4, h5, h6, .display-1, .display-2, .display-3, .display-4, .section
   line-height: 1.25;
 }
 
+/* Reusable Visual Word-Order Mirror Component */
+.gh-word-line {
+  display: inline-flex;
+  flex-wrap: wrap;
+  column-gap: 0.28em;
+  row-gap: 0.1em;
+  vertical-align: baseline;
+  text-align: inherit;
+}
+
+.gh-word {
+  display: inline-block;
+  unicode-bidi: isolate;
+  direction: ltr;
+  white-space: nowrap;
+}
+
+[dir="ltr"] .gh-word-line {
+  flex-direction: row;
+}
+
+[dir="rtl"] .gh-word-line {
+  flex-direction: row;
+}
+
 /* Ensure headings inside dark cards / primary containers / text-white blocks always render crisp white in both Light & Dark modes */
 .text-white h1, .text-white h2, .text-white h3, .text-white h4, .text-white h5, .text-white h6,
 .bg-primary h1, .bg-primary h2, .bg-primary h3, .bg-primary h4, .bg-primary h5, .bg-primary h6,
@@ -769,15 +807,15 @@ html.dark .btn-outline-primary:hover {
 .btn-accent {
   background-color: var(--gh-accent);
   border-color: var(--gh-accent);
-  color: #ffffff;
+  color: #ffffff !important;
 }
 
 .btn-accent:hover {
   background-color: var(--gh-accent-hover);
   border-color: var(--gh-accent-hover);
-  color: #ffffff;
+  color: #ffffff !important;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 106, 22, 0.35);
+  box-shadow: 0 6px 20px rgba(46, 125, 50, 0.35);
 }
 
 .btn-warning {
@@ -1134,8 +1172,7 @@ html.dark .nx-navbar.scrolled {
 }
 
 /* Authentication Page Brand Logo - Centered Circular G Logo with Brand Name Below */
-.gh-brand-auth,
-[dir="rtl"] .gh-brand-auth {
+.gh-brand-auth {
   display: inline-flex !important;
   flex-direction: column !important;
   align-items: center !important;
@@ -1335,16 +1372,7 @@ html.dark .gh-btn-email i {
   color: #00FF7F !important;
 }
 
-/* RTL Support */
-[dir="rtl"] .gh-btn-social .gh-social-icon,
-html.rtl .gh-btn-social .gh-social-icon,
-html[dir="rtl"] .gh-btn-social .gh-social-icon,
-[dir="rtl"] .gh-btn-email i,
-html.rtl .gh-btn-email i,
-html[dir="rtl"] .gh-btn-email i {
-  margin-right: 0 !important;
-  margin-left: 0.5rem !important;
-}
+
 
 /* Quick Test / Demo Account Box */
 .gh-demo-box {
@@ -1795,18 +1823,28 @@ nav a:hover, nav a.active {
   border: 1px solid var(--gh-nav-dropdown-border) !important;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
-  padding: 0.5rem;
+  padding: 0.6rem;
   background-color: var(--gh-nav-dropdown-bg) !important;
   min-width: 210px;
   margin-top: 0.5rem !important;
+}
+
+.gh-dropdown-menu.show, .nx-dropdown-menu.show {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.4rem !important;
+}
+
+.gh-dropdown-menu li, .nx-dropdown-menu li {
+  list-style: none;
 }
 
 .gh-dropdown-item, .nx-dropdown-item {
   font-weight: 600;
   font-size: 0.96rem !important;
   color: var(--gh-nav-dropdown-text) !important;
-  padding: 0.55rem 1rem;
-  border-radius: var(--radius-sm);
+  padding: 0.65rem 1.15rem !important;
+  border-radius: 8px !important;
   display: flex;
   align-items: center;
   transition: var(--transition-fast);
@@ -1949,8 +1987,8 @@ nav a:hover, nav a.active {
 }
 
 /* Navbar Buttons Uniform Height & Alignment */
-.gh-navbar .btn:not(.d-lg-none),
-.nx-navbar .btn:not(.d-lg-none) {
+.gh-navbar .btn:not(.d-lg-none):not(.d-md-none):not(.gh-mobile-toggle),
+.nx-navbar .btn:not(.d-lg-none):not(.d-md-none):not(.gh-mobile-toggle) {
   height: 38px !important;
   display: inline-flex !important;
   align-items: center !important;
@@ -1966,7 +2004,7 @@ nav a:hover, nav a.active {
 
 /* ==================================================
    MOBILE MENU TOGGLE (LIST / HAMBURGER / THREE-DOT BUTTON)
-   Strictly hidden on laptops, desktop monitors & widescreen devices (>= 992px)
+   Strictly hidden on laptops, tablets & desktop monitors (>= 768px)
    ================================================== */
 .gh-mobile-toggle,
 button.gh-mobile-toggle,
@@ -1976,9 +2014,14 @@ button.gh-mobile-toggle,
 button[data-bs-target="#mobileMenuOffcanvas"],
 .gh-navbar .d-lg-none,
 .nx-navbar .d-lg-none,
+.gh-navbar .d-md-none,
+.nx-navbar .d-md-none,
 .gh-navbar .btn.d-lg-none,
 .nx-navbar .btn.d-lg-none,
-button.btn-icon.d-lg-none {
+.gh-navbar .btn.d-md-none,
+.nx-navbar .btn.d-md-none,
+button.btn-icon.d-lg-none,
+button.btn-icon.d-md-none {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
@@ -1997,10 +2040,152 @@ button.btn-icon.d-lg-none {
   }
 }
 
-@media (max-width: 991.98px) {
+/* ==================================================
+   1. Laptop / Tablet Navbar: 769px to 1024px and above (>= 769px)
+   - Display the full desktop navbar.
+   - Keep the logo, all navigation links, and action buttons visible in one row.
+   - Hide the three-dot hamburger menu.
+   - Maintain proper alignment, spacing, and font sizes without overlapping or wrapping.
+   ================================================== */
+@media (min-width: 769px) {
   .gh-navbar nav,
-  .nx-navbar nav {
+  .nx-navbar nav,
+  .gh-nav-desktop,
+  .gh-navbar .gh-nav-desktop,
+  .nx-navbar .gh-nav-desktop {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  .gh-navbar .reserve-nav-btn,
+  .nx-navbar .reserve-nav-btn {
+    display: inline-flex !important;
+    visibility: visible !important;
+  }
+  .gh-navbar #navAuthContainer,
+  .nx-navbar #navAuthContainer {
+    display: inline-flex !important;
+  }
+  .gh-mobile-toggle,
+  button.gh-mobile-toggle,
+  .btn.gh-mobile-toggle,
+  .gh-navbar button[data-bs-target="#mobileMenuOffcanvas"],
+  .nx-navbar button[data-bs-target="#mobileMenuOffcanvas"],
+  button[data-bs-target="#mobileMenuOffcanvas"],
+  .gh-navbar .gh-mobile-toggle,
+  .gh-navbar button.gh-mobile-toggle,
+  .gh-navbar .btn.gh-mobile-toggle,
+  .nx-navbar .gh-mobile-toggle,
+  .nx-navbar button.gh-mobile-toggle,
+  .nx-navbar .btn.gh-mobile-toggle {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+  }
+}
+
+/* Tablet Landscape & Compact Desktop (769px to 1024px) Layout Fine-Tuning */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .gh-navbar .container,
+  .gh-navbar .container-fluid,
+  .nx-navbar .container,
+  .nx-navbar .container-fluid {
+    max-width: 100% !important;
+    padding-left: clamp(0.35rem, 1vw, 0.75rem) !important;
+    padding-right: clamp(0.35rem, 1vw, 0.75rem) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: nowrap !important;
+  }
+  .gh-navbar .gh-brand {
+    gap: 0.2rem !important;
+    flex-shrink: 0 !important;
+    margin-right: 0.25rem !important;
+  }
+  .gh-navbar .gh-logo-wrapper {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+  }
+  .gh-navbar .gh-brand-title-img {
+    height: 30px !important;
+    max-width: 85px !important;
+    margin-left: 0.15rem !important;
+    object-fit: contain !important;
+  }
+  .gh-navbar nav,
+  .nx-navbar nav,
+  .gh-nav-desktop {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.08rem !important;
+    margin: 0 auto !important;
+    flex-shrink: 1 !important;
+    flex-wrap: nowrap !important;
+  }
+  .gh-navbar .gh-nav-link,
+  .nx-navbar .gh-nav-link {
+    font-size: 0.73rem !important;
+    padding: 0.18rem 0.26rem !important;
+    white-space: nowrap !important;
+    letter-spacing: -0.2px !important;
+    height: auto !important;
+    line-height: 1.2 !important;
+  }
+  .gh-navbar .gh-nav-link i,
+  .nx-navbar .gh-nav-link i {
+    font-size: 0.65rem !important;
+    margin-left: 0.15rem !important;
+  }
+  .gh-navbar .d-flex.align-items-center.gap-2,
+  .nx-navbar .d-flex.align-items-center.gap-2 {
+    gap: 0.2rem !important;
+    flex-shrink: 0 !important;
+    margin-left: 0.25rem !important;
+  }
+  .gh-navbar .theme-toggle-btn,
+  .gh-navbar .rtl-toggle-btn,
+  .gh-navbar .cart-nav-btn,
+  .gh-navbar .reserve-nav-btn,
+  .nx-navbar .theme-toggle-btn,
+  .nx-navbar .rtl-toggle-btn,
+  .nx-navbar .cart-nav-btn,
+  .nx-navbar .reserve-nav-btn {
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    min-height: 30px !important;
+    font-size: 0.78rem !important;
+    padding: 0 !important;
+  }
+}
+
+/* ==================================================
+   2. Mobile Navbar: 328px to 768px (max-width: 768px)
+   - Display the mobile navbar with the three-dot hamburger menu.
+   - Hide the full desktop navigation links.
+   - Keep the logo visible and properly aligned.
+   ================================================== */
+@media (max-width: 768px) {
+  .gh-navbar nav,
+  .nx-navbar nav,
+  .gh-nav-desktop,
+  .gh-navbar .gh-nav-desktop,
+  .nx-navbar .gh-nav-desktop,
+  nav.d-none.d-md-flex,
+  nav.d-none.d-lg-flex {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
   .gh-navbar #navAuthContainer,
   .nx-navbar #navAuthContainer {
@@ -2072,8 +2257,20 @@ button.btn-icon.d-lg-none {
   }
 }
 
-@media (max-width: 767.98px) {
-  /* Hide Reserve Table Icon completely on Mobile */
+/* --------------------------------------------------
+   REMOVE SIGN IN BTN IN NAVBAR & HAMBURGER MENU
+-------------------------------------------------- */
+.gh-nav-auth-login-btn,
+#navAuthContainer:not(:has(.gh-nav-auth-dropdown)),
+#mobileMenuOffcanvas .gh-signin-btn-mobile,
+#mobileMenuOffcanvas a[href="login.html"].btn,
+#mobileMenuOffcanvas #mobileNavAuthContainer a[href="login.html"],
+#ghAuthPromptModal {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  /* Hide Reserve Table Icon completely on Mobile <= 768px */
   .reserve-nav-btn,
   .gh-navbar .reserve-nav-btn,
   .nx-navbar .reserve-nav-btn {
@@ -2548,8 +2745,8 @@ html.dark .offcanvas nav .dropdown-menu .gh-dropdown-item.active {
     padding: 0 0.38rem !important;
     height: 36px !important;
   }
-  .gh-navbar .btn:not(.d-lg-none),
-  .nx-navbar .btn:not(.d-lg-none) {
+  .gh-navbar .btn:not(.d-lg-none):not(.d-md-none):not(.gh-mobile-toggle),
+  .nx-navbar .btn:not(.d-lg-none):not(.d-md-none):not(.gh-mobile-toggle) {
     padding: 0 0.72rem !important;
     font-size: 0.82rem !important;
     height: 36px !important;
@@ -2609,8 +2806,8 @@ html.dark .offcanvas nav .dropdown-menu .gh-dropdown-item.active {
   .gh-navbar #navAuthContainer a[href="register.html"] {
     display: none !important;
   }
-  .gh-navbar .btn:not(.d-lg-none),
-  .nx-navbar .btn:not(.d-lg-none) {
+  .gh-navbar .btn:not(.d-lg-none):not(.d-md-none):not(.gh-mobile-toggle),
+  .nx-navbar .btn:not(.d-lg-none):not(.d-md-none):not(.gh-mobile-toggle) {
     padding: 0 0.48rem !important;
     font-size: 0.76rem !important;
     height: 32px !important;
@@ -2647,7 +2844,13 @@ html.dark .offcanvas nav .dropdown-menu .gh-dropdown-item.active {
 
 .gh-hero-nature {
   position: relative;
-  background: url('../images/give_this_image_bg.jpeg') center center / cover no-repeat;
+  background-image: none !important;
+  background-color: #93C459 !important;
+  background: 
+    radial-gradient(ellipse 80% 55% at 50% 0%, rgba(254, 249, 230, 0.95) 0%, rgba(230, 242, 185, 0.72) 35%, transparent 75%),
+    radial-gradient(circle at 10% 90%, rgba(55, 120, 25, 0.32) 0%, transparent 60%),
+    radial-gradient(circle at 90% 90%, rgba(55, 120, 25, 0.32) 0%, transparent 60%),
+    linear-gradient(180deg, #D5EAA9 0%, #A4D36A 38%, #78B949 76%, #529A30 100%) !important;
   min-height: calc(100vh - 76px);
   display: flex;
   align-items: center;
@@ -3942,7 +4145,13 @@ html.dark .hero-delivery-badge .delivery-road-line {
 /* Dark theme overrides for nature hero */
 [data-bs-theme="dark"] .gh-hero-nature,
 html.dark .gh-hero-nature {
-  background: linear-gradient(rgba(1, 50, 32, 0.88), rgba(1, 50, 32, 0.94)), url('../images/give_this_image_bg.jpeg') center top / cover no-repeat;
+  background-image: none !important;
+  background-color: #062313 !important;
+  background: 
+    radial-gradient(ellipse 75% 55% at 50% 0%, rgba(20, 90, 50, 0.5) 0%, transparent 70%),
+    radial-gradient(circle at 10% 90%, rgba(1, 40, 25, 0.6) 0%, transparent 60%),
+    radial-gradient(circle at 90% 90%, rgba(1, 40, 25, 0.6) 0%, transparent 60%),
+    linear-gradient(180deg, #0d381e 0%, #062313 50%, #021a0d 100%) !important;
   border-bottom-color: rgba(0, 255, 127, 0.2);
 }
 
@@ -4081,10 +4290,9 @@ html.dark .hero-floating-badge .text-muted {
 .dish-details-header {
   position: relative;
   padding: 1.85rem 0 1.45rem !important;
-  background: 
-    linear-gradient(180deg, rgba(244, 250, 245, 0.65) 0%, rgba(250, 252, 250, 0.48) 25%, rgba(243, 250, 246, 0.55) 50%, rgba(250, 248, 244, 0.58) 75%, rgba(244, 250, 245, 0.65) 100%),
-    url('../images/home-2-bg.jpg') center top / cover no-repeat !important;
-  border-bottom: 1px solid rgba(85, 135, 66, 0.16) !important;
+  background-color: #EAFBD7 !important;
+  background: #EAFBD7 !important;
+  border-bottom: 1px solid rgba(85, 135, 66, 0.18) !important;
   text-align: center;
   overflow: hidden;
 }
@@ -4102,9 +4310,8 @@ html.dark .page-header,
 html.dark .about-page-header,
 html.dark .menu-page-header,
 html.dark .dish-details-header {
-  background: 
-    linear-gradient(180deg, rgba(1, 36, 21, 0.78) 0%, rgba(1, 45, 27, 0.70) 25%, rgba(2, 38, 23, 0.74) 50%, rgba(1, 30, 18, 0.76) 75%, rgba(1, 36, 21, 0.80) 100%),
-    url('../images/home-2-bg.jpg') center top / cover no-repeat !important;
+  background-color: #012417 !important;
+  background: linear-gradient(180deg, #012216 0%, #012d1e 50%, #012417 100%) !important;
   border-bottom-color: rgba(0, 255, 127, 0.16) !important;
 }
 
@@ -6565,7 +6772,13 @@ html.dark #growerDetailsModal .badge.bg-light {
 .about-nature-page .about-cta-section,
 .about-cta-section {
   position: relative;
-  padding: 6rem 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(3.5rem, 8vh, 6.5rem) 0;
+  box-sizing: border-box;
   background: 
     radial-gradient(ellipse at 50% 40%, rgba(1, 45, 26, 0.88) 0%, rgba(1, 35, 20, 0.94) 60%, rgba(1, 25, 14, 0.97) 100%),
     url('../images/about-bg.jpg') center center / cover no-repeat;
@@ -6573,6 +6786,10 @@ html.dark #growerDetailsModal .badge.bg-light {
   text-align: center;
   color: #ffffff;
   overflow: hidden;
+}
+
+.about-cta-section .container {
+  width: 100%;
 }
 
 .about-cta-badge,
@@ -6619,6 +6836,22 @@ html.dark #growerDetailsModal .badge.bg-light {
 
 .section-header {
   margin-bottom: 3.5rem;
+}
+
+.section-header.text-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.section-header.text-center .section-title,
+.section-header.text-center .section-desc,
+.section-header.text-center .section-sub {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .section-sub {
@@ -7543,71 +7776,28 @@ html.dark .gh-footer .bi.text-warning {
   font-weight: 550 !important;
   padding-top: 1.75rem !important;
   margin-top: 3.5rem !important;
+  text-align: center !important;
 }
 
 .gh-footer .footer-bottom a,
 .gh-footer .footer-bottom .gh-legal-link,
-.gh-footer .footer-bottom .text-white-50 {
+.gh-footer .footer-bottom .text-white-50,
+.gh-footer .footer-bottom p {
   color: var(--gh-footer-bottom-text) !important;
-  font-weight: 600 !important;
-  transition: color 0.2s ease;
+  font-weight: 550 !important;
+  text-decoration: none !important;
 }
 
+.gh-footer .footer-bottom:hover,
+.gh-footer .footer-bottom p:hover,
+.gh-footer .footer-bottom .text-white-50:hover,
 .gh-footer .footer-bottom a:hover,
-.gh-footer .footer-bottom .gh-legal-link:hover,
-.gh-footer .footer-bottom .text-white-50:hover {
-  color: var(--gh-footer-bottom-link-hover) !important;
-  text-decoration: underline !important;
+.gh-footer .footer-bottom .gh-legal-link:hover {
+  color: var(--gh-footer-bottom-text) !important;
+  text-decoration: none !important;
 }
 
-/* --------------------------------------------------
-   13. RTL (RIGHT-TO-LEFT) COMPATIBILITY
--------------------------------------------------- */
-[dir="rtl"], html.rtl {
-  text-align: start;
-}
 
-[dir="rtl"] .me-1, [dir="rtl"] .me-2, [dir="rtl"] .me-3, [dir="rtl"] .me-4 {
-  margin-left: 0.5rem !important;
-  margin-right: 0 !important;
-}
-
-[dir="rtl"] .ms-1, [dir="rtl"] .ms-2, [dir="rtl"] .ms-3, [dir="rtl"] .ms-4 {
-  margin-right: 0.5rem !important;
-  margin-left: 0 !important;
-}
-
-[dir="rtl"] .dish-card-price {
-  right: auto;
-  left: 1rem;
-}
-
-[dir="rtl"] .dish-card-badge {
-  left: auto;
-  right: 1rem;
-}
-
-[dir="rtl"] .pricing-card.featured::before {
-  right: auto;
-  left: 24px;
-}
-
-[dir="rtl"] .back-to-top {
-  right: 28px !important;
-  left: auto !important;
-  inset-inline-start: auto !important;
-  inset-inline-end: 28px !important;
-  direction: ltr !important;
-}
-
-@media (max-width: 576px) {
-  [dir="rtl"] .back-to-top {
-    right: 20px !important;
-    left: auto !important;
-    inset-inline-start: auto !important;
-    inset-inline-end: 20px !important;
-  }
-}
 
 /* --------------------------------------------------
    14. ONLINE ORDERING, CART & CHECKOUT STYLES
@@ -7933,11 +8123,28 @@ html.dark .gh-footer .bi.text-warning {
   color: #a89f94 !important;
 }
 
-/* Global scrollbar suppression for guest selector pills */
+/* Global scrollbar suppression & mobile scrolling for guest selector pills */
+.catering-estimator-section-wrap {
+  width: 100%;
+  max-width: 100%;
+  padding: 0 0.75rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
 .catering-estimator-wrap {
+  max-width: 100% !important;
+  width: auto;
+  min-width: 0 !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  white-space: nowrap !important;
   scrollbar-width: none !important;
   -ms-overflow-style: none !important;
   -webkit-overflow-scrolling: touch !important;
+  touch-action: pan-x !important;
+  overscroll-behavior-x: contain;
+  scroll-behavior: smooth;
 }
 
 .catering-estimator-wrap::-webkit-scrollbar {
@@ -7945,6 +8152,10 @@ html.dark .gh-footer .bi.text-warning {
   width: 0px !important;
   height: 0px !important;
   background: transparent !important;
+}
+
+.catering-estimator-btn {
+  flex-shrink: 0 !important;
 }
 
 /* Delivery Fee Info Button */
@@ -8829,6 +9040,9 @@ html.dark .ethos-img-wrapper {
 -------------------------------------------------- */
 .gh-events-nature-section {
   position: relative;
+  width: 100% !important;
+  max-width: 100% !important;
+  align-self: stretch !important;
   padding: 6.5rem 0;
   background: linear-gradient(135deg, #013220 0%, #032B16 50%, #012111 100%);
   border-top: 1px solid rgba(85, 135, 66, 0.25);
@@ -8926,16 +9140,25 @@ html.dark .gh-events-nature-section {
 .gh-dishes-nature-section {
   position: relative;
   padding: 6rem 0;
-  background: linear-gradient(180deg, rgba(250, 247, 242, 0.82) 0%, rgba(244, 250, 245, 0.70) 50%, rgba(250, 247, 242, 0.82) 100%),
-              url('../images/home-2-bg.jpg') center center / cover no-repeat fixed;
-  background-attachment: fixed;
+  background-color: #EAFBD7;
+  background: linear-gradient(180deg, rgba(234, 251, 215, 0.70) 0%, rgba(234, 251, 215, 0.38) 45%, rgba(234, 251, 215, 0.70) 100%),
+              url('../images/culinary-creations-bg.jpg') center center / cover no-repeat;
   border-top: 1px solid rgba(85, 135, 66, 0.18);
   border-bottom: 1px solid rgba(85, 135, 66, 0.18);
   overflow: hidden;
 }
 
+.gh-dishes-nature-section .section-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
 .gh-dishes-nature-section .section-title {
   color: #163E16;
+  text-align: center;
 }
 
 .gh-dishes-nature-section .section-desc {
@@ -8943,6 +9166,7 @@ html.dark .gh-events-nature-section {
   max-width: 620px;
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
 }
 
 .gh-dishes-nature-section .dish-card {
@@ -8962,9 +9186,9 @@ html.dark .gh-events-nature-section {
 /* Dark mode for featured dishes */
 [data-bs-theme="dark"] .gh-dishes-nature-section,
 html.dark .gh-dishes-nature-section {
-  background: linear-gradient(180deg, rgba(1, 40, 24, 0.90) 0%, rgba(1, 30, 18, 0.86) 50%, rgba(1, 40, 24, 0.92) 100%),
-              url('../images/home-2-bg.jpg') center center / cover no-repeat fixed;
-  background-attachment: fixed;
+  background-color: #072314;
+  background: linear-gradient(180deg, rgba(2, 38, 22, 0.90) 0%, rgba(2, 38, 22, 0.82) 50%, rgba(2, 38, 22, 0.90) 100%),
+              url('../images/culinary-creations-bg.jpg') center center / cover no-repeat;
   border-color: rgba(0, 255, 127, 0.18);
 }
 
@@ -9201,23 +9425,32 @@ a.btn,
     padding: 2rem 1.5rem;
   }
   .about-narrative-section .ethos-img-wrapper {
-    margin-top: 0;
-    min-height: 320px;
-    max-height: 420px;
+    margin-top: 1.5rem !important;
+    min-height: auto !important;
+    max-height: none !important;
+    height: auto !important;
+    display: block !important;
   }
   .about-narrative-section .ethos-img-wrapper img {
-    min-height: 320px;
-    max-height: 420px;
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    display: block !important;
   }
   .section-padding {
     padding: 3.5rem 0;
   }
 }
 
-/* --- E. Mobile Screens (576px - 767.98px) --- */
-@media (max-width: 767.98px) {
+/* --- E. Mobile Screens (576px - 768px) --- */
+@media (max-width: 768px) {
   .gh-hero-nature {
-    padding: 2.8rem 0 3.2rem;
+    min-height: auto !important;
+    height: auto !important;
+    max-height: none !important;
+    padding: clamp(1.8rem, 4vw, 2.4rem) 0 clamp(1.2rem, 3vw, 1.6rem) !important;
   }
   .gh-nature-container {
     width: 100%;
@@ -9240,16 +9473,21 @@ a.btn,
     font-size: 1.5rem;
   }
   .hero-img-card {
-    margin-top: 1.75rem;
-    border-radius: 20px;
+    margin-top: 1.4rem !important;
+    margin-bottom: 0 !important;
+    border-radius: 22px;
     border-width: 4px;
-    max-width: 360px;
+    max-width: clamp(320px, 92%, 390px) !important;
     margin-left: auto;
     margin-right: auto;
   }
   .hero-main-img {
-    min-height: 260px;
-    border-radius: 16px;
+    min-height: 280px !important;
+    height: clamp(280px, 40vh, 340px) !important;
+    max-height: 360px !important;
+    aspect-ratio: 4/3 !important;
+    object-fit: cover !important;
+    border-radius: 18px;
   }
   .hero-rotating-seal {
     width: 74px;
@@ -9307,13 +9545,51 @@ a.btn,
     border-radius: 20px;
   }
   .about-narrative-section .ethos-img-wrapper {
-    min-height: 280px;
-    max-height: 360px;
+    margin-top: 1.25rem !important;
+    min-height: auto !important;
+    max-height: none !important;
+    height: auto !important;
+    display: block !important;
     border-radius: 20px;
   }
   .about-narrative-section .ethos-img-wrapper img {
-    min-height: 280px;
-    max-height: 360px;
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    display: block !important;
+  }
+
+  /* About Page - Mobile Container Spacing Fix */
+  .about-nature-page .about-narrative-section {
+    min-height: auto !important;
+    height: auto !important;
+    max-height: none !important;
+    padding: 2.2rem 0 1.2rem !important;
+    display: block !important;
+  }
+  .about-nature-page .about-narrative-section .container {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  .about-nature-page .section-padding,
+  .about-nature-page .about-pillars-section,
+  .about-nature-page .about-timeline-section,
+  .about-nature-page .about-stats-section,
+  .about-nature-page .about-chefs-section,
+  .about-nature-page #executive-chefs,
+  .about-nature-page .about-partners-section {
+    padding: 2.2rem 0 !important;
+  }
+  .about-nature-page .about-cta-section {
+    min-height: auto !important;
+    height: auto !important;
+    padding: 3rem 0 !important;
+  }
+  .about-nature-page .section-header.mb-5,
+  .about-nature-page .section-header {
+    margin-bottom: 1.75rem !important;
   }
 }
 
@@ -9394,7 +9670,10 @@ a.btn,
     margin: 0 !important;
   }
   .gh-hero-nature {
-    padding: 2.2rem 0 2.8rem;
+    min-height: auto !important;
+    height: auto !important;
+    max-height: none !important;
+    padding: 1.8rem 0 1.2rem !important;
   }
   .gh-hero-nature .hero-title {
     font-size: clamp(1.85rem, 8vw, 2.45rem);
@@ -9414,12 +9693,15 @@ a.btn,
   }
   
   /* Hero Action Buttons - Full-width stacked for easy thumb tapping */
+  .gh-hero-nature .hero-btns-row,
+  .gh-hero-nature .d-flex.flex-wrap.align-items-center.gap-2,
   .gh-hero-nature .d-flex.flex-wrap.align-items-center.gap-3 {
     flex-direction: column !important;
     align-items: stretch !important;
     gap: 0.65rem !important;
-    margin-bottom: 1.5rem !important;
+    margin-bottom: 1.25rem !important;
   }
+  .gh-hero-nature .hero-btns-row > a,
   .gh-hero-nature .d-flex.flex-wrap.align-items-center.gap-3 > div,
   .btn-hero-primary,
   .btn-hero-outline,
@@ -9429,9 +9711,9 @@ a.btn,
     align-items: center !important;
     justify-content: center !important;
     text-align: center !important;
-    padding: 0.75rem 1.2rem !important;
+    padding: 0.72rem 1.15rem !important;
     font-size: 0.95rem !important;
-    min-height: 46px;
+    min-height: 44px;
   }
   
   /* Hero Stats */
@@ -9454,17 +9736,21 @@ a.btn,
   
   /* Hero Image Card & Badges */
   .hero-img-card {
-    margin-top: 1.5rem;
-    border-radius: 18px;
-    border-width: 3px;
-    max-width: 290px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-top: 1.2rem !important;
+    margin-bottom: 0 !important;
+    border-radius: 20px !important;
+    border-width: 3.5px !important;
+    max-width: clamp(290px, 94%, 350px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
   .hero-main-img {
-    min-height: 220px;
-    border-radius: 14px;
-    aspect-ratio: 16/11;
+    min-height: 260px !important;
+    height: clamp(260px, 38vh, 310px) !important;
+    max-height: 340px !important;
+    aspect-ratio: 4/3 !important;
+    object-fit: cover !important;
+    border-radius: 16px !important;
   }
   .hero-rotating-seal {
     width: 66px;
@@ -9559,6 +9845,27 @@ a.btn,
   .modal-dialog {
     margin: 0.5rem;
   }
+
+  /* About Page - Ultra-Compact Mobile Spacing */
+  .about-nature-page .about-narrative-section {
+    padding: 1.8rem 0 1rem !important;
+  }
+  .about-nature-page .section-padding,
+  .about-nature-page .about-pillars-section,
+  .about-nature-page .about-timeline-section,
+  .about-nature-page .about-stats-section,
+  .about-nature-page .about-chefs-section,
+  .about-nature-page #executive-chefs,
+  .about-nature-page .about-partners-section {
+    padding: 1.8rem 0 !important;
+  }
+  .about-nature-page .about-cta-section {
+    padding: 2.4rem 0 !important;
+  }
+  .about-nature-page .section-header.mb-5,
+  .about-nature-page .section-header {
+    margin-bottom: 1.35rem !important;
+  }
 }
 
 /* ================================================================
@@ -9570,20 +9877,27 @@ a.btn,
    ================================================================ */
 
 body.home-2-page {
-  background: linear-gradient(180deg, rgba(244, 250, 245, 0.65) 0%, rgba(250, 252, 250, 0.48) 22%, rgba(243, 250, 246, 0.55) 50%, rgba(250, 248, 244, 0.58) 75%, rgba(244, 250, 245, 0.65) 100%),
-              url('../images/home-2-bg.jpg') center center / cover no-repeat fixed !important;
-  background-attachment: fixed !important;
-  background-color: #F4FAF5 !important;
+  background: 
+    radial-gradient(circle at 10% 12%, rgba(190, 242, 100, 0.35) 0%, transparent 48%),
+    radial-gradient(circle at 90% 28%, rgba(163, 230, 53, 0.30) 0%, transparent 46%),
+    radial-gradient(circle at 18% 62%, rgba(132, 204, 22, 0.25) 0%, transparent 45%),
+    radial-gradient(circle at 85% 82%, rgba(163, 230, 53, 0.28) 0%, transparent 48%),
+    radial-gradient(ellipse at 50% 0%, rgba(247, 254, 231, 0.85) 0%, transparent 58%),
+    linear-gradient(180deg, #ecfcd8 0%, #e2f9c7 22%, #eafcd4 45%, #dff7c3 70%, #eafbd5 100%) !important;
+  background-color: #ecfcd8 !important;
   position: relative;
   overflow-x: clip;
 }
 
 [data-bs-theme="dark"] body.home-2-page,
 html.dark body.home-2-page {
-  background: linear-gradient(180deg, rgba(1, 36, 21, 0.78) 0%, rgba(1, 45, 27, 0.70) 25%, rgba(2, 38, 23, 0.74) 50%, rgba(1, 30, 18, 0.76) 75%, rgba(1, 36, 21, 0.80) 100%),
-              url('../images/home-2-bg.jpg') center center / cover no-repeat fixed !important;
-  background-attachment: fixed !important;
-  background-color: #012415 !important;
+  background: 
+    radial-gradient(circle at 12% 14%, rgba(0, 255, 127, 0.22) 0%, transparent 50%),
+    radial-gradient(circle at 88% 30%, rgba(16, 185, 129, 0.20) 0%, transparent 48%),
+    radial-gradient(circle at 18% 68%, rgba(20, 110, 55, 0.38) 0%, transparent 50%),
+    radial-gradient(circle at 82% 88%, rgba(6, 78, 38, 0.45) 0%, transparent 48%),
+    linear-gradient(180deg, #022314 0%, #01190e 30%, #032817 65%, #01140b 100%) !important;
+  background-color: #011a0f !important;
 }
 
 /* Ambient Background Fixed Layer */
@@ -9605,65 +9919,63 @@ html.dark body.home-2-page {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('../images/home-2-bg.jpg') center center / cover no-repeat;
-  opacity: 0.25;
-  filter: saturate(1.1);
+  background: radial-gradient(circle at 50% 25%, rgba(163, 230, 53, 0.22) 0%, transparent 70%);
   pointer-events: none;
   z-index: -1;
 }
 
 [data-bs-theme="dark"] .h2-ambient-bg-wrapper::before {
-  opacity: 0.18;
-  filter: brightness(0.8) contrast(1.1);
+  opacity: 0.35;
+  filter: brightness(0.9) contrast(1.2);
 }
 
-/* Soft Glow Diffusion Orbs */
+/* Soft Glow Diffusion Orbs - Fresh Living Botanical Lime-Green (#ecfcd8) */
 .h2-glow-orb {
   position: absolute;
   border-radius: 50%;
   filter: blur(80px);
-  opacity: 0.65;
+  opacity: 0.75;
   pointer-events: none;
   will-change: transform;
 }
 
 .h2-glow-orb-top-left {
-  width: clamp(350px, 45vw, 600px);
-  height: clamp(350px, 45vw, 600px);
-  top: -120px;
-  left: -100px;
-  background: radial-gradient(circle, rgba(168, 230, 207, 0.45) 0%, rgba(220, 248, 235, 0.25) 55%, transparent 75%);
-  animation: h2OrbDrift1 22s infinite alternate ease-in-out;
+  width: clamp(380px, 48vw, 680px);
+  height: clamp(380px, 48vw, 680px);
+  top: -100px;
+  left: -80px;
+  background: radial-gradient(circle, rgba(190, 242, 100, 0.65) 0%, rgba(163, 230, 53, 0.38) 42%, rgba(101, 163, 13, 0.18) 68%, transparent 78%);
+  animation: h2OrbDrift1 20s infinite alternate ease-in-out;
 }
 
 .h2-glow-orb-center-right {
-  width: clamp(400px, 50vw, 700px);
-  height: clamp(400px, 50vw, 700px);
-  top: 35%;
-  right: -140px;
-  background: radial-gradient(circle, rgba(198, 246, 225, 0.4) 0%, rgba(254, 243, 199, 0.22) 50%, transparent 75%);
-  animation: h2OrbDrift2 26s infinite alternate ease-in-out;
+  width: clamp(420px, 52vw, 720px);
+  height: clamp(420px, 52vw, 720px);
+  top: 32%;
+  right: -120px;
+  background: radial-gradient(circle, rgba(217, 249, 157, 0.62) 0%, rgba(190, 242, 100, 0.38) 45%, rgba(250, 204, 21, 0.18) 65%, transparent 78%);
+  animation: h2OrbDrift2 24s infinite alternate ease-in-out;
 }
 
 .h2-glow-orb-bottom-left {
-  width: clamp(380px, 48vw, 650px);
-  height: clamp(380px, 48vw, 650px);
-  bottom: -100px;
-  left: 5%;
-  background: radial-gradient(circle, rgba(168, 230, 207, 0.4) 0%, rgba(240, 253, 244, 0.2) 55%, transparent 75%);
-  animation: h2OrbDrift3 24s infinite alternate ease-in-out;
+  width: clamp(400px, 50vw, 680px);
+  height: clamp(400px, 50vw, 680px);
+  bottom: -80px;
+  left: 3%;
+  background: radial-gradient(circle, rgba(190, 242, 100, 0.6) 0%, rgba(132, 204, 22, 0.36) 48%, rgba(77, 124, 15, 0.18) 68%, transparent 78%);
+  animation: h2OrbDrift3 22s infinite alternate ease-in-out;
 }
 
 [data-bs-theme="dark"] .h2-glow-orb-top-left {
-  background: radial-gradient(circle, rgba(0, 255, 127, 0.14) 0%, rgba(20, 90, 50, 0.22) 55%, transparent 75%);
+  background: radial-gradient(circle, rgba(0, 255, 127, 0.28) 0%, rgba(16, 185, 129, 0.22) 48%, transparent 75%);
 }
 
 [data-bs-theme="dark"] .h2-glow-orb-center-right {
-  background: radial-gradient(circle, rgba(136, 212, 184, 0.12) 0%, rgba(46, 125, 50, 0.2) 50%, transparent 75%);
+  background: radial-gradient(circle, rgba(52, 211, 153, 0.26) 0%, rgba(5, 150, 105, 0.22) 48%, transparent 75%);
 }
 
 [data-bs-theme="dark"] .h2-glow-orb-bottom-left {
-  background: radial-gradient(circle, rgba(0, 255, 127, 0.12) 0%, rgba(10, 50, 28, 0.25) 55%, transparent 75%);
+  background: radial-gradient(circle, rgba(0, 255, 127, 0.25) 0%, rgba(10, 80, 42, 0.38) 52%, transparent 75%);
 }
 
 @keyframes h2OrbDrift1 {
@@ -9808,15 +10120,19 @@ html.dark body.home-2-page {
 }
 
 .home-2-page .bg-surface {
-  background: rgba(255, 255, 255, 0.88) !important;
+  background: rgba(244, 253, 236, 0.90) !important;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(132, 204, 22, 0.22);
+  border-bottom: 1px solid rgba(132, 204, 22, 0.22);
 }
 
 [data-bs-theme="dark"] .home-2-page .bg-surface {
   background: rgba(1, 45, 27, 0.90) !important;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(0, 255, 127, 0.14);
+  border-bottom: 1px solid rgba(0, 255, 127, 0.14);
 }
 
 /* Floating Botanical & Word Badge Keyframes */
@@ -10236,8 +10552,9 @@ html.dark .h2-eyebrow::after {
   padding: 2.5rem 0;
   overflow: hidden;
   box-sizing: border-box;
-  background: radial-gradient(ellipse at 80% 20%, rgba(226, 244, 226, 0.4) 0%, transparent 60%),
-              radial-gradient(ellipse at 15% 85%, rgba(247, 235, 225, 0.45) 0%, transparent 55%),
+  background: radial-gradient(ellipse at 80% 20%, rgba(217, 249, 157, 0.45) 0%, transparent 62%),
+              radial-gradient(ellipse at 15% 85%, rgba(236, 252, 216, 0.65) 0%, transparent 58%),
+              radial-gradient(circle at 50% 50%, rgba(190, 242, 100, 0.18) 0%, transparent 70%),
               transparent;
 }
 
@@ -10252,8 +10569,8 @@ html.dark .h2-eyebrow::after {
 
 [data-bs-theme="dark"] .h2-farm-hero,
 html.dark .h2-farm-hero {
-  background: radial-gradient(ellipse at 80% 20%, rgba(20, 90, 50, 0.25) 0%, transparent 60%),
-              radial-gradient(ellipse at 15% 85%, rgba(1, 40, 25, 0.5) 0%, transparent 55%),
+  background: radial-gradient(ellipse at 80% 20%, rgba(0, 255, 127, 0.22) 0%, transparent 60%),
+              radial-gradient(ellipse at 15% 85%, rgba(16, 185, 129, 0.28) 0%, transparent 55%),
               transparent;
 }
 
@@ -10524,6 +10841,11 @@ html.dark .h2-floating-leaf-node {
   height: 100%;
   object-fit: cover;
   transition: transform 0.6s ease;
+}
+
+.h2-journey-img-wrap img.h2-journey-img-chef,
+.h2-journey-img-wrap img[src*="Chef_Crafted"] {
+  object-position: center 10%;
 }
 
 .h2-journey-card:hover .h2-journey-img-wrap img {
@@ -11243,11 +11565,25 @@ html.dark .h2-step-pill {
   box-shadow: var(--shadow-lg);
 }
 
+.h2-private-dining-box .row {
+  align-items: stretch;
+}
+
+.h2-private-dining-img-col {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
 .h2-private-dining-img {
   width: 100%;
   height: 100%;
   min-height: clamp(340px, 42vh, 440px);
   object-fit: cover;
+  object-position: center center;
+  display: block;
+  flex-grow: 1;
   transition: transform 0.6s ease;
 }
 
@@ -11392,24 +11728,103 @@ html.dark .home-2-page div.text-muted {
   letter-spacing: 1.2px;
 }
 
-/* Section 3 Chef Story Container - Wide 100% Responsive Viewport Fill */
-.home-2-page #chef-story .h2-chef-container {
-  width: 100% !important;
-  max-width: min(1560px, 95vw) !important;
-  padding-left: clamp(1rem, 2.5vw, 2.5rem) !important;
-  padding-right: clamp(1rem, 2.5vw, 2.5rem) !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
+/* Section 3 Chef Story - Perfectly Balanced Container Fit */
+.home-2-page #chef-story,
+#chef-story,
+.home-2-page .h2-chef-section,
+.h2-chef-section {
+  padding: clamp(2.5rem, 4vh, 3.5rem) 0 !important;
+  width: 100%;
 }
 
-/* Section 3 Chef Story Narrative Frosted Card - High Contrast & Visibility */
+.home-2-page #chef-story .h2-chef-container,
+#chef-story .h2-chef-container {
+  width: 100% !important;
+}
+
+@media (min-width: 992px) and (max-width: 1024px) {
+  .home-2-page #chef-story .h2-chef-container,
+  #chef-story .h2-chef-container {
+    max-width: 100% !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+.home-2-page #chef-story .row {
+  display: flex !important;
+  align-items: stretch !important;
+}
+
+/* Decreased Image Showcase: col-lg-5 */
+.home-2-page #chef-story .h2-chef-img-wrapper {
+  position: relative !important;
+  border-radius: var(--radius-xl, 24px) !important;
+  overflow: hidden !important;
+  box-shadow: 0 10px 32px rgba(10, 45, 18, 0.1) !important;
+  height: 100% !important;
+  min-height: 380px !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.home-2-page #chef-story .h2-chef-img-wrapper img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+  transition: transform 0.6s ease !important;
+}
+
+.home-2-page #chef-story .h2-chef-img-wrapper:hover img {
+  transform: scale(1.03) !important;
+}
+
+/* Tag Card on Image */
+.home-2-page #chef-story .h2-chef-tag-card {
+  position: absolute !important;
+  bottom: 14px !important;
+  right: 14px !important;
+  background: linear-gradient(135deg, rgba(20, 56, 26, 0.94) 0%, rgba(12, 38, 18, 0.97) 100%) !important;
+  color: #FAF8F5 !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1.5px solid rgba(168, 230, 207, 0.4) !important;
+  padding: 0.55rem 0.95rem !important;
+  border-radius: var(--radius-md, 16px) !important;
+  box-shadow: 0 8px 24px rgba(10, 45, 18, 0.35) !important;
+  max-width: 260px !important;
+  z-index: 5 !important;
+}
+
+.home-2-page #chef-story .h2-chef-tag-card .h2-award-icon {
+  font-size: 1.6rem !important;
+  color: #FFC107 !important;
+}
+
+.home-2-page #chef-story .h2-chef-tag-card h6 {
+  font-size: 0.92rem !important;
+  font-weight: 700 !important;
+  color: #FFFFFF !important;
+  margin-bottom: 2px !important;
+}
+
+.home-2-page #chef-story .h2-chef-tag-card span {
+  font-size: 0.78rem !important;
+  color: #A8E6CF !important;
+  line-height: 1.3 !important;
+}
+
+/* Expanded Narrative Card: Compact and refined typography */
 .home-2-page .h2-chef-narrative-card {
   background: rgba(255, 255, 255, 0.94) !important;
   backdrop-filter: blur(16px) !important;
   -webkit-backdrop-filter: blur(16px) !important;
   border: 1px solid rgba(46, 101, 24, 0.18) !important;
   border-radius: var(--radius-xl, 24px) !important;
-  padding: clamp(1.25rem, 2.2vw, 2rem) clamp(1.4rem, 2.5vw, 2.25rem) !important;
+  padding: clamp(1.35rem, 2vw, 2.1rem) clamp(1.5rem, 2.3vw, 2.5rem) !important;
   box-shadow: 0 12px 38px rgba(10, 45, 18, 0.09) !important;
   height: 100% !important;
   display: flex !important;
@@ -11424,11 +11839,17 @@ html.dark .home-2-page .h2-chef-narrative-card {
   box-shadow: 0 12px 38px rgba(0, 0, 0, 0.5) !important;
 }
 
+.home-2-page .h2-chef-narrative-card .h2-eyebrow {
+  font-size: 0.8rem !important;
+  letter-spacing: 1.2px !important;
+  font-weight: 700 !important;
+}
+
 .home-2-page .h2-chef-narrative-card .section-title {
   color: #0B2912 !important;
   font-family: 'Playfair Display', Georgia, serif !important;
   font-weight: 700 !important;
-  font-size: clamp(1.85rem, 2.2vw, 2.25rem) !important;
+  font-size: clamp(1.75rem, 2vw, 2.1rem) !important;
   line-height: 1.22 !important;
 }
 
@@ -11439,8 +11860,8 @@ html.dark .home-2-page .h2-chef-narrative-card .section-title {
 
 .home-2-page .h2-chef-narrative-card .h2-section-desc {
   color: #243827 !important;
-  font-size: 0.98rem !important;
-  line-height: 1.58 !important;
+  font-size: clamp(0.9rem, 1.02vw, 0.96rem) !important;
+  line-height: 1.55 !important;
   font-weight: 500 !important;
 }
 
@@ -11449,12 +11870,39 @@ html.dark .home-2-page .h2-chef-narrative-card .h2-section-desc {
   color: #D6EAD3 !important;
 }
 
+/* Interactive Pillar Items with Smooth Transitions and Micro-Animations */
+.h2-pillar-item {
+  padding: 0.55rem 0.75rem;
+  border-radius: 14px;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.h2-pillar-item:hover {
+  background: rgba(46, 101, 24, 0.05);
+  transform: translateX(6px);
+}
+
+[data-bs-theme="dark"] .h2-pillar-item:hover,
+html.dark .h2-pillar-item:hover {
+  background: rgba(0, 255, 127, 0.08);
+}
+
+.h2-pillar-content {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 .home-2-page .h2-pillar-title,
 .home-2-page .h2-chef-narrative-card .h2-pillar-title {
-  font-size: 1rem !important;
+  font-size: 0.96rem !important;
   color: #0E2E16 !important;
   font-weight: 700 !important;
   margin-bottom: 2px !important;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.h2-pillar-item:hover .h2-pillar-title {
+  color: #1E6023 !important;
 }
 
 [data-bs-theme="dark"] .home-2-page .h2-pillar-title,
@@ -11462,12 +11910,22 @@ html.dark .home-2-page .h2-chef-narrative-card .h2-section-desc {
   color: #FFFFFF !important;
 }
 
+[data-bs-theme="dark"] .h2-pillar-item:hover .h2-pillar-title,
+html.dark .h2-pillar-item:hover .h2-pillar-title {
+  color: #00FF7F !important;
+}
+
 .home-2-page .h2-pillar-desc,
 .home-2-page .h2-chef-narrative-card .h2-pillar-desc {
-  font-size: 0.88rem !important;
-  line-height: 1.48 !important;
+  font-size: 0.85rem !important;
+  line-height: 1.45 !important;
   color: #314634 !important;
   font-weight: 500 !important;
+  transition: color 0.25s ease;
+}
+
+.h2-pillar-item:hover .h2-pillar-desc {
+  color: #163618 !important;
 }
 
 [data-bs-theme="dark"] .home-2-page .h2-pillar-desc,
@@ -11475,6 +11933,12 @@ html.dark .home-2-page .h2-chef-narrative-card .h2-section-desc {
   color: #D0E6CD !important;
 }
 
+[data-bs-theme="dark"] .h2-pillar-item:hover .h2-pillar-desc,
+html.dark .h2-pillar-item:hover .h2-pillar-desc {
+  color: #E2F4E2 !important;
+}
+
+/* Pillar Icon Styling & Dynamic Hover Animation */
 .home-2-page .h2-chef-narrative-card .h2-chef-pillar-icon {
   width: 36px !important;
   height: 36px !important;
@@ -11485,6 +11949,30 @@ html.dark .home-2-page .h2-chef-narrative-card .h2-section-desc {
   border: 1px solid rgba(46, 101, 24, 0.16) !important;
   font-size: 1.05rem !important;
   box-shadow: 0 4px 12px rgba(30, 96, 35, 0.08) !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.home-2-page .h2-chef-narrative-card .h2-chef-pillar-icon i {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-block;
+}
+
+/* Hover effect triggered when hovering either the pillar item or the icon directly */
+.h2-pillar-item:hover .h2-chef-pillar-icon,
+.h2-chef-pillar-icon:hover {
+  background: #1E6023 !important;
+  color: #FFFFFF !important;
+  border-color: #1E6023 !important;
+  transform: scale(1.14) rotate(6deg) !important;
+  box-shadow: 0 6px 18px rgba(30, 96, 35, 0.32) !important;
+}
+
+.h2-pillar-item:hover .h2-chef-pillar-icon i,
+.h2-chef-pillar-icon:hover i {
+  transform: scale(1.1);
 }
 
 [data-bs-theme="dark"] .home-2-page .h2-chef-narrative-card .h2-chef-pillar-icon,
@@ -11494,47 +11982,27 @@ html.dark .home-2-page .h2-chef-narrative-card .h2-chef-pillar-icon {
   border-color: rgba(105, 240, 174, 0.3) !important;
 }
 
-/* Section 3 Equal Height Container Symmetry */
-.home-2-page #chef-story .row {
-  display: flex !important;
-  align-items: stretch !important;
+[data-bs-theme="dark"] .h2-pillar-item:hover .h2-chef-pillar-icon,
+html.dark .h2-pillar-item:hover .h2-chef-pillar-icon,
+[data-bs-theme="dark"] .h2-chef-pillar-icon:hover,
+html.dark .h2-chef-pillar-icon:hover {
+  background: #00FF7F !important;
+  color: #012417 !important;
+  border-color: #00FF7F !important;
+  box-shadow: 0 6px 18px rgba(0, 255, 127, 0.45) !important;
 }
 
-@media (min-width: 992px) {
-  .home-2-page #chef-story .col-lg-6 {
-    display: flex !important;
-    flex-direction: column !important;
-  }
+.home-2-page .h2-chef-narrative-card .btn {
+  font-size: 0.94rem !important;
+  font-weight: 600 !important;
+  padding: 0.58rem 1.45rem !important;
+  border-radius: 9999px !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
 
-  .home-2-page #chef-story .h2-chef-img-wrapper {
-    position: relative !important;
-    height: 100% !important;
-    min-height: 100% !important;
-    flex: 1 1 100% !important;
-    border-radius: var(--radius-xl, 24px) !important;
-    overflow: hidden !important;
-  }
-
-  .home-2-page #chef-story .h2-chef-img-wrapper img {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    min-height: 100% !important;
-    object-fit: cover !important;
-    display: block !important;
-    border-radius: inherit !important;
-  }
-
-  .home-2-page #chef-story .h2-chef-narrative-card {
-    height: 100% !important;
-    min-height: 100% !important;
-    flex: 1 1 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: space-between !important;
-  }
+.home-2-page .h2-chef-narrative-card .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30, 78, 24, 0.35);
 }
 
 /* Section 4 Experience Cards */
@@ -11679,6 +12147,538 @@ html.dark .home-2-page .h2-process-step p {
 [data-bs-theme="dark"] .home-2-page .h2-final-cta-section .lead,
 [data-bs-theme="dark"] .home-2-page .h2-final-cta-meta {
   color: #DDF5DC !important;
+}
+
+/* ================================================================
+   36.3 HOME 2 EXCLUSIVE: LIVING BOTANICAL MATRIX & FLAVOR ALCHEMY
+   ================================================================ */
+.h2-botanical-matrix-section {
+  position: relative;
+  overflow: hidden;
+  background: 
+    radial-gradient(circle at 15% 20%, rgba(190, 242, 100, 0.32) 0%, transparent 45%),
+    radial-gradient(circle at 85% 75%, rgba(163, 230, 53, 0.25) 0%, transparent 50%),
+    linear-gradient(180deg, rgba(236, 252, 216, 0.75) 0%, rgba(226, 249, 201, 0.90) 50%, rgba(236, 252, 216, 0.75) 100%) !important;
+  border-top: 1.5px solid rgba(101, 163, 13, 0.22);
+  border-bottom: 1.5px solid rgba(101, 163, 13, 0.22);
+  padding: clamp(4rem, 6vw, 6rem) 0;
+}
+
+[data-bs-theme="dark"] .h2-botanical-matrix-section {
+  background: 
+    radial-gradient(circle at 15% 20%, rgba(0, 255, 127, 0.18) 0%, transparent 45%),
+    radial-gradient(circle at 85% 75%, rgba(16, 185, 129, 0.15) 0%, transparent 50%),
+    linear-gradient(180deg, rgba(2, 35, 20, 0.95) 0%, rgba(1, 25, 14, 0.98) 50%, rgba(3, 40, 23, 0.95) 100%) !important;
+  border-color: rgba(0, 255, 127, 0.22);
+}
+
+/* Floating Botanical Micro-Particle Leaves */
+.h2-matrix-leaf-particle {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.35;
+  filter: drop-shadow(0 4px 10px rgba(46, 125, 50, 0.2));
+}
+
+.h2-matrix-particle-1 {
+  top: 12%;
+  left: 3%;
+  width: 48px;
+  animation: h2FloatParticle1 14s infinite ease-in-out;
+}
+
+.h2-matrix-particle-2 {
+  top: 45%;
+  right: 2%;
+  width: 56px;
+  animation: h2FloatParticle2 16s infinite ease-in-out 1.5s;
+}
+
+.h2-matrix-particle-3 {
+  bottom: 8%;
+  left: 5%;
+  width: 42px;
+  animation: h2FloatParticle1 12s infinite ease-in-out 3s;
+}
+
+[data-bs-theme="dark"] .h2-matrix-leaf-particle {
+  opacity: 0.25;
+  filter: drop-shadow(0 4px 14px rgba(0, 255, 127, 0.3));
+}
+
+/* Signature Farm-to-Table Dish Cards */
+.h2-dish-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.96) !important;
+  border: 1.5px solid rgba(101, 163, 13, 0.25) !important;
+  border-radius: 22px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: 0 10px 30px rgba(77, 124, 15, 0.1) !important;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+  overflow: hidden;
+  z-index: 2;
+}
+
+[data-bs-theme="dark"] .h2-dish-card {
+  background: rgba(2, 38, 22, 0.94) !important;
+  border: 1.5px solid rgba(0, 255, 127, 0.25) !important;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.5) !important;
+}
+
+.h2-dish-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 42px rgba(101, 163, 13, 0.25) !important;
+  border-color: #65A30D !important;
+}
+
+[data-bs-theme="dark"] .h2-dish-card:hover {
+  box-shadow: 0 20px 45px rgba(0, 255, 127, 0.28) !important;
+  border-color: #00FF7F !important;
+}
+
+/* Image Showcase with Zoom */
+.h2-dish-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.h2-dish-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+
+.h2-dish-card:hover .h2-dish-img-wrap img {
+  transform: scale(1.08);
+}
+
+/* Badges on Image */
+.h2-dish-badge-origin {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(16, 42, 20, 0.88);
+  color: #FFFFFF;
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.4px;
+  padding: 0.28rem 0.7rem;
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 3;
+}
+
+.h2-dish-price-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: linear-gradient(135deg, #15803D, #166534);
+  color: #FFFFFF;
+  font-size: 0.88rem;
+  font-weight: 800;
+  padding: 0.28rem 0.8rem;
+  border-radius: var(--radius-full);
+  box-shadow: 0 4px 14px rgba(22, 101, 52, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  z-index: 3;
+}
+
+/* Dish Body */
+.h2-dish-body {
+  padding: 1.3rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.h2-dish-dietary {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #166534;
+  background: rgba(220, 245, 226, 0.92);
+  border: 1px solid rgba(46, 125, 50, 0.28);
+  border-radius: var(--radius-full);
+  padding: 0.22rem 0.65rem;
+  align-self: flex-start;
+  margin-bottom: 0.55rem;
+}
+
+[data-bs-theme="dark"] .h2-dish-dietary {
+  background: rgba(8, 52, 28, 0.95);
+  color: #86EFAC;
+  border-color: rgba(0, 255, 127, 0.35);
+}
+
+.h2-dish-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #142900;
+  margin-bottom: 0.45rem;
+  line-height: 1.25;
+}
+
+[data-bs-theme="dark"] .h2-dish-title {
+  color: #FFFFFF;
+}
+
+.h2-dish-desc {
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: #2D4F0A;
+  margin-bottom: 0.9rem;
+  flex-grow: 1;
+}
+
+[data-bs-theme="dark"] .h2-dish-desc {
+  color: #D6EAD3;
+}
+
+/* Botanical Ingredient Chips */
+.h2-dish-ingredients {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 1.15rem;
+}
+
+.h2-dish-chip {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #1F3A06;
+  background: rgba(236, 252, 216, 0.9);
+  border: 1px solid rgba(101, 163, 13, 0.28);
+  border-radius: var(--radius-full);
+  padding: 0.2rem 0.6rem;
+  transition: all 0.25s ease;
+}
+
+.h2-dish-card:hover .h2-dish-chip {
+  border-color: rgba(101, 163, 13, 0.5);
+  background: rgba(236, 252, 216, 1);
+}
+
+[data-bs-theme="dark"] .h2-dish-chip {
+  background: rgba(8, 48, 26, 0.85);
+  color: #C3ECD0;
+  border-color: rgba(0, 255, 127, 0.25);
+}
+
+.h2-dish-order-btn {
+  margin-top: auto;
+  padding: 0.55rem 1rem;
+  font-weight: 700;
+  font-size: 0.84rem;
+  border-radius: var(--radius-md, 12px);
+}
+
+/* Sanctuary Live Metrics — Separated Professional Cards System */
+.h2-matrix-metrics-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+.h2-metric-card {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(46, 101, 24, 0.16);
+  border-radius: 18px;
+  padding: 1.25rem 1.15rem;
+  box-shadow: 0 8px 24px rgba(22, 60, 22, 0.07);
+  display: flex;
+  align-items: center;
+  gap: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.h2-metric-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #2E7D32, #81C784);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.h2-metric-card:hover {
+  transform: translateY(-4px);
+  background: #FFFFFF;
+  border-color: rgba(46, 101, 24, 0.35);
+  box-shadow: 0 14px 34px rgba(22, 60, 22, 0.14);
+}
+
+.h2-metric-card:hover::before {
+  opacity: 1;
+}
+
+[data-bs-theme="dark"] .h2-metric-card {
+  background: rgba(2, 38, 22, 0.92);
+  border-color: rgba(0, 255, 127, 0.22);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+[data-bs-theme="dark"] .h2-metric-card::before {
+  background: linear-gradient(180deg, #00FF7F, #00b05b);
+}
+
+[data-bs-theme="dark"] .h2-metric-card:hover {
+  background: rgba(2, 48, 28, 0.98);
+  border-color: #00FF7F;
+  box-shadow: 0 14px 36px rgba(0, 255, 127, 0.22);
+}
+
+.h2-metric-icon-wrap {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(220, 245, 226, 0.95), rgba(187, 247, 208, 0.9));
+  color: #166534;
+  border: 1px solid rgba(46, 125, 50, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.h2-metric-card:hover .h2-metric-icon-wrap {
+  transform: scale(1.12) rotate(6deg);
+  background: #1E6023;
+  color: #FFFFFF;
+  border-color: #1E6023;
+  box-shadow: 0 6px 16px rgba(30, 96, 35, 0.3);
+}
+
+[data-bs-theme="dark"] .h2-metric-icon-wrap {
+  background: linear-gradient(135deg, rgba(8, 48, 26, 0.95), rgba(4, 30, 16, 0.95));
+  color: #4ADE80;
+  border-color: rgba(0, 255, 127, 0.35);
+}
+
+[data-bs-theme="dark"] .h2-metric-card:hover .h2-metric-icon-wrap {
+  background: #00FF7F;
+  color: #012417;
+  border-color: #00FF7F;
+  box-shadow: 0 6px 18px rgba(0, 255, 127, 0.45);
+}
+
+.h2-metric-content {
+  flex-grow: 1;
+}
+
+.h2-metric-value {
+  font-size: 1.42rem;
+  font-weight: 800;
+  color: #0E3E18;
+  line-height: 1.15;
+  font-family: var(--font-serif);
+  margin-bottom: 2px;
+  transition: color 0.25s ease;
+}
+
+.h2-metric-card:hover .h2-metric-value {
+  color: #1E6023;
+}
+
+[data-bs-theme="dark"] .h2-metric-value {
+  color: #FFFFFF;
+}
+
+[data-bs-theme="dark"] .h2-metric-card:hover .h2-metric-value {
+  color: #00FF7F;
+}
+
+.h2-metric-desc {
+  font-size: 0.82rem;
+  color: #384F3B;
+  font-weight: 600;
+  margin-bottom: 0;
+  line-height: 1.35;
+}
+
+[data-bs-theme="dark"] .h2-metric-desc {
+  color: #C3ECD0;
+}
+
+/* Standalone Separated Seasonal Menu CTA Button */
+.h2-menu-cta-btn {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(46, 101, 24, 0.3);
+  color: #1E6023 !important;
+  border-radius: 9999px;
+  padding: 0.75rem 2.2rem !important;
+  font-size: 0.96rem;
+  font-weight: 700;
+  box-shadow: 0 6px 20px rgba(22, 60, 22, 0.08);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+}
+
+.h2-menu-cta-btn .h2-menu-cta-text {
+  display: inline-block;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.h2-menu-cta-btn i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  line-height: 1;
+  transition: transform 0.25s ease;
+}
+
+.h2-menu-cta-btn:hover {
+  background: #1E6023 !important;
+  color: #FFFFFF !important;
+  border-color: #1E6023 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(30, 96, 35, 0.3);
+}
+
+.h2-menu-cta-btn:hover i.bi-arrow-right {
+  transform: translateX(4px);
+}
+
+[data-bs-theme="dark"] .h2-menu-cta-btn {
+  background: rgba(2, 38, 22, 0.92);
+  border-color: rgba(0, 255, 127, 0.4);
+  color: #88FFB0 !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+[data-bs-theme="dark"] .h2-menu-cta-btn:hover {
+  background: #00FF7F !important;
+  color: #012417 !important;
+  border-color: #00FF7F !important;
+  box-shadow: 0 10px 30px rgba(0, 255, 127, 0.45);
+}
+
+/* Mobile Alignment Fix for Seasonal Menu CTA Button */
+@media (max-width: 768px) {
+  .h2-menu-cta-btn {
+    padding: 0.7rem 1.35rem !important;
+    font-size: clamp(0.86rem, 3.5vw, 0.94rem) !important;
+    gap: 0.55rem !important;
+    max-width: 100% !important;
+    white-space: nowrap !important;
+  }
+  .h2-menu-cta-btn i {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .h2-menu-cta-btn {
+    padding: 0.65rem 1.15rem !important;
+    font-size: clamp(0.82rem, 3.4vw, 0.88rem) !important;
+    gap: 0.5rem !important;
+    max-width: calc(100% - 16px) !important;
+    white-space: nowrap !important;
+  }
+  .h2-menu-cta-btn i {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 340px) {
+  .h2-menu-cta-btn {
+    padding: 0.6rem 0.9rem !important;
+    font-size: 0.78rem !important;
+    gap: 0.4rem !important;
+  }
+  .h2-menu-cta-btn i {
+    font-size: 0.82rem;
+  }
+}
+
+/* Animations Keyframes */
+@keyframes h2FloatParticle1 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(10deg); }
+}
+
+@keyframes h2FloatParticle2 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(22px) rotate(-12deg); }
+}
+
+@keyframes h2HerbSway {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(4deg) scale(1.04); }
+  75% { transform: rotate(-4deg) scale(0.98); }
+}
+
+/* Home 2 Buttons Shimmer Sweep & Hover Lift */
+.home-2-page .btn-primary {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(34, 139, 34, 0.28);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.home-2-page .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(34, 139, 34, 0.42);
+}
+
+.home-2-page .btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: h2BtnSweep 4s infinite linear;
+  pointer-events: none;
+}
+
+@keyframes h2BtnSweep {
+  0% { left: -100%; }
+  25%, 100% { left: 160%; }
+}
+
+/* Chef Story Living Glow Halo */
+.home-2-page #chef-story .h2-chef-img-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(74, 222, 128, 0.4), transparent 50%, rgba(34, 197, 94, 0.4));
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.6;
+  animation: h2BorderGlowPulse 4s infinite ease-in-out;
+}
+
+@keyframes h2BorderGlowPulse {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.008); }
 }
 
 /* Footer Contrast */
@@ -13056,7 +14056,19 @@ html.dark .gh-farm-video-section {
   font-size: 0.85rem !important;
   letter-spacing: 1.8px !important;
   box-shadow: 0 4px 14px rgba(46, 101, 24, 0.16) !important;
-  padding: 0.42rem 1.2rem !important;
+  padding: 0.42rem 1.25rem !important;
+  gap: 0.75rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.about-nature-page .section-sub i,
+.about-nature-page .partner-section-sub i {
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 [data-bs-theme="dark"] .about-nature-page .section-sub,
@@ -13065,6 +14077,22 @@ html.dark .gh-farm-video-section {
   color: #DEF5D6 !important;
   border-color: rgba(0, 255, 127, 0.45) !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.55) !important;
+}
+
+@media (max-width: 575.98px) {
+  .about-nature-page .section-sub,
+  .about-nature-page .partner-section-sub {
+    font-size: clamp(0.74rem, 3.2vw, 0.82rem) !important;
+    letter-spacing: 1.2px !important;
+    padding: 0.36rem clamp(0.75rem, 3vw, 1rem) !important;
+    gap: 0.65rem !important;
+    white-space: nowrap !important;
+    max-width: 100% !important;
+  }
+  .about-nature-page .section-sub i,
+  .about-nature-page .partner-section-sub i {
+    font-size: 0.88rem !important;
+  }
 }
 
 .about-nature-page .section-title,
@@ -13526,19 +14554,7 @@ html.dark .gh-farm-video-section {
   visibility: visible;
 }
 
-/* RTL Layout Support */
-[dir="rtl"] .gh-cart-drawer {
-  right: auto;
-  left: 0;
-  transform: translateX(-100%);
-  border-left: none;
-  border-right: 1px solid var(--gh-border, rgba(45, 42, 38, 0.08));
-  box-shadow: 15px 0 45px rgba(22, 19, 17, 0.22);
-}
 
-[dir="rtl"] .gh-cart-drawer.is-open {
-  transform: translateX(0);
-}
 
 /* Drawer Header */
 .gh-cart-header {
@@ -14122,10 +15138,7 @@ html.dark .gh-farm-video-section {
   box-shadow: -15px 0 50px rgba(0, 0, 0, 0.65);
 }
 
-[data-bs-theme="dark"][dir="rtl"] .gh-cart-drawer {
-  border-right-color: rgba(255, 255, 255, 0.08);
-  box-shadow: 15px 0 50px rgba(0, 0, 0, 0.65);
-}
+
 
 [data-bs-theme="dark"] .gh-cart-header {
   background: rgba(28, 25, 23, 0.85);
@@ -14749,6 +15762,42 @@ html.dark .blog-nature-page .bg-card {
   background: rgba(2, 44, 27, 0.95) !important;
   border-color: rgba(0, 255, 127, 0.25) !important;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Featured Article Responsive Image Wrap */
+.featured-img-wrap {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  aspect-ratio: 16 / 9;
+  height: auto;
+}
+
+.featured-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.6s ease;
+}
+
+.featured-img-wrap:hover img {
+  transform: scale(1.03);
+}
+
+@media (min-width: 992px) {
+  .featured-img-wrap {
+    height: 380px;
+    aspect-ratio: auto;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .featured-img-wrap {
+    aspect-ratio: 16 / 9;
+    height: auto;
+  }
 }
 
 /* 6. Blog Filter Buttons */
@@ -15463,9 +16512,10 @@ html.dark .btn-white-cta:hover {
 }
 
 /* 41. Universal Footer Contact Telephone Styling */
-a[href^="tel:"],
-footer a[href^="tel:"],
-.gh-footer a[href^="tel:"] {
+.footer-contact-info a[href^="tel:"],
+a[href^="tel:"]:not(.btn),
+footer a[href^="tel:"]:not(.btn),
+.gh-footer a[href^="tel:"]:not(.btn) {
   color: var(--gh-footer-heading) !important;
   text-decoration: none !important;
   font-weight: 550 !important;
@@ -15474,15 +16524,18 @@ footer a[href^="tel:"],
   transition: color 0.2s ease, opacity 0.2s ease;
 }
 
-a[href^="tel:"]:hover,
-a[href^="tel:"]:focus,
-a[href^="tel:"]:active,
-footer a[href^="tel:"]:hover,
-footer a[href^="tel:"]:focus,
-footer a[href^="tel:"]:active,
-.gh-footer a[href^="tel:"]:hover,
-.gh-footer a[href^="tel:"]:focus,
-.gh-footer a[href^="tel:"]:active {
+.footer-contact-info a[href^="tel:"]:hover,
+.footer-contact-info a[href^="tel:"]:focus,
+.footer-contact-info a[href^="tel:"]:active,
+a[href^="tel:"]:hover:not(.btn),
+a[href^="tel:"]:focus:not(.btn),
+a[href^="tel:"]:active:not(.btn),
+footer a[href^="tel:"]:hover:not(.btn),
+footer a[href^="tel:"]:focus:not(.btn),
+footer a[href^="tel:"]:active:not(.btn),
+.gh-footer a[href^="tel:"]:hover:not(.btn),
+.gh-footer a[href^="tel:"]:focus:not(.btn),
+.gh-footer a[href^="tel:"]:active:not(.btn) {
   color: var(--gh-footer-link-hover) !important;
   text-decoration: none !important;
 }
@@ -16646,18 +17699,51 @@ html.dark .contact-card-link:hover {
   margin-bottom: 1rem !important;
 }
 
+.dish-nutrition-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.65rem;
+}
+
+.dish-nutrition-title {
+  font-size: 0.74rem !important;
+  letter-spacing: 0.5px !important;
+  white-space: nowrap;
+}
+
+.dish-nutrition-tag {
+  font-size: 0.72rem !important;
+  white-space: nowrap;
+}
+
 .dish-nutrition-cell {
   background: #FFFFFF !important;
   border: 1px solid rgba(46, 101, 24, 0.1) !important;
   border-radius: 8px !important;
-  padding: 0.5rem 0.35rem !important;
+  padding: 0.55rem 0.25rem !important;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+  min-height: 64px;
 }
 
 .dish-nutri-label {
   font-size: 0.7rem !important;
   color: #6C757D !important;
   margin-bottom: 0.2rem;
+  white-space: nowrap;
+}
+
+.dish-nutri-val {
+  font-size: 0.95rem !important;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.dish-nutri-unit {
+  font-size: 0.68rem !important;
+  font-weight: 500;
+  color: #6C757D;
 }
 
 /* Special Instructions Textarea */
@@ -16684,11 +17770,17 @@ html.dark .contact-card-link:hover {
 }
 
 .dish-modal-qty-box {
+  min-width: 108px;
   height: 44px;
   padding: 0.25rem 0.5rem;
   border-radius: 999px;
   border: 1px solid rgba(46, 101, 24, 0.2);
   background: #F8FAF7;
+}
+
+#dishModalQtyInput {
+  width: 36px;
+  font-size: 0.92rem;
 }
 
 #dishModalQtyMinus,
@@ -16721,6 +17813,197 @@ html.dark .contact-card-link:hover {
   height: 44px;
   font-size: 0.95rem;
   font-weight: 600;
+  white-space: nowrap;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#dishModalAddToCartBtn i {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  position: relative;
+  top: 0;
+}
+
+#dishModalAddToCartBtn i::before {
+  vertical-align: 0 !important;
+  line-height: 1 !important;
+}
+
+#dishModalAddToCartBtn .dish-modal-btn-text {
+  display: inline-flex !important;
+  align-items: center !important;
+  white-space: nowrap !important;
+  line-height: 1 !important;
+}
+
+/* Mobile Alignment Fix for Dish Modal Action Bar & Add to Cart Button */
+@media (max-width: 768px) {
+  .dish-modal-action-bar {
+    gap: 0.45rem !important;
+  }
+  .dish-modal-qty-box {
+    min-width: 96px !important;
+    height: 42px !important;
+    padding: 0.18rem 0.35rem !important;
+  }
+  #dishModalQtyMinus,
+  #dishModalQtyPlus {
+    width: 28px !important;
+    height: 28px !important;
+  }
+  #dishModalQtyInput {
+    width: 28px !important;
+    font-size: 0.88rem !important;
+  }
+  #dishModalAddToCartBtn {
+    height: 42px !important;
+    font-size: clamp(0.82rem, 3.5vw, 0.9rem) !important;
+    padding: 0 0.75rem !important;
+    gap: 0.4rem !important;
+    white-space: nowrap !important;
+  }
+  #dishModalAddToCartBtn i {
+    font-size: 0.92rem !important;
+  }
+  .dish-nutrition-block {
+    padding: 0.8rem 0.8rem !important;
+  }
+  .dish-nutrition-header {
+    gap: 0.4rem !important;
+    margin-bottom: 0.55rem !important;
+  }
+  .dish-nutrition-title {
+    font-size: 0.72rem !important;
+    letter-spacing: 0.4px !important;
+  }
+  .dish-nutrition-tag {
+    font-size: 0.7rem !important;
+  }
+  .dish-nutrition-cell {
+    padding: 0.5rem 0.2rem !important;
+    min-height: 60px !important;
+  }
+  .dish-nutri-label {
+    font-size: 0.68rem !important;
+    margin-bottom: 0.15rem !important;
+  }
+  .dish-nutri-val {
+    font-size: 0.9rem !important;
+  }
+  .dish-nutri-unit {
+    font-size: 0.65rem !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .dish-modal-action-bar {
+    gap: 0.35rem !important;
+  }
+  .dish-modal-qty-box {
+    min-width: 88px !important;
+    height: 40px !important;
+    padding: 0.12rem 0.25rem !important;
+  }
+  #dishModalQtyMinus,
+  #dishModalQtyPlus {
+    width: 26px !important;
+    height: 26px !important;
+  }
+  #dishModalQtyInput {
+    width: 26px !important;
+    font-size: 0.84rem !important;
+  }
+  #dishModalAddToCartBtn {
+    height: 40px !important;
+    font-size: clamp(0.76rem, 3.2vw, 0.82rem) !important;
+    padding: 0 0.55rem !important;
+    gap: 0.35rem !important;
+    white-space: nowrap !important;
+  }
+  #dishModalAddToCartBtn i {
+    font-size: 0.85rem !important;
+  }
+  .dish-nutrition-block {
+    padding: 0.7rem 0.6rem !important;
+  }
+  .dish-nutrition-header {
+    gap: 0.3rem !important;
+    margin-bottom: 0.45rem !important;
+  }
+  .dish-nutrition-title {
+    font-size: 0.68rem !important;
+    letter-spacing: 0.25px !important;
+  }
+  .dish-nutrition-tag {
+    font-size: 0.66rem !important;
+  }
+  .dish-nutrition-cell {
+    padding: 0.45rem 0.15rem !important;
+    min-height: 56px !important;
+  }
+  .dish-nutri-label {
+    font-size: 0.65rem !important;
+    margin-bottom: 0.12rem !important;
+  }
+  .dish-nutri-val {
+    font-size: 0.86rem !important;
+  }
+  .dish-nutri-unit {
+    font-size: 0.62rem !important;
+  }
+}
+
+@media (max-width: 340px) {
+  .dish-modal-qty-box {
+    min-width: 82px !important;
+    height: 38px !important;
+    padding: 0.1rem 0.2rem !important;
+  }
+  #dishModalQtyMinus,
+  #dishModalQtyPlus {
+    width: 24px !important;
+    height: 24px !important;
+  }
+  #dishModalQtyInput {
+    width: 24px !important;
+    font-size: 0.8rem !important;
+  }
+  #dishModalAddToCartBtn {
+    height: 38px !important;
+    font-size: 0.74rem !important;
+    padding: 0 0.45rem !important;
+    gap: 0.25rem !important;
+  }
+  #dishModalAddToCartBtn i {
+    font-size: 0.8rem !important;
+  }
+  .dish-nutrition-block {
+    padding: 0.55rem 0.45rem !important;
+  }
+  .dish-nutrition-title {
+    font-size: 0.62rem !important;
+    letter-spacing: 0.15px !important;
+  }
+  .dish-nutrition-tag {
+    font-size: 0.6rem !important;
+  }
+  .dish-nutrition-cell {
+    padding: 0.38rem 0.1rem !important;
+    min-height: 52px !important;
+  }
+  .dish-nutri-label {
+    font-size: 0.6rem !important;
+  }
+  .dish-nutri-val {
+    font-size: 0.8rem !important;
+  }
+  .dish-nutri-unit {
+    font-size: 0.58rem !important;
+  }
 }
 
 /* Favorite Button */
@@ -16798,6 +18081,21 @@ html.dark .dish-nutrition-cell strong {
 
 [data-bs-theme="dark"] .dish-nutri-label,
 html.dark .dish-nutri-label {
+  color: #A3C9B0 !important;
+}
+
+[data-bs-theme="dark"] .dish-nutri-unit,
+html.dark .dish-nutri-unit {
+  color: #A3C9B0 !important;
+}
+
+[data-bs-theme="dark"] .dish-nutrition-tag,
+html.dark .dish-nutrition-tag {
+  color: #88FFB0 !important;
+}
+
+[data-bs-theme="dark"] .dish-nutrition-title,
+html.dark .dish-nutrition-title {
   color: #A3C9B0 !important;
 }
 
@@ -17409,10 +18707,7 @@ html.dark .admin-404-number {
   width: calc(100vw - 32px);
 }
 
-[dir="rtl"] .gh-toast-container {
-  right: auto;
-  left: 24px;
-}
+
 
 @media (max-width: 576px) {
   .gh-toast-container {
@@ -18343,8 +19638,10 @@ html.dark .pricing-period {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
   width: 100%;
   font-size: 0.95rem;
+  white-space: nowrap;
 }
 
 /* 6. Services Page: Harmonized Grid Card Height */
@@ -18383,6 +19680,39 @@ html.dark .pricing-period {
 
 .reservation-sidebar-card {
   width: 100% !important;
+}
+
+.reservation-sidebar-card .btn-accent {
+  background-color: #2E7D32 !important;
+  border-color: #2E7D32 !important;
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  border-radius: 9999px !important;
+  padding: 0.65rem 1.25rem !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  text-decoration: none !important;
+}
+
+.reservation-sidebar-card .btn-accent:hover,
+.reservation-sidebar-card .btn-accent:focus,
+.reservation-sidebar-card .btn-accent:active {
+  background-color: #388E3C !important;
+  border-color: #388E3C !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(56, 142, 60, 0.45) !important;
+  text-decoration: none !important;
+}
+
+.reservation-sidebar-card .btn-accent i {
+  color: #FFFFFF !important;
+  transition: transform 0.2s ease !important;
+}
+
+.reservation-sidebar-card .btn-accent:hover i {
+  transform: scale(1.15) !important;
 }
 
 /* 9. Blog Article Card Balancing */
@@ -18489,9 +19819,183 @@ h2.display-5 {
   transform: translateX(3px) !important;
 }
 
-[data-bs-theme="dark"] .featured-card-footer {
-  border-top-color: rgba(0, 255, 127, 0.15) !important;
+/* 11.5 Footer Enhanced Content & Badges Polish */
+.gh-footer .footer-bio {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--gh-footer-text, #1B3522);
 }
+
+.gh-footer .footer-contact-info p,
+.gh-footer .footer-contact-info a {
+  font-size: 0.88rem;
+  color: var(--gh-footer-text, #1B3522);
+}
+
+.gh-footer .footer-digest-highlights {
+  border-top-color: rgba(46, 101, 24, 0.14) !important;
+}
+
+.gh-footer .footer-mission-note {
+  background: rgba(255, 255, 255, 0.75) !important;
+  border-color: rgba(46, 101, 24, 0.2) !important;
+}
+
+/* Neutral Monochrome Trust Tags */
+.gh-footer .footer-trust-tag {
+  background: transparent !important;
+  color: var(--gh-footer-text, #1B3522) !important;
+  border: 1px solid rgba(46, 101, 24, 0.25) !important;
+  font-size: 0.72rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+}
+
+.gh-footer .footer-trust-tag i {
+  color: var(--gh-footer-text, #1B3522) !important;
+  opacity: 0.75;
+}
+
+[data-bs-theme="dark"] .gh-footer .footer-trust-tag {
+  background: transparent !important;
+  color: var(--gh-footer-text, #D0DFD6) !important;
+  border-color: rgba(0, 255, 127, 0.25) !important;
+}
+
+[data-bs-theme="dark"] .gh-footer .footer-trust-tag i {
+  color: var(--gh-footer-text, #D0DFD6) !important;
+  opacity: 0.85;
+}
+
+[data-bs-theme="dark"] .gh-footer .footer-mission-note {
+  background: rgba(2, 44, 27, 0.6) !important;
+  border-color: rgba(0, 255, 127, 0.25) !important;
+}
+
+[data-bs-theme="dark"] .gh-footer .footer-mission-note span {
+  color: #C5D7C2 !important;
+}
+
+
+
+[data-bs-theme="dark"] .gh-footer .footer-contact-info p,
+[data-bs-theme="dark"] .gh-footer .footer-contact-info a,
+[data-bs-theme="dark"] .gh-footer .footer-bio {
+  color: var(--gh-footer-text, #D0DFD6) !important;
+}
+
+/* 11.6 Compact Clean Spacing & Strict Start Alignment for Footer Navigation List */
+.gh-footer .footer-col {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  text-align: start !important;
+}
+
+.gh-footer .footer-nav-list {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  text-align: start !important;
+  gap: 0.35rem !important;
+  margin-bottom: 0.75rem !important;
+  padding: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  list-style: none !important;
+  width: 100% !important;
+}
+
+.gh-footer .footer-nav-list li {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  text-align: start !important;
+  line-height: 1.25 !important;
+}
+
+.gh-footer .footer-link {
+  font-size: 0.92rem !important;
+  padding: 0.18rem 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  text-align: start !important;
+  gap: 0.45rem !important;
+  line-height: 1.3 !important;
+}
+
+.gh-footer .footer-link i {
+  font-size: 0.75rem !important;
+  flex-shrink: 0 !important;
+}
+
+.gh-footer .footer-col-title,
+.gh-footer h4.footer-col-title {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  text-align: start !important;
+  margin-bottom: 0.85rem !important;
+  height: auto !important;
+  min-height: 38px !important;
+}
+
+/* 11.7 Unified Uniform Font Size Across All Footer Contact Info Items */
+.gh-footer .footer-contact-info p,
+.gh-footer .footer-contact-info a,
+.gh-footer .footer-contact-info span,
+.gh-footer a[href^="tel:"],
+.gh-footer a[href^="mailto:"],
+.gh-footer a[href*="mail.google.com"] {
+  font-size: 0.92rem !important;
+  line-height: 1.4 !important;
+  color: var(--gh-footer-text, #1B3522) !important;
+}
+
+.gh-footer .footer-contact-info a,
+.gh-footer a[href^="tel:"],
+.gh-footer a[href^="mailto:"],
+.gh-footer a[href*="mail.google.com"] {
+  text-decoration: none !important;
+}
+
+.gh-footer .footer-contact-info a:hover,
+.gh-footer a[href^="tel:"]:hover,
+.gh-footer a[href^="mailto:"]:hover,
+.gh-footer a[href*="mail.google.com"]:hover {
+  color: var(--gh-footer-link-hover, #1B5E20) !important;
+  text-decoration: none !important;
+}
+
+.gh-footer .footer-contact-info i {
+  font-size: 0.95rem !important;
+  width: 16px !important;
+  text-align: center !important;
+}
+
+[data-bs-theme="dark"] .gh-footer .footer-contact-info p,
+[data-bs-theme="dark"] .gh-footer .footer-contact-info a,
+[data-bs-theme="dark"] .gh-footer .footer-contact-info span,
+[data-bs-theme="dark"] .gh-footer a[href^="tel:"],
+[data-bs-theme="dark"] .gh-footer a[href^="mailto:"],
+[data-bs-theme="dark"] .gh-footer a[href*="mail.google.com"] {
+  color: var(--gh-footer-text, #D0DFD6) !important;
+}
+
+[data-bs-theme="dark"] .gh-footer .footer-contact-info a:hover,
+[data-bs-theme="dark"] .gh-footer a[href^="tel:"]:hover,
+[data-bs-theme="dark"] .gh-footer a[href^="mailto:"]:hover,
+[data-bs-theme="dark"] .gh-footer a[href*="mail.google.com"]:hover {
+  color: #00FF7F !important;
+  text-decoration: none !important;
+}
+
+
+
 
 
 

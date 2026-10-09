@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
+<html dir="ltr" lang="en" data-bs-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,6 +25,54 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <!-- Custom Master Stylesheet -->
   <link rel="stylesheet" href="assets/css/style.css?v=2.2">
+  <style>
+    /* Responsive Featured Article Cover */
+    .featured-img-wrap {
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+      aspect-ratio: 16 / 9;
+      height: auto;
+    }
+
+    .featured-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.6s ease;
+    }
+
+    .featured-img-wrap:hover img {
+      transform: scale(1.03);
+    }
+
+    @media (min-width: 992px) {
+      .featured-img-wrap {
+        height: 380px;
+        aspect-ratio: auto;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      .featured-img-wrap {
+        aspect-ratio: 16 / 9;
+        height: auto;
+      }
+      .featured-blog-card {
+        padding: 0.9rem !important;
+      }
+    }
+
+    #modalArticleImg {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      height: auto;
+      object-fit: cover;
+      max-height: 440px;
+    }
+  </style>
 </head>
 <body class="nature-bg-page blog-nature-page">
 
@@ -48,14 +96,14 @@
         </a>
 
         <!-- Desktop Navigation Links -->
-        <nav class="d-none d-lg-flex align-items-center gap-1">
+        <nav class="gh-nav-desktop align-items-center gap-1">
           <div class="dropdown">
             <a class="gh-nav-link  dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Home
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item " href="index.html">Home 1 (Gourmet Landing)</a></li>
-              <li><a class="gh-dropdown-item " href="home-2.html">Home 2 (Farm to Plate)</a></li>
+              <li><a class="gh-dropdown-item " href="index.html">Gourmet Landing</a></li>
+              <li><a class="gh-dropdown-item " href="home-2.html">Farm Plate</a></li>
             </ul>
           </div>
           <a class="gh-nav-link " href="about.html">About</a>
@@ -95,21 +143,14 @@
             <span id="navCartCount" class="cart-badge-count" style="display: none;">0</span>
           </a>
 
-          <!-- Reserve Table Icon (Desktop & Tablet only) -->
-          <a href="reservation.html" class="reserve-nav-btn d-none d-md-inline-flex" title="Reserve Table" aria-label="Reserve Table" data-bs-toggle="tooltip" data-bs-placement="bottom">
+          <!-- Reserve Table Icon (Desktop & Tablet only >= 968px) -->
+          <a href="reservation.html" class="reserve-nav-btn" title="Reserve Table" aria-label="Reserve Table" data-bs-toggle="tooltip" data-bs-placement="bottom">
             <i class="bi bi-calendar2-check"></i>
           </a>
 
-          <!-- Standard Desktop Auth (Sign In) -->
-          <div id="navAuthContainer" class="d-none d-md-block">
-            <div class="d-inline-flex align-items-center gap-2 flex-nowrap">
-              <a href="login.html" class="btn btn-outline-primary btn-sm gh-nav-auth-login-btn" title="Sign In" aria-label="Sign In">
-                <i class="bi bi-box-arrow-in-right me-1"></i><span class="gh-nav-auth-label">Sign In</span>
-              </a>
-            </div>
-          </div>
+          <div id="navAuthContainer"></div>
 
-          <button class="btn btn-icon btn-outline-primary d-lg-none gh-mobile-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenuOffcanvas" aria-controls="mobileMenuOffcanvas" aria-label="Open mobile navigation">
+          <button class="btn btn-icon btn-outline-primary gh-mobile-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenuOffcanvas" aria-controls="mobileMenuOffcanvas" aria-label="Open mobile navigation">
             <i class="bi bi-list fs-4"></i>
           </button>
         </div>
@@ -137,14 +178,10 @@
     </div>
     <div class="offcanvas-body p-4 d-flex flex-column justify-content-between">
       <div>
-        <div id="mobileNavAuthContainer" class="mb-3">
-          <div class="d-flex gap-2">
-            <a href="login.html" class="btn btn-outline-primary btn-sm flex-fill"><i class="bi bi-box-arrow-in-right me-1"></i> Sign In</a>
-          </div>
-        </div>
+        <div id="mobileNavAuthContainer" class="mb-3"></div>
         <nav class="d-flex flex-column gap-2">
-          <a class="gh-nav-link " href="index.html">Home (Gourmet)</a>
-          <a class="gh-nav-link " href="home-2.html">Home (Farm to Plate)</a>
+          <a class="gh-nav-link " href="index.html">Gourmet Landing</a>
+          <a class="gh-nav-link " href="home-2.html">Farm Plate</a>
           <a class="gh-nav-link " href="about.html">About Us</a>
           <a class="gh-nav-link " href="menu.html">Full Restaurant Menu</a>
           <a class="gh-nav-link" href="cart.html"><i class="bi bi-bag me-1"></i> My Dining Cart</a>
@@ -206,9 +243,9 @@
         <div class="featured-blog-card mb-5 p-3 p-md-4 rounded-4 shadow-sm border bg-card position-relative overflow-hidden" id="blogFeaturedCard" data-category="vegan">
           <div class="row g-4 align-items-center">
             <div class="col-lg-7">
-              <div class="featured-img-wrap rounded-4 overflow-hidden position-relative" style="height: 380px;">
-                <a href="#article=cashew-cheese" data-article-key="cashew-cheese" class="d-block w-100 h-100 btn-open-article" aria-label="Read featured article: The Art of Fermented Cashew Silk Cheese">
-                  <img src="assets/img/blog/art-of-fermented-cashew-silk-cheese.jpg" alt="The Art of Fermented Cashew Silk Cheese" class="w-100 h-100" style="object-fit: cover; transition: transform 0.6s ease;">
+              <div class="featured-img-wrap rounded-4 overflow-hidden position-relative">
+                <a href="#article=cashew-cheese" data-article-key="cashew-cheese" class="d-block w-100 h-100 btn-open-article" aria-label="Read featured article: Crafting Cave-Ripened Plant-Based Fromagerie">
+                  <img src="assets/img/blog/art-of-fermented-cashew-silk-cheese.jpg" alt="Crafting Cave-Ripened Plant-Based Fromagerie" class="w-100 h-100" style="object-fit: cover; transition: transform 0.6s ease;">
                 </a>
                 <span class="badge bg-success position-absolute top-0 start-0 m-3 px-3 py-2 rounded-pill shadow-sm">
                   <i class="bi bi-star-fill me-1"></i> Featured Article
@@ -224,7 +261,7 @@
                 </div>
                 <h2 class="font-serif fw-bold display-6 mb-3">
                   <a href="#article=cashew-cheese" data-article-key="cashew-cheese" class="text-decoration-none text-dark hover-primary btn-open-article">
-                    The Art of Fermented Cashew Silk Cheese
+                    Crafting Cave-Ripened Plant-Based Fromagerie
                   </a>
                 </h2>
                 <p class="text-muted mb-4 lead fs-6 fw-bold">
@@ -251,26 +288,26 @@
         <div class="row g-4" id="blogGrid">
           
           <!-- ================= VEGAN ARTICLES (3 items) ================= -->
-          <!-- Vegan 1: Cashew Silk Cheese -->
+          <!-- Vegan 1: King Oyster Scallops -->
           <div class="col-md-6 col-lg-4 blog-item-col" data-category="vegan">
             <div class="user-model-card h-100 d-flex flex-column justify-content-between position-relative">
               <div class="position-relative overflow-hidden" style="height: 230px;">
-                <img src="assets/img/blog/art-of-fermented-cashew-silk-cheese.jpg" class="w-100 h-100" style="object-fit: cover;" alt="The Art of Fermented Cashew Silk Cheese">
+                <img src="assets/images/king-oyster-scallops.jpg" class="w-100 h-100" style="object-fit: cover;" alt="Pan-Seared King Oyster Scallops: Botanical Umami Mastery">
                 <span class="user-model-badge">VEGAN</span>
               </div>
               <div class="p-4 d-flex flex-column flex-grow-1 justify-content-between">
                 <div>
                   <div class="text-muted extra-small mb-2 fw-medium">
-                    <i class="bi bi-calendar3 me-1"></i> May 12, 2026 &bull; Chef Elena Rostova
+                    <i class="bi bi-calendar3 me-1"></i> May 08, 2026 &bull; Chef Julian Sterling
                   </div>
                   <h4 class="blog-title font-serif fw-bold mb-2">
-                    <a href="#article=cashew-cheese" data-article-key="cashew-cheese" class="text-decoration-none text-dark hover-primary">The Art of Fermented Cashew Silk Cheese</a>
+                    <a href="#article=king-oyster-scallops" data-article-key="king-oyster-scallops" class="text-decoration-none text-dark hover-primary">Pan-Seared King Oyster Scallops: Botanical Umami Mastery</a>
                   </h4>
-                  <p class="dish-desc text-muted small mb-0">Explore how live active cultures and cold-pressed lactic fermentation transform raw organic cashews into artisanal cave-ripened cheese.</p>
+                  <p class="dish-desc text-muted small mb-0">Discover how precise cross-hatch scoring, hot cast-iron searing, and garlic thyme glaze turn wild king trumpet mushrooms into oceanic-style culinary medallions.</p>
                 </div>
                 <div>
                   <hr class="my-3 opacity-25">
-                  <a href="#article=cashew-cheese" data-article-key="cashew-cheese" class="read-article-pill-btn">Read Article <i class="bi bi-arrow-right"></i></a>
+                  <a href="#article=king-oyster-scallops" data-article-key="king-oyster-scallops" class="read-article-pill-btn">Read Article <i class="bi bi-arrow-right"></i></a>
                 </div>
               </div>
             </div>
@@ -617,7 +654,7 @@
     </section>
   </main>
 
-        <!-- Universal 4-Column Luxury Footer -->
+                  <!-- Universal 4-Column Luxury Footer -->
   <footer class="gh-footer">
     <div class="container">
       <div class="row g-4 g-lg-5 mb-5 align-items-start">
@@ -628,7 +665,7 @@
             <img src="assets/images/logo-g.png" alt="Green Haven Logo" class="gh-brand-logo-img me-2">
             <span class="gh-brand-text">Green Haven</span>
           </a>
-          <p class="footer-bio mb-4">
+          <p class="footer-bio mb-3">
             An organic plant-based restaurant sanctuary celebrating vibrant seasonal gastronomy, regenerative agriculture, and holistic well-being.
           </p>
           <div class="footer-social-group d-flex gap-2 flex-wrap">
@@ -643,31 +680,39 @@
         <!-- Column 2: Navigation -->
         <div class="col-lg-3 col-md-6 footer-col">
           <h4 class="footer-col-title">Navigation</h4>
-          <ul class="list-unstyled d-flex flex-column gap-2 mb-0 footer-nav-list">
+          <ul class="list-unstyled d-flex flex-column gap-2 mb-3 footer-nav-list">
             <li><a href="index.html" class="footer-link"><i class="bi bi-chevron-right"></i> Home</a></li>
-            <li><a href="about.html" class="footer-link"><i class="bi bi-chevron-right"></i> About Us</a></li>
-            <li><a href="menu.html" class="footer-link"><i class="bi bi-chevron-right"></i> Our Menu</a></li>
-            <li><a href="cart.html" class="footer-link"><i class="bi bi-chevron-right"></i> Food Cart</a></li>
+            <li><a href="about.html" class="footer-link"><i class="bi bi-chevron-right"></i> About</a></li>
+            <li><a href="menu.html" class="footer-link"><i class="bi bi-chevron-right"></i> Menu</a></li>
+            <li><a href="services.html" class="footer-link"><i class="bi bi-chevron-right"></i> Services</a></li>
             <li><a href="catering.html" class="footer-link"><i class="bi bi-chevron-right"></i> Catering</a></li>
-            <li><a href="contact.html" class="footer-link"><i class="bi bi-chevron-right"></i> Contact Us</a></li>
+            <li><a href="pricing.html" class="footer-link"><i class="bi bi-chevron-right"></i> Packages</a></li>
           </ul>
         </div>
 
         <!-- Column 3: Hours & Location -->
         <div class="col-lg-3 col-md-6 footer-col">
           <h4 class="footer-col-title">Hours &amp; Location</h4>
-          <div class="footer-contact-info d-flex flex-column gap-2 mb-0">
-            <p class="text-white-50 small mb-0 d-flex align-items-start gap-2">
+          <div class="footer-contact-info d-flex flex-column gap-2 mb-3">
+            <p class="small mb-0 d-flex align-items-start gap-2">
               <i class="bi bi-geo-alt text-warning mt-1 flex-shrink-0"></i>
-              <span>742 Evergreen Botanical Way, Portland</span>
+              <span>742 Evergreen Botanical Way, Portland, OR 97201</span>
             </p>
-            <p class="text-white-50 small mb-0 d-flex align-items-center gap-2">
+            <p class="small mb-0 d-flex align-items-center gap-2">
               <i class="bi bi-clock text-warning flex-shrink-0"></i>
-              <span>Mon - Sun: 8:00 AM - 10:00 PM</span>
+              <span>Mon - Fri: 8:00 AM - 10:00 PM</span>
             </p>
-            <p class="text-white-50 small mb-0 d-flex align-items-center gap-2">
+            <p class="small mb-0 d-flex align-items-center gap-2">
+              <i class="bi bi-clock text-warning flex-shrink-0"></i>
+              <span>Sat - Sun, 9:00 AM - 3:00 PM</span>
+            </p>
+            <p class="small mb-0 d-flex align-items-center gap-2">
               <i class="bi bi-telephone text-warning flex-shrink-0"></i>
               <a href="tel:+15035550192" class="text-decoration-none">+1 (503) 555-0192</a>
+            </p>
+            <p class="small mb-0 d-flex align-items-center gap-2">
+              <i class="bi bi-envelope text-warning flex-shrink-0"></i>
+              <a href="https://mail.google.com/" target="_blank" rel="noopener noreferrer" class="text-decoration-none">hello@greenhaven.com</a>
             </p>
           </div>
         </div>
@@ -675,9 +720,9 @@
         <!-- Column 4: Botanical Digest -->
         <div class="col-lg-3 col-md-6 footer-col">
           <h4 class="footer-col-title">Botanical Digest</h4>
-          <p class="text-white-50 small mb-3">Join our newsletter for seasonal menu previews and chef recipes.</p>
+          <p class="small mb-3">Join our newsletter for seasonal menu previews, wild foraging updates, and chef masterclass recipes.</p>
           <form class="newsletter-form d-flex gap-2">
-            <input type="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)" class="form-control form-control-sm" placeholder="Your email" required>
+            <input type="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address (e.g. name@example.com)" class="form-control form-control-sm" placeholder="Your email address" required>
             <button type="submit" class="btn btn-accent btn-sm px-3">Join</button>
           </form>
         </div>
@@ -685,15 +730,8 @@
       </div>
 
       <!-- Bottom Line -->
-      <div class="footer-bottom border-top pt-4 mt-4 text-white-50 small">
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
-          <div>&copy; 2026 Green Haven Restaurant. All Rights Reserved.</div>
-          <div class="d-flex gap-3">
-            <a href="#privacyPolicy" class="text-decoration-none gh-legal-link" data-legal="privacy" role="button">Privacy Policy</a>
-            <span>&bull;</span>
-            <a href="#termsConditions" class="text-decoration-none gh-legal-link" data-legal="terms" role="button">Terms &amp; Conditions</a>
-          </div>
-        </div>
+      <div class="footer-bottom border-top pt-4 mt-4 text-center">
+        <p class="mb-0 text-white-50 small">&copy; 2026 Green Haven Restaurant. All rights reserved.</p>
       </div>
     </div>
   </footer>
@@ -721,7 +759,7 @@
         <div class="modal-body p-4 p-md-5">
           <!-- Article Title & Subtitle -->
           <div class="max-w-850 mx-auto text-center mb-4">
-            <h1 class="font-serif fw-bold display-5 mb-3" id="modalArticleTitle">The Art of Fermented Cashew Silk Cheese</h1>
+            <h1 class="font-serif fw-bold display-5 mb-3" id="modalArticleTitle">Crafting Cave-Ripened Plant-Based Fromagerie</h1>
             <p class="lead text-muted fw-semibold" id="modalArticleSubtitle">Explore how live active cultures and cold-pressed lactic fermentation transform raw organic cashews into artisanal cave-ripened cheese.</p>
             
             <!-- Author Card Pill -->
@@ -772,7 +810,7 @@
   // Complete Article Catalog for In-Page Reader
   const BLOG_ARTICLES = {
     'cashew-cheese': {
-      title: 'The Art of Fermented Cashew Silk Cheese',
+      title: 'Crafting Cave-Ripened Plant-Based Fromagerie',
       subtitle: 'Explore how live active cultures and cold-pressed lactic fermentation transform raw organic cashews into artisanal cave-ripened cheese.',
       category: 'Vegan',
       date: 'May 12, 2026',
@@ -787,6 +825,23 @@
       caption: 'Cave-aged botanical cashew wheels maturing in Green Haven\'s microclimate aging cellar (54°F / 85% RH).',
       leadText: 'For centuries, the ancient art of affineurs and master fromagers was considered the exclusive domain of animal dairy. At Green Haven\'s botanical fermentation atelier in Portland, we have fundamentally rewritten that paradigm. By synthesizing traditional European cellar-aging techniques with cutting-edge plant microbiology, we transform raw, regeneratively cultivated cashews into cave-ripened silk cheeses that rival the finest bloomy-rind Camemberts and alpine wheels of France.',
       quote: 'True fromagerie is not bound by dairy; it is bound by microbiology, patience, and reverence for living botanical ecosystems. When microbes eat, they weave poetry into flavor.'
+    },
+    'king-oyster-scallops': {
+      title: 'Pan-Seared King Oyster Scallops: Botanical Umami Mastery',
+      subtitle: 'How enzymatic wood-aging, cross-hatch scoring, and hot cast-iron searing unlock oceanic umami textures in culinary fungi.',
+      category: 'Vegan',
+      date: 'May 08, 2026',
+      readTime: '7 min read',
+      author: {
+        name: 'Chef Julian Sterling',
+        role: 'Executive Chef & Founder, Green Haven',
+        avatar: 'assets/images/chef-julian-sterling.png',
+        bio: 'Trained in Paris and Kyoto, Julian dedicated the last decade to pioneering zero-waste, 100% plant-based gastronomy with an emphasis on wild foraging and enzymatic gastronomy.'
+      },
+      heroImg: 'assets/images/king-oyster-scallops.jpg',
+      caption: 'Golden pan-seared king oyster mushroom medallions served over velvety parsnip puree with botanical herb emulsion.',
+      leadText: 'In traditional gastronomy, the sea scallop is revered for its delicate sweet salinity and caramelized crust. At Green Haven, our botanical culinary team discovered that mature king trumpet mushrooms (Pleurotus eryngii), harvested from hardwood logs in the coastal range, possess an identical dense fibrous texture. By scoring the medallions and searing them in cold-pressed botanical oil with thyme and roasted garlic, we achieve a deeply satisfying plant-based tour de force.',
+      quote: 'Umami is not the exclusive property of oceans or pasturelands; it sleeps inside forest fungi, waiting for heat, garlic, and reverence to awaken it.'
     },
     'foraging': {
       title: 'Spring Foraging in the Oregon Coastal Range',

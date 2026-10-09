@@ -62,8 +62,8 @@ html[dir="rtl"] {
 [dir="rtl"] label,
 [dir="rtl"] small,
 [dir="rtl"] .alert {
-  unicode-bidi: plaintext;
-  text-align: start;
+  unicode-bidi: isolate;
+  text-align: inherit;
 }
 
 /* Inline interactive and phrase components */
@@ -100,11 +100,15 @@ html[dir="rtl"] {
 [dir="rtl"] .stat-counter-value,
 [dir="rtl"] .badge-discount,
 [dir="rtl"] .badge-percentage,
+[dir="rtl"] .badge.bg-success-subtle,
+[dir="rtl"] .badge.bg-warning-subtle,
+[dir="rtl"] .badge.bg-info-subtle,
 [dir="rtl"] .order-id,
 [dir="rtl"] #modalTrackOrderId,
 [dir="rtl"] .tracker-step-time,
 [dir="rtl"] .phone-number,
 [dir="rtl"] .numeric,
+[dir="rtl"] .font-monospace,
 [dir="rtl"] .ltr-isolate,
 [dir="rtl"] .ltr-text,
 [dir="rtl"] bdi {
@@ -133,9 +137,55 @@ html[dir="rtl"] {
    3. BOOTSTRAP UTILITY MIRRORING WITH LOGICAL PROPERTIES
 -------------------------------------------------- */
 /* Text Alignments */
-[dir="rtl"] .text-start { text-align: start !important; }
-[dir="rtl"] .text-end { text-align: end !important; }
-[dir="rtl"] .text-center { text-align: center !important; }
+[dir="rtl"] .text-start,
+[dir="rtl"] .text-sm-start,
+[dir="rtl"] .text-md-start,
+[dir="rtl"] .text-lg-start,
+[dir="rtl"] .text-xl-start,
+[dir="rtl"] .text-xxl-start { text-align: start !important; }
+
+[dir="rtl"] .text-end,
+[dir="rtl"] .text-sm-end,
+[dir="rtl"] .text-md-end,
+[dir="rtl"] .text-lg-end,
+[dir="rtl"] .text-xl-end,
+[dir="rtl"] .text-xxl-end { text-align: end !important; }
+
+[dir="rtl"] .text-center,
+[dir="rtl"] .text-center h1,
+[dir="rtl"] .text-center h2,
+[dir="rtl"] .text-center h3,
+[dir="rtl"] .text-center h4,
+[dir="rtl"] .text-center h5,
+[dir="rtl"] .text-center h6,
+[dir="rtl"] .text-center p,
+[dir="rtl"] .text-center .lead,
+[dir="rtl"] .text-center span:not([class*="bi-"]),
+[dir="rtl"] .text-center .events-heading,
+[dir="rtl"] .gh-events-nature-section h2,
+[dir="rtl"] .gh-events-nature-section .events-heading,
+[dir="rtl"] .gh-events-nature-section p,
+[dir="rtl"] .gh-events-nature-section .events-lead,
+[dir="rtl"] .section-header.text-center .section-title,
+[dir="rtl"] .section-header.text-center .section-desc,
+[dir="rtl"] .section-header.text-center .section-sub {
+  text-align: center !important;
+}
+
+[dir="rtl"] .section-header.text-center {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+[dir="rtl"] .gh-events-nature-section {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  align-self: stretch !important;
+  text-align: center !important;
+}
 
 /* Floats */
 [dir="rtl"] .float-start { float: right !important; }
@@ -329,15 +379,379 @@ html[dir="rtl"] {
   margin-right: 0 !important;
 }
 
+[dir="rtl"] .offcanvas nav .gh-nav-link,
+[dir="rtl"] .offcanvas .dropdown > .gh-nav-link,
+[dir="rtl"] .offcanvas nav .dropdown > .gh-nav-link {
+  justify-content: flex-start !important;
+  text-align: right !important;
+  padding-inline-start: 1.25rem !important;
+  padding-inline-end: 1.25rem !important;
+}
+
+[dir="rtl"] .offcanvas nav .gh-nav-link i,
+[dir="rtl"] .offcanvas nav .gh-nav-link svg {
+  margin-inline-start: 0 !important;
+  margin-inline-end: 0.65rem !important;
+  margin-right: 0 !important;
+  margin-left: 0.65rem !important;
+}
+
 /* --------------------------------------------------
    5. HERO & BREADCRUMB SECTIONS
 -------------------------------------------------- */
-[dir="rtl"] .hero-section {
-  text-align: start;
+[dir="rtl"] .hero-section,
+[dir="rtl"] .gh-hero-nature {
+  text-align: right !important;
+  direction: rtl !important;
 }
 
 [dir="rtl"] .hero-content {
-  text-align: start;
+  text-align: right !important;
+}
+
+/* Hero Title & Lead Text Mirroring */
+[dir="rtl"] .gh-hero-nature .hero-title {
+  text-align: right !important;
+  direction: rtl !important;
+  unicode-bidi: normal !important;
+}
+
+[dir="rtl"] .gh-word-line {
+  flex-direction: row;
+  text-align: inherit;
+}
+
+[dir="rtl"] .gh-word {
+  direction: ltr !important;
+}
+
+[dir="rtl"] .gh-hero-nature .hero-title .gh-word-line,
+[dir="rtl"] .hero-title .gh-word-line,
+[dir="rtl"] .gh-farm-heading .gh-word-line,
+[dir="rtl"] .ethos-heading .gh-word-line,
+[dir="rtl"] .dish-title .gh-word-line {
+  text-align: right !important;
+  justify-content: flex-start !important;
+}
+
+[dir="rtl"] .text-center .gh-word-line,
+[dir="rtl"] .section-header .gh-word-line,
+[dir="rtl"] .events-heading .gh-word-line,
+[dir="rtl"] .events-tag-badge .gh-word-line,
+[dir="rtl"] .section-sub .gh-word-line {
+  justify-content: center !important;
+}
+
+[dir="rtl"] .dish-card-body,
+[dir="rtl"] .dish-desc,
+[dir="rtl"] .dish-card-body p,
+[dir="rtl"] .dish-card-body bdi {
+  text-align: right !important;
+}
+
+[dir="rtl"] .gh-hero-nature .hero-lead {
+  text-align: right !important;
+  direction: rtl !important;
+  unicode-bidi: normal !important;
+  margin-right: 0 !important;
+  margin-left: auto !important;
+}
+
+[dir="rtl"] .gh-hero-nature .hero-btns-row {
+  justify-content: flex-start !important;
+}
+
+[dir="rtl"] .gh-hero-nature .col-lg-6.ps-lg-3 {
+  padding-left: calc(var(--bs-gutter-x, 1.5rem) * 0.5) !important;
+  padding-right: calc(var(--bs-gutter-x, 1.5rem) * 0.5 + 1rem) !important;
+}
+
+/* Hero Badge Pill */
+[dir="rtl"] .hero-animated-pill {
+  flex-direction: row;
+  display: inline-flex !important;
+  align-items: center;
+}
+
+[dir="rtl"] .hero-animated-pill i {
+  margin-inline-end: 0.4rem;
+  margin-left: 0.4rem !important;
+  margin-right: 0 !important;
+}
+
+/* Hero Organic Rotating Seal Mirroring (Top-Right in LTR -> Top-Left in RTL) */
+[dir="rtl"] .hero-rotating-seal {
+  right: auto !important;
+  left: -16px !important;
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  [dir="rtl"] .hero-rotating-seal {
+    right: auto !important;
+    left: -10px !important;
+  }
+}
+
+@media (max-width: 991.98px) {
+  [dir="rtl"] .hero-rotating-seal {
+    right: auto !important;
+    left: -10px !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  [dir="rtl"] .hero-rotating-seal {
+    right: auto !important;
+    left: -8px !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  [dir="rtl"] .hero-rotating-seal {
+    right: auto !important;
+    left: -6px !important;
+  }
+}
+
+/* Ensure SVG seal text is always rendered in LTR along the circular path so it rotates visibly */
+[dir="rtl"] .hero-rotating-seal svg,
+[dir="rtl"] .seal-curve-svg,
+[dir="rtl"] .seal-curve-text,
+[dir="rtl"] .hero-rotating-seal text,
+[dir="rtl"] .hero-rotating-seal textPath {
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+}
+
+/* Hero Eco Delivery Bike Badge Mirroring (Bottom-Left in LTR -> Bottom-Right in RTL) */
+[dir="rtl"] .hero-delivery-badge {
+  left: auto !important;
+  right: 20px !important;
+  text-align: right;
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  [dir="rtl"] .hero-delivery-badge {
+    left: auto !important;
+    right: 10px !important;
+  }
+}
+
+@media (max-width: 991.98px) {
+  [dir="rtl"] .hero-delivery-badge {
+    left: auto !important;
+    right: 12px !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  [dir="rtl"] .hero-delivery-badge {
+    left: auto !important;
+    right: 10px !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  [dir="rtl"] .hero-delivery-badge {
+    left: auto !important;
+    right: 8px !important;
+  }
+}
+
+[dir="rtl"] .hero-delivery-badge .delivery-badge-header {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+[dir="rtl"] .hero-delivery-badge .delivery-badge-title {
+  direction: ltr;
+  unicode-bidi: isolate;
+  display: inline-block;
+}
+
+/* Delivery Bike vehicle flipped horizontally to face leftwards towards destination */
+[dir="rtl"] .hero-delivery-badge .delivery-bike-vehicle {
+  left: auto !important;
+  right: -45px;
+  transform: scaleX(-1);
+  animation: bikeDriveTripRTL 6.5s linear infinite !important;
+  will-change: right, transform, opacity;
+}
+
+@keyframes bikeDriveTripRTL {
+  0% {
+    right: -45px;
+    opacity: 0;
+  }
+  3% {
+    opacity: 1;
+  }
+  97% {
+    opacity: 1;
+  }
+  100% {
+    right: calc(100% + 12px);
+    opacity: 0;
+  }
+}
+
+/* Home-2 Floating Leaf Badges Mirroring */
+[dir="rtl"] .h2-floating-leaf-top {
+  right: auto !important;
+  left: 15px !important;
+}
+
+[dir="rtl"] .h2-floating-leaf-bottom {
+  left: auto !important;
+  right: 10px !important;
+}
+
+/* Home-2 Hero Section Mirroring */
+[dir="rtl"] .h2-farm-hero {
+  text-align: right !important;
+  direction: rtl !important;
+}
+
+[dir="rtl"] .h2-hero-text-col .h2-hero-title,
+[dir="rtl"] .h2-hero-nature-section .h2-hero-title,
+[dir="rtl"] .h2-farm-hero .h2-hero-title {
+  text-align: right !important;
+  direction: rtl !important;
+  unicode-bidi: normal !important;
+}
+
+[dir="rtl"] .h2-final-cta-section {
+  text-align: center !important;
+}
+
+[dir="rtl"] .h2-final-cta-section .h2-hero-title,
+[dir="rtl"] .h2-final-cta-section h2,
+[dir="rtl"] .h2-final-cta-section .lead,
+[dir="rtl"] .h2-final-cta-section .h2-eyebrow {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+[dir="rtl"] .h2-final-cta-meta {
+  justify-content: center !important;
+}
+
+[dir="rtl"] .h2-hero-desc {
+  text-align: right !important;
+  direction: rtl !important;
+  unicode-bidi: normal !important;
+  margin-right: 0 !important;
+  margin-left: auto !important;
+}
+
+/* --------------------------------------------------
+   FARM TO PLATE (VIDEO SHOWCASE) SECTION MIRRORING
+-------------------------------------------------- */
+[dir="rtl"] .gh-farm-video-section {
+  text-align: right !important;
+  direction: rtl !important;
+}
+
+[dir="rtl"] .gh-farm-content-box {
+  text-align: right !important;
+}
+
+[dir="rtl"] .gh-farm-eyebrow {
+  text-align: right !important;
+}
+
+[dir="rtl"] .gh-farm-badge {
+  flex-direction: row;
+  display: inline-flex !important;
+  align-items: center;
+}
+
+[dir="rtl"] .gh-farm-badge i {
+  margin-inline-end: 0.4rem;
+  margin-left: 0.4rem !important;
+  margin-right: 0 !important;
+}
+
+[dir="rtl"] .gh-farm-heading {
+  text-align: right !important;
+  direction: rtl !important;
+  unicode-bidi: normal !important;
+}
+
+[dir="rtl"] .gh-farm-desc {
+  text-align: right !important;
+  direction: rtl !important;
+  unicode-bidi: normal !important;
+  margin-right: 0 !important;
+  margin-left: auto !important;
+}
+
+[dir="rtl"] .gh-farm-highlight-item {
+  margin-left: 0 !important;
+  margin-right: -0.85rem !important;
+  text-align: right !important;
+}
+
+[dir="rtl"] .gh-farm-highlight-item:hover {
+  transform: translateX(-6px) !important;
+}
+
+[dir="rtl"] .gh-farm-leaf-left {
+  left: auto !important;
+  right: -20px !important;
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .gh-farm-cta-wrapper {
+  text-align: right !important;
+}
+
+[dir="rtl"] .gh-farm-cta-btn:hover i {
+  transform: translateX(-6px) !important;
+}
+
+/* --------------------------------------------------
+   ETHOS / REGENERATIVE SOIL SECTION MIRRORING
+-------------------------------------------------- */
+[dir="rtl"] .gh-regenerative-section {
+  text-align: right !important;
+  direction: rtl !important;
+}
+
+[dir="rtl"] .ethos-title-row {
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+[dir="rtl"] .ethos-heading {
+  text-align: right !important;
+  direction: rtl !important;
+  unicode-bidi: normal !important;
+}
+
+[dir="rtl"] .ethos-description {
+  text-align: right !important;
+  direction: rtl !important;
+  unicode-bidi: normal !important;
+  margin-right: 0 !important;
+  margin-left: auto !important;
+}
+
+[dir="rtl"] .ethos-tag-badge {
+  text-align: right !important;
+}
+
+[dir="rtl"] .ethos-feature-card {
+  text-align: right !important;
+}
+
+[dir="rtl"] .ethos-leaf-decor {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .ethos-cta-wrap {
+  text-align: right !important;
 }
 
 [dir="rtl"] .breadcrumb-nav {
@@ -363,8 +777,7 @@ html[dir="rtl"] {
 
 [dir="rtl"] .dish-card-price,
 [dir="rtl"] .dish-card-price-pill,
-[dir="rtl"] .pricing-floating-icon,
-[dir="rtl"] .catering-floating-icon {
+[dir="rtl"] .pricing-floating-icon {
   inset-inline-start: 10px !important;
   inset-inline-end: auto !important;
   right: auto !important;
@@ -396,7 +809,7 @@ html[dir="rtl"] {
 }
 
 [dir="rtl"] .dish-card-actions {
-  flex-direction: row-reverse;
+  /* Natural direction-aware flex layout */
 }
 
 /* Quantity Controls in RTL */
@@ -487,6 +900,18 @@ html.dark[dir="rtl"] .gh-cart-drawer {
   text-align: start !important;
   direction: rtl !important;
   unicode-bidi: plaintext !important;
+}
+
+[dir="rtl"] input[type="email"],
+[dir="rtl"] input[type="tel"],
+[dir="rtl"] input[type="url"],
+[dir="rtl"] input[type="number"],
+[dir="rtl"] .email-input,
+[dir="rtl"] .phone-input,
+[dir="rtl"] .ltr-input {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: isolate !important;
 }
 
 [dir="rtl"] .form-select {
@@ -677,11 +1102,16 @@ html.dark[dir="rtl"] .gh-cart-drawer {
   right: 0.85rem !important;
 }
 
+[dir="rtl"] .admin-kbd-hint {
+  right: auto !important;
+  left: 0.85rem !important;
+}
+
 [dir="rtl"] .admin-search-input {
   padding-inline-start: 2.3rem !important;
-  padding-inline-end: 1rem !important;
+  padding-inline-end: 2.5rem !important;
   padding-right: 2.3rem !important;
-  padding-left: 1rem !important;
+  padding-left: 2.5rem !important;
   text-align: start;
 }
 
@@ -733,8 +1163,40 @@ html.dark[dir="rtl"] .gh-cart-drawer {
    11. FOOTER & FLOATING ACTIONS
 -------------------------------------------------- */
 [dir="rtl"] .gh-footer {
-  text-align: start;
+  text-align: right !important;
   direction: rtl;
+}
+
+[dir="rtl"] .gh-footer .footer-col {
+  align-items: flex-start !important;
+  text-align: right !important;
+}
+
+[dir="rtl"] .gh-footer .footer-col-title {
+  text-align: right !important;
+  justify-content: flex-start !important;
+}
+
+[dir="rtl"] .gh-footer .footer-contact-info,
+[dir="rtl"] .footer-contact-info {
+  text-align: right !important;
+  direction: rtl !important;
+}
+
+[dir="rtl"] .gh-footer .footer-contact-info p,
+[dir="rtl"] .footer-contact-info p {
+  text-align: right !important;
+  justify-content: flex-start !important;
+  width: 100%;
+}
+
+[dir="rtl"] .gh-footer .footer-contact-info span,
+[dir="rtl"] .gh-footer .footer-contact-info a,
+[dir="rtl"] .gh-footer .footer-contact-info bdi,
+[dir="rtl"] .footer-contact-info span,
+[dir="rtl"] .footer-contact-info a,
+[dir="rtl"] .footer-contact-info bdi {
+  text-align: right !important;
 }
 
 [dir="rtl"] .gh-footer .footer-link i {
