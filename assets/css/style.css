@@ -3366,6 +3366,59 @@ html.dark .offcanvas nav .dropdown-menu .gh-dropdown-item.active {
   white-space: nowrap;
 }
 
+/* Home Page Hero Secondary CTA: Light White Color Aesthetic */
+.gh-hero-nature .btn-hero-outline,
+.btn-hero-outline {
+  --bs-btn-bg: rgba(255, 255, 255, 0.88) !important;
+  --bs-btn-border-color: rgba(46, 101, 24, 0.45) !important;
+  --bs-btn-color: #1E5016 !important;
+  background-color: rgba(255, 255, 255, 0.88) !important;
+  border: 1.5px solid rgba(46, 101, 24, 0.45) !important;
+  color: #1E5016 !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06) !important;
+}
+
+.gh-hero-nature .btn-hero-outline:hover,
+.btn-hero-outline:hover {
+  background-color: #FFFFFF !important;
+  border-color: #1E5016 !important;
+  color: #123812 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12) !important;
+}
+
+.gh-hero-nature .btn-hero-outline:active,
+.btn-hero-outline:active {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  transform: translateY(0) !important;
+}
+
+/* Dark mode override for home hero secondary button */
+[data-bs-theme="dark"] .gh-hero-nature .btn-hero-outline,
+[data-bs-theme="dark"] .btn-hero-outline,
+html.dark .gh-hero-nature .btn-hero-outline,
+html.dark .btn-hero-outline {
+  --bs-btn-bg: rgba(255, 255, 255, 0.12) !important;
+  --bs-btn-border-color: rgba(255, 255, 255, 0.45) !important;
+  --bs-btn-color: #FFFFFF !important;
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.45) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-bs-theme="dark"] .gh-hero-nature .btn-hero-outline:hover,
+[data-bs-theme="dark"] .btn-hero-outline:hover,
+html.dark .gh-hero-nature .btn-hero-outline:hover,
+html.dark .btn-hero-outline:hover {
+  background-color: rgba(255, 255, 255, 0.22) !important;
+  border-color: #FFFFFF !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45) !important;
+}
+
 /* --------------------------------------------------
    ANIMATED DIETARY BADGES & INTERACTIVE PILLS (GF & VEGAN)
    Each pill with Distinct Vibrant Color & Unique Animation Type
