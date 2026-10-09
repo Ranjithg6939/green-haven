@@ -9142,7 +9142,7 @@ html.dark .gh-events-nature-section {
   padding: 6rem 0;
   background-color: #EAFBD7;
   background: linear-gradient(180deg, rgba(234, 251, 215, 0.70) 0%, rgba(234, 251, 215, 0.38) 45%, rgba(234, 251, 215, 0.70) 100%),
-              url('../images/culinary-creations-bg.jpg') center center / cover no-repeat;
+              url('../images/culinary-workshops-bg.png') center center / cover no-repeat;
   border-top: 1px solid rgba(85, 135, 66, 0.18);
   border-bottom: 1px solid rgba(85, 135, 66, 0.18);
   overflow: hidden;
@@ -9188,7 +9188,7 @@ html.dark .gh-events-nature-section {
 html.dark .gh-dishes-nature-section {
   background-color: #072314;
   background: linear-gradient(180deg, rgba(2, 38, 22, 0.90) 0%, rgba(2, 38, 22, 0.82) 50%, rgba(2, 38, 22, 0.90) 100%),
-              url('../images/culinary-creations-bg.jpg') center center / cover no-repeat;
+              url('../images/culinary-workshops-bg.png') center center / cover no-repeat;
   border-color: rgba(0, 255, 127, 0.18);
 }
 
