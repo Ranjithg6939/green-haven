@@ -736,11 +736,11 @@
           <div class="modal-content border-0 rounded-4 shadow-2xl overflow-hidden">
             <!-- Modal Header with Category and Back -->
             <div class="modal-header border-0 pb-0 pt-3 px-3 px-md-4 d-flex align-items-center justify-content-between">
-              <div class="d-flex align-items-center gap-2">
-                <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3 py-1 d-inline-flex align-items-center gap-1 extra-small fw-semibold" data-bs-dismiss="modal">
-                  <i class="bi bi-arrow-left"></i> Back to Menu
+              <div class="d-flex align-items-center gap-2 flex-nowrap">
+                <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3 py-1 d-inline-flex align-items-center gap-1.5 extra-small fw-semibold text-nowrap dish-modal-back-btn" data-bs-dismiss="modal">
+                  <i class="bi bi-arrow-left" aria-hidden="true"></i> <span>Back to Menu</span>
                 </button>
-                <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3 py-1 extra-small fw-semibold" id="dishModalCategory">Starters</span>
+                <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3 py-1 extra-small fw-semibold text-nowrap" id="dishModalCategory">Starters</span>
               </div>
               <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>

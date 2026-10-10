@@ -479,6 +479,32 @@ html[dir="rtl"] {
   margin-right: 0 !important;
 }
 
+[dir="rtl"] .gh-hero-badge .hero-badge-text {
+  direction: rtl;
+  display: inline-flex;
+  align-items: center;
+}
+
+[dir="rtl"] .reservation-submit-wrapper .btn,
+[dir="rtl"] #reservationForm button[type="submit"] {
+  flex-direction: row;
+}
+
+[dir="rtl"] .reservation-submit-wrapper .btn i,
+[dir="rtl"] #reservationForm button[type="submit"] i {
+  margin: 0 !important;
+}
+
+[dir="rtl"] .dish-modal-back-btn,
+[dir="rtl"] .dish-details-modal .modal-header button.btn-outline-secondary {
+  flex-direction: row;
+}
+
+[dir="rtl"] .dish-modal-back-btn i,
+[dir="rtl"] .dish-details-modal .modal-header button.btn-outline-secondary i {
+  transform: scaleX(-1);
+}
+
 /* Hero Organic Rotating Seal Mirroring (Top-Right in LTR -> Top-Left in RTL) */
 [dir="rtl"] .hero-rotating-seal {
   right: auto !important;
