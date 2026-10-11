@@ -581,11 +581,18 @@ document.addEventListener('DOMContentLoaded', () => {
     let page = rawPath.split('/').pop() || 'index.html';
     if (page === '' || page === '/') page = 'index.html';
 
+    const parentPageMap = {
+      'menu-details.html': 'menu.html',
+      'service-details.html': 'services.html',
+      'blog-details.html': 'blog.html'
+    };
+    const activeTarget = parentPageMap[page] || page;
+
     document.querySelectorAll('.gh-navbar .gh-nav-link, .gh-navbar .gh-dropdown-item, .offcanvas nav .gh-nav-link').forEach(link => {
       const href = link.getAttribute('href');
       if (!href || href === '#' || href.startsWith('javascript:')) return;
       const targetPage = href.split('/').pop().split('#')[0];
-      if (targetPage === page) {
+      if (targetPage === page || targetPage === activeTarget) {
         link.classList.add('active');
         const dropdown = link.closest('.dropdown');
         if (dropdown) {

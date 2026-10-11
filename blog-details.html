@@ -63,12 +63,13 @@
               Home
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item " href="index.html">Gourmet Landing</a></li>
-              <li><a class="gh-dropdown-item " href="home-2.html">Farm Plate</a></li>
+              <li><a class="gh-dropdown-item " href="index.html">Home 1 (Gourmet Landing)</a></li>
+              <li><a class="gh-dropdown-item " href="home-2.html">Home 2 (Farm to Plate)</a></li>
             </ul>
           </div>
           <a class="gh-nav-link " href="about.html">About</a>
           <a class="gh-nav-link " href="menu.html">Menu</a>
+          <a class="gh-nav-link " href="shop.html">Shop</a>
           <a class="gh-nav-link " href="services.html">Services</a>
           <a class="gh-nav-link " href="catering.html">Catering</a>
           <a class="gh-nav-link " href="pricing.html">Packages</a>
@@ -78,9 +79,15 @@
               Pages
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item " href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
-              <li><a class="gh-dropdown-item " href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
-              <li><a class="gh-dropdown-item " href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
+              <li><a class="gh-dropdown-item " href="reservation.html"><i class="bi bi-calendar2-check me-2"></i> Table Reservation</a></li>
+              <li><a class="gh-dropdown-item " href="cart.html"><i class="bi bi-bag me-2"></i> Dining Cart</a></li>
+              <li><a class="gh-dropdown-item " href="checkout.html"><i class="bi bi-credit-card me-2"></i> Checkout</a></li>
+              <li><a class="gh-dropdown-item " href="orders.html"><i class="bi bi-clock-history me-2"></i> My Orders</a></li>
+              <li><a class="gh-dropdown-item " href="my-account.html"><i class="bi bi-person me-2"></i> My Account</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="gh-dropdown-item" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
+              <li><a class="gh-dropdown-item" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
+              <li><a class="gh-dropdown-item" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
             </ul>
           </div>
           <a class="gh-nav-link " href="contact.html">Contact</a>
@@ -109,7 +116,12 @@
             <i class="bi bi-calendar2-check"></i>
           </a>
 
-          <div id="navAuthContainer"></div>
+          <!-- Auth Container (managed dynamically by shop.js) -->
+          <div id="navAuthContainer">
+            <a href="login.html" class="btn btn-outline-primary btn-sm gh-nav-auth-login-btn" title="Sign In" aria-label="Sign In">
+              <i class="bi bi-box-arrow-in-right me-1"></i><span class="gh-nav-auth-label">Sign In</span>
+            </a>
+          </div>
 
           <button class="btn btn-icon btn-outline-primary gh-mobile-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenuOffcanvas" aria-controls="mobileMenuOffcanvas" aria-label="Open mobile navigation">
             <i class="bi bi-list fs-4"></i>
@@ -139,13 +151,18 @@
     </div>
     <div class="offcanvas-body p-4 d-flex flex-column justify-content-between">
       <div>
-        <div id="mobileNavAuthContainer" class="mb-3"></div>
+        <div id="mobileNavAuthContainer" class="mb-3">
+          <div class="d-flex gap-2">
+            <a href="login.html" class="btn btn-outline-primary btn-sm flex-fill"><i class="bi bi-box-arrow-in-right me-1"></i> Sign In</a>
+          </div>
+        </div>
         <nav class="d-flex flex-column gap-2">
-          <a class="gh-nav-link " href="index.html">Gourmet Landing</a>
-          <a class="gh-nav-link " href="home-2.html">Farm Plate</a>
+          <a class="gh-nav-link " href="index.html">Home 1 (Gourmet Landing)</a>
+          <a class="gh-nav-link " href="home-2.html">Home 2 (Farm to Plate)</a>
           <a class="gh-nav-link " href="about.html">About Us</a>
           <a class="gh-nav-link " href="menu.html">Full Restaurant Menu</a>
-          <a class="gh-nav-link" href="cart.html"><i class="bi bi-bag me-1"></i> My Dining Cart</a>
+          <a class="gh-nav-link " href="shop.html"><i class="bi bi-shop me-1"></i> Culinary Shop</a>
+          <a class="gh-nav-link " href="cart.html"><i class="bi bi-bag me-1"></i> My Dining Cart</a>
           <a class="gh-nav-link " href="services.html">Our Services</a>
           <a class="gh-nav-link " href="catering.html">Plant-Based Catering</a>
           <a class="gh-nav-link " href="pricing.html">Dining Packages</a>
@@ -155,9 +172,15 @@
               Pages
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item " href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
-              <li><a class="gh-dropdown-item " href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
-              <li><a class="gh-dropdown-item " href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
+              <li><a class="gh-dropdown-item " href="reservation.html"><i class="bi bi-calendar2-check me-2"></i> Table Reservation</a></li>
+              <li><a class="gh-dropdown-item " href="cart.html"><i class="bi bi-bag me-2"></i> Dining Cart</a></li>
+              <li><a class="gh-dropdown-item " href="checkout.html"><i class="bi bi-credit-card me-2"></i> Checkout</a></li>
+              <li><a class="gh-dropdown-item " href="orders.html"><i class="bi bi-clock-history me-2"></i> My Orders</a></li>
+              <li><a class="gh-dropdown-item " href="my-account.html"><i class="bi bi-person me-2"></i> My Account</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="gh-dropdown-item" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
+              <li><a class="gh-dropdown-item" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
+              <li><a class="gh-dropdown-item" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
             </ul>
           </div>
           <a class="gh-nav-link " href="contact.html">Contact Us</a>
@@ -646,7 +669,8 @@
         <div class="col-lg-3 col-md-6 footer-col">
           <a class="gh-brand mb-3 d-inline-flex align-items-center" href="index.html" aria-label="Green Haven Restaurant">
             <img src="assets/images/logo-g.png" alt="Green Haven Logo" class="gh-brand-logo-img me-2">
-            <span class="gh-brand-text">Green Haven</span>
+            <img src="assets/images/title.png" alt="Green Haven" class="gh-brand-title-img gh-title-light footer-title-img">
+            <img src="assets/images/title-dark.png" alt="Green Haven" class="gh-brand-title-img gh-title-dark footer-title-img">
           </a>
           <p class="footer-bio mb-3">
             An organic plant-based restaurant sanctuary celebrating vibrant seasonal gastronomy, regenerative agriculture, and holistic well-being.

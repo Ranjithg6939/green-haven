@@ -8,30 +8,31 @@ const pageActiveMap = {
   'home-2.html': 'home2',
   'about.html': 'about',
   'menu.html': 'menu',
+  'shop.html': 'shop',
   'services.html': 'services',
+  'service-details.html': 'services',
   'catering.html': 'catering',
   'pricing.html': 'packages',
   'blog.html': 'blog',
-  'contact.html': 'contact',
-  'reservation.html': 'none',
-  'login.html': 'none',
-  'register.html': 'none',
-  'cart.html': 'none',
-  'checkout.html': 'none',
-  'orders.html': 'none',
-  'order-success.html': 'none',
-  'my-account.html': 'none',
-  '404.html': '404',
-  'coming-soon.html': 'coming-soon',
-  'maintenance.html': 'maintenance',
-  'service-details.html': 'services',
   'blog-details.html': 'blog',
-  'menu-details.html': 'menu'
+  'contact.html': 'contact',
+  'reservation.html': 'reservation',
+  'login.html': 'login',
+  'register.html': 'register',
+  'cart.html': 'cart',
+  'checkout.html': 'checkout',
+  'orders.html': 'orders',
+  'order-success.html': 'orders',
+  'my-account.html': 'my-account',
+  'menu-details.html': 'menu',
+  '404.html': 'hidden',
+  'coming-soon.html': 'hidden',
+  'maintenance.html': 'hidden'
 };
 
 function buildNavbarSnippet(activeKey) {
   const isHome = activeKey === 'home1' || activeKey === 'home2';
-  const isPages = activeKey === '404' || activeKey === 'coming-soon' || activeKey === 'maintenance';
+  const isPages = ['reservation', 'cart', 'checkout', 'orders', 'my-account'].includes(activeKey);
 
   return `<!-- Main Navigation Bar -->
   <header class="gh-navbar">
@@ -59,12 +60,13 @@ function buildNavbarSnippet(activeKey) {
               Home
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item ${activeKey === 'home1' ? 'active' : ''}" href="index.html">Gourmet Landing</a></li>
-              <li><a class="gh-dropdown-item ${activeKey === 'home2' ? 'active' : ''}" href="home-2.html">Farm Plate</a></li>
+              <li><a class="gh-dropdown-item ${activeKey === 'home1' ? 'active' : ''}" href="index.html">Home 1 (Gourmet Landing)</a></li>
+              <li><a class="gh-dropdown-item ${activeKey === 'home2' ? 'active' : ''}" href="home-2.html">Home 2 (Farm to Plate)</a></li>
             </ul>
           </div>
           <a class="gh-nav-link ${activeKey === 'about' ? 'active' : ''}" href="about.html">About</a>
           <a class="gh-nav-link ${activeKey === 'menu' ? 'active' : ''}" href="menu.html">Menu</a>
+          <a class="gh-nav-link ${activeKey === 'shop' ? 'active' : ''}" href="shop.html">Shop</a>
           <a class="gh-nav-link ${activeKey === 'services' ? 'active' : ''}" href="services.html">Services</a>
           <a class="gh-nav-link ${activeKey === 'catering' ? 'active' : ''}" href="catering.html">Catering</a>
           <a class="gh-nav-link ${activeKey === 'packages' ? 'active' : ''}" href="pricing.html">Packages</a>
@@ -74,9 +76,15 @@ function buildNavbarSnippet(activeKey) {
               Pages
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item ${activeKey === '404' ? 'active' : ''}" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
-              <li><a class="gh-dropdown-item ${activeKey === 'coming-soon' ? 'active' : ''}" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
-              <li><a class="gh-dropdown-item ${activeKey === 'maintenance' ? 'active' : ''}" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
+              <li><a class="gh-dropdown-item ${activeKey === 'reservation' ? 'active' : ''}" href="reservation.html"><i class="bi bi-calendar2-check me-2"></i> Table Reservation</a></li>
+              <li><a class="gh-dropdown-item ${activeKey === 'cart' ? 'active' : ''}" href="cart.html"><i class="bi bi-bag me-2"></i> Dining Cart</a></li>
+              <li><a class="gh-dropdown-item ${activeKey === 'checkout' ? 'active' : ''}" href="checkout.html"><i class="bi bi-credit-card me-2"></i> Checkout</a></li>
+              <li><a class="gh-dropdown-item ${activeKey === 'orders' ? 'active' : ''}" href="orders.html"><i class="bi bi-clock-history me-2"></i> My Orders</a></li>
+              <li><a class="gh-dropdown-item ${activeKey === 'my-account' ? 'active' : ''}" href="my-account.html"><i class="bi bi-person me-2"></i> My Account</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="gh-dropdown-item" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
+              <li><a class="gh-dropdown-item" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
+              <li><a class="gh-dropdown-item" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
             </ul>
           </div>
           <a class="gh-nav-link ${activeKey === 'contact' ? 'active' : ''}" href="contact.html">Contact</a>
@@ -105,7 +113,12 @@ function buildNavbarSnippet(activeKey) {
             <i class="bi bi-calendar2-check"></i>
           </a>
 
-          <div id="navAuthContainer"></div>
+          <!-- Auth Container (managed dynamically by shop.js) -->
+          <div id="navAuthContainer">
+            <a href="login.html" class="btn btn-outline-primary btn-sm gh-nav-auth-login-btn" title="Sign In" aria-label="Sign In">
+              <i class="bi bi-box-arrow-in-right me-1"></i><span class="gh-nav-auth-label">Sign In</span>
+            </a>
+          </div>
 
           <button class="btn btn-icon btn-outline-primary gh-mobile-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenuOffcanvas" aria-controls="mobileMenuOffcanvas" aria-label="Open mobile navigation">
             <i class="bi bi-list fs-4"></i>
@@ -135,13 +148,18 @@ function buildNavbarSnippet(activeKey) {
     </div>
     <div class="offcanvas-body p-4 d-flex flex-column justify-content-between">
       <div>
-        <div id="mobileNavAuthContainer" class="mb-3"></div>
+        <div id="mobileNavAuthContainer" class="mb-3">
+          <div class="d-flex gap-2">
+            <a href="login.html" class="btn btn-outline-primary btn-sm flex-fill"><i class="bi bi-box-arrow-in-right me-1"></i> Sign In</a>
+          </div>
+        </div>
         <nav class="d-flex flex-column gap-2">
-          <a class="gh-nav-link ${activeKey === 'home1' ? 'active' : ''}" href="index.html">Gourmet Landing</a>
-          <a class="gh-nav-link ${activeKey === 'home2' ? 'active' : ''}" href="home-2.html">Farm Plate</a>
+          <a class="gh-nav-link ${activeKey === 'home1' ? 'active' : ''}" href="index.html">Home 1 (Gourmet Landing)</a>
+          <a class="gh-nav-link ${activeKey === 'home2' ? 'active' : ''}" href="home-2.html">Home 2 (Farm to Plate)</a>
           <a class="gh-nav-link ${activeKey === 'about' ? 'active' : ''}" href="about.html">About Us</a>
           <a class="gh-nav-link ${activeKey === 'menu' ? 'active' : ''}" href="menu.html">Full Restaurant Menu</a>
-          <a class="gh-nav-link" href="cart.html"><i class="bi bi-bag me-1"></i> My Dining Cart</a>
+          <a class="gh-nav-link ${activeKey === 'shop' ? 'active' : ''}" href="shop.html"><i class="bi bi-shop me-1"></i> Culinary Shop</a>
+          <a class="gh-nav-link ${activeKey === 'cart' ? 'active' : ''}" href="cart.html"><i class="bi bi-bag me-1"></i> My Dining Cart</a>
           <a class="gh-nav-link ${activeKey === 'services' ? 'active' : ''}" href="services.html">Our Services</a>
           <a class="gh-nav-link ${activeKey === 'catering' ? 'active' : ''}" href="catering.html">Plant-Based Catering</a>
           <a class="gh-nav-link ${activeKey === 'packages' ? 'active' : ''}" href="pricing.html">Dining Packages</a>
@@ -151,9 +169,15 @@ function buildNavbarSnippet(activeKey) {
               Pages
             </a>
             <ul class="dropdown-menu gh-dropdown-menu">
-              <li><a class="gh-dropdown-item ${activeKey === '404' ? 'active' : ''}" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
-              <li><a class="gh-dropdown-item ${activeKey === 'coming-soon' ? 'active' : ''}" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
-              <li><a class="gh-dropdown-item ${activeKey === 'maintenance' ? 'active' : ''}" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
+              <li><a class="gh-dropdown-item ${activeKey === 'reservation' ? 'active' : ''}" href="reservation.html"><i class="bi bi-calendar2-check me-2"></i> Table Reservation</a></li>
+              <li><a class="gh-dropdown-item ${activeKey === 'cart' ? 'active' : ''}" href="cart.html"><i class="bi bi-bag me-2"></i> Dining Cart</a></li>
+              <li><a class="gh-dropdown-item ${activeKey === 'checkout' ? 'active' : ''}" href="checkout.html"><i class="bi bi-credit-card me-2"></i> Checkout</a></li>
+              <li><a class="gh-dropdown-item ${activeKey === 'orders' ? 'active' : ''}" href="orders.html"><i class="bi bi-clock-history me-2"></i> My Orders</a></li>
+              <li><a class="gh-dropdown-item ${activeKey === 'my-account' ? 'active' : ''}" href="my-account.html"><i class="bi bi-person me-2"></i> My Account</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="gh-dropdown-item" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i> 404 Error</a></li>
+              <li><a class="gh-dropdown-item" href="coming-soon.html"><i class="bi bi-clock-history me-2"></i> Coming Soon</a></li>
+              <li><a class="gh-dropdown-item" href="maintenance.html"><i class="bi bi-tools me-2"></i> Maintenance</a></li>
             </ul>
           </div>
           <a class="gh-nav-link ${activeKey === 'contact' ? 'active' : ''}" href="contact.html">Contact Us</a>
@@ -178,6 +202,44 @@ for (const [file, activeKey] of Object.entries(pageActiveMap)) {
 
   let content = fs.readFileSync(filePath, 'utf8');
 
+  // SPECIAL PAGES: Keep navbar completely hidden on 404, Coming Soon, Maintenance
+  if (activeKey === 'hidden') {
+    // Check if header exists and remove it along with offcanvas
+    const headerIdx = content.indexOf('<header');
+    if (headerIdx !== -1) {
+      let nextSectionIdx = content.indexOf('<main', headerIdx);
+      if (nextSectionIdx === -1) {
+        const sectionMatch = content.slice(headerIdx).match(/(<section|<div class="container py|<div class="auth-wrapper|<div class="container my)/);
+        if (sectionMatch) {
+          nextSectionIdx = headerIdx + sectionMatch.index;
+        }
+      }
+
+      if (nextSectionIdx !== -1) {
+        let replaceStart = headerIdx;
+        const beforeHeader = content.slice(0, headerIdx);
+        const commentMatch = beforeHeader.match(/<!--\s*([A-Za-z\s]+Navigation[A-Za-z\s]*|Minimal Header)\s*-->\s*$/);
+        if (commentMatch) {
+          replaceStart = beforeHeader.lastIndexOf(commentMatch[0]);
+        }
+        content = content.slice(0, replaceStart) + '\n  ' + content.slice(nextSectionIdx);
+      }
+    }
+
+    // Mark body class as special-page
+    const pageName = file.replace('.html', '');
+    content = content.replace(/<body([^>]*)class="([^"]*)"/i, (m, pre, cls) => {
+      let classes = cls.split(' ').filter(c => c !== 'special-page' && c !== `page-${pageName}`);
+      classes.push('special-page', `page-${pageName}`);
+      return `<body${pre}class="${classes.join(' ')}"`;
+    });
+
+    fs.writeFileSync(filePath, content, 'utf8');
+    modifiedCount++;
+    console.log(`Updated ${file.padEnd(20)} [NAVBAR HIDDEN - Special Page]`);
+    continue;
+  }
+
   // Find start of <header or navbar comment
   const headerIdx = content.indexOf('<header');
   if (headerIdx === -1) {
@@ -188,8 +250,7 @@ for (const [file, activeKey] of Object.entries(pageActiveMap)) {
   // Find where <main starts (or first section if no <main)
   let nextSectionIdx = content.indexOf('<main', headerIdx);
   if (nextSectionIdx === -1) {
-    // If no <main>, look for <section or <div class="page-header" or similar
-    const sectionMatch = content.slice(headerIdx).match(/(<section|<div class="container py|<div class="auth-wrapper|<div class="container my)/);
+    const sectionMatch = content.slice(headerIdx).match(/(<section|<div class="container py|<div class="auth-wrapper|<div class="container my|<div class="admin-layout)/);
     if (sectionMatch) {
       nextSectionIdx = headerIdx + sectionMatch.index;
     }
@@ -200,7 +261,6 @@ for (const [file, activeKey] of Object.entries(pageActiveMap)) {
     continue;
   }
 
-  // Also check if there was a preceding comment like <!-- Main Navigation Bar --> or <!-- Navigation Bar -->
   let replaceStart = headerIdx;
   const beforeHeader = content.slice(0, headerIdx);
   const commentMatch = beforeHeader.match(/<!--\s*([A-Za-z\s]+Navigation[A-Za-z\s]*|Minimal Header)\s*-->\s*$/);

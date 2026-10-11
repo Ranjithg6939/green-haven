@@ -19,7 +19,8 @@
         <div class="col-lg-3 col-md-6 footer-col">
           <a class="gh-brand mb-3 d-inline-flex align-items-center" href="index.html" aria-label="Green Haven Restaurant">
             <img src="assets/images/logo-g.png" alt="Green Haven Logo" class="gh-brand-logo-img me-2">
-            <span class="gh-brand-text">Green Haven</span>
+            <img src="assets/images/title.png" alt="Green Haven" class="gh-brand-title-img gh-title-light footer-title-img">
+            <img src="assets/images/title-dark.png" alt="Green Haven" class="gh-brand-title-img gh-title-dark footer-title-img">
           </a>
           <p class="footer-bio mb-4">
             An organic plant-based restaurant sanctuary celebrating vibrant seasonal gastronomy, regenerative agriculture, and holistic well-being.
