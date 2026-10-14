@@ -1689,18 +1689,19 @@ html.dark .offcanvas-header .gh-brand .gh-brand-icon {
   background-color: transparent;
   display: block;
   pointer-events: none;
-  will-change: opacity, transform;
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  opacity: 1 !important;
+  will-change: transform;
+  transition: transform 0.3s ease;
 }
 
 .gh-logo-g {
   z-index: 2;
-  animation: ghAutoFadeG 6s infinite ease-in-out;
+  opacity: 1 !important;
+  animation: none !important;
 }
 
 .gh-logo-h {
-  z-index: 1;
-  animation: ghAutoFadeH 6s infinite ease-in-out;
+  display: none !important;
 }
 
 .gh-brand-title-img {
@@ -6822,12 +6823,12 @@ html.dark #growerDetailsModal .badge.bg-light {
 .about-nature-page .about-cta-section,
 .about-cta-section {
   position: relative;
-  min-height: 100vh;
-  min-height: 100dvh;
+  min-height: auto !important;
+  height: auto !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(3.5rem, 8vh, 6.5rem) 0;
+  padding: clamp(3rem, 5vw, 4.5rem) 0;
   box-sizing: border-box;
   background: 
     radial-gradient(ellipse at 50% 40%, rgba(1, 45, 26, 0.88) 0%, rgba(1, 35, 20, 0.94) 60%, rgba(1, 25, 14, 0.97) 100%),
@@ -6847,7 +6848,7 @@ html.dark #growerDetailsModal .badge.bg-light {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.55rem 1.35rem;
+  padding: 0.45rem 1.25rem;
   border-radius: var(--radius-full);
   background: rgba(255, 255, 255, 0.16) !important;
   border: 1.5px solid rgba(168, 230, 207, 0.55) !important;
@@ -6859,14 +6860,23 @@ html.dark #growerDetailsModal .badge.bg-light {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.85rem;
+}
+
+.about-cta-section h2,
+.about-cta-section .display-4 {
+  font-size: clamp(1.85rem, 2.6vw, 2.6rem) !important;
+  line-height: 1.25 !important;
+  margin-bottom: 0.85rem !important;
 }
 
 .about-cta-section p,
 .about-cta-section .lead {
   color: rgba(255, 255, 255, 0.88) !important;
-  font-size: clamp(1.05rem, 1.25vw, 1.22rem);
-  line-height: 1.75;
+  font-size: clamp(0.98rem, 1.15vw, 1.12rem) !important;
+  line-height: 1.65;
+  max-width: 660px;
+  margin: 0 auto 1.5rem;
 }
 
 .section-bg-alt {
@@ -9696,7 +9706,12 @@ a.btn,
   .about-nature-page .about-cta-section {
     min-height: auto !important;
     height: auto !important;
-    padding: 3rem 0 !important;
+    padding: 2.5rem 1rem !important;
+  }
+  .about-cta-section h2,
+  .about-cta-section .display-4 {
+    font-size: 1.85rem !important;
+    margin-bottom: 0.65rem !important;
   }
   .about-nature-page .section-header.mb-5,
   .about-nature-page .section-header {
@@ -10024,7 +10039,17 @@ a.btn,
     padding: 1.8rem 0 !important;
   }
   .about-nature-page .about-cta-section {
-    padding: 2.4rem 0 !important;
+    padding: 2.2rem 1rem !important;
+  }
+  .about-cta-section h2,
+  .about-cta-section .display-4 {
+    font-size: 1.65rem !important;
+    margin-bottom: 0.6rem !important;
+  }
+  .about-cta-section p,
+  .about-cta-section .lead {
+    font-size: 0.92rem !important;
+    margin-bottom: 1.25rem !important;
   }
   .about-nature-page .section-header.mb-5,
   .about-nature-page .section-header {
@@ -14667,9 +14692,12 @@ html.dark .gh-farm-video-section {
 .about-cta-section p.lead,
 .about-cta-section .lead {
   color: #F2FAF4 !important;
-  font-size: clamp(1.1rem, 1.25vw, 1.28rem) !important;
-  line-height: 1.75 !important;
+  font-size: clamp(0.98rem, 1.15vw, 1.12rem) !important;
+  line-height: 1.65 !important;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8) !important;
+  max-width: 660px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 /* --------------------------------------------------

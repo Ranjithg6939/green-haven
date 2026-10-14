@@ -12,7 +12,7 @@ const canonicalFooter = `  <!-- Universal 4-Column Luxury Footer -->
         <!-- Column 1: Brand & Tagline -->
         <div class="col-lg-3 col-md-6 footer-col">
           <a class="gh-brand mb-3 d-inline-flex align-items-center" href="index.html" aria-label="Green Haven Restaurant">
-            <img src="assets/images/logo-g.png" alt="Green Haven Logo" class="gh-brand-logo-img me-2">
+            <img src="assets/images/framlore_logo.png" alt="Green Haven Logo" class="gh-brand-logo-img me-2">
             <span class="gh-brand-text">Green Haven</span>
           </a>
           <p class="footer-bio mb-3">

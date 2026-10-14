@@ -300,7 +300,7 @@
               <div class="text-center mb-4">
                 <a class="gh-brand gh-brand-auth d-inline-flex align-items-center justify-content-center text-decoration-none mb-2" href="index.html" aria-label="Green Haven Restaurant">
                   <span class="gh-logo-wrapper" style="width: 44px; height: 44px;">
-                    <img src="assets/images/logo-g.png" alt="Green Haven Logo" class="gh-logo-icon gh-logo-static" style="width: 100%; height: 100%; object-fit: contain;">
+                    <img src="assets/images/framlore_logo.png" alt="Green Haven Logo" class="gh-logo-icon gh-logo-static" style="width: 100%; height: 100%; object-fit: contain;">
                   </span>
                   <span class="gh-auth-brand-name ms-2 fw-bold font-serif" style="font-size: 1.35rem; color: var(--gh-heading-color, #1A3018);">Green Haven</span>
                 </a>
