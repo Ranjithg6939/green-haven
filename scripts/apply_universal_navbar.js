@@ -47,7 +47,7 @@ function buildNavbarSnippet(activeKey) {
               <circle class="gh-logo-outline-stroke" cx="50" cy="50" r="48" pathLength="100" />
             </svg>
             <img src="assets/images/logo-g.png" alt="Green Haven Logo G" class="gh-logo-icon gh-logo-g">
-            <img src="assets/images/logo-g.png" alt="Green Haven Logo H" class="gh-logo-icon gh-logo-h">
+            <img src="assets/images/logo-h.png" alt="Green Haven Logo H" class="gh-logo-icon gh-logo-h">
           </span>
           <img src="assets/images/title.png" alt="Green Haven" class="gh-brand-title-img gh-title-light">
           <img src="assets/images/title-dark.png" alt="Green Haven" class="gh-brand-title-img gh-title-dark">
@@ -66,7 +66,6 @@ function buildNavbarSnippet(activeKey) {
           </div>
           <a class="gh-nav-link ${activeKey === 'about' ? 'active' : ''}" href="about.html">About</a>
           <a class="gh-nav-link ${activeKey === 'menu' ? 'active' : ''}" href="menu.html">Menu</a>
-          <a class="gh-nav-link ${activeKey === 'shop' ? 'active' : ''}" href="shop.html">Shop</a>
           <a class="gh-nav-link ${activeKey === 'services' ? 'active' : ''}" href="services.html">Services</a>
           <a class="gh-nav-link ${activeKey === 'catering' ? 'active' : ''}" href="catering.html">Catering</a>
           <a class="gh-nav-link ${activeKey === 'packages' ? 'active' : ''}" href="pricing.html">Packages</a>
@@ -139,7 +138,7 @@ function buildNavbarSnippet(activeKey) {
             <circle class="gh-logo-outline-stroke" cx="50" cy="50" r="48" pathLength="100" />
           </svg>
           <img src="assets/images/logo-g.png" alt="Green Haven Logo G" class="gh-logo-icon gh-logo-g">
-          <img src="assets/images/logo-g.png" alt="Green Haven Logo H" class="gh-logo-icon gh-logo-h">
+          <img src="assets/images/logo-h.png" alt="Green Haven Logo H" class="gh-logo-icon gh-logo-h">
         </span>
         <img src="assets/images/title.png" alt="Green Haven" class="gh-brand-title-img gh-title-light">
         <img src="assets/images/title-dark.png" alt="Green Haven" class="gh-brand-title-img gh-title-dark">
@@ -158,7 +157,6 @@ function buildNavbarSnippet(activeKey) {
           <a class="gh-nav-link ${activeKey === 'home2' ? 'active' : ''}" href="home-2.html">Home 2 (Farm to Plate)</a>
           <a class="gh-nav-link ${activeKey === 'about' ? 'active' : ''}" href="about.html">About Us</a>
           <a class="gh-nav-link ${activeKey === 'menu' ? 'active' : ''}" href="menu.html">Full Restaurant Menu</a>
-          <a class="gh-nav-link ${activeKey === 'shop' ? 'active' : ''}" href="shop.html"><i class="bi bi-shop me-1"></i> Culinary Shop</a>
           <a class="gh-nav-link ${activeKey === 'cart' ? 'active' : ''}" href="cart.html"><i class="bi bi-bag me-1"></i> My Dining Cart</a>
           <a class="gh-nav-link ${activeKey === 'services' ? 'active' : ''}" href="services.html">Our Services</a>
           <a class="gh-nav-link ${activeKey === 'catering' ? 'active' : ''}" href="catering.html">Plant-Based Catering</a>
